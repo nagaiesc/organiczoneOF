@@ -1,12 +1,12 @@
 <?php 
-$servidor="host local";
-$nombre="usuarios";
-$contraseña="";
-$nombreBD="productosOZ";
+$nombreServidor = "localhost";
+$nombreUsuario = "root";
+$contraseñaBaseDeDatos = "";
+$nombreBaseDeDatos = "productosOZ";
 
-$conexión = new mysqli($servidor, $nombre, $contraseña, $nombreBD);
-if ($conexión->connect_error) {
-    die("conexion fallida: " . $conexión->connect_error);
+$conexion = new mysqli($nombreServidor, $nombreUsuario, $contraseñaBaseDeDatos, $nombreBaseDeDatos);
+if ($conexion->connect_error) {
+    die("conexion fallida: " . $conexion->connect_error);
 }
 
 $CI=$_POST['CI'];
@@ -30,7 +30,7 @@ $SQL="INSERT INTO usuarios (CI, nombre, direccion, celular, rol, estado)
 <body>
 
 <?php
-    if($conexión->query($SQL) ==TRUE){
+    if($conexion->query($SQL) ==TRUE){
        echo "
        <script>
         Swal.fire({
@@ -48,14 +48,14 @@ $SQL="INSERT INTO usuarios (CI, nombre, direccion, celular, rol, estado)
     <script>
         Swal.fire({
             title: 'Error',
-            text: '". $conexión->error ."',
+            text: '". $conexion->error ."',
             icon: 'error'
         });
     </script>
     ";
      }
 
-     $conexión->close();
+     $conexion->close();
 
 ?>
 </body>
