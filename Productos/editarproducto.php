@@ -12,10 +12,11 @@ $resultado = $conexion->query($sql);
 
 $fila = $resultado->fetch_assoc();
 
-$nombreproducto = $fila['nombreproducto'];
-$precioventa = $fila['precioventa'];
-$cantidad = $fila['cantidad'];
+$nombre = $fila['nombre'];
+$descripcion = $fila['descripcion'];
+$precio = $fila['precio'];
 $costo = $fila['costo'];
+$stock = $fila['stock'];
 ?>
 
 <!DOCTYPE html>
@@ -153,27 +154,27 @@ body {
 
             <input type="hidden" name="id" value="<?= $id ?>" readonly>
 
-            <label>Nombre del producto</label>
-            <input type="text" name="nombreproducto" value="<?= $nombreproducto ?>" required>
+            <label>Nombre</label>
+            <input type="text" name="nombre" value="<?= $nombre?>" required>
 
             <div class="fil">
                 <div>
-                    <label>Precio venta</label>
-                    <input type="number" name="precioventa" value="<?= $precioventa ?>" required>
+                    <label>Descripcion</label>
+                    <input type="number" name="descripcion" value="<?= $descripcion ?>" required>
                 </div>
 
+                <div>
+                    <label>Precio</label>
+                    <input type="number" name="precio" value="<?= $precio ?>" required>
+                </div>
                 <div>
                     <label>Costo</label>
                     <input type="number" name="costo" value="<?= $costo ?>" required>
                 </div>
-            </div>
-
-            <div class="fil">
                 <div>
-                    <label>Cantidad</label>
-                    <input type="number" name="cantidad" value="<?= $cantidad ?>" required>
+                    <label>Stock</label>
+                    <input type="number" name="stock" value="<?= $stock ?>" required>
                 </div>
-
             </div>
 
             <button type="submit">Guardar Cambios</button>
