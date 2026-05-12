@@ -10,7 +10,7 @@ if ($conexion->connect_error) {
 }
 
 $CI=$_POST['CI'];
-$nombre=$_POST['apellido'];
+$nombre=$_POST['nombre'];
 $direccion = $_POST['direccion'];
 $celular = $_POST['celular'];
 $rol = $_POST['rol'];
