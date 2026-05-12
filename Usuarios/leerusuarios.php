@@ -2,7 +2,7 @@
 $nombreServidor = "localhost";
 $nombreUsuario = "root";
 $contraseñaBaseDeDatos = "";
-$nombreBaseDeDatos = "productosOZ";
+$nombreBaseDeDatos = "porganiczoneBD";
 $conexion = new mysqli($nombreServidor, $nombreUsuario, $contraseñaBaseDeDatos, $nombreBaseDeDatos);
     if ($conexion->connect_error) {
     echo "<tr><td colspan='8'>Hubo un error en la conexión</td></tr>";

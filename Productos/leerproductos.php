@@ -157,7 +157,7 @@ tbody td {
 
                 <tbody>
                 <?php
-                $conexion = new mysqli("localhost", "root", "", "productosOZ");
+                $conexion = new mysqli("localhost", "root", "", "organiczoneBD");
 
                 if ($conexion->connect_error) {
                     echo "<tr><td colspan='6'>Error en la conexión</td></tr>";
