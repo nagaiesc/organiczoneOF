@@ -128,7 +128,7 @@ o
     <div class="fil">
       <div>
         <label>Descripcion</label>
-        <input type="number" name="descripcion" required>
+        <input type="text" name="descripcion" required>
       </div>
       <div>
         <label>Precio</label>
