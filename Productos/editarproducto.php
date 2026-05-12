@@ -1,5 +1,5 @@
 <?php
-$conexion = new mysqli("localhost", "root", "", "productosOZ");
+$conexion = new mysqli("localhost", "root", "", "organiczoneBD");
 
 if ($conexion->connect_error) {
     die("Error en la conexión");
