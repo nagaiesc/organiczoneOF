@@ -129,7 +129,7 @@ tbody td {
         </nav>
 
         <h1 class="contrato-titulo">LISTA DE PRODUCTOS</h1>
-        <a href="http://localhost/organiczone/Productos/formularioproductos.php" id="boton">Registrar Producto</a>
+        <a href="http://localhost/organiczoneOF/Productos/formularioproductos.php" id="boton">Registrar Producto</a>
 
         <p class="desc">
             Visualiza los productos registrados en el sistema.<br>
@@ -147,11 +147,12 @@ tbody td {
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nombre Producto</th>
-                        <th>Precio Venta</th>
-                        <th>Cantidad</th>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Precio</th>
                         <th>Costo</th>
-                        <th>Acciones</th>
+                        <th>Stock</th>
+                        
                     </tr>
                 </thead>
 
@@ -172,10 +173,11 @@ tbody td {
 
                         echo "<tr>";
                         echo "<td>{$fila['id']}</td>";
-                        echo "<td>{$fila['nombreproducto']}</td>";
-                        echo "<td>{$fila['precioventa']}</td>";
-                        echo "<td>{$fila['cantidad']}</td>";
+                        echo "<td>{$fila['nombre']}</td>";
+                        echo "<td>{$fila['descripcion']}</td>";
+                        echo "<td>{$fila['precio']}</td>";                        
                         echo "<td>{$fila['costo']}</td>";
+                        echo "<td>{$fila['stock']}</td>";
 
                         echo "<td class='acciones'>
                                 <a href='editarproducto.php?id=$id'><button>Editar</button></a>
