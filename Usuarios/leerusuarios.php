@@ -20,9 +20,9 @@ $conexion = new mysqli($nombreServidor, $nombreUsuario, $contraseñaBaseDeDatos,
         echo "<td>" . $fila['rol'] . "</td>";
         echo "<td>" . $fila['estado'] . "</td>";
         echo "<td class='acciones'>";
-        echo "<a href='editarusuario.php?id=$CI'><button>Editar</button></a>";
-        echo "<a href='eliminarusuario.php?id=$CI'><button>Eliminar</button></a>";
-        echo "<a href='leerusuario.php?id=$CI'><button>Mostrar</button></a>";
+        echo "<a href='editarusuario.php?CI=$CI'><button>Editar</button></a>";
+        echo "<a href='eliminarusuario.php?CI=$CI'><button>Eliminar</button></a>";
+        echo "<a href='leerusuario.php?CI=$CI'><button>Mostrar</button></a>";
         echo "</td>";
         echo "</tr>";
         }

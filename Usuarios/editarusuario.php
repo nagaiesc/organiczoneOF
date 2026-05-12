@@ -36,37 +36,37 @@ if ($resultado->num_rows > 0) {
         <th><label for="CI">CI del usuario:</label></th>
         </tr>
         <tr>
-        <td><input type="number" name ="CI"required></td>
+        <td><input type="number" name ="CI" value="<?= $CI?>" required></td>
         </tr>
         <tr>
         <th><label for="nombre">Nombre del usuario:</label></th>
         </tr>
         <tr>
-        <td><input type="text" name ="nombre"required></td>
+        <td><input type="text" name ="nombre" value="<?= $nombre?>" required></td>
         </tr>
         <tr>
         <th><label for="direccion">Dirección del usuario:</label></th>
         </tr>
         <tr>
-        <td><input type="text" name ="direccion"required></td>
+        <td><input type="text" name ="direccion" value="<?= $direccion?>" required></td>
         </tr>
         <tr>
         <th><label for="celular">Celular del usuario:</label></th>
         </tr>
         <tr>
-        <td><input type="text" name ="celular"required></td>
+        <td><input type="text" name ="celular" value="<?= $celular?>" required></td>
         </tr>
         <tr>
         <th><label for="rol">Rol del Usuario:</label></th>
         </tr>
         <tr>
-        <td><input type="text" name ="rol"required></td>
+        <td><input type="text" name ="rol" value="<?= $rol?>" required></td>
         </tr>
         <tr>
         <th><label for="estado">Estado:</label></th>
         </tr>
         <tr>
-        <td><input type="text" name ="estado"required></td>
+        <td><input type="text" name ="estado" value="<?= $estado?>" required></td>
         </tr>
         </table>
         <input type="submit" value="Editar">       
