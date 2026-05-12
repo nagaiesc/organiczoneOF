@@ -170,22 +170,26 @@ body {
 
                 <div class="campo">
                     <span>Nombre</span>
-                    <strong><?= $fila['nombreproducto'] ?></strong>
+                    <strong><?= $fila['nombre'] ?></strong>
+                </div>
+
+                <div class="campo">
+                    <span>Descripcion</span>
+                    <strong><?= $fila['descripcion'] ?></strong>
                 </div>
 
                 <div class="campo">
                     <span>Precio</span>
-                    <strong><?= $fila['precioventa'] ?></strong>
-                </div>
-
-                <div class="campo">
-                    <span>Cantidad</span>
-                    <strong><?= $fila['cantidad'] ?></strong>
+                    <strong><?= $fila['precio'] ?></strong>
                 </div>
 
                 <div class="campo">
                     <span>Costo</span>
                     <strong><?= $fila['costo'] ?></strong>
+                </div>
+                <div class="campo">
+                    <span>Stock</span>
+                    <strong><?= $fila['stock'] ?></strong>
                 </div>
 
                 <a class="btn" href="leerproductos.php">Volver</a>
