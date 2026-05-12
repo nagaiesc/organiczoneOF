@@ -160,7 +160,7 @@ body {
             <div class="fil">
                 <div>
                     <label>Descripcion</label>
-                    <input type="number" name="descripcion" value="<?= $descripcion ?>" required>
+                    <input type="text" name="descripcion" value="<?= $descripcion ?>" required>
                 </div>
 
                 <div>
