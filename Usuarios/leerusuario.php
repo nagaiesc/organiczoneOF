@@ -22,7 +22,7 @@ if (!isset($_GET['CI'])) {
 
 $CI = intval($_GET['CI']);
 
-$sql = "SELECT * FROM clientes WHERE CI = $CI";
+$sql = "SELECT * FROM usuarios WHERE CI = $CI";
 
 $resultado = $conexion->query($sql);
 
