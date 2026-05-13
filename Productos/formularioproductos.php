@@ -148,7 +148,7 @@ o
   </form>
 
   <div class="pie">
-    Organic Zone - Cochabamba, Bolivia 2025
+    Organic Zone - Cochabamba, Bolivia 2026
   </div>
 
 </div>
