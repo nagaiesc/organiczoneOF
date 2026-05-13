@@ -5,12 +5,25 @@ if ($conexion->connect_error) {
     die("Error en la conexión");
 }
 
+/* VERIFICAR SI EXISTE EL ID */
+if (!isset($_GET['id'])) {
+    die("ID no recibido");
+}
+
 $id = intval($_GET['id']);
 
 $sql = "SELECT * FROM productos WHERE id = $id";
 $resultado = $conexion->query($sql);
 
-$fila = $resultado->fetch_assoc();
+if ($resultado->num_rows > 0) {
+
+    $fila = $resultado->fetch_assoc();
+
+} else {
+
+    die("Producto no encontrado");
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +34,7 @@ $fila = $resultado->fetch_assoc();
 <title>Detalle Producto</title>
 
 <style>
+
 html, body {
     height: 100%;
     margin: 0;
@@ -45,7 +59,7 @@ body {
     overflow: hidden;
 }
 
-/* IZQUIERDA */
+/* PANEL IZQUIERDO */
 .section-negro {
     background: #000;
     color: #fff;
@@ -55,6 +69,7 @@ body {
 .nav-inner a {
     color: #e0e0e0;
     text-decoration: none;
+    font-weight: 600;
 }
 
 .contrato-titulo {
@@ -66,9 +81,10 @@ body {
 .desc {
     color: #bababa;
     margin-top: 20px;
+    line-height: 1.6;
 }
 
-/* DERECHA */
+/* PANEL DERECHO */
 .section-blanco {
     background: #fff;
     padding: 40px;
@@ -100,7 +116,7 @@ body {
     font-size: 18px;
 }
 
-/* UPLOAD */
+/* SUBIDA */
 .upload-box {
     border: 2px dashed #ccc;
     padding: 20px;
@@ -130,11 +146,14 @@ body {
     padding: 8px 16px;
     text-decoration: none;
     font-weight: 600;
+    border: none;
+    cursor: pointer;
 }
 
 .btn:hover {
     background: #222;
 }
+
 </style>
 </head>
 
@@ -142,8 +161,9 @@ body {
 
 <section class="principal-grid">
 
-    <!-- IZQUIERDA -->
+    <!-- PANEL IZQUIERDO -->
     <section class="section-negro">
+
         <nav class="nav-inner">
             <a href="leerproductos.php">VOLVER</a>
         </nav>
@@ -153,9 +173,10 @@ body {
         <p class="desc">
             Visualiza y gestiona el producto seleccionado.
         </p>
+
     </section>
 
-    <!-- DERECHA -->
+    <!-- PANEL DERECHO -->
     <section class="section-blanco">
 
         <div class="grid-derecha">
@@ -187,6 +208,7 @@ body {
                     <span>Costo</span>
                     <strong><?= $fila['costo'] ?></strong>
                 </div>
+
                 <div class="campo">
                     <span>Stock</span>
                     <strong><?= $fila['stock'] ?></strong>
@@ -196,58 +218,86 @@ body {
 
             </div>
 
-            <!-- SUBIDA -->
+            <!-- IMAGEN -->
             <div class="upload-box">
 
-            <h3>Imagen del producto</h3>
+                <h3>Imagen del producto</h3>
 
-            <!-- IMAGEN ACTUAL -->
-             <?php  
-                //nombre del posible archivo
-                $nombreArchivo="P-".$id;
+                <?php
+
+                $nombreArchivo = "P-" . $id;
+
                 $directorio = "../Imagenes/";
-                //lista de todas las extenciones posibles
-                $extensiones = ["pdf", "jpg", "jpeg", "png", "gif", "webp"];
-                //bandera para verificar todo tipo de archivo
+
+                $extensiones = ["jpg", "jpeg", "png", "gif", "webp"];
+
                 $archivoEncontrado = null;
-                //verificar si el archivo se creo en alguna extension conocida
+
                 foreach ($extensiones as $ext) {
-                    //nombre del archivo con cada extension
+
                     $ruta = $directorio . $nombreArchivo . "." . $ext;
-                    //verifica
+
                     if (file_exists($ruta)) {
+
                         $archivoEncontrado = $ruta;
-                        // detenemos la búsqueda en cuanto lo encuentra
+
                         break;
                     }
                 }
-                
-            ?>
-            <?php if ($archivoEncontrado) {?>
+
+                ?>
+
+                <!-- IMAGEN ACTUAL -->
+                <?php if ($archivoEncontrado) { ?>
+
+                    <div class="preview">
+
+                        <p style="font-size:13px; color:#777;">
+                            Imagen actual
+                        </p>
+
+                        <img src="<?= $archivoEncontrado ?>" alt="Imagen actual">
+
+                    </div>
+
+                <?php } else { ?>
+
+                    <p style="font-size:13px; color:#999;">
+                        Sin imagen cargada
+                    </p>
+
+                <?php } ?>
+
+                <!-- FORMULARIO -->
+                <form action="subirimagen.php" method="post" enctype="multipart/form-data">
+
+                    <input type="hidden" name="id" value="<?= $id ?>">
+
+                    <input 
+                        type="file" 
+                        name="imagen" 
+                        accept="image/*"
+                        onchange="previewImage(event)"
+                    >
+
+                    <button class="btn" type="submit">
+                        Actualizar imagen
+                    </button>
+
+                </form>
+
+                <!-- PREVISUALIZACIÓN -->
                 <div class="preview">
-                    <p style="font-size:13px; color:#777;">Imagen actual</p>
-                    <img src="<?= $archivoEncontrado ?>" alt="Imagen actual">
+
+                    <p style="font-size:13px; color:#777;">
+                        Previsualización
+                    </p>
+
+                    <img id="preview" src="" alt="">
+
                 </div>
-            <?php } else { ?>
-                <p style="font-size:13px; color:#999;">Sin imagen cargada</p>
-            <?php } ?>
 
-            <!-- SUBIDA -->
-            <form action="subirimagen.php" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="id" value="<?= $id ?>">
-
-                <input type="file" name="imagen" accept="image/*" onchange="previewImage(event)">
-                
-                <button class="btn" type="submit">Actualizar imagen</button>
-            </form>
-
-            <!-- PREVIEW NUEVO -->
-            <div class="preview">
-                <p style="font-size:13px; color:#777;">Previsualización</p>
-                <img id="preview" src="" alt="">
             </div>
-
-</div>
 
         </div>
 
@@ -256,14 +306,21 @@ body {
 </section>
 
 <script>
+
 function previewImage(event) {
+
     const reader = new FileReader();
-    reader.onload = function(){
+
+    reader.onload = function() {
+
         const img = document.getElementById('preview');
+
         img.src = reader.result;
     }
+
     reader.readAsDataURL(event.target.files[0]);
 }
+
 </script>
 
 </body>
