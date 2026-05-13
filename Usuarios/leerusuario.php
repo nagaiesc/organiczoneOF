@@ -152,15 +152,15 @@ body {
     <section class="section-negro">
 
         <nav class="nav-inner">
-            <a href="leerclientes.php">VOLVER</a>
+            <a href="leerusuarios.php">VOLVER</a>
         </nav>
 
         <h1 class="contrato-titulo">
-            DETALLE CLIENTE
+            DETALLE USUARIO
         </h1>
 
         <p class="desc">
-            Visualiza la información completa del cliente seleccionado.
+            Visualiza la información completa del usuario seleccionado.
         </p>
 
     </section>
@@ -199,10 +199,6 @@ body {
                 <span>Estado</span>
                 <strong><?= $fila['estado'] ?></strong>
             </div>
-
-            <a class="btn" href="leerclientes.php">
-                Volver
-            </a>
 
         </div>
 

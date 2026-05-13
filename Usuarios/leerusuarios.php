@@ -148,7 +148,7 @@ tbody tr:hover {
 
         <h1 class="contrato-titulo">LISTA DE USUARIOS</h1>
 
-        <a href="formulariousuario.php" id="boton">Registrar Usuario</a>
+        <a href="formulariousuarioS.php" id="boton">Registrar Usuario</a>
 
         <p class="desc">
             Visualiza todos los usuarios registrados en el sistema.<br>
