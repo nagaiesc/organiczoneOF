@@ -2,7 +2,7 @@
 $servidor = "localhost";
 $nombre = "root";
 $contraseña = "";
-$BDnombre = "productosOZ";
+$BDnombre = "organiczoneBD";
 
 $conn = new mysqli($servidor, $nombre, $contraseña, $BDnombre);
 

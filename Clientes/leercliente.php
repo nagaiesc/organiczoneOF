@@ -2,7 +2,7 @@
 $nombreServidor = "localhost";
 $nombreUsuario = "root";
 $contraseñaBaseDeDatos = "";
-$nombreBaseDeDatos = "productosOZ";
+$nombreBaseDeDatos = "organiczoneBD";
 
 $conexion = new mysqli($nombreServidor, $nombreUsuario, $contraseñaBaseDeDatos, $nombreBaseDeDatos);
 if ($conexion->connect_error) {

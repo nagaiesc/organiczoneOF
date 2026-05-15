@@ -2,7 +2,7 @@
 $nombreServidor = "localhost";
 $nombreUsuario = "root";
 $contraseñaBaseDeDatos = "";
-$nombreBaseDeDatos = "productosOZ";
+$nombreBaseDeDatos = "organiczoneBD";
 
 $conexion = new mysqli($nombreServidor, $nombreUsuario, $contraseñaBaseDeDatos, $nombreBaseDeDatos);
 if ($conexion->connect_error) {
@@ -10,7 +10,7 @@ if ($conexion->connect_error) {
 }
 
 $CI=$_POST['CI'];
-$nombre=$_POST['apellido'];
+$nombre=$_POST['nombre'];
 $direccion = $_POST['direccion'];
 $celular = $_POST['celular'];
 $rol = $_POST['rol'];

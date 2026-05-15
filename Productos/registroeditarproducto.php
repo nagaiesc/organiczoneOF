@@ -2,17 +2,18 @@
 $nombreServidor = "localhost";
 $nombreUsuario = "root";
 $contraseñaBaseDeDatos = "";
-$nombreBaseDeDatos = "productosOZ";
+$nombreBaseDeDatos = "organiczoneBD";
 $conexion = new mysqli($nombreServidor, $nombreUsuario, $contraseñaBaseDeDatos, $nombreBaseDeDatos);
 if ($conexion->connect_error) {
     echo "Hubo un error en la conexion";
 }
 $id = $_POST['id'];
-$nombreproducto = $_POST['nombreproducto'];
-$precioventa = $_POST['precioventa'];
-$cantidad = $_POST['cantidad'];
+$nombre = $_POST['nombre'];
+$descripcion = $_POST['descripcion'];
+$precio = $_POST['precio'];
 $costo = $_POST['costo'];
-$sql = "UPDATE productos SET nombreproducto='$nombreproducto', precioventa='$precioventa', cantidad='$cantidad', costo='$costo' WHERE id=$id";
+$stock = $_POST['stock'];
+$sql = "UPDATE productos SET nombre='$nombre', descripcion='$descripcion' , precio='$precio' , costo='$costo' , stock='$stock' ";
 if ($conexion->query($sql) === TRUE) {
     echo "Producto editado correctamente";
     header("location: leerproductos.php");

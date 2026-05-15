@@ -121,37 +121,34 @@ body {
   <div class="titu">Registro de Producto</div>
 
   <form class="forma" action="productos.php" method="post">
-
-    <label>Nombre del producto</label>
-    <input type="text" name="nombreproducto" required>
+o
+    <label>Nombre</label>
+    <input type="text" name="nombre" required>
 
     <div class="fil">
       <div>
-        <label>Precio de venta</label>
-        <input type="number" name="precioventa" required>
+        <label>Descripcion</label>
+        <input type="text" name="descripcion" required>
       </div>
-
+      <div>
+        <label>Precio</label>
+        <input type="number" name="precio" required>
+      </div>
       <div>
         <label>Costo</label>
-        <input type="number" name="costo" required>
+        <input type="number" name="Costo" required>
       </div>
-    </div>
-
-    <div class="fil">
       <div>
-        <label>Cantidad</label>
-        <input type="number" name="cantidad" required>
+        <label>Stock</label>
+        <input type="number" name="stock" required>
       </div>
-
-
     </div>
-
     <button type="submit">Guardar Producto</button>
 
   </form>
 
   <div class="pie">
-    Organic Zone - Cochabamba, Bolivia 2025
+    Organic Zone - Cochabamba, Bolivia 2026
   </div>
 
 </div>

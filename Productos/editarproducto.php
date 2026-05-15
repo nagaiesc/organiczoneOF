@@ -1,5 +1,5 @@
 <?php
-$conexion = new mysqli("localhost", "root", "", "productosOZ");
+$conexion = new mysqli("localhost", "root", "", "organiczoneBD");
 
 if ($conexion->connect_error) {
     die("Error en la conexión");
@@ -160,7 +160,7 @@ body {
             <div class="fil">
                 <div>
                     <label>Descripcion</label>
-                    <input type="number" name="descripcion" value="<?= $descripcion ?>" required>
+                    <input type="text" name="descripcion" value="<?= $descripcion ?>" required>
                 </div>
 
                 <div>
