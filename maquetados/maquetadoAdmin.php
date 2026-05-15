@@ -78,6 +78,36 @@ button{
 table{
   width:100%;
 }
+.botonrN{
+    display: inline-block;
+    background-color: #f2b35d;
+    color: black;
+    text-decoration: none;
+    padding: 6px 20px;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 15px;
+}
+.botonVC{
+  display: inline-block;
+    background-color: #d8e8b1;
+    color: black;
+    text-decoration: none;
+    padding: 6px 20px;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 15px;
+}
+.botonVO{
+  display: inline-block;
+    background-color: #003d12;
+    color: white;
+    text-decoration: none;
+    padding: 6px 20px;
+    border-radius: 25px; 
+    text-align: center;
+    font-size: 15px;
+}
 
 
 @media(max-width:900px){
@@ -136,6 +166,7 @@ Hamburguesa
 <button style=background:#003d12;color:white>
 Editar
 </button>
+
 <button style=background:#d8e8b1>
 Eliminar
 </button>
@@ -168,47 +199,57 @@ Eliminar
 <section style="background:#10b046;border-radius:25px;padding:20px">
 <article style="background:none;color:white;padding:0">
 <h1 style=font-size:70px>
+
+
+
 Usuarios
 </h1>
 </article>
 <nav style="grid-template-columns:repeat(4,1fr)">
-<article style="background:#54260d;color:white">
-<h2>Cristian Rodriguez</h2>
-<p>Criox00</p>
-<br>
-<button style=background:#f2b35d>
-Editar
-</button>
-<button style=background:#d8e8b1>
-Eliminar
-</button>
-</article>
-<article style="background:#169f3d;color:white">
-<h2>Cristian Rodriguez</h2>
-<p>Criox00</p>
-<br>
-<button style=background:#003d12;color:white>
-Editar
-</button>
-<button style=background:#d8e8b1>
-Eliminar
-</button>
-</article>
-<article style="background:#003d12;color:white">
-<h2>Cristian Rodriguez</h2>
-<p>Criox00</p>
-<br>
-<button style=background:#f2b35d>
-Editar
-</button>
-<button style=background:#d8e8b1>
-Eliminar
-</button>
-</article>
-<article style="background:none;display:flex;justify-content:center;align-items:center">
-<button style="background:#f2b35d;width:70px;height:70px;border-radius:50%;font-size:35px">
-</button>
-</article>
+  <?php
+    $nombreServidor = "localhost";
+    $nombreUsuario = "root";
+    $contraseñaBaseDeDatos = "";
+    $nombreBaseDeDatos = "organiczoneBD";
+
+    $conexion = new mysqli($nombreServidor, $nombreUsuario, $contraseñaBaseDeDatos, $nombreBaseDeDatos);
+
+    if ($conexion->connect_error) {
+        echo "<tr><td colspan='7'>Hubo un error en la conexión</td></tr>";
+    }
+    $i=0;
+    $color="#54260d";
+    $sql = "SELECT * FROM usuarios";
+    $resultado = $conexion->query($sql);
+    if ($resultado->num_rows > 0) {
+      while($fila = $resultado->fetch_assoc()){
+        $i=$i+1;
+        if ($i==1){
+            $color="#54260d";
+        }
+        if ($i==2){
+            $color="#169f3d";
+        }
+        if ($i==3){
+            $color="#003d12";
+            $i=0;
+        }
+        echo "<article style='background:$color;color:white'>";
+        echo "<h2>".$fila['nombre']."</h2>";
+        echo "<p>Criox00</p><br>";
+        echo "<a href='../Usuarios/editarusuario.php?CI=".$fila['CI']."' class='botonN'> <strong><p>Editar</p></strong></a>";
+        echo "<button style='background:#d8e8b1'>
+                Eliminar
+                </button>
+                <button style='background:#003d12;color:white'>
+                Mostrar
+              </button>
+              </article>";
+      }
+    }
+
+?>
+
 </nav>
 </section>
 </section>
