@@ -170,6 +170,9 @@ Editar
 <button style=background:#d8e8b1>
 Eliminar
 </button>
+<button style="background-color: #f2b35d;">
+Mostrar
+</button>
 </article>
 <article style="background:#003d12;height:280px;color:white;text-align:center">
 <h2 style=margin-top:70px>
@@ -182,17 +185,23 @@ Editar
 <button style=background:#d8e8b1>
 Eliminar
 </button>
+<button style=background:#f2b35d;>
+  Mostrar
+</button>
 </article>
 <article style="background:#2f0d06;height:280px;color:white;text-align:center">
 <h2 style=margin-top:70px>
 Combo
 </h2>
 <br><br><br>
-<button style=background:#f2b35d>
+<button style=background:#169f3d>
 Editar
 </button>
 <button style=background:#d8e8b1>
 Eliminar
+</button>
+<button style=background:#f2b35d>
+  Mostrar
 </button>
 </article>
 </nav>
