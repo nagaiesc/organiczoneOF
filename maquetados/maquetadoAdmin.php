@@ -90,13 +90,13 @@ table{
 }
 .botonVC{
   display: inline-block;
-    background-color: #d8e8b1;
-    color: black;
-    text-decoration: none;
-    padding: 6px 20px;
-    border-radius: 25px;
-    text-align: center;
-    font-size: 15px;
+  background-color: #d8e8b1;
+  color: black;
+  text-decoration: none;
+  padding: 6px 20px;
+  border-radius: 25px;
+  text-align: center;
+  font-size: 15px;
 }
 .botonVO{
   display: inline-block;
@@ -205,8 +205,8 @@ Eliminar
 </button>
 </article>
 </nav>
-<section style="background:#10b046;border-radius:25px;padding:20px">
-<article style="background:none;color:white;padding:0">
+<section style="background:#f2b35d;border-radius:25px;padding:20px">
+<article style="background:none;color:#1d0c03;padding:0">
 <h1 style=font-size:70px>
 
 
@@ -245,19 +245,51 @@ Usuarios
         }
         echo "<article style='background:$color;color:white'>";
         echo "<h2>".$fila['nombre']."</h2>";
-        echo "<p>Criox00</p><br>";
-        echo "<a href='../Usuarios/editarusuario.php?CI=".$fila['CI']."' class='botonN'> <strong><p>Editar</p></strong></a>";
-        echo "<button style='background:#d8e8b1'>
-                Eliminar
-                </button>
-                <button style='background:#003d12;color:white'>
-                Mostrar
-              </button>
-              </article>";
+        echo "<h2>".$fila['direccion']."</h2>";
+        echo "<h2>".$fila['celular']."</h2>";
+        echo "<a href='../Usuarios/editarusuario.php?CI=".$fila['CI']."' class='botonN' style=
+          'display: inline-block;
+          background-color: #f2b35d;
+          color: black;
+          text-decoration: none;
+          margin-top:3px;
+          padding: 6px 20px;
+          border-radius: 25px;
+          text-align: center;
+          font-size: 15px;'> 
+          <strong><p>Editar</p></strong></a> <br>";
+        echo "<a href='../Usuarios/eliminarusuario.php?CI=".$fila['CI']."' class='botonVC' style=
+          'display: inline-block;
+          background-color: #d8e8b1;
+          margin-top:3px;
+          color: black;
+          text-decoration: none;
+          padding: 6px 20px;
+          border-radius: 25px;
+          text-align: center;
+          font-size: 15px;'> 
+          <strong><p>Eliminar</p></strong></a> <br>";
+        echo "<a href='../Usuarios/leerusuarios.php?CI=".$fila['CI']."' class='botonVC' style=
+          'display: inline-block;
+          background-color: #b6e75b;
+          margin-top:3px;
+          color: black;
+          text-decoration: none;
+          padding: 6px 20px;
+          border-radius: 25px;
+          text-align: center;
+          font-size: 15px;'> 
+          <strong><p>Mostrar</p></strong></a> <br>";
+          echo "</article>";
+
       }
+
+
     }
 
 ?>
+
+
 
 </nav>
 </section>
@@ -267,17 +299,39 @@ Usuarios
 Roles
 </h1>
 <br>
+<?php
+    $nombreServidor = "localhost";
+    $nombreUsuario = "root";
+    $contraseñaBaseDeDatos = "";
+    $nombreBaseDeDatos = "organiczoneBD";
+
+    $conexion = new mysqli($nombreServidor, $nombreUsuario, $contraseñaBaseDeDatos, $nombreBaseDeDatos);
+
+    if ($conexion->connect_error) {
+        echo "<tr><td colspan='7'>Hubo un error en la conexión</td></tr>";
+    }
+    $i=0;
+    $color="#54260d";
+    $sql = "SELECT * FROM usuarios";
+    $resultado = $conexion->query($sql);
+    if ($resultado->num_rows > 0) {
+      while($fila = $resultado->fetch_assoc())
+        {
+          echo "<article style='background:none;color:white;padding:0'>";
+          echo "<h2>".$fila['nombre']."</h2>";
+          echo "<p>".$fila['rol']."</p>";
+          echo "<p>".$fila['estado']."</p>";
+          echo "</article>";
+        }
+    }
+    
+?>
+
 <article style="background:none;color:white;padding:0">
-<h2>Carlos Rivera</h2>
-<p>Admin - Vendedor</p>
 <br>
 <button style=background:#10b046;color:white>
 </button>
 </article>
-<br>
-<article style="background:none;color:white;padding:0">
-<h2>Laura Lopez</h2>
-<p>Admin - Vendedor</p>
 <br>
 <button style=background:#10b046;color:white>
 </button>
