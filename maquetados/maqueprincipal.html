@@ -1,231 +1,402 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Organic Zone - Full Width PC</title>
-    <style>
-       
- 
-       
-        body {
-            background-color: #0c8b2e; 
-            display: flex;
-            flex-direction: column;
-            font-family: 'Outfit', sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   
-        h1, h2, h4, aside b {
-            font-family: 'Chonburi', serif;
-            font-weight: normal;
-        }
+<title>Organic Zone</title>
 
-        article h2, footer h1 {
-            font-family: 'Impact', sans-serif;
-            
-        }
+<style>
 
-    
-        .contenido-centrado {
-            width: 100%;
-            max-width: 1000px;
-            margin: 0 auto;
-            box-sizing: border-box;
-            position: relative;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
 
-        
-        header {
-            background-color: #033310; 
-            width: 100%;
-            padding: 60px 40px;
-            box-sizing: border-box;
-        }
+body{
+    background:#0c8b2e;
+    overflow-x:hidden;
+}
 
-        header .contenido-centrado {
-            height: 280px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+#barra{
+    position:fixed;
+    top:15px;
+    left:50%;
+    transform:translateX(-50%);
+    width:92%;
+    max-width:1400px;
+    background:#f3f3ee;
+    border:2px solid #042d10;
+    border-radius:45px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px 25px;
+    z-index:1000;
+}
 
-        h1 { font-size: 80px;
-             
-              color: white; 
-              line-height: 0.9; }
-        h2 { color: #f3d299; 
-            margin: 10px 0 0 0;
-             font-size: 32px; }
-        
-        h3 { 
-            background-color: #3b2416; 
-            color: #f3d299;
-            width: 80px; 
-            height: 80px; 
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            position: absolute;
-            font-size: 20px;
-            font-weight: bold;
-        }
+#orga{
+    text-decoration:none;
+}
 
-      
-        section {
-            background-color: #3b2416; 
-            width: 100%;
-            padding: 60px 40px;
-            box-sizing: border-box;
-        }
+#orga h1{
+    color:#0c8b2e;
+    font-size:38px;
+}
 
-        section .con {
-            display: flex;
-            gap: 40px;
-            color: white;
-            align-items: center;
-        }
+#links{
+    display:flex;
+    gap:25px;
+}
 
-        section h4 { 
-            font-size: 32px; 
-             flex: 1; 
-            }
-        section p { 
-            font-size: 15px;
-             flex: 1; 
-             }
+#links a{
+    text-decoration:none;
+    color:#042d10;
+    font-size:18px;
+    font-weight:bold;
+}
 
-        
-        article {
-            background-color: #042d10; 
-            width: 100%;
-            padding: 80px 40px;
-            box-sizing: border-box;
-            text-align: center;
-            color: white;
-        }
+#linkprodu{
+    background:#a6e239;
+    color:black;
+    text-decoration:none;
+    padding:10px 24px;
+    border-radius:30px;
+    font-size:18px;
+    font-weight:bold;
+}
 
-        article h2 { 
-            font-size: 60px; 
-            color: white; 
-            ; }
-        article p {
-             margin: 5px 0;
-             font-size: 16px; 
-            }
+#descu2{
+    text-decoration:none;
+}
 
-        
-        main {
-            background-color: #021a0a;  
-            width: 100%;
-            padding: 0 40px 60px 40px;
-            box-sizing: border-box;
-        }
+#descu{
+    background:#d6e4b1;
+    color:#042d10;
+    padding:10px 24px;
+    border-radius:30px;
+    font-size:18px;
+    margin:0;
+}
 
-        main .con {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
+header{
+    background:#033310;
+    width:100%;
+    padding:150px 60px 100px 60px;
+    position:relative;
+}
 
-        aside {
-            flex: 1;
-            height: 220px;
-            border-radius: 30px;
-            padding: 30px 25px;
-            box-sizing: border-box;
-            color: white;
-        }
+header .con{
+    max-width:1200px;
+    margin:auto;
+    position:relative;
+}
 
-        aside b {
-            display: block;
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
+header h1{
+    font-size:100px;
+    color:white;
+    line-height:0.9;
+}
 
-        aside p {
-            margin: 0;
-            font-size: 15px;
-            line-height: 1.5;
-        }
+header h2{
+    color:#f3d299;
+    margin-top:20px;
+    font-size:35px;
+}
 
-        .caj1 {
-             background-color: #3b2416; 
-            }
-        .caj2 {
-             background-color: #0c8b2e; 
-            }
-        .caj3 { background-color:#f3d299; 
-            color: #3b2416;
-         }
+header h3{
+    background:#3b2416;
+    color:#f3d299;
+    width:95px;
+    height:95px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:absolute;
+    right:80px;
+    top:20px;
+    font-size:24px;
+}
 
-      
-        footer {
-            width: 100%;
-            padding: 40px 40px 60px 40px;
-          
-        }
+section.info{
+    background:#3b2416;
+    width:100%;
+    padding:70px 60px;
+}
 
-        footer h1 { 
-            font-size: 100px; 
-            
-         color: white; 
-            line-height: 0.85;
-            text-align: right;
-        }
+section.info .con{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    gap:50px;
+    align-items:center;
+    color:white;
+}
 
-    </style>
+section.info h4{
+    flex:1;
+    font-size:36px;
+}
+
+section.info p{
+    flex:1;
+    font-size:17px;
+    line-height:1.7;
+}
+
+article.visita{
+    background:#042d10;
+    width:100%;
+    padding:90px 60px;
+    text-align:center;
+    color:white;
+}
+
+article.visita h2{
+    font-size:60px;
+    margin-bottom:20px;
+}
+
+article.visita p{
+    font-size:18px;
+    margin-top:10px;
+}
+
+main{
+    background:#021a0a;
+    width:100%;
+    padding:70px 60px;
+}
+
+main .con{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    gap:25px;
+}
+
+aside{
+    flex:1;
+    border-radius:30px;
+    padding:35px;
+    color:white;
+    min-height:220px;
+}
+
+aside b{
+    display:block;
+    font-size:28px;
+    margin-bottom:15px;
+}
+
+aside p{
+    font-size:18px;
+    line-height:1.6;
+}
+
+.caj1{
+    background:#3b2416;
+}
+
+.caj2{
+    background:#0c8b2e;
+}
+
+.caj3{
+    background:#f3d299;
+    color:#3b2416;
+}
+
+footer{
+    padding:70px 60px;
+    background:#0c8b2e;
+}
+
+footer .contenido{
+    max-width:1200px;
+    margin:auto;
+}
+
+footer h1{
+    font-size:90px;
+    color:white;
+    line-height:0.85;
+    text-align:right;
+}
+
+@media(max-width:1000px){
+
+    #barra{
+        flex-wrap:wrap;
+        gap:15px;
+        justify-content:center;
+        padding:18px;
+    }
+    #links{
+        width:100%;
+        justify-content:center;
+    }
+    header{
+        padding-top:220px;
+    }
+    header h1{
+        font-size:70px;
+    }
+    section.info .con{
+        flex-direction:column;
+    }
+    main .con{
+        flex-direction:column;
+    }
+    footer h1{
+        font-size:70px;
+    }
+}
+
+@media(max-width:700px){
+    #orga h1{
+        font-size:30px;
+    }
+    #links{
+        flex-direction:column;
+
+        align-items:center;
+
+        gap:10px;
+    }
+    #linkprodu,
+    #descu{
+        font-size:16px;
+    }
+    header{
+        padding:280px 30px 80px 30px;
+    }
+    header h1{
+        font-size:50px;
+    }
+    header h2{
+        font-size:25px;
+    }
+    header h3{
+        position:static;
+
+        margin-top:25px;
+    }
+    section.info,article.visita, main,footer{
+        padding-left:30px;
+        padding-right:30px;
+    }
+    section.info h4{
+        font-size:28px;
+    }
+    article.visita h2{
+        font-size:45px;
+    }
+    footer h1{
+        font-size:50px;
+    }
+}
+
+</style>
 </head>
+
 <body>
-
-    <header>
-        <div class="con">
-            <h1>Organic <br> Zone</h1>
-            <h2>Hii!!</h2>
-            <h3>21Bs</h3>
-        </div>
-    </header>
-
-    <section>
-        <div class="con">
-            <h4>Saborea la diferencia con ingredientes frescos y orgánicos</h4>
-            <p>En Organic Zone, creemos que las mejores hamburguesas comienzan con los mejores ingredientes. Es por eso que obtenemos nuestros productos de granjas orgánicas locales, asegurando que cada bocado esté lleno de sabor y nutrientes.</p>
-        </div>
+<nav id="barra">
+    <a href="maqueprincipal.html" id="orga">
+        <h1>OrganicZone</h1>
+    </a>
+    <section id="links">
+        <a href="maquetadoAdmin.php">Vista Admin</a>
+        <a href="maquetadoProducto.html">Vista Vendedor</a>
     </section>
-   
-    <article>
-        <div class="con">
-            <h2>VISITANOS</h2>
-            <p style="font-size: 20px;"><b>Colegio Pedro Poveda</b></p>
-            <p >Ven a visitarnos y disfruta de nuestras hamburguesas gourmet orgánicas.</p>
-        </div>
-    </article>
 
-    <main>
-        <div class="con">
-            <aside class="caj1">
-                <b>Dirección</b>
-                <p>Colegio Pedro Poveda Plazuela Tarija</p>
-            </aside>
-            
-            <aside class="caj2">
-                <b>Contacto</b>
-                <p>+591 70376053</p>
-            </aside>
-            
-            <aside class="caj3">
-                <b>Correo</b>
-                <p style="text-decoration: underline;">organiczone@gmail.com</p>
-            </aside>
-        </div>
-    </main>
+    <a href="pideaquimaquetadoOZ.html" id="linkprodu">
+        Pide aquí
+    </a>
 
-    <footer>
-        <div class="contenido-centrado">
-            <h1>ORGANIC<br>ZONE</h1>
-        </div>
-    </footer>
+    <a href="../Clientes/login.php" id="descu2">
+        <h3 id="descu">Iniciar Sesión</h3>
+    </a>
+    </a>
+</nav>
+
+<header>
+    <div class="con">
+        <h1>
+            Organic <br>
+            Zone
+        </h1>
+        <h2>
+            Hii!!
+        </h2>
+        <h3>
+            21Bs
+        </h3>
+    </div>
+</header>
+
+<section class="info">
+    <div class="con">
+        <h4>
+            Saborea la diferencia con ingredientes frescos y orgánicos
+        </h4>
+        <p>
+            En Organic Zone, creemos que las mejores hamburguesas comienzan con los mejores ingredientes. Es por eso que obtenemos nuestros productos de granjas orgánicas locales, asegurando que cada bocado esté lleno de sabor y nutrientes.
+        </p>
+    </div>
+</section>
+
+<article class="visita">
+    <div class="con">
+        <h2>
+            VISÍTANOS
+        </h2>
+        <p style="font-size:22px;">
+            <b>Colegio Pedro Poveda</b>
+        </p>
+        <p>
+            Ven a visitarnos y disfruta de nuestras hamburguesas gourmet orgánicas.
+        </p>
+    </div>
+</article>
+
+<main>
+    <div class="con">
+        <aside class="caj1">
+            <b>Dirección</b>
+            <p>
+                Colegio Pedro Poveda Plazuela Tarija
+            </p>
+        </aside>
+        <aside class="caj2">
+            <b>Contacto</b>
+            <p>
+                +591 70376053
+            </p>
+        </aside>
+        <aside class="caj3">
+
+            <b>Correo</b>
+
+            <p style="text-decoration:underline;">
+                organiczone@gmail.com
+            </p>
+        </aside>
+    </div>
+</main>
+
+<footer>
+    <div class="contenido">
+
+        <h1>
+            ORGANIC <br>
+            ZONE
+        </h1>
+    </div>
+</footer>
 
 </body>
 </html>

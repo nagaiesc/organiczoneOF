@@ -134,7 +134,7 @@ body {
     <button type="submit">Ingresar</button>
 
     <div class="extra">
-      ¿No tienes cuenta? <a href="intento2.php">Regístrate</a>
+      ¿No tienes cuenta? <a href="formularioclientes.php">Regístrate</a>
     </div>
 
   </form>
