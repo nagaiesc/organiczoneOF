@@ -143,7 +143,7 @@ tbody tr:hover {
     <!-- PANEL IZQUIERDO -->
     <section class="section-negro">
         <nav class="nav-inner">
-            <a href="../maquetadoOZ.html">INICIO</a>
+            <a href="../maquetados/maquetadoAdmin.php">INICIO</a>
         </nav>
 
         <h1 class="contrato-titulo">LISTA DE USUARIOS</h1>
