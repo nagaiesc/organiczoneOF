@@ -133,61 +133,122 @@ User
 </header>
 <section>
 <nav>
+
 <?php
 
-$conexion = new mysqli("localhost", "root", "", "productosOZ");
+$conexion = new mysqli(
+    "localhost",
+    "root",
+    "",
+    "organiczoneBD"
+);
 
-if ($conexion->connect_error) {
+if($conexion->connect_error){
     die("Error de conexión");
 }
 
 $sql = "SELECT * FROM productos";
+
 $resultado = $conexion->query($sql);
 
 $i = 0;
 
-while($fila = $resultado->fetch_assoc()) {
+if($resultado->num_rows > 0){
 
-    $i++;
+    while($fila = $resultado->fetch_assoc()){
 
-    $color = "#10b046";
+        $i++;
 
-    if($i == 2){
-        $color = "#003d12";
+        $color = "#10b046";
+
+        if($i == 2){
+            $color = "#003d12";
+        }
+
+        echo "
+
+        <article style='
+        background:$color;
+        min-height:320px;
+        
+        color:white;
+        text-align:center;
+        border-radius:35px;
+        padding:20px;
+        '>
+
+        <h2 style='margin-top:40px;font-size:35px'>
+        ".$fila['nombre']."
+        </h2>
+
+        <br>
+
+        <p>
+        ".$fila['descripcion']."
+        </p>
+
+        <br>
+
+        <h3>
+        ".$fila['precio']." Bs
+        </h3>
+        <br>
+
+        <h2>
+        Stock: ".$fila['stock']."
+        </h2>
+
+        <br>";
+         echo "<a href='../Productos/editarproducto.php?CI=".$fila['id']."' class='botonN' style=
+          'display: inline-block;
+          background-color: #f2b35d;
+          color: black;
+          text-decoration: none;
+          margin-top:3px;
+          padding: 6px 20px;
+          border-radius: 25px;
+          text-align: center;
+          font-size: 15px;'> 
+          <strong><p>Editar</p></strong></a> <br>";
+        echo "<a href='../Productos/eliminarproducto.php?CI=".$fila['id']."' class='botonVC' style=
+          'display: inline-block;
+          background-color: #d8e8b1;
+          margin-top:3px;
+          color: black;
+          text-decoration: none;
+          padding: 6px 20px;
+          border-radius: 25px;
+          text-align: center;
+          font-size: 15px;'> 
+          <strong><p>Eliminar</p></strong></a> <br>";
+        echo "<a href='../Productos/leerproductos.php?CI=".$fila['id']."' class='botonVC' style=
+          'display: inline-block;
+          background-color: #b6e75b;
+          margin-top:3px;
+          color: black;
+          text-decoration: none;
+          padding: 6px 20px;
+          border-radius: 25px;
+          text-align: center;
+          font-size: 15px;'> 
+          <strong><p>Mostrar</p></strong></a> <br>";
+          echo "</article>";
+
     }
 
-    if($i == 3){
-        $color = "#2f0d06";
-        $i = 0;
-    }
-    
-    $nombre = $fila['nombreproducto'];
+}else{
 
     echo "
-
-    <article style='
-    background:$color;
-    height:350px;
-    color:white;
-    text-align:center;
-    border-radius:35px;
-    padding:20px;
-    '>
-
-        <h2>$nombre</h2>
-
-        <button>Editar</button>
-        <button>Eliminar</button>
-        <button>Mostrar</button>
-
-    </article>
-
+    <h1 style='color:black'>
+    No hay productos registrados
+    </h1>
     ";
+
 }
 
 ?>
-</nav>
 
+</nav>
 <h1 style=font-size:70px>
 
 
