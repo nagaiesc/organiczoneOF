@@ -4,6 +4,7 @@
 <meta charset=UTF-8>
 <meta name=viewport content="width=device-width, initial-scale=1.0">
 <title>Admin</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
 *{
   margin:0;
@@ -239,7 +240,7 @@ Usuarios
           text-align: center;
           font-size: 15px;'> 
           <strong><p>Editar</p></strong></a> <br>";
-        echo "<a href='../Usuarios/eliminarusuario.php?CI=".$fila['CI']."' class='botonVC' style=
+        echo "<a href='#' onclick='confirmarEliminacion(".$fila['CI'].")' class='botonVC' style=
           'display: inline-block;
           background-color: #d8e8b1;
           margin-top:3px;
@@ -337,6 +338,39 @@ Roles
 </article>
 </aside>
 </main>
+<script>
+
+function confirmarEliminacion(CI){
+
+Swal.fire({
+  title: "¿Estás seguro?",
+  text: "No podrás revertir esto",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Sí, eliminar"
+}).then((result) => {
+
+  if (result.isConfirmed) {
+
+    Swal.fire({
+      title: "Eliminado!",
+      text: "El usuario fue eliminado.",
+      icon: "success"
+    }).then(() => {
+
+      window.location = "../Usuarios/eliminarusuario.php?CI=" + CI;
+
+    });
+
+  }
+
+});
+
+}
+
+</script>
 </body>
 </html>
 
