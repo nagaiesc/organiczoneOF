@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang=es>
+<head>
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width, initial-scale=1.0">
+<title>Admin</title>
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+}
+
+body{
+  background:#e8ecdf;
+  padding:20px;
+}
+
+main{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:20px;
+}
+
+header{
+  grid-column:1/3;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+section{
+  display:grid;
+  gap:20px;
+}
+
+article{
+  border-radius:25px;
+  padding:20px;
+}
+
+nav{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+aside{
+  background:#003d12;
+  color:white;
+  border-radius:25px;
+  padding:20px;
+}
+
+button{
+  border:none;
+  border-radius:20px;
+  padding:8px 18px;
+  font-weight:bold;
+}
+
+table{
+  width:100%;
+}
+.botonrN{
+    display: inline-block;
+    background-color: #f2b35d;
+    color: black;
+    text-decoration: none;
+    padding: 6px 20px;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 15px;
+}
+.botonVC{
+  display: inline-block;
+  background-color: #d8e8b1;
+  color: black;
+  text-decoration: none;
+  padding: 6px 20px;
+  border-radius: 25px;
+  text-align: center;
+  font-size: 15px;
+}
+.botonVO{
+  display: inline-block;
+    background-color: #003d12;
+    color: white;
+    text-decoration: none;
+    padding: 6px 20px;
+    border-radius: 25px; 
+    text-align: center;
+    font-size: 15px;
+}
+
+
+@media(max-width:900px){
+
+  main{
+    grid-template-columns:1fr;
+  }
+  header{
+    flex-direction:column;
+    gap:20px;
+  }
+  nav{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+<main>
+<header>
+<article style=color:#118c2f;background:none;padding:0>
+<h1 style=font-size:60px>
+Hola!
+</h1>
+<h1 style=color:#2b120b;font-size:90px>
+Admin
+</h1>
+</article>
+<article style="display:flex;gap:15px;background:none">
+<button style=background:#10b046;color:white>
+Inicio
+</button>
+<button style=background:#003d12;color:white>
+User
+</button>
+</article>
+</header>
+<section>
+<nav>
+<?php
+
+$conexion = new mysqli("localhost", "root", "", "productosOZ");
+
+if ($conexion->connect_error) {
+    die("Error de conexión");
+}
+
+$sql = "SELECT * FROM productos";
+$resultado = $conexion->query($sql);
+
+$i = 0;
+
+while($fila = $resultado->fetch_assoc()) {
+
+    $i++;
+
+    $color = "#10b046";
+
+    if($i == 2){
+        $color = "#003d12";
+    }
+
+    if($i == 3){
+        $color = "#2f0d06";
+        $i = 0;
+    }
+    
+    $nombre = $fila['nombreproducto'];
+
+    echo "
+
+    <article style='
+    background:$color;
+    height:350px;
+    color:white;
+    text-align:center;
+    border-radius:35px;
+    padding:20px;
+    '>
+
+        <h2>$nombre</h2>
+
+        <button>Editar</button>
+        <button>Eliminar</button>
+        <button>Mostrar</button>
+
+    </article>
+
+    ";
+}
+
+?>
+</nav>
+
+<h1 style=font-size:70px>
+
+
+
+Usuarios
+</h1>
+</article>
+<nav style="grid-template-columns:repeat(4,1fr)">
+  <?php
+    $nombreServidor = "localhost";
+    $nombreUsuario = "root";
+    $contraseñaBaseDeDatos = "";
+    $nombreBaseDeDatos = "organiczoneBD";
+
+    $conexion = new mysqli($nombreServidor, $nombreUsuario, $contraseñaBaseDeDatos, $nombreBaseDeDatos);
+
+    if ($conexion->connect_error) {
+        echo "<tr><td colspan='7'>Hubo un error en la conexión</td></tr>";
+    }
+    $i=0;
+    $color="#54260d";
+    $sql = "SELECT * FROM usuarios";
+    $resultado = $conexion->query($sql);
+    if ($resultado->num_rows > 0) {
+      while($fila = $resultado->fetch_assoc()){
+        $i=$i+1;
+        if ($i==1){
+            $color="#54260d";
+        }
+        if ($i==2){
+            $color="#169f3d";
+        }
+        if ($i==3){
+            $color="#003d12";
+            $i=0;
+        }
+        echo "<article style='background:$color;color:white'>";
+        echo "<h2>".$fila['nombre']."</h2>";
+        echo "<h2>".$fila['direccion']."</h2>";
+        echo "<h2>".$fila['celular']."</h2>";
+        echo "<a href='../Usuarios/editarusuario.php?CI=".$fila['CI']."' class='botonN' style=
+          'display: inline-block;
+          background-color: #f2b35d;
+          color: black;
+          text-decoration: none;
+          margin-top:3px;
+          padding: 6px 20px;
+          border-radius: 25px;
+          text-align: center;
+          font-size: 15px;'> 
+          <strong><p>Editar</p></strong></a> <br>";
+        echo "<a href='../Usuarios/eliminarusuario.php?CI=".$fila['CI']."' class='botonVC' style=
+          'display: inline-block;
+          background-color: #d8e8b1;
+          margin-top:3px;
+          color: black;
+          text-decoration: none;
+          padding: 6px 20px;
+          border-radius: 25px;
+          text-align: center;
+          font-size: 15px;'> 
+          <strong><p>Eliminar</p></strong></a> <br>";
+        echo "<a href='../Usuarios/leerusuarios.php?CI=".$fila['CI']."' class='botonVC' style=
+          'display: inline-block;
+          background-color: #b6e75b;
+          margin-top:3px;
+          color: black;
+          text-decoration: none;
+          padding: 6px 20px;
+          border-radius: 25px;
+          text-align: center;
+          font-size: 15px;'> 
+          <strong><p>Mostrar</p></strong></a> <br>";
+          echo "</article>";
+
+      }
+
+
+    }
+
+?>
+
+
+
+</nav>
+</section>
+</section>
+<aside>
+<h1 style=font-size:60px>
+Roles
+</h1>
+<br>
+<?php
+    $nombreServidor = "localhost";
+    $nombreUsuario = "root";
+    $contraseñaBaseDeDatos = "";
+    $nombreBaseDeDatos = "organiczoneBD";
+
+    $conexion = new mysqli($nombreServidor, $nombreUsuario, $contraseñaBaseDeDatos, $nombreBaseDeDatos);
+
+    if ($conexion->connect_error) {
+        echo "<tr><td colspan='7'>Hubo un error en la conexión</td></tr>";
+    }
+    $i=0;
+    $color="#54260d";
+    $sql = "SELECT * FROM usuarios";
+    $resultado = $conexion->query($sql);
+    if ($resultado->num_rows > 0) {
+      while($fila = $resultado->fetch_assoc())
+        {
+          echo "<article style='background:none;color:white;padding:0'>";
+          echo "<h2>".$fila['nombre']."</h2>";
+          echo "<p
+          style=
+          'display: inline-block;
+          background-color: #10b046;
+          margin-top:3px;
+          margin-left:10px;
+          color: white;
+          text-decoration: none;
+          padding: 6px 20px;
+          border-radius: 25px;
+          text-align: center;
+          font-size: 15px;'
+          >".$fila['rol']."</p>";
+
+          echo "<p style=
+          'display: inline-block;
+          background-color: #10b046;
+          margin-top:3px;
+          margin-left: 30px;
+          color: white;
+          text-decoration: none;
+          padding: 6px 20px;
+          border-radius: 25px;
+          text-align: center;
+          font-size: 15px;'
+          >".$fila['estado']."</p>";
+          echo "</article>";
+        }
+    }
+    
+?>
+
+<article style="background:none;color:white;padding:0">
+</article>
+</article>
+</aside>
+</main>
+</body>
+</html>
+

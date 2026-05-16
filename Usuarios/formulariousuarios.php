@@ -165,7 +165,7 @@ body {
                 <label>Rol</label>
 
                 <select name="rol" required>
-                    <option value="">Seleccione un rol</option>
+                   
                     <option value="admin">Admin</option>
                     <option value="usuario">Usuario</option>
                 </select>
