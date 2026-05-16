@@ -121,7 +121,6 @@ body {
   <div class="titu">Registro de Producto</div>
 
   <form class="forma" action="productos.php" method="post">
-o
     <label>Nombre</label>
     <input type="text" name="nombre" required>
 
@@ -136,7 +135,7 @@ o
       </div>
       <div>
         <label>Costo</label>
-        <input type="number" name="Costo" required>
+        <input type="number" name="costo" required>
       </div>
       <div>
         <label>Stock</label>

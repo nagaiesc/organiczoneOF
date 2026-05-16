@@ -14,6 +14,7 @@ if ($resultado->num_rows > 0) {
     while($fila = $resultado->fetch_assoc()) {
         $sql = "DELETE FROM usuarios WHERE CI = $CI";
         if ($conexion->query($sql) === TRUE) {
+            /*Funcionalidad para redireccionar páginas y se detiene el script*/ 
             header("Location: leerusuarios.php");
             exit();
         }

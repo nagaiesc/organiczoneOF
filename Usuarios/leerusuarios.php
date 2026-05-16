@@ -206,7 +206,7 @@ tbody tr:hover {
 
                         echo "<td class='acciones'>";
                         echo "<a href='editarusuario.php?CI=$CI'><button>Editar</button></a>";
-                        echo "<a href='#' onclick='confirmarEliminacion($CI)'><button>Eliminar</button></a>";
+                        echo "<a href='#' onclick='confirmarEliminacion($CI)'><button>Eliminar</button></a>";/*Pausa temporalemnte el enlace*/ 
                         echo "<a href='leerusuario.php?CI=$CI'><button>Mostrar</button></a>";
                         echo "</td>";
 
@@ -240,7 +240,7 @@ function confirmarEliminacion(CI){
     }).then((result) => {
 
         if (result.isConfirmed) {
-
+            /*Redirecciona de navegador a la página verdadera*/
             window.location = "eliminarusuario.php?CI=" + CI;
 
         }

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lista de Productos</title>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
 /* === MISMOS ESTILOS BASE === */
 html, body {
@@ -181,7 +181,7 @@ tbody td {
 
                         echo "<td class='acciones'>
                                 <a href='editarproducto.php?id=$id'><button>Editar</button></a>
-                                <a href='eliminarproducto.php?id=$id'><button>Eliminar</button></a>
+                                <a href='#' onclick='confirmarEliminacion($id)'><button>Eliminar</button></a>
                                 <a href='leerproducto.php?id=$id'><button>Mostrar</button></a>
                               </td>";
 
@@ -199,6 +199,29 @@ tbody td {
     </section>
 
 </section>
+<script>
 
+function confirmarEliminacion(id){
+
+    Swal.fire({
+        title: "¿Estás seguro?",
+        text: "No podrás revertir esta acción",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+            /*Redirecciona de navegador a la página verdadera y agrega el id*/
+            window.location = "eliminarproducto.php?id=" + id;
+
+        }
+
+    });
+}
+</script>
 </body>
 </html>
