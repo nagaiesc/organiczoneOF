@@ -319,8 +319,32 @@ Roles
         {
           echo "<article style='background:none;color:white;padding:0'>";
           echo "<h2>".$fila['nombre']."</h2>";
-          echo "<p>".$fila['rol']."</p>";
-          echo "<p>".$fila['estado']."</p>";
+          echo "<p
+          style=
+          'display: inline-block;
+          background-color: #10b046;
+          margin-top:3px;
+          margin-left:10px;
+          color: white;
+          text-decoration: none;
+          padding: 6px 20px;
+          border-radius: 25px;
+          text-align: center;
+          font-size: 15px;'
+          >".$fila['rol']."</p>";
+
+          echo "<p style=
+          'display: inline-block;
+          background-color: #10b046;
+          margin-top:3px;
+          margin-left: 30px;
+          color: white;
+          text-decoration: none;
+          padding: 6px 20px;
+          border-radius: 25px;
+          text-align: center;
+          font-size: 15px;'
+          >".$fila['estado']."</p>";
           echo "</article>";
         }
     }
@@ -328,13 +352,7 @@ Roles
 ?>
 
 <article style="background:none;color:white;padding:0">
-<br>
-<button style=background:#10b046;color:white>
-</button>
 </article>
-<br>
-<button style=background:#10b046;color:white>
-</button>
 </article>
 </aside>
 </main>
