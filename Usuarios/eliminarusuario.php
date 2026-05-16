@@ -14,7 +14,8 @@ if ($resultado->num_rows > 0) {
     while($fila = $resultado->fetch_assoc()) {
         $sql = "DELETE FROM usuarios WHERE CI = $CI";
         if ($conexion->query($sql) === TRUE) {
-            echo "Usuario eliminado correctamente";
+            header("Location: leerusuarios.php");
+            exit();
         }
     }    
 }
