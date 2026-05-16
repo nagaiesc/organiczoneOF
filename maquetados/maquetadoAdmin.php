@@ -3,14 +3,8 @@
 <head>
 <meta charset=UTF-8>
 <meta name=viewport content="width=device-width, initial-scale=1.0">
-
-
 <title>Admin</title>
-
-
 <style>
-
-
 *{
   margin:0;
   padding:0;
@@ -18,19 +12,16 @@
   font-family:Arial;
 }
 
-
 body{
   background:#e8ecdf;
   padding:20px;
 }
-
 
 main{
   display:grid;
   grid-template-columns:2fr 1fr;
   gap:20px;
 }
-
 
 header{
   grid-column:1/3;
@@ -39,25 +30,21 @@ header{
   align-items:center;
 }
 
-
 section{
   display:grid;
   gap:20px;
 }
-
 
 article{
   border-radius:25px;
   padding:20px;
 }
 
-
 nav{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:20px;
 }
-
 
 aside{
   background:#003d12;
@@ -66,14 +53,12 @@ aside{
   padding:20px;
 }
 
-
 button{
   border:none;
   border-radius:20px;
   padding:8px 18px;
   font-weight:bold;
 }
-
 
 table{
   width:100%;
@@ -112,29 +97,19 @@ table{
 
 @media(max-width:900px){
 
-
   main{
     grid-template-columns:1fr;
   }
-
-
   header{
     flex-direction:column;
     gap:20px;
   }
-
-
   nav{
     grid-template-columns:1fr;
   }
-
-
 }
-
-
 </style>
 </head>
-
 
 <body>
 <main>
@@ -158,55 +133,61 @@ User
 </header>
 <section>
 <nav>
-<article style="background:#10b046;height:280px;color:white;text-align:center">
-<h2 style=margin-top:70px>
-Hamburguesa
-</h2>
-<br><br><br>
-<button style=background:#003d12;color:white>
-Editar
-</button>
+<?php
 
-<button style=background:#d8e8b1>
-Eliminar
-</button>
-<button style="background-color: #f2b35d;">
-Mostrar
-</button>
-</article>
-<article style="background:#003d12;height:280px;color:white;text-align:center">
-<h2 style=margin-top:70px>
-Papas
-</h2>
-<br><br><br>
-<button style=background:#10b046;color:white>
-Editar
-</button>
-<button style=background:#d8e8b1>
-Eliminar
-</button>
-<button style=background:#f2b35d;>
-  Mostrar
-</button>
-</article>
-<article style="background:#2f0d06;height:280px;color:white;text-align:center">
-<h2 style=margin-top:70px>
-Combo
-</h2>
-<br><br><br>
-<button style=background:#169f3d>
-Editar
-</button>
-<button style=background:#d8e8b1>
-Eliminar
-</button>
-<button style=background:#f2b35d>
-  Mostrar
-</button>
-</article>
+$conexion = new mysqli("localhost", "root", "", "productosOZ");
+
+if ($conexion->connect_error) {
+    die("Error de conexión");
+}
+
+$sql = "SELECT * FROM productos";
+$resultado = $conexion->query($sql);
+
+$i = 0;
+
+while($fila = $resultado->fetch_assoc()) {
+
+    $i++;
+
+    $color = "#10b046";
+
+    if($i == 2){
+        $color = "#003d12";
+    }
+
+    if($i == 3){
+        $color = "#2f0d06";
+        $i = 0;
+    }
+    
+    $nombre = $fila['nombreproducto'];
+
+    echo "
+
+    <article style='
+    background:$color;
+    height:350px;
+    color:white;
+    text-align:center;
+    border-radius:35px;
+    padding:20px;
+    '>
+
+        <h2>$nombre</h2>
+
+        <button>Editar</button>
+        <button>Eliminar</button>
+        <button>Mostrar</button>
+
+    </article>
+
+    ";
+}
+
+?>
 </nav>
-<section style="background:#f2b35d;border-radius:25px;padding:20px">
-<article style="background:none;color:#1d0c03;padding:0">
+
 <h1 style=font-size:70px>
 
 
@@ -358,3 +339,4 @@ Roles
 </main>
 </body>
 </html>
+
