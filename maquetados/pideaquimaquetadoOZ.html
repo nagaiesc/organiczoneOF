@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú de Cajas Puras</title>
+    <style>
+       
+        body {
+            padding: 50px;
+            font-family: sans-serif; /* falta la fuentee */
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #0c8b2e;
+            font-size: 60px;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+      
+        main {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+     
+        section {
+            width: 230px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+       
+        section header {
+            height: 300px;
+            border-radius: 25px;
+            padding: 20px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            font-weight: bold;
+        }
+
+        .caj1 { 
+            background-color: #042d10;
+         }
+        .caj2 { 
+            background-color: #0c8b2e;
+             color: #f3d299;
+         }
+        .caj3 { background-color: white; 
+            border: 2px solid #042d10;
+             color: #042d10; 
+            }
+        .caj4 { background-color: #0c8b2e; 
+               color: #f3d299; 
+        }
+
+        section footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        p { font-size: 24px; color: #042d10; }
+        
+        a {
+            background-color: #0c8b2e;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        span {
+            background-color: #f3d299;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+<main>
+    <h1>Menú</h1>
+
+ <section>
+            <header class="caj1">
+                Beyond<br>Burger
+            </header>
+            <footer>
+                <p>21 Bs</p>
+                <a href="#">Agregar</a>
+                <span>+</span>
+            </footer>
+</section>
+
+        <section>
+            <header class="caj2">
+                Zone<br>Shake
+            </header>
+            <footer>
+                <p>27 Bs</p>
+                <a href="#">Agregar</a>
+                <span>+</span>
+            </footer>
+</section>
+
+         
+ <section>
+            <header class="caj3">
+            </header>
+            <footer>
+                <p>7 Bs</p>
+                <a href="#">Agregar</a>
+                <span>+</span>
+            </footer>
+        </section>
+
+       
+        <section>
+            <header class="caj4">
+                Zone<br>Shake
+            </header>
+            <footer>
+                <p>4 Bs</p>
+                <a href="#">Agregar</a>
+                <span>+</span>    </footer>
+    </section>
+
+    </main>
+
+</body>
+</html>
