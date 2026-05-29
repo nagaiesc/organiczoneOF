@@ -177,7 +177,7 @@ body {
             <input type="hidden" name="CIoriginal" value="<?= $CI ?>">
 
             <label>CI del usuario</label>
-            <input type="number" name="CI" value="<?= $CI ?>" required>
+            <input type="number" name="CI" value="<?= $CI ?>" readonly required>
 
             <label>Nombre del usuario</label>
             <input type="text" name="nombre" value="<?= $nombre ?>" required>

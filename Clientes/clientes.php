@@ -14,11 +14,11 @@ $nombre = $_POST['nombre'];
 $apellido = $_POST['apellido'];
 $nombreusuario = $_POST['nombreusuario'];
 $correo = $_POST['correo'];
-$contrasena = $_POST['contrasena'];
+$contraseña = $_POST['contraseña'];
 $fechanacimiento = $_POST['fechanacimiento'];
 
-$sql = "INSERT INTO clientes (nombre, apellido, nombreusuario, correo, contrasena, fechanacimiento) 
-        VALUES ('$nombre', '$apellido', '$nombreusuario', '$correo', '$contrasena', '$fechanacimiento')";
+$sql = "INSERT INTO clientes (nombre, apellido, nombreusuario, correo, contraseña, fechanacimiento) 
+        VALUES ('$nombre', '$apellido', '$nombreusuario', '$correo', '$contraseña', '$fechanacimiento')";
 
 ?>
 <!DOCTYPE html>

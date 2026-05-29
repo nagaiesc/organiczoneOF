@@ -129,7 +129,7 @@ body {
     <input type="text" name="usuario" placeholder="Ingresa tu usuario" required>
 
     <label>Contraseña</label>
-    <input type="password" name="contrasena" placeholder="Ingresa tu contraseña" required>
+    <input type="password" name="contraseña" placeholder="Ingresa tu contraseña" required>
 
     <button type="submit">Ingresar</button>
 

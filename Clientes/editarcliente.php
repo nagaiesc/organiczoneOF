@@ -16,7 +16,7 @@ if ($resultado->num_rows > 0) {
         $apellido = $fila['apellido'];
         $nombreusuario= $fila['nombreusuario'];
         $correo = $fila['correo'];
-        $contrasena = $fila['contrasena'];
+        $contraseña = $fila['contraseña'];
         $fechanacimiento = $fila['fechanacimiento'];
     }    
 }
@@ -64,7 +64,7 @@ if ($resultado->num_rows > 0) {
         <th><label for="contrasena">Contraseña:</label></th>
         </tr>
         <tr>
-        <td><input type="password" name ="contrasena"required></td>
+        <td><input type="password" name ="contraseña"required></td>
         </tr>
          <tr>
         <th><label for="fechanacimiento">Fecha de nacimiento:</label></th>
