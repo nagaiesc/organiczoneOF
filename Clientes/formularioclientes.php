@@ -263,7 +263,7 @@
             <label for="news">Inicia Sesion para no perderte de nada!!</label> 
           </div>
           <label>Contraseña</label><br>
-          <input type="password" name="contrasena" required><br>
+          <input type="password" name="contraseña" required><br>
           <button type="submit" value="Enviar">Enviar</button>
         </form>
       </div>

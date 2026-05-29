@@ -18,7 +18,7 @@ USE `organiczoneBD`;
 -- Table `organiczoneBD`.`clientes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `organiczoneBD`.`clientes` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL 	AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL,
   `apellido` VARCHAR(45) NULL,
   `nombreusuario` VARCHAR(45) NULL,
@@ -33,7 +33,7 @@ ENGINE = InnoDB;
 -- Table `organiczoneBD`.`usuarios`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `organiczoneBD`.`usuarios` (
-  `CI` INT NOT NULL,
+  `CI` INT NOT NULL ,
   `nombre` VARCHAR(45) NULL,
   `direccion` VARCHAR(45) NULL,
   `celular` VARCHAR(45) NULL,

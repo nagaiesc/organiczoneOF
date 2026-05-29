@@ -129,12 +129,12 @@ body {
     <input type="text" name="usuario" placeholder="Ingresa tu usuario" required>
 
     <label>Contraseña</label>
-    <input type="password" name="contrasena" placeholder="Ingresa tu contraseña" required>
+    <input type="password" name="contraseña" placeholder="Ingresa tu contraseña" required>
 
     <button type="submit">Ingresar</button>
 
     <div class="extra">
-      ¿No tienes cuenta? <a href="intento2.php">Regístrate</a>
+      ¿No tienes cuenta? <a href="formularioclientes.php">Regístrate</a>
     </div>
 
   </form>

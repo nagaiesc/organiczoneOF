@@ -12,9 +12,9 @@ $nombre = $_POST['nombre'];
 $apellido= $_POST['apellido'];
 $nombreusuario = $_POST['nombreusuario'];
 $correo = $_POST['correo'];
-$contrasena = $_POST['contrasena'];
+$contraseña = $_POST['contraseña'];
 $fechanacimiento = $_POST['fechanacimiento'];
-$sql = "UPDATE clientes SET nombre='$nombre', apellido='$apellido', nombreusuario='$nombreusuario', correo='$correo', contrasena='$contrasena', fechanacimiento='$fechanacimiento' WHERE id=$id";
+$sql = "UPDATE clientes SET nombre='$nombre', apellido='$apellido', nombreusuario='$nombreusuario', correo='$correo', contraseña='$contraseña', fechanacimiento='$fechanacimiento' WHERE id=$id";
 if ($conn->query($sql) === TRUE) {
     echo "Cliente editado correctamente";
 }

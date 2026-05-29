@@ -14,7 +14,7 @@ $sql = "SELECT * FROM clientes WHERE id = $id";
 $resultado = $conexion->query($sql);
 if ($resultado->num_rows > 0) {
     while($fila = $resultado->fetch_assoc()) {
-        echo $fila['id']. " " .$fila['nombre']. " " . $fila['apellido']. " " . $fila['nombreusuario']. " " . $fila['correo']. " " . $fila['contrasena']. " " . $fila['fechanacimiento'];
+        echo $fila['id']. " " .$fila['nombre']. " " . $fila['apellido']. " " . $fila['nombreusuario']. " " . $fila['correo']. " " . $fila['contraseña']. " " . $fila['fechanacimiento'];
         $id=$fila['id'];
     }    
 }

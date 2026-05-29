@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lista de Productos</title>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
 /* === MISMOS ESTILOS BASE === */
 html, body {
@@ -125,7 +125,7 @@ tbody td {
     <!-- PANEL IZQUIERDO -->
     <section class="section-negro">
         <nav class="nav-inner">
-            <a href="../maquetadoOZ.html">INICIO</a>
+            <a href="../maquetados/maquetadoAdmin.php">INICIO</a>
         </nav>
 
         <h1 class="contrato-titulo">LISTA DE PRODUCTOS</h1>
@@ -178,10 +178,10 @@ tbody td {
                         echo "<td>{$fila['precio']}</td>";                        
                         echo "<td>{$fila['costo']}</td>";
                         echo "<td>{$fila['stock']}</td>";
-
+                        $fid=$fila['id'];
                         echo "<td class='acciones'>
-                                <a href='editarproducto.php?id=$id'><button>Editar</button></a>
-                                <a href='eliminarproducto.php?id=$id'><button>Eliminar</button></a>
+                                <a href='editarproducto.php?id=$fid'><button>Editar</button></a>
+                                <a href='#' onclick='confirmarEliminacion($id)'><button>Eliminar</button></a>
                                 <a href='leerproducto.php?id=$id'><button>Mostrar</button></a>
                               </td>";
 
@@ -199,6 +199,29 @@ tbody td {
     </section>
 
 </section>
+<script>
 
+function confirmarEliminacion(id){
+
+    Swal.fire({
+        title: "¿Estás seguro?",
+        text: "No podrás revertir esta acción",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+            /*Redirecciona de navegador a la página verdadera y agrega el id*/
+            window.location = "eliminarproducto.php?id=" + id;
+
+        }
+
+    });
+}
+</script>
 </body>
 </html>
