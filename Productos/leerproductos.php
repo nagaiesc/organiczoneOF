@@ -178,9 +178,9 @@ tbody td {
                         echo "<td>{$fila['precio']}</td>";                        
                         echo "<td>{$fila['costo']}</td>";
                         echo "<td>{$fila['stock']}</td>";
-
+                        $fid=$fila['id'];
                         echo "<td class='acciones'>
-                                <a href='editarproducto.php?id=$id'><button>Editar</button></a>
+                                <a href='editarproducto.php?id=$fid'><button>Editar</button></a>
                                 <a href='#' onclick='confirmarEliminacion($id)'><button>Eliminar</button></a>
                                 <a href='leerproducto.php?id=$id'><button>Mostrar</button></a>
                               </td>";
