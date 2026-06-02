@@ -151,6 +151,23 @@ body {
   </div>
 
 </div>
+<script>
+  $("form").validate({
+    rules:{
+      Nombre:{
+            required:true,
+            maxlength:20
+                },
+                Telefono:{
+                    required:true,
+                },
+                Ubicacion:{
+                    required:true,
+                    maxlength:20
+                }
+    }
+  })
+</script>
 
 </body>
 </html>
