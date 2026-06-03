@@ -13,12 +13,11 @@ $BDnombre = "organiczoneBD";
   $costo = $_POST['costo'];
   $stock = $_POST['stock'];
   $cantidad= $_POST ['cantidad'];
-  $costototal = $_POST ['costototal'];
 
   $costototal=$precio*$cantidad;
   
   $sql = "INSERT INTO productos ( nombre , descripcion , precio , costo , stock)
-  VALUES ('$nombre' , '$descripcion' , '$precio' , '$costo' , '$stock') ";
+  VALUES ('$nombre' , '$descripcion' , '$precio' , '$costo' , '$stock' , '$cantidad' , '$costototal') ";
   if($conn->query($sql) === TRUE) {
     echo "Nuevo producto creado correctamente";
     header("Location: leerproductos.php?");

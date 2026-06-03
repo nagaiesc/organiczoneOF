@@ -193,5 +193,52 @@ body {
 
 </div>
 
+<script>
+    $("form").validate({
+        rules:{
+            CI:{
+                required:true
+            },
+            nombre:{
+                required:true
+            },
+            direccion:{
+                required:true
+            },
+            celular:{
+                required:true
+            },
+            rol:{
+                required:true
+            },
+            estado:{
+                required:true
+            }
+
+        },
+        messages:{
+            CI:{
+                required:"este campo no puede estar vacio"
+                
+            },
+            nombre:{
+                required:"este campo no puede estar vacio"
+            },
+            direccion:{
+                required:"este campo no puede estar vacio"
+            },
+            celular:{
+                required:"este campo no puede estar vacio"
+            },
+            rol:{
+                required:"este campo no puede estar vacio"
+            },
+            estado:{
+                required:"este campo no puede estar vacio"
+            }
+        }
+    })
+</script>
+
 </body>
 </html>
