@@ -12,7 +12,10 @@ $BDnombre = "organiczoneBD";
   $precio = $_POST['precio'];
   $costo = $_POST['costo'];
   $stock = $_POST['stock'];
+  $cantidad= $_POST ['cantidad'];
+  $costototal = $_POST ['costototal'];
 
+  $costototal=$precio*$cantidad;
   
   $sql = "INSERT INTO productos ( nombre , descripcion , precio , costo , stock)
   VALUES ('$nombre' , '$descripcion' , '$precio' , '$costo' , '$stock') ";

@@ -12,13 +12,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema organiczoneBD
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `organiczoneBD` DEFAULT CHARACTER SET utf8 ;
-USE `organiczoneBD`;
+USE `organiczoneBD` ;
 
 -- -----------------------------------------------------
 -- Table `organiczoneBD`.`clientes`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `organiczoneBD`.`clientes` (
-  `id` INT NOT NULL 	AUTO_INCREMENT,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL,
   `apellido` VARCHAR(45) NULL,
   `nombreusuario` VARCHAR(45) NULL,
@@ -33,7 +33,7 @@ ENGINE = InnoDB;
 -- Table `organiczoneBD`.`usuarios`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `organiczoneBD`.`usuarios` (
-  `CI` INT NOT NULL ,
+  `CI` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL,
   `direccion` VARCHAR(45) NULL,
   `celular` VARCHAR(45) NULL,
@@ -47,13 +47,50 @@ ENGINE = InnoDB;
 -- Table `organiczoneBD`.`productos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `organiczoneBD`.`productos` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL,
   `descripcion` VARCHAR(45) NULL,
   `precio` INT NULL,
   `costo` INT NULL,
   `stock` INT NULL,
   PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `organiczoneBD`.`pedidos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `organiczoneBD`.`pedidos` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NULL,
+  `fecha` DATE NULL,
+  `estado` VARCHAR(45) NULL,
+  `nombrevendedor` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `organiczoneBD`.`carrito`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `organiczoneBD`.`carrito` (
+  `pedidos_id` INT NOT NULL,
+  `productos_id` INT NOT NULL,
+  `cantidad` INT NULL,
+  `costototal` INT NULL,
+  PRIMARY KEY (`pedidos_id`, `productos_id`),
+  INDEX `fk_pedidos_has_productos_productos1_idx` (`productos_id` ASC) ,
+  INDEX `fk_pedidos_has_productos_pedidos_idx` (`pedidos_id` ASC),
+  CONSTRAINT `fk_pedidos_has_productos_pedidos`
+    FOREIGN KEY (`pedidos_id`)
+    REFERENCES `organiczoneBD`.`pedidos` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_pedidos_has_productos_productos1`
+    FOREIGN KEY (`productos_id`)
+    REFERENCES `organiczoneBD`.`productos` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
