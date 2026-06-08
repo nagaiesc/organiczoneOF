@@ -122,24 +122,24 @@ body {
 
   <form class="forma" action="productos.php" method="post">
     <label>Nombre</label>
-    <input type="text" name="nombre" required>
+    <input type="text" name="nombre" >
 
     <div class="fil">
       <div>
         <label>Descripcion</label>
-        <input type="text" name="descripcion" required>
+        <input type="text" name="descripcion" >
       </div>
       <div>
         <label>Precio</label>
-        <input type="number" name="precio" required>
+        <input type="number" name="precio" >
       </div>
       <div>
         <label>Costo</label>
-        <input type="number" name="costo" required>
+        <input type="number" name="costo" >
       </div>
       <div>
         <label>Stock</label>
-        <input type="number" name="stock" required>
+        <input type="number" name="stock" >
       </div>
     </div>
     <button type="submit">Guardar Producto</button>
