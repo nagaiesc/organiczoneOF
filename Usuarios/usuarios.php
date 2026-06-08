@@ -39,7 +39,7 @@ $SQL="INSERT INTO usuarios (CI, nombre, direccion, celular, rol, estado)
             icon: 'success',
             confirmButtonText: 'Aceptar'
         }).then(() => {
-            window.location.href = '/OrganicZone/maquetadoOZ.html';
+            window.location.href = '../Usuarios/leerusuarios.php';
         });
         </script>
         ";

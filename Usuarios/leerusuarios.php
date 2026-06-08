@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lista de Usuarios</title>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
 /* === ESTILOS GENERALES === */
 html, body {
@@ -143,7 +143,7 @@ tbody tr:hover {
     <!-- PANEL IZQUIERDO -->
     <section class="section-negro">
         <nav class="nav-inner">
-            <a href="../maquetadoOZ.html">INICIO</a>
+            <a href="../maquetados/maquetadoAdmin.php">INICIO</a>
         </nav>
 
         <h1 class="contrato-titulo">LISTA DE USUARIOS</h1>
@@ -206,7 +206,7 @@ tbody tr:hover {
 
                         echo "<td class='acciones'>";
                         echo "<a href='editarusuario.php?CI=$CI'><button>Editar</button></a>";
-                        echo "<a href='eliminarusuario.php?CI=$CI'><button>Eliminar</button></a>";
+                        echo "<a href='#' onclick='confirmarEliminacion($CI)'><button>Eliminar</button></a>";/*Pausa temporalemnte el enlace*/ 
                         echo "<a href='leerusuario.php?CI=$CI'><button>Mostrar</button></a>";
                         echo "</td>";
 
@@ -224,7 +224,30 @@ tbody tr:hover {
     </section>
 
 </section>
+<script>
 
+function confirmarEliminacion(CI){
+
+    Swal.fire({
+        title: "¿Estás seguro?",
+        text: "No podrás revertir esta acción",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sí, eliminar",
+        cancelButtonText: "Cancelar"
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+            /*Redirecciona de navegador a la página verdadera*/
+            window.location = "eliminarusuario.php?CI=" + CI;
+
+        }
+
+    });
+}
+</script>
 </body>
 </html>
 ```

@@ -10,7 +10,7 @@ if ($conn->connect_error) {
  
  $usuario=$_POST['usuario'];
  $contrasena=$_POST['contrasena'];
- $sql="SELECT *FROM clientes WHERE nombreusuario='$usuario' AND contrasena='$contrasena'";
+ $sql="SELECT *FROM clientes WHERE nombreusuario='$usuario' AND contraseña='$contraseña'";
 echo $sql;
 $resultado = $conn->query($sql);
 echo "holi";

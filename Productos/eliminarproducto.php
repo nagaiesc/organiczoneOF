@@ -14,7 +14,9 @@ if ($resultado->num_rows > 0) {
     while($fila = $resultado->fetch_assoc()) {
         $sql = "DELETE FROM productos WHERE id = $id";
         if ($conexion->query($sql) === TRUE) {
-            echo "Producto eliminado correctamente";
+            /*Funcionalidad para redireccionar a la página y se detiene el script*/
+            header("Location: leerproductos.php");
+            exit();
         }
     }    
 }

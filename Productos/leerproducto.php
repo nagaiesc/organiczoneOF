@@ -4,8 +4,6 @@ $conexion = new mysqli("localhost", "root", "", "organiczoneBD");
 if ($conexion->connect_error) {
     die("Error en la conexión");
 }
-
-/* VERIFICAR SI EXISTE EL ID */
 if (!isset($_GET['id'])) {
     die("ID no recibido");
 }
