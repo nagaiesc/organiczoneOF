@@ -140,21 +140,21 @@ body {
     <form class="forma" action="usuarios.php" method="POST">
 
         <label>CI</label>
-        <input type="text" name="CI" required>
+        <input type="number" name="CI" >
 
         <label>Nombre</label>
-        <input type="text" name="nombre" required>
+        <input type="text" name="nombre" >
 
         <div class="fil">
 
             <div>
                 <label>Dirección</label>
-                <input type="text" name="direccion" required>
+                <input type="text" name="direccion">
             </div>
 
             <div>
                 <label>Celular</label>
-                <input type="text" name="celular" required>
+                <input type="number" name="celular" >
             </div>
 
         </div>
@@ -164,7 +164,7 @@ body {
             <div>
                 <label>Rol</label>
 
-                <select name="rol" required>
+                <select name="rol" >
                    
                     <option value="admin">Admin</option>
                     <option value="usuario">Usuario</option>
@@ -174,7 +174,7 @@ body {
             <div>
                 <label>Estado</label>
 
-                <select name="estado" required>
+                <select name="estado" >
                     <option value="">Seleccione un estado</option>
                     <option value="activo">Activo</option>
                     <option value="inactivo">Inactivo</option>
@@ -219,7 +219,6 @@ body {
         messages:{
             CI:{
                 required:"este campo no puede estar vacio"
-                
             },
             nombre:{
                 required:"este campo no puede estar vacio"
