@@ -168,8 +168,9 @@ body {
       },
       stock:{
           required:true
-      }
-    }messages:{
+      },
+    },
+    messages:{
       nombre:{
            required:"Este campo no puede ir vacio"
       },
