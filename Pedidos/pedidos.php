@@ -13,7 +13,7 @@ $BDnombre = "organiczoneBD";
   $estado = $_POST['estado'];
   $nombrevendedor = $_POST['nombrevendedor'];
 
-  $costototal=$precio*$cantidad;
+ 
   
   $sql = "INSERT INTO pedidos( id, nombre , fecha , estado, nombrevendedor)
   VALUES ('$id' , '$nombre' , '$fecha' , '$estado' , '$nombrevendedor') ";
