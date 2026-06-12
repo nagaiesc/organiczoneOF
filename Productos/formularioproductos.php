@@ -122,24 +122,24 @@ body {
 
   <form class="forma" action="productos.php" method="post">
     <label>Nombre</label>
-    <input type="text" name="nombre" required>
+    <input type="text" name="nombre" >
 
     <div class="fil">
       <div>
         <label>Descripcion</label>
-        <input type="text" name="descripcion" required>
+        <input type="text" name="descripcion" >
       </div>
       <div>
         <label>Precio</label>
-        <input type="number" name="precio" required>
+        <input type="number" name="precio" >
       </div>
       <div>
         <label>Costo</label>
-        <input type="number" name="costo" required>
+        <input type="number" name="costo" >
       </div>
       <div>
         <label>Stock</label>
-        <input type="number" name="stock" required>
+        <input type="number" name="stock" >
       </div>
     </div>
     <button type="submit">Guardar Producto</button>
@@ -154,17 +154,37 @@ body {
 <script>
   $("form").validate({
     rules:{
-      Nombre:{
-            required:true,
-            maxlength:20
-                },
-                Telefono:{
-                    required:true,
-                },
-                Ubicacion:{
-                    required:true,
-                    maxlength:20
-                }
+      nombre:{
+            required:true
+            },
+      descripcion:{
+           required:true
+      },
+      precio:{
+           required:true
+      },
+      costo:{
+          required:true
+      },
+      stock:{
+          required:true
+      }
+    }messages:{
+      nombre:{
+           required:"Este campo no puede ir vacio"
+      },
+      descripcion:{
+           required:"Este campo debe llenarse"
+      },
+      precio:{
+           required:"Este campo no puede ir vacío"
+      },
+      costo:{
+          required:"Este campo no puede ir vacío"
+      },
+      stock:{
+          required:"Este campo no puede ir vacío"
+      }
     }
   })
 </script>
