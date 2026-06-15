@@ -14,20 +14,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE SCHEMA IF NOT EXISTS `organiczoneBD` DEFAULT CHARACTER SET utf8 ;
 USE `organiczoneBD` ;
 
--- -----------------------------------------------------
--- Table `organiczoneBD`.`clientes`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `organiczoneBD`.`clientes` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NULL,
-  `apellido` VARCHAR(45) NULL,
-  `nombreusuario` VARCHAR(45) NULL,
-  `correo` VARCHAR(45) NULL,
-  `contraseña` VARCHAR(45) NULL,
-  `fechanacimiento` DATE NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `organiczoneBD`.`usuarios`
