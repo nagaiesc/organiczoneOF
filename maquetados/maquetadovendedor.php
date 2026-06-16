@@ -4,6 +4,7 @@
 <meta charset=UTF-8>
 <meta name=viewport content="width=device-width, initial-scale=1.0">
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <title>Organic Zone</title>
 <style>
@@ -120,6 +121,7 @@ td{
 
 </style>
 </head>
+<?php session_start(); ?>
 <body>
 <main>
 <section>
@@ -127,6 +129,7 @@ td{
 <article style=background:#165b22;color:white;text-align:center;font-size:40px;font-weight:bold>
 <br>
 Organic Zone
+<p>Bienvenido <?php echo $_SESSION['nombre']; ?></p>
 </article>
 <article style=background:#c6d8b5;text-align:center>
 <h2>Productos vendidos</h2>
