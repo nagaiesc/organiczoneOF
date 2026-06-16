@@ -137,7 +137,7 @@ body {
 
     <div class="titu">Registro de Usuario</div>
 
-    <form class="forma" action="usuarios.php" method="POST">
+    <form class="forma" action="login.php" method="POST">
 
         <label>CI</label>
         <input type="number" name="CI" >

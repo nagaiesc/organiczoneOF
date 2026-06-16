@@ -58,5 +58,7 @@ $SQL="INSERT INTO usuarios (CI, nombre, direccion, celular, rol, estado)
      $conexion->close();
 
 ?>
+
+
 </body>
 </html>

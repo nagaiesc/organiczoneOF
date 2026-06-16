@@ -25,6 +25,7 @@ $resultado = $conexion->query($sql);
 if ($resultado->num_rows > 0) {
 
     $fila = $resultado->fetch_assoc();
+    echo "<a href+'carrito.php?idPedido=$id'><button>Agregar al carrito</button></a>"
 
 } else {
 
