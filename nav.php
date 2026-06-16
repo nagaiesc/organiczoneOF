@@ -18,7 +18,7 @@
         }
 
         #barra{
-            background-color: rgb(1, 34, 12);
+            background-color: #0ba84a;
             position: fixed;
             width: 1300px;
             height: 65px;
@@ -66,7 +66,7 @@
         }
         
         #linkprodu{
-            background-color: rgba(172, 255, 47, 0.705);
+            background-color: #2e140d;
             padding: 13px;
             padding-left: 20px;
             border-radius: 50px;
@@ -77,7 +77,7 @@
         }
        
         #descu{
-            background-color: rgba(172, 255, 47, 0.705);
+            background-color: #0c8b2e;
             padding: 13px;
             padding-left: 20px;
             border-radius: 50px;
@@ -88,58 +88,81 @@
             bottom: 11px;
             right: 8px;
         }
-        .menu-desplegable{
-            position: relative;
-        }
-
-        .submenu{
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            min-width: 220px;
-            background: black;
-            border-radius: 15px;
-            overflow: visible;
-            z-index: 1000;
-        }
-
-        .menu-desplegable:hover .submenu{
-            display: block;
-        }
-
-        .submenu-item{
-            position: relative;
-            display: block;
-            padding: 20px;
-            color: white;
-            text-decoration: none;
-            background: black;
-            border-radius: 30px;
-            background-color: rgba(172,255,47,0.7);
-        }
-
-        .submenu a:hover{
-            background: rgba(172,255,47,0.7);
-            color: black;
-        }
-
-
-        .submenu-lateral{
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 100%;
-            min-width: 220px;
-            background: black;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-
-        .submenu-item:hover .submenu-lateral{
-            display: block;
-        }
+        
     </style>
+
+    <style> /*ESTILOS SUBMENUS */
+.menu{
+position: relative;
+display:flex;
+justify-content: center;
+top: 20px;
+left: 50%;
+transform: translateX(-50%);
+display: flex;
+gap: 25px;
+align-items: center;
+padding: 15px 30px;
+background: rgba(39, 133, 30, 0.66);
+backdrop-filter: blur(15px);
+-webkit-backdrop-filter: blur(15px);
+border: 1px solid rgba(80, 206, 69, 0.66);
+border-radius: 50px;
+box-shadow: 0 8px 32px rgba(65, 168, 55, 0.69);
+z-index: 1000;
+}
+.item{
+position: relative;
+}
+.item > a{
+display:flex;
+align-items:center;
+gap:8px;
+text-decoration:none;
+color:rgb(255, 255, 255);
+padding:12px 18px;
+border-radius:12px;
+background:rgba(69, 182, 58, 0.54);
+transition:.3s;
+}
+.item > a:hover{
+background:rgba(103, 236, 91, 0.35);
+}
+.submenu{
+position:absolute;
+top:110%;
+left:0;
+min-width:180px;
+background:rgba(90, 182, 82, 0.72);
+backdrop-filter:blur(15px);
+border-radius:15px;
+max-height:0;
+overflow:hidden;
+transition:max-height.5s ease;
+}
+.item:hover .submenu{
+max-height:250px;
+}
+.submenu a{
+display:block;
+text-decoration:none;
+color:rgb(255, 253, 253);
+padding:12px 15px;
+transition:.3s;
+}
+.submenu a:hover{
+background:rgba(95, 202, 109, 0.88);
+}
+.flecha{
+transition:.4s;
+}
+.item:hover .flecha{
+transform:rotate(90deg);
+}
+
+    </style>
+
+
 
 </head>
 <body>
@@ -174,30 +197,43 @@
     <nav id="barra">
     <div><a href="" id="orga"><h1>OrganicZone</h1></a></div>
     <section id="links">
-    <a href="contacto.html" id="link2"><h3>Contacto</h3></a>
-    <a href="sobreNosotros.html" id="link3"><h3>Sobre Nosotros</h3></a>
+        <div class="item">
+    <a href="#">
+        Nosotros
+        <span class="flecha">▶</span>
+    </a>
+
+    <div class="submenu">
+        <a href="mision.html">Misión</a>
+        <a href="vision.html">Visión</a>
+    </div>
+</div>
+
+<div class="item">
+    <a href="#">
+        About Us
+        <span class="flecha">▶</span>
+    </a>
+    <div class="submenu">
+        <a href="contacto.html">Contacto</a>
+    </div>
+</div>
+<div class="item">
+    <a href="#">
+        Menú
+        <span class="flecha">▶</span>
+    </a>
+    <div class="submenu">
+        <a href="hamburguesas.html">Hamburguesas</a>
+        <a href="refrescos.html">Refrescos</a>
+        <a href="helados.html">Helados</a>
+    </div>
+</div>
+
     </section>
     <section> <strong><a href="pedidos.php" id="linkprodu">Pide aquí</a></section></strong>
     <section><a href="Clientes/login.php" id="descu2"><h3 id="descu"> Iniciar Sesion</h3></a></section>
-    <div class="menu-desplegable">
-    <a href="#"><h3>Menú ▼</h3></a>
-
-    <div class="submenu">
-
-        <div class="submenu-item">
-            <a href="#">🍔 Hamburguesas</a>
-        </div>
-
-        <div class="submenu-item">
-            <a href="#">🥤 Refrescos</a>
-        </div>
-
-        <div class="submenu-item">
-            <a href="#">🥛 Mi Leche</a>
-        </div>
-
-    </div>
-</div>
+   
     </nav>
     </center>
 
