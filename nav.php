@@ -18,7 +18,7 @@
         }
 
         #barra{
-            background-color: #0ba84a;
+            background-color: #60a04d8f;
             position: fixed;
             width: 1300px;
             height: 65px;
@@ -66,7 +66,7 @@
         }
         
         #linkprodu{
-            background-color: #2e140d;
+            background-color: rgba(23, 61, 33, 0.69);
             padding: 13px;
             padding-left: 20px;
             border-radius: 50px;
@@ -77,7 +77,7 @@
         }
        
         #descu{
-            background-color: #0c8b2e;
+            background-color: rgba(23, 61, 33, 0.69);
             padding: 13px;
             padding-left: 20px;
             border-radius: 50px;
@@ -122,7 +122,7 @@ text-decoration:none;
 color:rgb(255, 255, 255);
 padding:12px 18px;
 border-radius:12px;
-background:rgba(69, 182, 58, 0.54);
+background:rgba(99, 143, 95, 0.54);
 transition:.3s;
 }
 .item > a:hover{
@@ -133,7 +133,7 @@ position:absolute;
 top:110%;
 left:0;
 min-width:180px;
-background:rgba(90, 182, 82, 0.72);
+background:rgba(139, 189, 135, 0.59);
 backdrop-filter:blur(15px);
 border-radius:15px;
 max-height:0;
