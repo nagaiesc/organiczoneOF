@@ -113,6 +113,7 @@ table{
 </head>
 
 <body>
+  
 <main>
 <header>
 <article style=color:#118c2f;background:none;padding:0>
@@ -133,7 +134,13 @@ User
 </article>
 </header>
 <section>
+  <article >
+<h1 style="font-size:70px">
+Productos
+</h1>
+</article>
 <nav>
+  
 
 <?php
 
@@ -199,8 +206,10 @@ if($resultado->num_rows > 0){
         Stock: ".$fila['stock']."
         </h2>
 
+        
+        
         <br>";
-         echo "<a href='../Productos/editarproducto.php?CI=".$fila['id']."' class='botonN' style=
+         echo "<a href='../Productos/editarproducto.php?id=".$fila['id']."' class='botonN' style=
           'display: inline-block;
           background-color: #f2b35d;
           color: black;
@@ -211,7 +220,7 @@ if($resultado->num_rows > 0){
           text-align: center;
           font-size: 15px;'> 
           <strong><p>Editar</p></strong></a> <br>";
-        echo "<a href='../Productos/eliminarproducto.php?CI=".$fila['id']."' class='botonVC' style=
+        echo "<a href='#' onclick='confirmarEliminacionProducto(".$fila['id'].")' class='botonVC' style=
           'display: inline-block;
           background-color: #d8e8b1;
           margin-top:3px;
@@ -222,7 +231,7 @@ if($resultado->num_rows > 0){
           text-align: center;
           font-size: 15px;'> 
           <strong><p>Eliminar</p></strong></a> <br>";
-        echo "<a href='../Productos/leerproductos.php?CI=".$fila['id']."' class='botonVC' style=
+        echo "<a href='../Productos/leerproductos.php?id=".$fila['id']."' class='botonVC' style=
           'display: inline-block;
           background-color: #b6e75b;
           margin-top:3px;
@@ -422,6 +431,36 @@ Swal.fire({
     }).then(() => {
 
       window.location = "../Usuarios/eliminarusuario.php?CI=" + CI;
+
+    });
+
+  }
+
+});
+
+}
+
+function confirmarEliminacionProducto(id){
+
+Swal.fire({
+  title: "¿Estás seguro?",
+  text: "No podrás revertir esto",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Sí, eliminar"
+}).then((result) => {
+
+  if (result.isConfirmed) {
+
+    Swal.fire({
+      title: "Eliminado!",
+      text: "El producto fue eliminado.",
+      icon: "success"
+    }).then(() => {
+
+      window.location = "../Productos/eliminarproducto.php?id=" + id;
 
     });
 

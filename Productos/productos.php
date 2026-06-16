@@ -7,14 +7,15 @@ $BDnombre = "organiczoneBD";
   if($conn->connect_error) {
     die ("conexion fallida" . $conn->connect_error);
   }
+  $id = $_POST['id'];
   $nombre = $_POST['nombre'];
   $descripcion = $_POST['descripcion'];
   $precio = $_POST['precio'];
   $costo = $_POST['costo'];
   $stock = $_POST['stock'];
   
-  $sql = "INSERT INTO productos ( nombre , descripcion , precio , costo , stock)
-  VALUES ('$nombre' , '$descripcion' , '$precio' , '$costo' , '$stock') ";
+  $sql = "INSERT INTO productos (id, nombre, descripcion, precio, costo, stock)
+  VALUES ('$id', '$nombre', '$descripcion', '$precio', '$costo', '$stock')";
   if($conn->query($sql) === TRUE) {
     echo "Nuevo producto creado correctamente";
     header("Location: leerproductos.php?");
