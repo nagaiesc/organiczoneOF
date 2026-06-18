@@ -231,7 +231,6 @@ transform:rotate(90deg);
 </div>
 
     </section>
-    <section> <strong><a href="pedidos.php" id="linkprodu">Pide aquí</a></section></strong>
     <section><a href="Clientes/login.php" id="descu2"><h3 id="descu"> Iniciar Sesion</h3></a></section>
    
     </nav>

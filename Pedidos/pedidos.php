@@ -3,11 +3,13 @@ $servidor = "localhost";
 $nombre = "root";
 $contraseña = "";
 $BDnombre = "organiczoneBD";
+
  $conn = new mysqli($servidor, $nombre, $contraseña, $BDnombre);
+
   if($conn->connect_error) {
     die ("conexion fallida" . $conn->connect_error);
   }
-  $id = $_POST['id'];
+
   $nombre = $_POST['nombre'];
   $fecha = $_POST['fecha'];
   $estado = $_POST['estado'];
@@ -15,11 +17,16 @@ $BDnombre = "organiczoneBD";
 
  
   
-  $sql = "INSERT INTO pedidos( id, nombre , fecha , estado, nombrevendedor)
-  VALUES ('$id' , '$nombre' , '$fecha' , '$estado' , '$nombrevendedor') ";
+  $sql = "INSERT INTO pedidos( nombre , fecha , estado, nombrevendedor)
+  VALUES ('$nombre' , '$fecha' , '$estado' , '$nombrevendedor') ";
+
   if($conn->query($sql) === TRUE) {
-    echo "Nuevo pedido creado correctamente";
+
+    $idPedido = $conn->insert_id;
+
     header("Location: leerpedidos.php?");
+    exit();
+    
   } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
   }

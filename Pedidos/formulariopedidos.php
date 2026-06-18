@@ -124,8 +124,8 @@ body {
 
   <div class="titu">Registro de Pedido</div>
 
-  <form class="forma" action="pedidos.php" method="post">
-    <label>Nombre</label>
+  <form class="forma" action="pedidos.php" method="POST">
+    <label>Nombre Cliente </label>
     <input type="text" name="nombre" >
 
     <div class="fil">

@@ -25,18 +25,18 @@ if(mysqli_num_rows($resultado) > 0){
     $_SESSION['nombre'] = $fila['nombre'];
     $_SESSION['rol']=$fila['rol'];
     $_SESSION['estado']=$fila['estado'];
-}if($_SESSION['rol']==1){
+}if($_SESSION['rol']==¨Administrador¨){
 
 
 
-    header("Location:../PAGINA WEB/maquetadovendedor.php");
+    header("Location: ../maquetados/maquetadoAdmin.php");
 
 }
-if($_SESSION['rol']==2){
+if($_SESSION['rol']==¨Vendedor¨){
 
 
 
-    header("Location:../PAGINA WEB/maquetadoAdmin.php");
+    header("Location: ../maquetados/maquetadovendedor.php");
 
 }else{
     echo "Usuario o contraseña incorrectos";

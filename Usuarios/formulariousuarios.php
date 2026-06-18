@@ -169,7 +169,7 @@ body {
                 <select name="rol" >
                    
                     <option value="admin">Admin</option>
-                    <option value="usuario">Usuario</option>
+                    <option value="vendedor">Vendedor</option>
                 </select>
             </div>
 
