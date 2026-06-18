@@ -6,13 +6,11 @@ $conexion = mysqli_connect("localhost","root","","organiczoneBD");
 $CI=$_POST['CI'];
 $nombre=$_POST['nombre'];
 $rol = $_POST['rol'];
-$estado = $_POST['estado'];
 
 $sql = "SELECT * FROM usuarios
         WHERE CI='$CI'
         AND nombre='$nombre'
-        AND rol='$rol'
-        AND estado='$estado'"; 
+        AND rol='$rol'"; 
 
 $resultado = mysqli_query($conexion,$sql);
 
@@ -24,23 +22,24 @@ if(mysqli_num_rows($resultado) > 0){
     $_SESSION['CI'] = $fila['CI'];
     $_SESSION['nombre'] = $fila['nombre'];
     $_SESSION['rol']=$fila['rol'];
-    $_SESSION['estado']=$fila['estado'];
-}if($_SESSION['rol']==1){
+    
+}if($_SESSION['rol']=='usuarios'){
 
 
 
-    header("Location:../PAGINA WEB/maquetadovendedor.php");
+    header("Location:../maquetados/maquetadovendedor.php");
 
 }
-if($_SESSION['rol']==2){
+if($_SESSION['rol']=='admin'){
 
 
-
-    header("Location:../PAGINA WEB/maquetadoAdmin.php");
+    header("Location:../maquetados/maquetadoAdmin.php");
 
 }else{
-    echo "Usuario o contraseña incorrectos";
+    echo  "Usuario o contraseña incorrectos";
+
    
 }
-
 ?>
+
+

@@ -111,7 +111,7 @@ table{
 }
 </style>
 </head>
-
+<?php session_start(); ?>
 <body>
 <main>
 <header>
@@ -120,7 +120,7 @@ table{
 Hola!
 </h1>
 <h1 style=color:#2b120b;font-size:90px>
-Admin
+Admin <p>Bienvenido <?php echo $_SESSION['nombre']; ?></p>
 </h1>
 </article>
 <article style="display:flex;gap:15px;background:none">
