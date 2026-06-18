@@ -395,7 +395,7 @@ Oz
     </label>
 
     <label class="vendedor">
-        <input type="radio" name="rol" value="usuarios">
+        <input type="radio" name="rol" value="vendedor">
         <span>Vendedor</span>
     </label>
 

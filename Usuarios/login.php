@@ -24,7 +24,7 @@ if(mysqli_num_rows($resultado) > 0){
     $_SESSION['rol']=$fila['rol'];
     $_SESSION['estado']=$fila['estado'];
  
-}if($_SESSION['rol']=='usuarios'){
+}if($_SESSION['rol']=='vendedor'){
 
 
 

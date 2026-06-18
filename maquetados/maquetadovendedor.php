@@ -256,6 +256,7 @@ AM
 <br><br><br>
 Gráfico
 </article>
+<button><a href="../Usuarios/cerrarse.php">Cerrar Sesion</a></button>
 </section>
 </main>
 </body>

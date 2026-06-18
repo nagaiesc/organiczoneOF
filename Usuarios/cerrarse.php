@@ -9,7 +9,7 @@
     <?php
     session_start();
     session_destroy();
-    header("Location: formulariosesion.html");
+    header("Location: ../Usuarios/formulariosesion.php");
     ?>
 </body>
 </html>

@@ -123,6 +123,7 @@ Hola!
 <h1 style=color:#2b120b;font-size:90px>
 Admin <p>Bienvenido <?php echo $_SESSION['nombre']; ?></p>
 </h1>
+<button><a href="../Usuarios/cerrarse.php"  >Cerrar Sesion</a></button>
 </article>
 <article style="display:flex;gap:15px;background:none">
 <button style=background:#10b046;color:white>
