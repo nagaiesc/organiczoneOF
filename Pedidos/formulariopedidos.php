@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+    $nombrevendedor=$_SESSION['nombre'];
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -120,25 +124,24 @@ body {
 
   <div class="titu">Registro de Pedido</div>
 
-  <form class="forma" action="pedidos.php" method="post">
-    <label>Nombre</label>
+  <form class="forma" action="pedidos.php" method="POST">
+    <label>Nombre Cliente </label>
     <input type="text" name="nombre" >
 
     <div class="fil">
       <div>
         <label>Fecha</label>
-        <input type="date" name="fecha" >
+        <input type="date" name="fecha" value="<?php echo date('Y-m.d'); ?>">
       </div>
       <div>
-        <label>Estado</label>
-        <input type="text" name="estado" >
+        <input type="hidden" name="estado" value="En Proceso">
       </div>
       <div>
         <label>Nombre del vendedor </label>
-        <input type="text" name="nombrevendedor" >
-      </div>
+        <input type="text" name="nombrevendedor" value="<?php echo $nombrevendedor?>" >
+      </div>    
       
-    <button type="submit">Guardar Pedido</button>
+    <button type="submit">Nuevo Pedido</button>
 
   </form>
 

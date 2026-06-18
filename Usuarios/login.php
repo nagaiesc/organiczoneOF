@@ -22,7 +22,8 @@ if(mysqli_num_rows($resultado) > 0){
     $_SESSION['CI'] = $fila['CI'];
     $_SESSION['nombre'] = $fila['nombre'];
     $_SESSION['rol']=$fila['rol'];
-    
+    $_SESSION['estado']=$fila['estado'];
+ 
 }if($_SESSION['rol']=='usuarios'){
 
 
@@ -34,6 +35,7 @@ if($_SESSION['rol']=='admin'){
 
 
     header("Location:../maquetados/maquetadoAdmin.php");
+
 
 }else{
     echo  "Usuario o contraseña incorrectos";

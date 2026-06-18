@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Registro de Usuarios</title>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 
 <style>
 
@@ -167,7 +169,7 @@ body {
                 <select name="rol" >
                    
                     <option value="admin">Admin</option>
-                    <option value="usuario">Usuario</option>
+                    <option value="vendedor">Vendedor</option>
                 </select>
             </div>
 
