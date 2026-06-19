@@ -25,13 +25,13 @@ VALUES
 
 if($conn->query($sql)){
 
-    header("Location: carrito.php?idPedido=".$idPedido);
+    header("Location: leercarrito.php?pedidos_id=".$idPedido);
 
 }else{
 
     echo "El producto ya fue agregado al pedido.<br><br>";
 
-    echo "<a href='carrito.php?idPedido=".$idPedido."'>
+    echo "<a href='leercarrito.php?pedidos_id=".$idPedido."'>
             <button>Volver</button>
           </a>";
 }
