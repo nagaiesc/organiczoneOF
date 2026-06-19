@@ -10,7 +10,7 @@ $conn = new mysqli($servidor, $usuario, $contrasena, $bd);
 if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
-$idPedido = $_GET['pedidos_id'];
+$idPedido = isset($_GET['pedidos_id']) ? $_GET['pedidos_id'] : 0;
 
 $sql = "SELECT * FROM productos";
 
@@ -57,10 +57,10 @@ while($fila = $resultado->fetch_assoc()){
 
     
 echo "<input type='hidden'
-    name='idProducto'
+    name='producto_id'
     value='".$fila['id']."'>";
 echo "<input type='hidden'
-        name='idPedido'
+        name='pedidos_id'
         value='".$idPedido."'>";
 
 echo "<input type='hidden'

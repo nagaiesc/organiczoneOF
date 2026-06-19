@@ -191,7 +191,6 @@ label {
                 <label>Estado</label>
 
                 <select name="estado" >
-                    <option value="">Seleccione un estado</option>
                     <option value="activo">Activo</option>
                     <option value="inactivo">Inactivo</option>
                 </select>
