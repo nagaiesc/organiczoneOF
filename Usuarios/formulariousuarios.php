@@ -6,11 +6,13 @@
 <title>Registro de Usuarios</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 
 body {
-    background: #969696;
+    background: #F4F1EE;
     margin: 0;
     font-family: 'Inter', Arial, Helvetica, sans-serif;
     color: #111;
@@ -22,7 +24,7 @@ body {
 
 /* CONTENEDOR PRINCIPAL */
 .cajp {
-    background: #fff;
+    background: #12A33C;
     width: 100%;
     max-width: 750px;
     border-radius: 40px;
@@ -38,13 +40,25 @@ body {
     margin-bottom: 20px;
     font-weight: 700;
     letter-spacing: 2px;
+    color: #fff;
 }
 
 .titu {
-    font-size: 48px;
-    font-weight: 900;
-    text-align: center;
-    margin-bottom: 35px;
+    
+font-family:'Fredoka',sans-serif;
+
+font-size:64px;
+font-weight:700;
+color:#fff;
+letter-spacing:-1px;
+    
+}
+label {
+    font-family:'Fredoka',sans-serif;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+    color:#fff;
 }
 
 /* FORMULARIO */
@@ -86,7 +100,7 @@ body {
 /* BOTÓN */
 .forma button {
     width: 100%;
-    background: #111;
+    background: #2b140d;
     color: #fff;
     border: none;
     border-radius: 12px;
