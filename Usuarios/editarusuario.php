@@ -174,7 +174,7 @@ body {
 
         <form class="forma" action="registroeditarusuario.php" method="post">
 
-            <input type="hidden" name="CIoriginal" value="<?= $CI ?>">
+            <input type="hidden" name="CI" value="<?= $CI ?>">
 
            
 
