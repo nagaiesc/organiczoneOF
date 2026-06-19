@@ -384,24 +384,7 @@ Oz
 
     <label>Carnet de Identidad:</label>
     <input type="text" name="CI" required>
-
-    <h3>Rol:</h3>
-
-    <section class="roles">
-
-    <label class="admin">
-        <input type="radio" name="rol" value="admin" required>
-        <span>Admin</span>
-    </label>
-
-    <label class="vendedor">
-        <input type="radio" name="rol" value="vendedor">
-        <span>Vendedor</span>
-    </label>
-
-</section>
-
-    <button class="btn" type="submit">
+ <button class="btn" type="submit">
         Entrar
     </button>
 

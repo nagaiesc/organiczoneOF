@@ -5,12 +5,12 @@ $conexion = mysqli_connect("localhost","root","","organiczoneBD");
 
 $CI=$_POST['CI'];
 $nombre=$_POST['nombre'];
-$rol = $_POST['rol'];
+/*$rol = $_POST['rol'];*/
 
 $sql = "SELECT * FROM usuarios
         WHERE CI='$CI'
         AND nombre='$nombre'
-        AND rol='$rol'"; 
+        "; 
 
 $resultado = mysqli_query($conexion,$sql);
 
@@ -24,14 +24,14 @@ if(mysqli_num_rows($resultado) > 0){
     $_SESSION['rol']=$fila['rol'];
     $_SESSION['estado']=$fila['estado'];
  
-}if($_SESSION['rol']=='vendedor'){
+}if($_SESSION['rol']=="vendedor"){
 
 
 
     header("Location:../Pedidos/formulariopedidos.php");
 
 }
-if($_SESSION['rol']=='admin'){
+if($_SESSION['rol']=="admin"){
 
 
     header("Location:../maquetados/maquetadoAdmin.php");
