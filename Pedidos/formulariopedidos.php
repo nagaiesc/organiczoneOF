@@ -141,8 +141,8 @@ body {
         <input type="text" name="nombrevendedor" value="<?php echo $nombrevendedor?>" >
       </div>    
       
-    <button type="submit">Nuevo Pedido</button>
-
+    <button type="submit">Enviar Pedido</button>
+    </div>
   </form>
 
   <div class="pie">

@@ -11,8 +11,8 @@ if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
-$idProducto = $_POST["idProducto"];
-$idPedido = $_POST["idPedido"];
+$idProducto = $_POST["productos_id"];
+$idPedido = $_POST["pedidos_id"];
 $cantidad = $_POST["cantidad"];
 $precio = $_POST["precio"];
 

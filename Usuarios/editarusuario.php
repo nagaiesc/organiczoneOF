@@ -174,7 +174,7 @@ body {
 
         <form class="forma" action="registroeditarusuario.php" method="post">
 
-            <input type="hidden" name="CIoriginal" value="<?= $CI ?>">
+            <input type="hidden" name="CI" value="<?= $CI ?>">
 
            
 
@@ -202,7 +202,7 @@ body {
 
                     <select name="rol" required>
                         <option value="admin" <?= $rol == 'admin' ? 'selected' : '' ?>>Admin</option>
-                        <option value="usuario" <?= $rol == 'usuario' ? 'selected' : '' ?>>Usuario</option>
+                        <option value="usuario" <?= $rol == 'vendedor' ? 'selected' : '' ?>>Vendedor</option>
                     </select>
                 </div>
 

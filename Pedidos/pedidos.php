@@ -24,7 +24,7 @@ $BDnombre = "organiczoneBD";
 
     $idPedido = $conn->insert_id;
 
-    header("Location: leerpedidos.php?");
+    header("Location: leercarrito.php?");
     exit();
     
   } else {
