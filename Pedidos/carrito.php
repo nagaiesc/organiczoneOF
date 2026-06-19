@@ -21,7 +21,7 @@ WHERE pedidos_id='$idPedido' ";
 
 $resultadoTotal=$conn->query($sqlTotal);
 
-$res=$resultadoTotal >fetch_assoc();
+$res=$resultadoTotal ->fetch_assoc();
 $total = $res['SUM(costototal)'];
 
 if($total == NULL){
