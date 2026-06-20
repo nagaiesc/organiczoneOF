@@ -204,8 +204,7 @@ transform:rotate(90deg);
     </a>
 
     <div class="submenu">
-        <a href="mision.html">Misión</a>
-        <a href="vision.html">Visión</a>
+        <a href="misionvision.php">Misión y Visión</a>
     </div>
 </div>
 
@@ -224,9 +223,8 @@ transform:rotate(90deg);
         <span class="flecha">▶</span>
     </a>
     <div class="submenu">
-        <a href="hamburguesas.html">Hamburguesas</a>
-        <a href="refrescos.html">Refrescos</a>
-        <a href="helados.html">Helados</a>
+        <a href="hamburguesas.php">Hamburguesas</a>
+        <a href="refrescos.php">Refrescos</a>
     </div>
 </div>
 

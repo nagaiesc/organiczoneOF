@@ -6,7 +6,6 @@
     <title>Menú Organic Zone</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
 <style>
 body{
     background:#f2f2f2;
@@ -85,6 +84,9 @@ button:hover{
     opacity:.9;
 }
 </style>
+<body>
+
+
 <section class="menu">
     <h1>Menú</h1>
 
