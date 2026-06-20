@@ -46,7 +46,7 @@ echo "<tr>
     </tr>";
 while($fila = $resultado->fetch_assoc()){
 
-    echo "<form action='agregarCarrito.php' method='POST'>";
+    echo "<form action='crearcarrito.php' method='POST'>";
 
     echo "<tr>";
 
@@ -57,7 +57,7 @@ while($fila = $resultado->fetch_assoc()){
 
     
 echo "<input type='hidden'
-    name='producto_id'
+    name='productos_id'
     value='".$fila['id']."'>";
 echo "<input type='hidden'
         name='pedidos_id'
@@ -85,3 +85,6 @@ echo "</form>";
 echo "</table>";
 
 echo "<br>";
+echo "<a href='mostrarcarrito.php?pedidos_id=".$idPedido."'> Ver carrito </a>";
+echo "<a href='../Usuarios/cerrarse.php'>Cerrar Sesion</a>";
+?>

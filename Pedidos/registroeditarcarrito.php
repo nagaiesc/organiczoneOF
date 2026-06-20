@@ -17,6 +17,7 @@ $resultadoProducto = $conexion->query($sqlProducto);
 $filaProducto = $resultadoProducto->fetch_assoc();
 
 /*Calcular nuevo costo total*/
+$precio = $filaProducto['precio'];
 $costototal = $precio * $cantidad;
 
 $sql = "UPDATE carrito SET cantidad='$cantidad', costototal='$costototal' WHERE pedidos_id = '$pedidos_id' AND productos_id = '$productos_id'" ;
