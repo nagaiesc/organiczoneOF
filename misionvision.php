@@ -68,8 +68,9 @@ h1{
     line-height:1.6;
 }
 </style>
-<body>
 
+<body>
+   
 <section class="about">
 
     <h1>About Us</h1>
