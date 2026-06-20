@@ -129,7 +129,7 @@ body{
     <div class="info">
 
         <div class="carta">
-            <span>📍</span>
+            <span>🌍</span>
             <h2>DIRECCIÓN</h2>
             <p>
                 Colegio Pedro Poveda Plazuela Tarija,
