@@ -70,6 +70,12 @@
 }
 </style>
 <body>
+    <nav>
+         <?php 
+        include("nav.php");
+        ?>
+    </nav>
+
     <section class="refrescos">
 
     <h1>Refrescos</h1>
@@ -119,5 +125,10 @@
     </div>
 
 </section>
+<footer>
+        <?php 
+        include("footer.php");
+        ?>
+    </footer>
 </body>
 </html>
