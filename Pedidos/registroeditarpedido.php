@@ -12,9 +12,8 @@ $nombre = $_POST['nombre'];
 $fecha = $_POST['fecha'];
 $estado = $_POST['estado'];
 $nombrevendedor = $_POST['nombrevendedor'];
-$sql = "UPDATE pedidos SET nombre='$nombre', fecha='$fecha' , estado='$estado' , nombrevendedor='$nombrevendedor'" ;
+$sql = "UPDATE pedidos SET nombre='$nombre', fecha='$fecha' , estado='$estado' , nombrevendedor='$nombrevendedor' WHERE id='$id' ";
 if ($conexion->query($sql) === TRUE) {
-    echo "Pedido editado correctamente";
     header("location: leerpedidos.php");
 }
 ?>
