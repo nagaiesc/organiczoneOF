@@ -27,15 +27,11 @@ if(mysqli_num_rows($resultado) > 0){
     // Movido dentro del bloque de éxito para que evalúe correctamente y no pase de largo al else
     if($_SESSION['rol']=="vendedor"){
 
-        header("Location:../Pedidos/formulariopedidos.php");
+        header("Location:../maquetados/vistavendedor.php");
         exit();
 
     }
-    if($_SESSION['rol']=="admin"){
 
-    header("Location:../maquetados/vistavendedor.php");
-
-}
 if($_SESSION['rol']=="admin"){
 
 

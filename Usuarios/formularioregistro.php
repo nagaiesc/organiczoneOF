@@ -70,7 +70,7 @@
             width: 85%;
             max-width: 950px;
             border-radius: 80px 80px 0 0;
-            padding: 60px 80px 40px 80px; /* Padding */
+            padding: 60px 80px 40px 80px;
             box-sizing: border-box;
             min-height: 500px; 
             display: flex;
@@ -132,6 +132,15 @@
             cursor: pointer;
             color: white;
             transition: 0.2s;
+            position: relative;
+        }
+
+        /* Ocultar radios */
+        .option-box input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
         }
 
         .opt-admin { background-color: var(--dark-green-btn); }
@@ -139,7 +148,8 @@
         .opt-activo { background-color: var(--dark-green-btn); }
         .opt-inactivo { background-color: var(--bg-page); color: var(--canva-green); }
 
-        .option-box.active {
+        
+        .option-box:has(input[type="radio"]:checked) {
             box-shadow: 0 0 0 4px white;
         }
 
@@ -216,23 +226,29 @@
                 <article>
                     <label>Rol</label>
                     <section class="options-container">
-                        <input type="hidden" name="rol"  value="admin">
-                        <button type="button" class="option-box opt-admin active" >Admin</button>
-                        <button type="button" class="option-box opt-vendedor" >Vendedor</button>
+                        <button type="button" class="option-box opt-admin" onclick="$(this).find('input').prop('checked', true).trigger('change')">
+                            <input type="radio" name="rol" value="admin" checked> Admin
+                        </button>
+                        <button type="button" class="option-box opt-vendedor" onclick="$(this).find('input').prop('checked', true).trigger('change')">
+                            <input type="radio" name="rol" value="vendedor"> Vendedor
+                        </button>
                     </section>
                 </article>
 
                 <article>
                     <label for="direccion">Dirección</label>
-                    <input type="text" name="direccion" >
+                    <input type="text" name="direccion">
                 </article>
 
                 <article>
                     <label>Estado</label>
                     <section class="options-container">
-                        <input type="hidden" name="estado" value="activo">
-                        <button type="button" class="option-box opt-activo active">Activo</button>
-                        <button type="button" class="option-box opt-inactivo" >Inactivo</button>
+                        <button type="button" class="option-box opt-activo" onclick="$(this).find('input').prop('checked', true).trigger('change')">
+                            <input type="radio" name="estado" value="activo" checked> Activo
+                        </button>
+                        <button type="button" class="option-box opt-inactivo" onclick="$(this).find('input').prop('checked', true).trigger('change')">
+                            <input type="radio" name="estado" value="inactivo"> Inactivo
+                        </button>
                     </section>
                 </article>
 
@@ -247,69 +263,23 @@
     <script>
     $("form").validate({
         rules:{
-            CI:{
-                required:true
-            },
-            nombre:{
-                required:true
-            },
-            direccion:{
-                required:true
-            },
-            celular:{
-                required:true
-            },
-            rol:{
-                required:true
-            },
-            estado:{
-                required:true
-            }
-
+            CI:{ required:true },
+            nombre:{ required:true },
+            direccion:{ required:true },
+            celular:{ required:true }
         },
         messages:{
-            CI:{
-                required:"este campo no puede estar vacio"
-            },
-            nombre:{
-                required:"este campo no puede estar vacio"
-            },
-            direccion:{
-                required:"este campo no puede estar vacio"
-            },
-            celular:{
-                required:"este campo no puede estar vacio"
-            },
-            rol:{
-                required:"este campo no puede estar vacio"
-            },
-            estado:{
-                required:"este campo no puede estar vacio"
-            }
+            CI:{ required:"este campo no puede estar vacio" },
+            nombre:{ required:"este campo no puede estar vacio" },
+            direccion:{ required:"este campo no puede estar vacio" },
+            celular:{ required:"este campo no puede estar vacio" }
         }
-    })
-</script>
-
-<script>
-
-function setVal(tipo, valor, boton){
-
-    document.getElementById(tipo + "_val").value = valor;
-
-
-    let botones = boton.parentElement.querySelectorAll(".option-box");
-
-
-    botones.forEach(b => {
-        b.classList.remove("active");
     });
 
-
-    boton.classList.add("active");
-
-}
-
-</script>
+    $('.options-container input[type="radio"]').on('change', function() {
+        $(this).closest('.options-container').find('.option-box').blur(); 
+    });
+    </script>
 
 </body>
 </html>
