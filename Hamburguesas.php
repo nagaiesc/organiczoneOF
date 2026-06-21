@@ -1,20 +1,18 @@
 <style>
-body{
-    background:#f2f2f2;
-    min-height:100vh;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
+.menu{
+    padding:40px;
 }
 
 .menu h1{
+    font-size:80px;
     color:#0c8d2f;
-    font-size:70px;
     margin-bottom:30px;
     font-weight:bold;
 }
 
 .productos{
     display:flex;
+    justify-content:center;
     gap:25px;
     flex-wrap:wrap;
 }
@@ -37,16 +35,6 @@ body{
     font-weight:bold;
 }
 
-.carta{
-    position:relative;
-}
-
-.carta h2{
-    position:absolute;
-    top:20px;
-    left:20px;
-}
-
 .precio{
     display:flex;
     justify-content:space-between;
@@ -60,7 +48,7 @@ body{
     color:#0c8d2f;
 }
 
-button{
+.precio button{
     background:#0c8d2f;
     color:white;
     border:none;
@@ -71,7 +59,7 @@ button{
 }
 
 button:hover{
-    opacity:.9;
+    opacity:.8;
 }
 </style>
 <body>
