@@ -1,10 +1,4 @@
 <style>
-body{
-    background:#f2f2f2;
-    min-height:100vh;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
 .menu{
     padding:40px;
 }
