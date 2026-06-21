@@ -127,6 +127,60 @@ input[type="submit"]:hover {
 
 }
 
+.botones{
+
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin-top:30px;
+
+}
+
+
+.botones a{
+
+    text-decoration:none;
+    padding:12px 30px;
+    border-radius:25px;
+    font-weight:700;
+    transition:.2s;
+
+}
+
+
+/* botón carrito */
+
+.boton-ver{
+
+    background:#111;
+    color:white;
+
+}
+
+
+.boton-ver:hover{
+
+    background:#136901;
+
+}
+
+
+/* botón cerrar */
+
+.boton-cerrar{
+
+    background:#2B140D;
+    color:white;
+
+}
+
+
+.boton-cerrar:hover{
+
+    background:#b3261e;
+
+}
+
 
 </style>
 
@@ -220,8 +274,14 @@ echo "</form>";
 echo "</table>";
 
 echo "<br>";
-echo "<a href='mostrarcarrito.php?pedidos_id=".$idPedido."'> Ver carrito </a>";
-echo "<a href='../Usuarios/cerrarse.php'>Cerrar Sesion</a>";
+echo "<div class='botones'>
+<a class='boton-ver' href='mostrarcarrito.php?pedidos_id=".$idPedido."'>
+    Ver carrito
+</a>
+<a class='boton-cerrar' href='../Usuarios/cerrarse.php'>
+    Cerrar Sesión
+</a>
+</div>";
 
 echo "
 
