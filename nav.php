@@ -39,12 +39,11 @@
             left: 15px;
             bottom: 8px;
         }
-        a{
-            display: flex;
-            text-decoration: none;
-            color: white;
+        #barra a{
+            display:flex;
+            text-decoration:none;
+            color:white;
         }
-
 
         #links{
             display:flex;

@@ -1,9 +1,9 @@
 <style>
-.menu{
+    .hamburguesas{
     padding:40px;
 }
 
-.menu h1{
+.hamburguesas h1{
     font-size:80px;
     color:#0c8d2f;
     margin-bottom:30px;
@@ -22,16 +22,16 @@
 }
 
 .imagen{
-    height:270px;
+    width:100%;
+    height:280px;
     background:#0c8d2f;
     border-radius:15px;
 }
 
-
 .carta h2{
     margin-top:15px;
-    color:white;
-    font-size:32px;
+    font-size:35px;
+    color:#0c8d2f;
     font-weight:bold;
 }
 
@@ -58,27 +58,29 @@
     font-weight:bold;
 }
 
-button:hover{
+.precio button:hover{
     opacity:.8;
 }
 </style>
 <body>
-<nav>
-    <?php 
-    include("nav.php");
-    ?>
-</nav>
+    <nav>
+         <?php 
+        include("nav.php");
+        ?>
+    </nav>
 
-<section class="menu">
-    <h1>Menú</h1>
+    <section class="hamburguesas">
+
+    <h1>Hamburguesas</h1>
 
     <div class="productos">
 
         <div class="carta">
             <div class="imagen"></div>
             <h2>Beyond Burger</h2>
+
             <div class="precio">
-                <span>21 Bs</span>
+                <span>8 Bs</span>
                 <button>Agregar</button>
             </div>
         </div>
@@ -86,8 +88,9 @@ button:hover{
         <div class="carta">
             <div class="imagen"></div>
             <h2>Beef Burger</h2>
+
             <div class="precio">
-                <span>27 Bs</span>
+                <span>10 Bs</span>
                 <button>Agregar</button>
             </div>
         </div>
@@ -95,8 +98,9 @@ button:hover{
         <div class="carta">
             <div class="imagen"></div>
             <h2>Smoked Fries</h2>
+
             <div class="precio">
-                <span>7 Bs</span>
+                <span>9 Bs</span>
                 <button>Agregar</button>
             </div>
         </div>
@@ -104,6 +108,7 @@ button:hover{
         <div class="carta">
             <div class="imagen"></div>
             <h2>Zone Shake</h2>
+
             <div class="precio">
                 <span>12 Bs</span>
                 <button>Agregar</button>
@@ -111,9 +116,10 @@ button:hover{
         </div>
 
     </div>
+
 </section>
 <footer>
-    <?php 
-    include("footer.php");
-    ?>
-</footer>
+        <?php 
+        include("footer.php");
+        ?>
+    </footer>

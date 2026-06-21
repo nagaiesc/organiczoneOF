@@ -4,34 +4,40 @@ body{
     background:#eef0ed;
     font-family:Arial, sans-serif;
     min-height:100vh;
+    margin:0;
     overflow-x:hidden;
+}
+
+.contenedor-nav{
+    height:100px;
 }
 
 .about{
     width:100%;
 }
 
-h1{
+.about h1{
     text-align:center;
     font-size:120px;
     color:#2b0a00;
     font-weight:900;
-    margin-bottom:20px;
+    margin:20px 0 50px;
 }
 
 .mision{
     width:60%;
     background:#11b348;
     color:white;
-    padding:25px 50px;
+    padding:35px 50px;
     border-radius:0 70px 70px 0;
-    margin-bottom:40px;
+    margin-bottom:50px;
+    box-sizing:border-box;
 }
 
 .mision h2{
     font-size:55px;
     color:#ffd08a;
-    margin-bottom:10px;
+    margin:0 0 10px;
 }
 
 .mision p{
@@ -43,9 +49,10 @@ h1{
     width:60%;
     background:#e8b164;
     color:#1d2e1d;
-    padding:25px 50px;
+    padding:35px 50px;
     border-radius:70px 0 0 70px;
     margin-left:auto;
+    box-sizing:border-box;
 }
 
 .vision h2{
@@ -62,11 +69,13 @@ h1{
 
 <body>
 <section>
-<nav>
-    <?php 
-    include("nav.php");
-    ?>
-</nav>
+
+<div class="contenedor-nav">
+<?php 
+include("nav.php");
+?>
+</div>
+
 </section>
 <section class="about">
 
