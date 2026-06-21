@@ -61,11 +61,13 @@ h1{
 </style>
 
 <body>
+<section>
 <nav>
     <?php 
     include("nav.php");
     ?>
 </nav>
+</section>
 <section class="about">
 
     <h1>About Us</h1>
