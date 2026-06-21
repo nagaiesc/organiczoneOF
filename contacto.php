@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
 <style>
 body{
     background:#000;
@@ -14,34 +7,28 @@ body{
     min-height:100vh;
     background:#000;
     color:white;
-    padding:80px;
     position:relative;
     overflow:hidden;
 }
 
 
 .contacto::before{
-    content:"";
     width:350px;
     height:350px;
     background:#4caf50;
     border-radius:50%;
     position:absolute;
-    top:-150px;
-    left:-150px;
     filter:blur(120px);
     opacity:.3;
 }
 
 .contacto::after{
-    content:"";
     width:300px;
     height:300px;
     background:#4caf50;
     border-radius:50%;
     position:absolute;
     bottom:-120px;
-    right:-120px;
     filter:blur(120px);
     opacity:.25;
 }
@@ -86,7 +73,7 @@ body{
 }
 
 .carta:hover{
-    transform:translateY(-10px);
+    transform:translateY(10px);
     border-color:#4caf50;
     box-shadow:0 0 25px rgba(76,175,80,.5);
 }
@@ -154,5 +141,3 @@ body{
     </div>
 
 </section>
-</body>
-</html>
