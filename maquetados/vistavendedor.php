@@ -265,6 +265,7 @@ body {
         <header class="caja-titulos">
             <h2 class="texto-saludo">Hola!</h2>
             <h1 class="texto-rol">Vendedor</h1>
+            <p>Bienvenido <?php echo $_SESSION['nombre']; ?></p>
         </header>
 
         <section class="caja-fondo-verde">
