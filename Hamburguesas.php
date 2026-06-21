@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Organic Zone</title>
-    <link rel="stylesheet" href="style.css">
-</head>
 <style>
 body{
     background:#f2f2f2;
     min-height:100vh;
-    padding:40px;
-    margin:0;
     box-sizing:border-box;
     font-family:Arial, sans-serif;
 }
@@ -29,7 +19,7 @@ body{
     flex-wrap:wrap;
 }
 
-.card{
+.carta{
     width:220px;
 }
 
@@ -130,6 +120,3 @@ button:hover{
 
     </div>
 </section>
-
-</body>
-</html>
