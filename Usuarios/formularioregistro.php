@@ -217,8 +217,8 @@
                     <label>Rol</label>
                     <section class="options-container">
                         <input type="hidden" name="rol"  value="admin">
-                        <button type="button" class="option-box opt-admin active" onclick="setVal('rol', 'admin', this)">Admin</button>
-                        <button type="button" class="option-box opt-vendedor" onclick="setVal('rol', 'vendedor', this)">Vendedor</button>
+                        <button type="button" class="option-box opt-admin active" >Admin</button>
+                        <button type="button" class="option-box opt-vendedor" >Vendedor</button>
                     </section>
                 </article>
 
@@ -231,8 +231,8 @@
                     <label>Estado</label>
                     <section class="options-container">
                         <input type="hidden" name="estado" value="activo">
-                        <button type="button" class="option-box opt-activo active" onclick="setVal('estado', 'activo', this)">Activo</button>
-                        <button type="button" class="option-box opt-inactivo" onclick="setVal('estado', 'inactivo', this)">Inactivo</button>
+                        <button type="button" class="option-box opt-activo active">Activo</button>
+                        <button type="button" class="option-box opt-inactivo" >Inactivo</button>
                     </section>
                 </article>
 
