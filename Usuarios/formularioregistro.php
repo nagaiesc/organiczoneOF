@@ -29,7 +29,7 @@
             min-height: 100vh;
         }
 
-        /* Contenedor del Título - Izquierda */
+        /* Contenedor de titulos */
         header {
             width: 100%;
             max-width: 1200px;
@@ -54,7 +54,7 @@
             line-height: 0.85;
         }
 
-        /* Contenedor para centrar la caja y permitir que crezca */
+        /* Contenedor  */
         .main-wrapper {
             display: flex;
             justify-content: center;
@@ -64,15 +64,15 @@
             margin-top: 20px;
         }
 
-        /* Caja Principal - Centrada, con min-height para no cortar contenido */
+        /* Caja Principal*/
         main {
             background-color: var(--canva-green);
             width: 85%;
             max-width: 950px;
             border-radius: 80px 80px 0 0;
-            padding: 60px 80px 40px 80px; /* Padding inferior para que el botón respire */
+            padding: 60px 80px 40px 80px; /* Padding */
             box-sizing: border-box;
-            min-height: 500px; /* Asegura un tamaño base */
+            min-height: 500px; 
             display: flex;
             flex-direction: column;
             box-shadow: 0 -5px 25px rgba(0,0,0,0.05);
@@ -178,7 +178,6 @@
             font-weight: 400;
         }
 
-        /* Responsive */
         @media (max-width: 900px) {
             header { padding-left: 30px; }
             .titu-usuarios { font-size: 80px; }
