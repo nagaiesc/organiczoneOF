@@ -1,7 +1,13 @@
 <?php
+session_start();
+?>
+
+<?php
 // suma stock 
 $conexion = new mysqli("localhost", "root", "", "organiczoneBD");
 $total_stock = 0;
+
+
 
 if (!$conexion->connect_error) {
     $sql_stock = "SELECT SUM(stock) as total FROM productos";
@@ -23,8 +29,9 @@ if (!$conexion->connect_error) {
 <style>
 
 body {
-    background: #EAF7EC;
-    margin: 0;
+    background:#EAF7EC;
+    margin:0;
+    padding-top:100px;
     font-family: 'Fredoka', sans-serif;
     color: #111;
     min-height: 100vh;
@@ -40,10 +47,12 @@ body {
     background: #EAF7EC;
     width: 100%;
     max-width: 1150px;
+    margin-top:80px;  
     display: grid;
     grid-template-columns: 340px 1fr;
-    gap: 45px;
-    align-items: center;
+    gap:45px;
+    align-items:center;
+
 }
 
 /*section izquierda*/
@@ -250,9 +259,12 @@ body {
     }
 }
 
+
 </style>
 </head>
 <body>
+        <?php include("../nav.php"); ?>
+
 
 <article class="caja-principal">
 
@@ -264,8 +276,7 @@ body {
         
         <header class="caja-titulos">
             <h2 class="texto-saludo">Hola!</h2>
-            <h1 class="texto-rol">Vendedor</h1>
-            <p>Bienvenido <?php echo $_SESSION['nombre']; ?></p>
+            <h1 class="texto-rol"><?php echo $_SESSION['nombre']; ?></h1>
         </header>
 
         <section class="caja-fondo-verde">
@@ -276,12 +287,14 @@ body {
                 <span class="sub-stock">Productos</span>
             </section>
 
-            <a href="registro_pedidos.php" class="enlace-tarjeta caja-pedidos">
+            <a href="../Pedidos/formulariopedidos.php" class="enlace-tarjeta caja-pedidos">
                 <header>
                     <h3 class="sub-pedidos">Registra tus</h3>
                     <h2 class="titulo-pedidos">Pedidos!</h2>
                 </header>
-                <button type="button" class="boton1">Registrar</button>
+                <button type="button" class="boton1">
+                    Registrar
+                </button>
             </a>
 
             <a href="http://localhost/organiczoneOF/Productos/formularioproductos.php" class="enlace-tarjeta caja-productos">

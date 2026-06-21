@@ -28,7 +28,7 @@ if(mysqli_num_rows($resultado) > 0){
 
 
 
-    header("Location:../Pedidos/formulariopedidos.php");
+    header("Location:../maquetados/vistavendedor.php");
 
 }
 if($_SESSION['rol']=="admin"){
