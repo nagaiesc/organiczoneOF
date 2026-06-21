@@ -33,8 +33,13 @@ if(mysqli_num_rows($resultado) > 0){
     }
     if($_SESSION['rol']=="admin"){
 
-        header("Location:../maquetados/maquetadoAdmin.php");
-        exit();
+    header("Location:../maquetados/vistavendedor.php");
+
+}
+if($_SESSION['rol']=="admin"){
+
+
+    header("Location:../maquetados/maquetadoAdmin.php");
 
     }
 

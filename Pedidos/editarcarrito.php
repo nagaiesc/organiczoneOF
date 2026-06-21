@@ -25,102 +25,122 @@ $cantidad = $fila['cantidad'];
 <title>Editar Carrito</title>
 
 <style>
-html, body {
-    height: 100%;
-    margin: 0;
-    background: #969696;
-    font-family: 'Inter', Arial, sans-serif;
-}
-
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background:#EAF7EC;
+    margin:0;
+    font-family:'Inter', Arial, Helvetica, sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-.principal-grid {
-    display: grid;
-    grid-template-columns: 440px 1fr;
-    width: 96vw;
-    max-width: 1400px;
-    min-height: 700px;
-    box-shadow: 0px 6px 40px rgba(88, 88, 88, 0.16);
-    border-radius: 10px;
-    overflow: hidden;
+.principal-grid{
+    background:white;
+    width:90%;
+    max-width:1000px;
+    display:grid;
+    grid-template-columns:320px 1fr;
+    border-radius:60px;
+    overflow:hidden;
+    box-shadow:0 10px 35px rgba(43,20,13,.25);
 }
 
-/* PANEL IZQUIERDO */
-.section-negro {
-    background: #000;
-    color: #fff;
-    padding: 40px;
+.section-negro{
+    background:#2B140D;
+    color:white;
+    padding:45px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 }
 
-.nav-inner a {
-    color: #e0e0e0;
-    text-decoration: none;
-    font-weight: 600;
+
+
+.nav-inner a{
+    color:#FCD09F;
+    text-decoration:none;
+    font-weight:700;
 }
 
-.contrato-titulo {
-    font-size: 2.4em;
-    font-weight: 900;
-    margin-top: 40px;
+
+
+.contrato-titulo{
+    font-size:45px;
+    line-height:1;
+    margin-top:50px;
+    font-weight:900;
 }
 
-.desc {
-    color: #bababa;
-    margin-top: 20px;
+.desc{
+    color:#EAF7EC;
+    line-height:1.5;
 }
 
-/* PANEL DERECHO */
-.section-blanco {
-    background: #fff;
-    padding: 50px;
+.section-blanco{
+    background:white;
+    padding:55px;
 }
 
-.section-blanco h2 {
-    margin-bottom: 30px;
+.section-blanco h2{
+    font-size:38px;
+    font-weight:900;
+    color:#2B140D;
+    margin-bottom:35px;
 }
 
-/* FORMULARIO */
-.forma label {
-    font-weight: 500;
-    font-size: 14px;
+.forma label{
+    font-weight:600;
+    color:#2B140D;
 }
 
-.forma input {
-    width: 100%;
-    border: none;
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 20px;
-    padding: 8px 0;
-    font-size: 16px;
-    background: none;
-    outline: none;
+.forma input{
+    width:100%;
+    border:none;
+    border-bottom:2px solid #ccc;
+    padding:12px 5px;
+    font-size:18px;
+    outline:none;
+    margin-bottom:25px;
+    background:none;
 }
 
-.forma input:focus {
-    border-bottom: 1.5px solid #000;
+.forma input:focus{
+    border-bottom:2px solid #12A33C;
 }
 
-.forma .fil {
-    display: flex;
-    gap: 20px;
+.forma .fil{
+    display:flex;
 }
 
-.forma button {
-    width: 100%;
-    background: #000;
-    color: #fff;
-    border: none;
-    padding: 10px;
-    font-weight: 600;
-    cursor: pointer;
+.forma button{
+    width:100%;
+    background:#2B140D;
+    color:white;
+    border:none;
+    border-radius:20px;
+    padding:14px;
+    font-size:17px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
 }
 
-.forma button:hover {
-    background: #222;
+.forma button:hover{
+    background:#12A33C;
+}
+
+@media(max-width:800px){
+.principal-grid{
+    grid-template-columns:1fr;
+    border-radius:40px;
+}
+.section-negro{
+    padding:30px;
+}
+.contrato-titulo{
+    font-size:35px;
+}
 }
 </style>
 </head>
@@ -135,7 +155,7 @@ body {
             <a href="leercarrito.php">VOLVER</a>
         </nav>
 
-        <h1 class="contrato-titulo">EDITAR PEDIDO</h1>
+        <h1 class="contrato-titulo">EDITAR<br>CARRITO</h1>
 
         <p class="desc">
             Modifica los datos del carrito seleccionado.<br>

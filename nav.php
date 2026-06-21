@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
     <style>
      
         #a{
@@ -18,19 +11,24 @@
         }
 
         #barra{
+
             background-color: #60a04d8f;
             position: fixed;
-            width: 1300px;
-            height: 65px;
-            margin-left: 280px;
-            margin-right: 100px;
-            margin-top: 20px;
-            border-radius: 50px;
+            top:20px;
+            left:50%;
+            transform:translateX(-50%);
+            width:90%;
+            max-width:1300px;
+            height:65px;
+            border-radius:50px;
             display:flex;
-            justify-content: space-between;
-            flex-wrap: nowrap;
-        }      
-       
+            justify-content:space-between;
+            align-items:center;
+            padding:0 20px;
+            box-sizing:border-box;
+            z-index:1000;
+        }  
+            
         #barra.desliza{
             background-color: black;
             transition: 1s;
@@ -49,10 +47,11 @@
 
 
         #links{
-            display: flex;
-            flex-direction: row;
+            display:flex;
+            flex-direction:row;
+            align-items:center;
+            gap:15px;
         }
-       
         #link1{
             margin-right: 10px;
         }
@@ -84,10 +83,11 @@
         }
        
         #descu2{
-            position: relative;
-            bottom: 11px;
-            right: 8px;
+            position:relative;
+            right:0;
+            bottom:0;
         }
+        
         
     </style>
 
@@ -230,6 +230,7 @@ transform:rotate(90deg);
 
     </section>
     <section><a href="Usuarios/formulariosesion.php" id="descu2"><h3 id="descu"> Iniciar Sesion</h3></a></section>
+    <section><a href='../Usuarios/cerrarse.php'  id="descu2"><h3 id="descu" >Cerrar Sesion</h3></a></section>
    
     </nav>
     </center>

@@ -61,7 +61,11 @@ h1{
 </style>
 
 <body>
-   
+<nav>
+    <?php 
+    include("nav.php");
+    ?>
+</nav>
 <section class="about">
 
     <h1>About Us</h1>
@@ -85,3 +89,8 @@ h1{
     </div>
 
 </section>
+<footer>
+    <?php 
+    include("footer.php");
+    ?>
+</footer>

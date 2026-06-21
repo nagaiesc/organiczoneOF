@@ -75,7 +75,11 @@ button:hover{
 }
 </style>
 <body>
-
+<nav>
+    <?php 
+    include("nav.php");
+    ?>
+</nav>
 
 <section class="menu">
     <h1>Menú</h1>
@@ -120,3 +124,8 @@ button:hover{
 
     </div>
 </section>
+<footer>
+    <?php 
+    include("footer.php");
+    ?>
+</footer>

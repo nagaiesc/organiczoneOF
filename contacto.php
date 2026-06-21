@@ -101,6 +101,11 @@ body{
 }
 </style>
 <body>
+    <nav>
+    <?php 
+    include("nav.php");
+    ?>
+    </nav>
     <section class="contacto">
 
     <div class="titulo">
@@ -141,3 +146,8 @@ body{
     </div>
 
 </section>
+<footer>
+    <?php 
+    include("footer.php");
+    ?>
+</footer>
