@@ -290,6 +290,26 @@
     })
 </script>
 
+<script>
+
+function setVal(tipo, valor, boton){
+
+    document.getElementById(tipo + "_val").value = valor;
+
+
+    let botones = boton.parentElement.querySelectorAll(".option-box");
+
+
+    botones.forEach(b => {
+        b.classList.remove("active");
+    });
+
+
+    boton.classList.add("active");
+
+}
+
+</script>
 
 </body>
 </html>
