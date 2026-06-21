@@ -24,24 +24,21 @@ if(mysqli_num_rows($resultado) > 0){
     $_SESSION['rol']=$fila['rol'];
     $_SESSION['estado']=$fila['estado'];
  
-}if($_SESSION['rol']=="vendedor"){
+    // Movido dentro del bloque de éxito para que evalúe correctamente y no pase de largo al else
+    if($_SESSION['rol']=="vendedor"){
 
+        header("Location:../Pedidos/formulariopedidos.php");
+        exit();
 
+    }
+    if($_SESSION['rol']=="admin"){
 
-    header("Location:../Pedidos/formulariopedidos.php");
+        header("Location:../maquetados/maquetadoAdmin.php");
+        exit();
 
-}
-if($_SESSION['rol']=="admin"){
-
-
-    header("Location:../maquetados/maquetadoAdmin.php");
-
+    }
 
 }else{
     echo  "Usuario o contraseña incorrectos";
-
-   
 }
 ?>
-
-
