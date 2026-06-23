@@ -194,7 +194,7 @@ transform:rotate(90deg);
    
     <center>
     <nav id="barra">
-    <div><a href="" id="orga"><h1>OrganicZone</h1></a></div>
+    <div><a href="paginaprincipal.php" id="orga" ><h1>OrganicZone</h1></a></div>
     <section id="links">
         <div class="item">
     <a href="#">
@@ -213,7 +213,7 @@ transform:rotate(90deg);
         <span class="flecha">▶</span>
     </a>
     <div class="submenu">
-        <a href="contacto.html">Contacto</a>
+        <a href="contacto.php">Contacto</a>
     </div>
 </div>
 <div class="item">
