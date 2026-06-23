@@ -194,7 +194,7 @@ transform:rotate(90deg);
    
     <center>
     <nav id="barra">
-    <div><a href="paginaprincipal.php" id="orga" ><h1>OrganicZone</h1></a></div>
+    <div><a href="../paginaprincipal.php" id="orga" ><h1>OrganicZone</h1></a></div>
     <section id="links">
         <div class="item">
     <a href="#">
