@@ -14,7 +14,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE SCHEMA IF NOT EXISTS `organiczoneBD` DEFAULT CHARACTER SET utf8 ;
 USE `organiczoneBD` ;
 
-
 -- -----------------------------------------------------
 -- Table `organiczoneBD`.`usuarios`
 -- -----------------------------------------------------
@@ -52,6 +51,8 @@ CREATE TABLE IF NOT EXISTS `organiczoneBD`.`pedidos` (
   `fecha` DATE NULL,
   `estado` VARCHAR(45) NULL,
   `nombrevendedor` VARCHAR(45) NULL,
+  `direccion` VARCHAR(45) NULL,
+  `telefono` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -66,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `organiczoneBD`.`carrito` (
   `costototal` INT NULL,
   PRIMARY KEY (`pedidos_id`, `productos_id`),
   INDEX `fk_pedidos_has_productos_productos1_idx` (`productos_id` ASC) ,
-  INDEX `fk_pedidos_has_productos_pedidos_idx` (`pedidos_id` ASC),
+  INDEX `fk_pedidos_has_productos_pedidos_idx` (`pedidos_id` ASC) ,
   CONSTRAINT `fk_pedidos_has_productos_pedidos`
     FOREIGN KEY (`pedidos_id`)
     REFERENCES `organiczoneBD`.`pedidos` (`id`)
@@ -75,6 +76,24 @@ CREATE TABLE IF NOT EXISTS `organiczoneBD`.`carrito` (
   CONSTRAINT `fk_pedidos_has_productos_productos1`
     FOREIGN KEY (`productos_id`)
     REFERENCES `organiczoneBD`.`productos` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `organiczoneBD`.`ventas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `organiczoneBD`.`ventas` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `estado` VARCHAR(45) NULL,
+  `metodo` VARCHAR(45) NULL,
+  `costototal` INT NULL,
+  `pedidos_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `pedidos_id`),
+  CONSTRAINT `fk_ventas_pedidos1`
+    FOREIGN KEY (`pedidos_id`)
+    REFERENCES `organiczoneBD`.`pedidos` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
