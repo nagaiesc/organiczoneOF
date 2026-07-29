@@ -169,6 +169,8 @@ tbody tr:hover {
                         <th>Fecha</th>
                         <th>Estado</th>
                         <th>Nombre vendedor</th>
+                        <th>Dirección</th>
+                        <th>Teléfono</th>
                     </tr>
                 </thead>
 
@@ -199,6 +201,8 @@ tbody tr:hover {
                         echo "<td>" . $fila['fecha'] . "</td>";
                         echo "<td>" . $fila['estado'] . "</td>";
                         echo "<td>" . $fila['nombrevendedor'] . "</td>";
+                        echo "<td>" . $fila['direccion'] . "</td>";
+                        echo "<td>" . $fila['telefono'] . "</td>";
                         
 
                         echo "<td class='acciones'>";
