@@ -191,6 +191,16 @@ body {
                 <span>Nombre vendedor:</span>
                 <strong><?= $fila['nombrevendedor'] ?></strong>
             </div>
+            <div class="campo">
+                <span>Direccion:</span>
+                <strong><?= $fila['direccion'] ?></strong>
+            </div>
+            <div class="campo">
+                <span>Telefono:</span>
+                <strong><?= $fila['telefono'] ?></strong>
+            </div>
+
+
 
 
         </div>

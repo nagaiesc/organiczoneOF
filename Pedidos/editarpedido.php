@@ -16,6 +16,8 @@ $nombre = $fila['nombre'];
 $fecha = $fila['fecha'];
 $estado = $fila['estado'];
 $nombrevendedor = $fila['nombrevendedor'];
+$direccion = $fila['direccion'];
+$telefono = $fila['telefono'];
 ?>
 
 <!DOCTYPE html>
@@ -169,6 +171,14 @@ body {
                 <div>
                     <label>Nombre vendedor</label>
                     <input type="number" name="costo" value="<?= $nombrevendedor ?>" required>
+                </div>
+                <div>
+                    <label>Direccion</label>
+                    <input type="number" name="costo" value="<?= $direccion ?>" required>
+                </div>
+                <div>
+                    <label>Telefono</label>
+                    <input type="number" name="costo" value="<?= $telefono ?>" required>
                 </div>
             </div>
 

@@ -14,11 +14,14 @@ $BDnombre = "organiczoneBD";
   $fecha = $_POST['fecha'];
   $estado = $_POST['estado'];
   $nombrevendedor = $_POST['nombrevendedor'];
+  $direccion = $_POST['direccion'];
+  $telefono = $_POST['telefono'];
+  
 
  
   
-  $sql = "INSERT INTO pedidos( nombre , fecha , estado, nombrevendedor)
-  VALUES ('$nombre' , '$fecha' , '$estado' , '$nombrevendedor') ";
+  $sql = "INSERT INTO pedidos( nombre , fecha , estado, nombrevendedor, direccion, telefono)
+  VALUES ('$nombre' , '$fecha' , '$estado' , '$nombrevendedor' , '$direccion' , '$telefono') ";
 
   if($conn->query($sql) === TRUE) {
 

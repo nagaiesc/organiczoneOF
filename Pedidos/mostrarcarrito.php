@@ -35,7 +35,7 @@ body{
 }
 
 .caja{
-    background:white
+    background:white;
     width:90%;
     max-width:1100px;
     padding:45px;
