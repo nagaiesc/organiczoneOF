@@ -137,6 +137,16 @@ body {
         <input type="hidden" name="estado" value="En Proceso">
       </div>
       <div>
+        <div>
+        <label>Direccion</label>
+        <input type="text" name="direccion" value=" ">
+      </div>
+      <div>
+        <label>Telefono</label>
+        <input type="number" name="telefono" value=" ">
+      </div>
+
+
         <label>Nombre del vendedor </label>
         <input type="text" name="nombrevendedor" value="<?php echo $nombrevendedor?>" >
       </div>    

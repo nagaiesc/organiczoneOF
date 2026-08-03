@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        header{
+            background-color: antiquewhite;
+            grid-area:marco;
+        }
+        nav{
+            background-color: aquamarine;
+            grid-area:menu;
+            display:flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content:space-between;
+        }
+        #uno{
+            background-color: blue;
+            grid-area: uno;
+        }
+        #dos{
+            background-color: rgb(8, 232, 248);
+            grid-area: dos;
+        }
+        aside{
+            background-color: green;
+            grid-area: tres;
+        }
+        footer{
+            background-color: rgb(245, 114, 6);
+            grid-area: pie;
+        }
+        body{
+            display: grid;
+            grid-template-rows: 200px 400px 600px 200px;
+            grid-template-columns: 33% 34% 33%;
+            grid-template-areas: 
+            "dos dos dos"
+            "menu  menu menu"
+            "uno marco  pie"
+            "tres tres tres";
+            gap:10px;
+        }
+        a{
+            background-color: green;
+            
+            height: 80px;
+        }
+       
+        @media(max-width:800px){
+            body{
+            display: grid;
+            grid-template-rows: 200px 400px 600px 200px;
+            grid-template-columns: 50% 50%;
+            grid-template-areas: 
+            "dos  dos"
+            "menu menu"
+            "uno marco"
+            "pie tres";
+            gap:10px;
+        }
+        header{
+            background-image: url("gruñon.jpg");
+        }
+          nav{
+            background-color: red;
+          }  
+        }
+    </style>
+</head>
+<body>
+    <header>0</header>
+    <nav><a id="a" href="">inicio</a><a id="e" href="">catalogo</a><a id="i" href="">horarios</a></nav>
+    <section id="uno">3</section>
+    <section id="dos">4</section>
+    <aside>5</aside>
+    <footer>6</footer>
+</body>
+</html>

@@ -122,7 +122,7 @@ body {
 
   <div class="titu">Registro de Producto</div>
 
-  <form class="forma" action="productos.php" method="post">
+  <form action="productos.php" method="post" enctype="multipart/form-data">
     <label>Nombre</label>
     <input type="text" name="nombre" >
 
@@ -142,6 +142,8 @@ body {
       <div>
         <label>Stock</label>
         <input type="number" name="stock" >
+        <label>Imagen</label>
+        <input type="file" name="imagen" accept=".jpg,.jpeg,.png,.gif,.webp">
       </div>
     </div>
     <button type="submit">Guardar Producto</button>

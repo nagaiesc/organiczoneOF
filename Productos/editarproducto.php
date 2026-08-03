@@ -150,7 +150,7 @@ body {
 
         <h2>Formulario de Edición</h2>
 
-        <form class="forma" action="registroeditarproducto.php" method="post">
+        <form class="forma" action="registroeditarproducto.php" method="post" enctype="multipart/form-data">
 
             <input type="hidden" name="id" value="<?= $id ?>" readonly>
 
@@ -174,12 +174,27 @@ body {
                 <div>
                     <label>Stock</label>
                     <input type="number" name="stock" value="<?= $stock ?>" required>
+                    <input type="file" name="imagen" accept=".jpg,.jpeg,.png,.gif,.webp">
                 </div>
             </div>
+
+
 
             <button type="submit">Guardar Cambios</button>
 
         </form>
+        <?php
+            $nombreArchivo="P-".$id;
+            $carpeta="../Imagenes/";
+            $extensiones=["jpg","jpeg","png","gif","webp"];
+            foreach($extensiones as $ext){
+            $ruta=$carpeta.$nombreArchivo.".".$ext;
+            if(file_exists($ruta)){
+            echo "<br><img src='$ruta' width='220'><br><br>";
+            break;
+            }
+            }
+        ?>
 
     </section>
 

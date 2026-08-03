@@ -8,8 +8,12 @@ if ($conexion->connect_error) {
     echo "Hubo un error en la conexion";
 }
 $id = $_GET['id'];
+
 $sql = "SELECT * FROM productos WHERE id = $id";
+
 $resultado = $conexion->query($sql);
+
+
 if ($resultado->num_rows > 0) {
     while($fila = $resultado->fetch_assoc()) {
         $sql = "DELETE FROM productos WHERE id = $id";

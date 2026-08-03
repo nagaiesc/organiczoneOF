@@ -16,12 +16,32 @@ $BDnombre = "organiczoneBD";
   
   $sql = "INSERT INTO productos (id, nombre, descripcion, precio, costo, stock)
   VALUES ('$id', '$nombre', '$descripcion', '$precio', '$costo', '$stock')";
-  if($conn->query($sql) === TRUE) {
-    echo "Nuevo producto creado correctamente";
-    header("Location: leerproductos.php?");
-  } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-  }
+  
+  if($conexion->query($sql)){
 
-  $conn->close();
+    $id=$conexion->insert_id;
+
+    if(isset($_FILES["imagen"]) && $_FILES["imagen"]["error"]==0){
+
+        $extension=strtolower(pathinfo($_FILES["imagen"]["name"],PATHINFO_EXTENSION));
+
+        $permitidas=["jpg","jpeg","png","gif","webp"];
+
+        if(in_array($extension,$permitidas)){
+
+            $destino="../Imagenes/P-".$id.".".$extension;
+
+            move_uploaded_file($_FILES["imagen"]["tmp_name"],$destino);
+
+        }
+
+    }
+
+    header("Location: leerproductos.php");
+
+}else{
+
+    echo $conexion->error;
+
+}
 ?>
