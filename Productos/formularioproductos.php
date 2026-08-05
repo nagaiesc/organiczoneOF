@@ -122,7 +122,7 @@ body {
 
   <div class="titu">Registro de Producto</div>
 
-  <form action="productos.php" method="post" enctype="multipart/form-data">
+  <form class="forma" action="productos.php" method="post" enctype="multipart/form-data">
     <label>Nombre</label>
     <input type="text" name="nombre" >
 
