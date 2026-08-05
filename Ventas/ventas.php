@@ -10,8 +10,8 @@ $BDnombre = "organiczoneBD";
   $id = $_POST['id'];
   $estado = $_POST['estado'];
   $metodo = $_POST['metodo'];
-  $costototal = $_POST['costo'];
-  $pedidos_id = $_POST['stock'];
+  $costototal = $_POST['costototal'];
+  $pedidos_id = $_POST['pedidosid'];
   
   $sql = "INSERT INTO ventas (id, estado, metodo, costototal, pedidos_id)
   VALUES ('$id', '$estado', '$metodo', '$costototal', '$pedidos_id')";
