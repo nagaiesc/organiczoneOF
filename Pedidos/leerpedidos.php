@@ -209,6 +209,7 @@ tbody tr:hover {
                         echo "<a href='editarpedido.php?id=$id'><button>Editar</button></a>";
                         echo "<a href='#' onclick='confirmarEliminacion($id)'><button>Eliminar</button></a>";/*Pausa temporalemnte el enlace*/ 
                         echo "<a href='leerpedido.php?id=$id'><button>Mostrar</button></a>";
+                       echo "<a href='../Ventas/formularioventas.php?pedido=$id'>Venta</a>";
                         echo "</td>";
 
                         echo "</tr>";
