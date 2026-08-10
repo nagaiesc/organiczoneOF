@@ -141,16 +141,13 @@ tbody tr:hover {
 
     <!-- PANEL IZQUIERDO -->
     <section class="section-negro">
-        <nav class="nav-inner">
-            <a href="../maquetados/maquetadoAdmin.php">INICIO</a>
-        </nav>
 
-        <h1 class="contrato-titulo">LISTA DE PEDIDOS</h1>
+        <h1 class="contrato-titulo">LISTA DE VENTAS</h1>
 
-        <a href="formulariopedidos.php" id="boton">Registrar Pedido</a>
+        <a href="formulariopedidos.php" id="boton">Registrar Venta</a>
 
         <p class="desc">
-            Visualiza todos los pedidps registrados en el sistema.<br>
+            Visualiza todos las ventas registradas en el sistema.<br>
             Administra información, estados y roles de manera rápida.
         </p>
     </section>
@@ -159,18 +156,16 @@ tbody tr:hover {
     <section class="section-blanco">
 
         <section class="section-clientes">
-            <h2>Pedidos Registrados</h2>
+            <h2>Ventas Registradas</h2>
 
             <table>
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Fecha</th>
                         <th>Estado</th>
-                        <th>Nombre vendedor</th>
-                        <th>Dirección</th>
-                        <th>Teléfono</th>
+                        <th>Método</th>
+                        <th>Costo Total</th>
+                        <th>ID Pedido</th>
                     </tr>
                 </thead>
 
@@ -187,7 +182,7 @@ tbody tr:hover {
                     echo "<tr><td colspan='7'>Hubo un error en la conexión</td></tr>";
                 }
 
-                $sql = "SELECT * FROM pedidos";
+                $sql = "SELECT * FROM ventas";
                 $resultado = $conexion->query($sql);
 
                 if ($resultado->num_rows > 0) {
@@ -197,25 +192,21 @@ tbody tr:hover {
 
                         echo "<tr>";
                         echo "<td>" . $fila['id'] . "</td>";
-                        echo "<td>" . $fila['nombre'] . "</td>";
-                        echo "<td>" . $fila['fecha'] . "</td>";
                         echo "<td>" . $fila['estado'] . "</td>";
-                        echo "<td>" . $fila['nombrevendedor'] . "</td>";
-                        echo "<td>" . $fila['direccion'] . "</td>";
-                        echo "<td>" . $fila['telefono'] . "</td>";
-                        
+                        echo "<td>" . $fila['metodo'] . "</td>";
+                        echo "<td>" . $fila['costototal'] . "</td>";
+                        echo "<td>" . $fila['pedidos_id'] . "</td>";
 
                         echo "<td class='acciones'>";
-                        echo "<a href='editarpedido.php?id=$id'><button>Editar</button></a>";
+                        echo "<a href='editarventa.php?id=$id'><button>Editar</button></a>";
                         echo "<a href='#' onclick='confirmarEliminacion($id)'><button>Eliminar</button></a>";/*Pausa temporalemnte el enlace*/ 
-                        echo "<a href='leerpedido.php?id=$id'><button>Mostrar</button></a>";
-                       echo "<a href='../Ventas/formularioventas.php?pedido=$id'>Venta</a>";
+                        echo "<a href='leerventa.php?id=$id'><button>Mostrar</button></a>";
                         echo "</td>";
 
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='7'>Sin pedidos para mostrar.</td></tr>";
+                    echo "<tr><td colspan='7'>Sin ventas para mostrar.</td></tr>";
                 }
                 ?>
                 </tbody>

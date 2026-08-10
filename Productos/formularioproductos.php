@@ -189,9 +189,7 @@ button[type="submit"]:hover {
   <div class="titu">Registro de Producto</div>
 
 <form action="productos.php" method="post" enctype="multipart/form-data">
-
-    <div class="fil">
-
+    <div class="fil">s
         <div>
             <label>Nombre</label>
             <input type="text" name="nombre">

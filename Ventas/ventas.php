@@ -7,14 +7,19 @@ $BDnombre = "organiczoneBD";
   if($conn->connect_error) {
     die ("conexion fallida" . $conn->connect_error);
   }
-  $id = $_POST['id'];
-  $estado = $_POST['estado'];
   $metodo = $_POST['metodo'];
-  $costototal = $_POST['costo'];
-  $pedidos_id = $_POST['stock'];
+  $pedidos_id = $_POST['pedidos_id'];
   
-  $sql = "INSERT INTO ventas (id, estado, metodo, costototal, pedidos_id)
-  VALUES ('$id', '$estado', '$metodo', '$costototal', '$pedidos_id')";
+  $estado= "Activo";
+
+ $sqlTotal = "SELECT SUM(costototal) AS total FROM carrito WHERE pedidos_id = '$pedidos_id'";
+ $resultado = $conn->query($sqlTotal);
+ $fila = $resultado->fetch_assoc();
+ $costototal = $fila['total'];
+
+  $sql = "INSERT INTO ventas (estado, metodo, costototal, pedidos_id)
+  VALUES ('$estado', '$metodo', '$costototal', '$pedidos_id')";
+  
   if($conn->query($sql) === TRUE) {
     echo "Nuevo venta creado correctamente";
     header("Location: leerventas.php?");
