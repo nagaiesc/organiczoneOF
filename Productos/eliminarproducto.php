@@ -1,28 +1,83 @@
 <?php
-$nombreServidor = "localhost";
-$nombreUsuario = "root";
-$contraseñaBaseDeDatos = "";
-$nombreBaseDeDatos = "organiczoneBD";
-$conexion = new mysqli($nombreServidor, $nombreUsuario, $contraseñaBaseDeDatos, $nombreBaseDeDatos);
+
+$conexion = new mysqli(
+    "localhost",
+    "root",
+    "",
+    "organiczoneBD"
+);
+
 if ($conexion->connect_error) {
-    echo "Hubo un error en la conexion";
+    die("Error en la conexión: " . $conexion->connect_error);
 }
-$id = $_GET['id'];
 
-$sql = "SELECT * FROM productos WHERE id = $id";
+/* Comprobar ID */
 
-$resultado = $conexion->query($sql);
-
-
-if ($resultado->num_rows > 0) {
-    while($fila = $resultado->fetch_assoc()) {
-        $sql = "DELETE FROM productos WHERE id = $id";
-        if ($conexion->query($sql) === TRUE) {
-            /*Funcionalidad para redireccionar a la página y se detiene el script*/
-            header("Location: leerproductos.php");
-            exit();
-        }
-    }    
+if (!isset($_GET['id'])) {
+    die("No se recibió el ID del producto.");
 }
+
+$id = intval($_GET['id']);
+
+if ($id <= 0) {
+    die("ID de producto no válido.");
+}
+
+
+/* ==========================================
+   1. ELIMINAR EL PRODUCTO DEL CARRITO
+   ========================================== */
+
+$sqlCarrito = "DELETE FROM carrito WHERE productos_id = $id";
+
+if (!$conexion->query($sqlCarrito)) {
+    die("Error al eliminar el producto del carrito: " . $conexion->error);
+}
+
+
+/* ==========================================
+   2. ELIMINAR LA IMAGEN
+   ========================================== */
+
+$carpeta = "../Imagenes/";
+
+$extensiones = [
+    "jpg",
+    "jpeg",
+    "png",
+    "gif",
+    "webp"
+];
+
+foreach ($extensiones as $extension) {
+
+    $imagen = $carpeta . "P-" . $id . "." . $extension;
+
+    if (file_exists($imagen)) {
+        unlink($imagen);
+    }
+
+}
+
+
+/* ==========================================
+   3. ELIMINAR EL PRODUCTO
+   ========================================== */
+
+$sqlProducto = "DELETE FROM productos WHERE id = $id";
+
+if (!$conexion->query($sqlProducto)) {
+
+    die("Error al eliminar el producto: " . $conexion->error);
+
+}
+
+
+/* ==========================================
+   4. VOLVER A LA LISTA
+   ========================================== */
+
+header("Location: leerproductos.php");
+exit();
 
 ?>

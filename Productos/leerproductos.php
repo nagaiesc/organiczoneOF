@@ -146,12 +146,14 @@ tbody td {
             <table>
                 <thead>
                     <tr>
+                        <th>Imagen</th>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Descripcion</th>
+                        <th>Descripción</th>
                         <th>Precio</th>
                         <th>Costo</th>
                         <th>Stock</th>
+                        <th>Acciones</th>
                         
                     </tr>
                 </thead>
@@ -161,7 +163,7 @@ tbody td {
                 $conexion = new mysqli("localhost", "root", "", "organiczoneBD");
 
                 if ($conexion->connect_error) {
-                    echo "<tr><td colspan='6'>Error en la conexión</td></tr>";
+                    echo "<tr><td colspan='8'>Error en la conexión</td></tr>";
                 }
 
                 $sql = "SELECT * FROM productos";
@@ -170,25 +172,45 @@ tbody td {
                 if ($resultado->num_rows > 0) {
                     while($fila = $resultado->fetch_assoc()){
                         $id = $fila['id'];
+                        $imagen = "../Imagenes/sinimagen.png";
 
+                        $extensiones = ["jpg","jpeg","png","gif","webp"];
+                        foreach ($extensiones as $ext) {
+                            $ruta = "../Imagenes/P-" . $id . "." . $ext;
+                            if (file_exists($ruta)) {
+                                $imagen = $ruta;
+                                break;
+                            }
+                        }
                         echo "<tr>";
+                        echo "<td>
+                                <img 
+                                    src='$imagen' 
+                                    alt='Imagen del producto'
+                                    style='width:80px;height:80px;object-fit:cover;border-radius:12px;'
+                                >
+                            </td>";
                         echo "<td>{$fila['id']}</td>";
                         echo "<td>{$fila['nombre']}</td>";
                         echo "<td>{$fila['descripcion']}</td>";
-                        echo "<td>{$fila['precio']}</td>";                        
+                        echo "<td>{$fila['precio']}</td>";
                         echo "<td>{$fila['costo']}</td>";
                         echo "<td>{$fila['stock']}</td>";
-                        $fid=$fila['id'];
                         echo "<td class='acciones'>
-                                <a href='editarproducto.php?id=$fid'><button>Editar</button></a>
-                                <a href='#' onclick='confirmarEliminacion($id)'><button>Eliminar</button></a>
-                                <a href='leerproducto.php?id=$id'><button>Mostrar</button></a>
-                              </td>";
-
+                                <a href='editarproducto.php?id=$id'>
+                                    <button>Editar</button>
+                                </a>
+                                <a href='#' onclick='confirmarEliminacion($id)'>
+                                    <button>Eliminar</button>
+                                </a>
+                                <a href='leerproducto.php?id=$id'>
+                                    <button>Mostrar</button>
+                                </a>
+                            </td>";
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='6'>No hay productos registrados</td></tr>";
+                    echo "<tr><td colspan='8'>No hay productos registrados</td></tr>";
                 }
                 ?>
                 </tbody>
@@ -208,8 +230,8 @@ function confirmarEliminacion(id){
         text: "No podrás revertir esta acción",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
+        confirmButtonColor: "#97d395",
+        cancelButtonColor: "rgb(54, 75, 57)",
         confirmButtonText: "Sí, eliminar",
         cancelButtonText: "Cancelar"
     }).then((result) => {
