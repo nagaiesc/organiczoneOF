@@ -9,7 +9,7 @@
 
 <style>
 body {
-  background-image: url(fondos);
+  background-image: url("../Fondo1.png");
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -111,6 +111,72 @@ body {
     flex-direction: column;
   }
 }
+.fil {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.fil > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.fil label {
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+.fil input {
+    width: 100%;
+    padding: 13px 15px;
+    border: 2px solid #dce8d8;
+    border-radius: 12px;
+    background-color: #fff;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 15px;
+    box-sizing: border-box;
+    outline: none;
+    transition: 0.3s;
+}
+
+.fil input:focus {
+    border-color: #0ba84a;
+    box-shadow: 0 0 0 3px rgba(11, 168, 74, 0.12);
+}
+
+/* Campo de archivo */
+.fil input[type="file"] {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #f8fcf6;
+}
+
+/* Botón */
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 14px;
+    background-color: #000000;
+    color: white;
+    font-family: 'Inter', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #000000;
+    transform: translateY(-2px);
+}
 </style>
 </head>
 
@@ -122,33 +188,47 @@ body {
 
   <div class="titu">Registro de Producto</div>
 
-  <form class="forma" action="productos.php" method="post" enctype="multipart/form-data">
-    <label>Nombre</label>
-    <input type="text" name="nombre" >
+<form action="productos.php" method="post" enctype="multipart/form-data">
+    <div class="fil">s
+        <div>
+            <label>Nombre</label>
+            <input type="text" name="nombre">
+        </div>
 
-    <div class="fil">
-      <div>
-        <label>Descripcion</label>
-        <input type="text" name="descripcion" >
-      </div>
-      <div>
-        <label>Precio</label>
-        <input type="number" name="precio" >
-      </div>
-      <div>
-        <label>Costo</label>
-        <input type="number" name="costo" >
-      </div>
-      <div>
-        <label>Stock</label>
-        <input type="number" name="stock" >
-        <label>Imagen</label>
-        <input type="file" name="imagen" accept=".jpg,.jpeg,.png,.gif,.webp">
-      </div>
+        <div>
+            <label>Descripción</label>
+            <input type="text" name="descripcion">
+        </div>
+
+        <div>
+            <label>Precio</label>
+            <input type="number" name="precio" step="0.01">
+        </div>
+
+        <div>
+            <label>Costo</label>
+            <input type="number" name="costo" step="0.01">
+        </div>
+
+        <div>
+            <label>Stock</label>
+            <input type="number" name="stock">
+        </div>
+
+        <div>
+            <label>Imagen del producto</label>
+            <input 
+                type="file" 
+                name="imagen" 
+                accept="image/jpeg,image/png,image/gif,image/webp"
+            >
+        </div>
+
     </div>
+
     <button type="submit">Guardar Producto</button>
 
-  </form>
+</form>
 
   <div class="pie">
     Organic Zone - Cochabamba, Bolivia 2026

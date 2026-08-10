@@ -210,6 +210,34 @@ tbody tr:hover {
                         echo "<a href='leerusuario.php?CI=$CI'><button>Mostrar</button></a>";
                         echo "</td>";
 
+                     if($fila["rol"]=="usuario"){ 
+
+                <a class="btn cambiar" href="../cambiar/cambiarVendedor.php?CI=<?= $fila['CI'] ?>">
+                   Hacer Vendedor
+                </a>
+
+             }elseif($fila["rol"]=="vendedor"){ 
+
+                <a class="btn cambiar" href="../cambiar/cambiarUsuario.php?CI=<?= $fila['CI'] ?>">
+                   Hacer Usuario
+                </a>
+
+             } 
+
+              if($fila["estado"]=="activo"){ 
+
+                <a class="btn cambiar" href="../cambiar/bloquear.php?CI=<?= $fila['CI'] ?>">
+                   Bloquear
+                </a>
+
+             }elseif($fila["estado"]=="bloqueado"){ 
+
+                <a class="btn cambiar" href="../cambiar/desbloquear.php?CI=<?= $fila['CI'] ?>">
+                   Activar
+                </a>
+
+             } 
+
                         echo "</tr>";
                     }
                 } else {

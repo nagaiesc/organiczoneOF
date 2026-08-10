@@ -1,47 +1,60 @@
 <?php
+
 $servidor = "localhost";
-$nombre = "root";
-$contraseña = "";
+$usuario = "root";
+$password = "";
 $BDnombre = "organiczoneBD";
- $conn = new mysqli($servidor, $nombre, $contraseña, $BDnombre);
-  if($conn->connect_error) {
-    die ("conexion fallida" . $conn->connect_error);
-  }
-  $id = $_POST['id'];
-  $nombre = $_POST['nombre'];
-  $descripcion = $_POST['descripcion'];
-  $precio = $_POST['precio'];
-  $costo = $_POST['costo'];
-  $stock = $_POST['stock'];
-  
-  $sql = "INSERT INTO productos (id, nombre, descripcion, precio, costo, stock)
-  VALUES ('$id', '$nombre', '$descripcion', '$precio', '$costo', '$stock')";
-  
-  if($conexion->query($sql)){
 
-    $id=$conexion->insert_id;
+$conexion = new mysqli($servidor,$usuario,$password,$BDnombre);
 
-    if(isset($_FILES["imagen"]) && $_FILES["imagen"]["error"]==0){
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
+}
+$nombre = $_POST['nombre'];
+$descripcion = $_POST['descripcion'];
+$precio = $_POST['precio'];
+$costo = $_POST['costo'];
+$stock = $_POST['stock'];
 
-        $extension=strtolower(pathinfo($_FILES["imagen"]["name"],PATHINFO_EXTENSION));
+$sql = "INSERT INTO productos (nombre, descripcion, precio, costo, stock)
+VALUES ('$nombre', '$descripcion', '$precio', '$costo', '$stock')";
 
-        $permitidas=["jpg","jpeg","png","gif","webp"];
+if (!$conexion->query($sql)) {
 
-        if(in_array($extension,$permitidas)){
+    die("Error al guardar el producto: " . $conexion->error);
 
-            $destino="../Imagenes/P-".$id.".".$extension;
+}
 
-            move_uploaded_file($_FILES["imagen"]["tmp_name"],$destino);
+$id = $conexion->insert_id;
+if (
+    isset($_FILES["imagen"]) &&
+    $_FILES["imagen"]["error"] === UPLOAD_ERR_OK
+) {
+    $nombreOriginal = $_FILES["imagen"]["name"];
+    $temporal = $_FILES["imagen"]["tmp_name"];
+
+    $extension = strtolower(
+        pathinfo($nombreOriginal, PATHINFO_EXTENSION)
+    );
+    $permitidas = ["jpg","jpeg","png","gif","webp"];
+    if (in_array($extension, $permitidas)) {
+        $carpeta = "../Imagenes/";
+        if (!is_dir($carpeta)) {
+            mkdir($carpeta, 0777, true);
+        }
+        $nombreImagen = "P-" . $id . "." . $extension;
+        $destino = $carpeta . $nombreImagen;
+        if (!move_uploaded_file($temporal, $destino)) {
+            echo "El producto se guardó, pero la imagen no pudo guardarse.";
 
         }
 
+    } else {
+        echo "Formato de imagen no permitido.";
     }
-
-    header("Location: leerproductos.php");
-
-}else{
-
-    echo $conexion->error;
-
 }
+
+header("Location: leerproductos.php");
+exit();
+
 ?>

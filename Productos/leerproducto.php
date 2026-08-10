@@ -135,7 +135,6 @@ body {
     border-radius: 8px;
 }
 
-/* BOTÓN */
 .btn {
     display: inline-block;
     margin-top: 20px;
@@ -158,8 +157,6 @@ body {
 <body>
 
 <section class="principal-grid">
-
-    <!-- PANEL IZQUIERDO -->
     <section class="section-negro">
 
         <nav class="nav-inner">
@@ -173,13 +170,10 @@ body {
         </p>
 
     </section>
-
-    <!-- PANEL DERECHO -->
     <section class="section-blanco">
 
         <div class="grid-derecha">
 
-            <!-- DETALLE -->
             <div class="card">
 
                 <div class="campo">
@@ -215,39 +209,38 @@ body {
                 <a class="btn" href="leerproductos.php">Volver</a>
 
             </div>
-
-            <!-- IMAGEN -->
             <div class="upload-box">
 
                 <h3>Imagen del producto</h3>
 
                 <?php
-
-                $nombreArchivo = "P-" . $id;
-
+                $nombreArchivo = "P-" . $fila['id'];
                 $directorio = "../Imagenes/";
-
                 $extensiones = ["jpg", "jpeg", "png", "gif", "webp"];
-
                 $archivoEncontrado = null;
-
                 foreach ($extensiones as $ext) {
-
                     $ruta = $directorio . $nombreArchivo . "." . $ext;
-
                     if (file_exists($ruta)) {
-
                         $archivoEncontrado = $ruta;
-
                         break;
                     }
                 }
 
                 ?>
-
-                <!-- IMAGEN ACTUAL -->
                 <?php if ($archivoEncontrado) { ?>
-
+                 <img 
+                        src="<?= htmlspecialchars($archivoEncontrado) ?>" 
+                        alt="Imagen del producto"
+                        style="max-width:300px; max-height:300px; object-fit:cover;"
+                    >
+                <?php else: ?>
+                    <img 
+                        src="../Imagenes/sinimagen.png"
+                        alt="Sin imagen"
+                        style="max-width:300px; max-height:300px; object-fit:cover;"
+                    
+                <?php endif; ?>
+                
                     <div class="preview">
 
                         <p style="font-size:13px; color:#777;">
@@ -266,31 +259,22 @@ body {
 
                 <?php } ?>
 
-                <!-- FORMULARIO -->
                 <form action="subirimagen.php" method="post" enctype="multipart/form-data">
-
-                    <input type="hidden" name="id" value="<?= $id ?>">
-
+                    <input type="hidden" name="id" value="<?= $fila['id'] ?>">
                     <input 
                         type="file" 
                         name="imagen" 
                         accept="image/*"
                         onchange="previewImage(event)"
                     >
-
                     <button class="btn" type="submit">
                         Actualizar imagen
                     </button>
-
                 </form>
-
-                <!-- PREVISUALIZACIÓN -->
                 <div class="preview">
-
                     <p style="font-size:13px; color:#777;">
                         Previsualización
                     </p>
-
                     <img id="preview" src="" alt="">
 
                 </div>
@@ -306,16 +290,11 @@ body {
 <script>
 
 function previewImage(event) {
-
     const reader = new FileReader();
-
     reader.onload = function() {
-
         const img = document.getElementById('preview');
-
         img.src = reader.result;
     }
-
     reader.readAsDataURL(event.target.files[0]);
 }
 
