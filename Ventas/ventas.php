@@ -8,7 +8,7 @@ $BDnombre = "organiczoneBD";
     die ("conexion fallida" . $conn->connect_error);
   }
   $metodo = $_POST['metodo'];
-  $pedidos_id = $_POST['pedidosid'];
+  $pedidos_id = $_POST['pedidos_id'];
   
   $estado= "Activo";
 
