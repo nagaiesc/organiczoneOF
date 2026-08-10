@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+$rol = $_SESSION['rol'];
+$nombreVendedor = $_SESSION['nombre'];
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -187,8 +193,16 @@ tbody tr:hover {
                     echo "<tr><td colspan='7'>Hubo un error en la conexión</td></tr>";
                 }
 
-                $sql = "SELECT * FROM pedidos";
-                $resultado = $conexion->query($sql);
+                if ($rol == "admin") {
+
+                 $sql = "SELECT * FROM pedidos";
+
+                 } else {
+
+                 $sql = "SELECT * FROM pedidos 
+                 WHERE nombrevendedor = '$nombreVendedor'";
+                }
+                 $resultado = $conexion->query($sql);
 
                 if ($resultado->num_rows > 0) {
                     while($fila = $resultado->fetch_assoc()){
@@ -206,18 +220,27 @@ tbody tr:hover {
                         
 
                         echo "<td class='acciones'>";
-                        echo "<a href='editarpedido.php?id=$id'><button>Editar</button></a>";
-                        echo "<a href='#' onclick='confirmarEliminacion($id)'><button>Eliminar</button></a>";/*Pausa temporalemnte el enlace*/ 
-                        echo "<a href='leerpedido.php?id=$id'><button>Mostrar</button></a>";
-                       echo "<a href='../Ventas/formularioventas.php?pedido=$id'>Venta</a>";
-                        echo "</td>";
+                        if ($rol == "admin") {
 
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='7'>Sin pedidos para mostrar.</td></tr>";
-                }
-                ?>
+                        echo "<a href='editarpedido.php?id=$id'><button>Editar</button></a>";
+                        echo "<a href='#' onclick='confirmarEliminacion($id)'><button>Eliminar</button></a>";
+
+                        }
+
+                        echo "<a href='leerpedido.php?id=$id'><button>Mostrar</button></a>";
+        echo "<a href='../Ventas/formularioventas.php?pedido=$id'>Venta</a>";
+
+        echo "</td>";
+
+        echo "</tr>";
+    }
+
+} else {
+
+    echo "<tr><td colspan='7'>Sin pedidos para mostrar.</td></tr>";
+
+}
+?>
                 </tbody>
             </table>
 

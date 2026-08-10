@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+$rol = $_SESSION['rol'];
+$nombreVendedor = $_SESSION['nombre'];
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -144,7 +150,7 @@ tbody tr:hover {
 
         <h1 class="contrato-titulo">LISTA DE VENTAS</h1>
 
-        <a href="formulariopedidos.php" id="boton">Registrar Venta</a>
+        <a href="formularioventas.php" id="boton">Registrar Venta</a>
 
         <p class="desc">
             Visualiza todos las ventas registradas en el sistema.<br>
@@ -162,6 +168,7 @@ tbody tr:hover {
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Vendedor</th>
                         <th>Estado</th>
                         <th>Método</th>
                         <th>Costo Total</th>
@@ -182,32 +189,98 @@ tbody tr:hover {
                     echo "<tr><td colspan='7'>Hubo un error en la conexión</td></tr>";
                 }
 
-                $sql = "SELECT * FROM ventas";
-                $resultado = $conexion->query($sql);
+                if ($rol == "admin") {
 
-                if ($resultado->num_rows > 0) {
-                    while($fila = $resultado->fetch_assoc()){
+    $sql = "SELECT * FROM ventas";
+    $resultado = $conexion->query($sql);
 
-                        $id = $fila['id'];
+    if ($resultado->num_rows > 0) {
 
-                        echo "<tr>";
-                        echo "<td>" . $fila['id'] . "</td>";
-                        echo "<td>" . $fila['estado'] . "</td>";
-                        echo "<td>" . $fila['metodo'] . "</td>";
-                        echo "<td>" . $fila['costototal'] . "</td>";
-                        echo "<td>" . $fila['pedidos_id'] . "</td>";
+        while($fila = $resultado->fetch_assoc()){
 
-                        echo "<td class='acciones'>";
-                        echo "<a href='editarventa.php?id=$id'><button>Editar</button></a>";
-                        echo "<a href='#' onclick='confirmarEliminacion($id)'><button>Eliminar</button></a>";/*Pausa temporalemnte el enlace*/ 
-                        echo "<a href='leerventa.php?id=$id'><button>Mostrar</button></a>";
-                        echo "</td>";
+            $id = $fila['id'];
+            $pedidos_id = $fila['pedidos_id'];
 
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='7'>Sin ventas para mostrar.</td></tr>";
-                }
+            // Buscar el vendedor del pedido
+            $sqlPedido = "SELECT nombrevendedor 
+                          FROM pedidos 
+                          WHERE id = '$pedidos_id'";
+
+            $resultadoPedido = $conexion->query($sqlPedido);
+            $pedido = $resultadoPedido->fetch_assoc();
+
+            $nombrevendedor = $pedido['nombrevendedor'];
+
+            echo "<tr>";
+            echo "<td>" . $fila['id'] . "</td>";
+            echo "<td>" . $nombrevendedor . "</td>";
+            echo "<td>" . $fila['estado'] . "</td>";
+            echo "<td>" . $fila['metodo'] . "</td>";
+            echo "<td>" . $fila['costototal'] . "</td>";
+            echo "<td>" . $fila['pedidos_id'] . "</td>";
+
+            echo "<td class='acciones'>";
+            echo "<a href='editarventa.php?id=$id'><button>Editar</button></a>";
+            echo "<a href='#' onclick='confirmarEliminacion($id)'><button>Eliminar</button></a>";
+            echo "<a href='leerventa.php?id=$id'><button>Mostrar</button></a>";
+            echo "</td>";
+
+            echo "</tr>";
+        }
+
+    } else {
+
+        echo "<tr><td colspan='7'>Sin ventas para mostrar.</td></tr>";
+
+    }
+
+} else {
+    // Buscar los pedidos del vendedor
+    $sqlPedidos = "SELECT id 
+                   FROM pedidos 
+                   WHERE nombrevendedor = '$nombreVendedor'";
+
+    $resultadoPedidos = $conexion->query($sqlPedidos);
+
+    if ($resultadoPedidos->num_rows > 0) {
+
+        while($pedido = $resultadoPedidos->fetch_assoc()){
+
+            $pedidos_id = $pedido['id'];
+
+            // Buscar las ventas de ese pedido
+            $sqlVentas = "SELECT * 
+                          FROM ventas 
+                          WHERE pedidos_id = '$pedidos_id'";
+
+            $resultadoVentas = $conexion->query($sqlVentas);
+
+            while($fila = $resultadoVentas->fetch_assoc()){
+
+                $id = $fila['id'];
+
+                echo "<tr>";
+                echo "<td>" . $fila['id'] . "</td>";
+                echo "<td>" . $nombreVendedor . "</td>";
+                echo "<td>" . $fila['estado'] . "</td>";
+                echo "<td>" . $fila['metodo'] . "</td>";
+                echo "<td>" . $fila['costototal'] . "</td>";
+                echo "<td>" . $fila['pedidos_id'] . "</td>";
+
+                echo "<td class='acciones'>";
+                echo "<a href='leerventa.php?id=$id'><button>Mostrar</button></a>";
+                echo "</td>";
+
+                echo "</tr>";
+            }
+        }
+
+    } else {
+
+        echo "<tr><td colspan='7'>No tienes pedidos registrados.</td></tr>";
+
+    }
+}
                 ?>
                 </tbody>
             </table>

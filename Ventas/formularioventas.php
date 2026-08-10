@@ -1,5 +1,10 @@
 <?php
-$pedidos_id = $_GET['pedido'];
+if (isset($_GET['pedido'])) {
+    $pedidos_id = $_GET['pedido'];
+} else {
+    die("No se recibió el pedido.");
+}
+
 ?>
 
 <!DOCTYPE html>
