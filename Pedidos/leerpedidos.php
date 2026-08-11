@@ -208,6 +208,7 @@ tbody tr:hover {
                     while($fila = $resultado->fetch_assoc()){
 
                         $id = $fila['id'];
+                        $estado = $fila['estado'];
 
                         echo "<tr>";
                         echo "<td>" . $fila['id'] . "</td>";
@@ -220,27 +221,29 @@ tbody tr:hover {
                         
 
                         echo "<td class='acciones'>";
-                        if ($rol == "admin") {
 
-                        echo "<a href='editarpedido.php?id=$id'><button>Editar</button></a>";
-                        echo "<a href='#' onclick='confirmarEliminacion($id)'><button>Eliminar</button></a>";
+                    if ($rol == "admin") {
+                         echo "<a href='editarpedido.php?id=$id'><button>Editar</button></a>";
+                         echo "<a href='#' onclick='confirmarEliminacion($id)'><button>Eliminar</button></a>";
+                    }
 
-                        }
+                         echo "<a href='leerpedido.php?id=$id'><button>Mostrar</button></a>";
 
-                        echo "<a href='leerpedido.php?id=$id'><button>Mostrar</button></a>";
-        echo "<a href='../Ventas/formularioventas.php?pedido=$id'>Venta</a>";
+                    if($rol == "vendedor" && $estado == "Pendiente"){
 
-        echo "</td>";
-
-        echo "</tr>";
-    }
-
-} else {
-
-    echo "<tr><td colspan='7'>Sin pedidos para mostrar.</td></tr>";
-
-}
-?>
+                         echo "<a href='aceptarpedido.php?id=$id'><button>Aceptar</button></a>";
+                         echo "<a href='rechazarpedido.php?id=$id'><button>Rechazar</button></a>";
+                    }
+                    if($estado == "Aceptado"){
+                         echo "<a href='../Ventas/formularioventas.php?pedido=$id'><button>Venta</button></a>";
+                    }
+                         echo "</td>";
+                         echo "</tr>";
+                    }
+                    } else {
+                         echo "<tr><td colspan='8'>Sin pedidos para mostrar.</td></tr>";
+                    }
+                   ?>
                 </tbody>
             </table>
 

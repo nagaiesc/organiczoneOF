@@ -134,9 +134,6 @@ body {
         <input type="date" name="fecha" value="<?php echo date('Y-m.d'); ?>">
       </div>
       <div>
-        <input type="hidden" name="estado" value="En Proceso">
-      </div>
-      <div>
         <div>
         <label>Direccion</label>
         <input type="text" name="direccion" value=" ">

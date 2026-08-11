@@ -234,7 +234,7 @@ tbody tr:hover {
 
     }
 
-} else {
+    } else {
     // Buscar los pedidos del vendedor
     $sqlPedidos = "SELECT id 
                    FROM pedidos 
@@ -307,7 +307,7 @@ function confirmarEliminacion(id){
 
         if (result.isConfirmed) {
             /*Redirecciona de navegador a la página verdadera*/
-            window.location = "eliminarpedido.php?id=" + id;
+            window.location = "eliminarventa.php?id=" + id;
 
         }
 

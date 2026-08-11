@@ -12,7 +12,7 @@ $BDnombre = "organiczoneBD";
 
   $nombre = $_POST['nombre'];
   $fecha = $_POST['fecha'];
-  $estado = $_POST['estado'];
+  $estado = "Pendiente";
   $nombrevendedor = $_POST['nombrevendedor'];
   $direccion = $_POST['direccion'];
   $telefono = $_POST['telefono'];

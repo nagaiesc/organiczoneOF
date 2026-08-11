@@ -22,7 +22,11 @@ $sql = "SELECT * FROM ventas WHERE id = $id";
 
 $resultado = $conexion->query($sql);
 
-$fila = $resultado->fetch_assoc();
+// Comprobar que existe la venta 
+if (!$resultado || $resultado->num_rows == 0) { 
+    die("La venta no existe"); 
+} 
+$fila = $resultado->fetch_assoc(); 
 
 ?>
 
@@ -181,6 +185,23 @@ body {
             <div class="campo">
                 <span>ID Pedido:</span>
                 <strong><?= $fila['pedidos_id'] ?></strong>
+            </div>
+            <div class="campo">
+                <span>Vendedor:</span>
+                <?php 
+                $pedidos_id = $fila['pedidos_id']; 
+                
+                $sqlPedido = "SELECT nombrevendedor FROM pedidos WHERE id = '$pedidos_id'"; 
+
+                $resultadoPedido = $conexion->query($sqlPedido); 
+
+                if ($resultadoPedido && $resultadoPedido->num_rows > 0) { 
+                    $pedido = $resultadoPedido->fetch_assoc(); 
+                    echo "<strong>" . $pedido['nombrevendedor'] . "</strong>"; 
+                } else { 
+                    echo "<strong>No disponible</strong>"; 
+                } 
+                ?>
             </div>
 
 
