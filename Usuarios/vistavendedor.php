@@ -281,7 +281,7 @@ body {
 </style>
 </head>
 <body>
-        <?php include("nav.php"); ?>
+        <?php include("../nav.php"); ?>
 
 
 <article class="caja-principal">
