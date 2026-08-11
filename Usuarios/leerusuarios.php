@@ -210,39 +210,36 @@ tbody tr:hover {
                         echo "<a href='leerusuario.php?CI=$CI'><button>Mostrar</button></a>";
                         echo "</td>";
 
-                     if($fila["rol"]=="usuario"){ 
-
-                <a class="btn cambiar" href="../cambiar/cambiarVendedor.php?CI=<?= $fila['CI'] ?>">
-                   Hacer Vendedor
-                </a>
-
-             }elseif($fila["rol"]=="vendedor"){ 
-
-                <a class="btn cambiar" href="../cambiar/cambiarUsuario.php?CI=<?= $fila['CI'] ?>">
-                   Hacer Usuario
-                </a>
-
-             } 
-
-              if($fila["estado"]=="activo"){ 
-
-                <a class="btn cambiar" href="../cambiar/bloquear.php?CI=<?= $fila['CI'] ?>">
-                   Bloquear
-                </a>
-
-             }elseif($fila["estado"]=="bloqueado"){ 
-
-                <a class="btn cambiar" href="../cambiar/desbloquear.php?CI=<?= $fila['CI'] ?>">
-                   Activar
-                </a>
-
-             } 
-
-                        echo "</tr>";
+                    if ($fila["rol"] == "usuario") {
+                        echo "<a class='btn cambiar' href='../cambiar/cambiarVendedor.php?CI=$CI'>";
+                        echo "<button type='button'>Hacer Vendedor</button>";
+                        echo "</a>";
+                    } elseif ($fila["rol"] == "vendedor") {
+                        echo "<a class='btn cambiar' href='../cambiar/cambiarUsuario.php?CI=$CI'>";
+                        echo "<button type='button'>Hacer Usuario</button>";
+                        echo "</a>";
                     }
-                } else {
-                    echo "<tr><td colspan='7'>Sin usuarios para mostrar.</td></tr>";
+                    if ($fila["estado"] == "activo") {
+                        echo "<a class='btn cambiar' href='../cambiar/bloquear.php?CI=$CI'>";
+                        echo "<button type='button'>Bloquear</button>";
+                        echo "</a>";
+                    } elseif ($fila["estado"] == "bloqueado") {
+                        echo "<a class='btn cambiar' href='../cambiar/desbloquear.php?CI=$CI'>";
+                        echo "<button type='button'>Activar</button>";
+                        echo "</a>";
+                    }
+                    echo "</td>";
+                    echo "</tr>";
                 }
+
+                } else {
+                    echo "<tr>";
+                    echo "<td colspan='7'>Sin usuarios para mostrar.</td>";
+                    echo "</tr>";
+                }
+
+            $conexion->close();
+
                 ?>
                 </tbody>
             </table>
