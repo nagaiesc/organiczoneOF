@@ -64,7 +64,7 @@ $BDnombre = "organiczoneBD";
 
     //Descontamos la cantidad de stock
 
-    $sqlStock = "UPDATE productos SET stock = stock - '$cantidad' WHERE id = '$productos_id'";
+    $sqlStock = "UPDATE productos SET s = sttockock - '$cantidad' WHERE id = '$productos_id'";
     $conn->query($sqlStock); 
     }
     header("Location: leerventas.php?");

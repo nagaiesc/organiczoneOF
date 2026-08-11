@@ -147,20 +147,21 @@ body {
 <section class="principal-grid">
     <section class="section-negro">
 
-        <nav class="nav-inner">
-            <a href="leerusuarios.php">VOLVER</a>
-        </nav>
+    <nav class="nav-inner">
+        <a href="leerusuarios.php">VOLVER</a>
+    </nav>
 
-        <h1 class="contrato-titulo">
-            DETALLE USUARIO
-        </h1>
+    <h1 class="contrato-titulo">
+        DETALLE USUARIO
+    </h1>
 
-        <p class="desc">
-            Visualiza la información completa del usuario seleccionado.
-        </p>
+    <p class="desc">
+        Visualiza la información completa del usuario seleccionado.
+    </p>
 
-    </section>
+    <a href="verpedidos.php" class="btn">Ver pedidos</a>
 
+</section>
     <!-- PANEL DERECHO -->
     <section class="section-blanco">
 
