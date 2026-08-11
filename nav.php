@@ -229,7 +229,7 @@ transform:rotate(90deg);
 
     </section>
     <section><a href="Usuarios/formulariosesion.php" id="descu2"><h3 id="descu"> Iniciar Sesion</h3></a></section>
-    <section><a href='../Usuarios/cerrarse.php'  id="descu2"><h3 id="descu" >Cerrar Sesion</h3></a></section>
+    <section><a href='Usuarios/cerrarse.php'  id="descu2"><h3 id="descu" >Cerrar Sesion</h3></a></section>
    
     </nav>
     </center>
