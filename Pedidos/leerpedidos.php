@@ -234,7 +234,7 @@ tbody tr:hover {
                          echo "<a href='aceptarpedido.php?id=$id'><button>Aceptar</button></a>";
                          echo "<a href='rechazarpedido.php?id=$id'><button>Rechazar</button></a>";
                     }
-                    if($estado == "Aceptado"){
+                    if($estado == "En proceso"){
                          echo "<a href='../Ventas/formularioventas.php?pedido=$id'><button>Venta</button></a>";
                     }
                          echo "</td>";
