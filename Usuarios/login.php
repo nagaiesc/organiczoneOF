@@ -45,7 +45,7 @@ if(mysqli_num_rows($resultado) > 0){
 if($_SESSION['rol']=="admin"){
 
 
-    header("Location:../maquetados/maquetadoAdmin.php");
+    header("Location:../vistaadmin.php");
     exit();
     }
 
