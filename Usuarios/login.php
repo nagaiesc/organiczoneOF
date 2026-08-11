@@ -23,6 +23,16 @@ if(mysqli_num_rows($resultado) > 0){
     $_SESSION['nombre'] = $fila['nombre'];
     $_SESSION['rol']=$fila['rol'];
     $_SESSION['estado']=$fila['estado'];
+
+    session_start();
+
+    if($_SESSION['estado']=="inactivo"){
+
+        header("Location:../cambiar/verUsuario.php");
+        exit();
+
+    }
+
  
     // Movido dentro del bloque de éxito para que evalúe correctamente y no pase de largo al else
     if($_SESSION['rol']=="vendedor"){
