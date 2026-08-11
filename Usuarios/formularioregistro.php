@@ -232,6 +232,9 @@
                         <button type="button" class="option-box opt-vendedor" onclick="$(this).find('input').prop('checked', true).trigger('change')">
                             <input type="radio" name="rol" value="vendedor"> Vendedor
                         </button>
+                        <button type="button" class="option-box opt-vendedor" onclick="$(this).find('input').prop('checked', true).trigger('change')">
+                            <input type="radio" name="rol" value="usuario"> Usuario
+                        </button>
                     </section>
                 </article>
 

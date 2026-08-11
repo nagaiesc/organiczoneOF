@@ -210,37 +210,39 @@ tbody tr:hover {
                         echo "<a href='leerusuario.php?CI=$CI'><button>Mostrar</button></a>";
                         echo "</td>";
 
-                     if($fila["rol"]=="usuario"){ 
+                     if ($fila["rol"] == "usuario") {
 
-                <a class="btn cambiar" href="../cambiar/cambiarVendedor.php?CI=<?= $fila['CI'] ?>">
-                   Hacer Vendedor
-                </a>
+echo "<a class='acciones' href='../cambiar/cambiarVendedor.php?CI=$CI'>
+            <button>Hacer Vendedor</button>
+          </a>";
 
-             }elseif($fila["rol"]=="vendedor"){ 
+} elseif ($fila["rol"] == "vendedor") {
 
-                <a class="btn cambiar" href="../cambiar/cambiarUsuario.php?CI=<?= $fila['CI'] ?>">
-                   Hacer Usuario
-                </a>
+    echo "<a class='acciones' href='../cambiar/cambiarUsuario.php?CI=$CI'>
+            <button>Hacer Usuario</button>
+          </a>";
+}
 
-             } 
 
-              if($fila["estado"]=="activo"){ 
+// BLOQUEAR / DESBLOQUEAR
+if ($fila["estado"] =="inactivo") {
 
-                <a class="btn cambiar" href="../cambiar/bloquear.php?CI=<?= $fila['CI'] ?>">
-                   Bloquear
-                </a>
+    echo "<a class='acciones' href='../cambiar/desbloquear.php?CI=$CI'>
+            <button>Desbloquear</button>
+          </a>";
 
-             }elseif($fila["estado"]=="bloqueado"){ 
+} elseif ($fila["estado"] =="activo") {
 
-                <a class="btn cambiar" href="../cambiar/desbloquear.php?CI=<?= $fila['CI'] ?>">
-                   Activar
-                </a>
+    echo "<a class='acciones' href='../cambiar/bloquear.php?CI=$CI'>
+            <button>Bloquear</button>
+          </a>";
+}
 
-             } 
+             }
 
                         echo "</tr>";
                     }
-                } else {
+                 else {
                     echo "<tr><td colspan='7'>Sin usuarios para mostrar.</td></tr>";
                 }
                 ?>
@@ -278,4 +280,3 @@ function confirmarEliminacion(CI){
 </script>
 </body>
 </html>
-```

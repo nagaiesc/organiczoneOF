@@ -213,51 +213,35 @@ body {
 
                 <h3>Imagen del producto</h3>
 
-                <?php
-                $nombreArchivo = "P-" . $fila['id'];
-                $directorio = "../Imagenes/";
+                <?php 
+                $nombreArchivo = "P-" . $fila['id']; 
+                $directorio = "../Imagenes/"; 
                 $extensiones = ["jpg", "jpeg", "png", "gif", "webp"];
-                $archivoEncontrado = null;
+                $archivoEncontrado = null; 
                 foreach ($extensiones as $ext) {
                     $ruta = $directorio . $nombreArchivo . "." . $ext;
                     if (file_exists($ruta)) {
-                        $archivoEncontrado = $ruta;
-                        break;
-                    }
-                }
-
-                ?>
-                <?php if ($archivoEncontrado) { ?>
-                 <img 
-                        src="<?= htmlspecialchars($archivoEncontrado) ?>" 
-                        alt="Imagen del producto"
-                        style="max-width:300px; max-height:300px; object-fit:cover;"
-                    >
-                <?php else: ?>
-                    <img 
-                        src="../Imagenes/sinimagen.png"
-                        alt="Sin imagen"
-                        style="max-width:300px; max-height:300px; object-fit:cover;"
-                    
-                <?php endif; ?>
+                        $archivoEncontrado = $ruta; 
+                        break; 
+                    } 
+                } ?> 
+                <div class="preview"> 
+                    <p style="font-size:13px; color:#777;"> Imagen actual </p> 
                 
-                    <div class="preview">
-
-                        <p style="font-size:13px; color:#777;">
-                            Imagen actual
-                        </p>
-
-                        <img src="<?= $archivoEncontrado ?>" alt="Imagen actual">
-
-                    </div>
-
-                <?php } else { ?>
-
-                    <p style="font-size:13px; color:#999;">
-                        Sin imagen cargada
-                    </p>
-
-                <?php } ?>
+                <?php 
+                if ($archivoEncontrado) { ?> 
+                <img src="<?= htmlspecialchars($archivoEncontrado) ?>
+                " alt="Imagen del producto" 
+                style="max-width:300px; 
+                max-height:300px; 
+                object-fit:cover;" > 
+                <?php 
+                } else { ?> 
+                <img src="../Imagenes/sinimagen.png" alt="Sin imagen" style="max-width:300px; max-height:300px; object-fit:cover;" > 
+                <?php 
+                } 
+                ?> 
+                </div>
 
                 <form action="subirimagen.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="<?= $fila['id'] ?>">
