@@ -233,7 +233,7 @@
                             <input type="radio" name="rol" value="vendedor"> Vendedor
                         </button>
                         <button type="button" class="option-box opt-vendedor" onclick="$(this).find('input').prop('checked', true).trigger('change')">
-                            <input type="radio" name="rol" value="usuario"> Usuario
+                            <input type="radio" name="rol" value="usuario"> cliente
                         </button>
                     </section>
                 </article>
@@ -241,18 +241,6 @@
                 <article>
                     <label for="direccion">Dirección</label>
                     <input type="text" name="direccion">
-                </article>
-
-                <article>
-                    <label>Estado</label>
-                    <section class="options-container">
-                        <button type="button" class="option-box opt-activo" onclick="$(this).find('input').prop('checked', true).trigger('change')">
-                            <input type="radio" name="estado" value="activo" checked> Activo
-                        </button>
-                        <button type="button" class="option-box opt-inactivo" onclick="$(this).find('input').prop('checked', true).trigger('change')">
-                            <input type="radio" name="estado" value="inactivo"> Inactivo
-                        </button>
-                    </section>
                 </article>
 
                 <section class="footer-form">
