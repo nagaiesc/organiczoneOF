@@ -235,6 +235,24 @@ body {
     border: none;
     cursor: pointer;
 }
+.card-pedidos {
+    background-color: #2e5d32; /* O el color verde/beige de tu paleta */
+    border-radius: 20px;
+    padding: 20px;
+    color: #ffffff;
+    text-align: center;
+}
+
+.btn-ver {
+    display: inline-block;
+    background-color: #00e676; /* Verde brillante o el color que prefieras para el botón */
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+}
 
 
 @media (max-width: 900px) {
@@ -263,7 +281,7 @@ body {
 </style>
 </head>
 <body>
-        <?php include("../nav.php"); ?>
+        <?php include("nav.php"); ?>
 
 
 <article class="caja-principal">
@@ -287,7 +305,7 @@ body {
                 <span class="sub-stock">Productos</span>
             </section>
 
-            <a href="../Pedidos/formulariopedidos.php" class="enlace-tarjeta caja-pedidos">
+            <a href="Pedidos/formulariopedidos.php" class="enlace-tarjeta caja-pedidos">
                 <header>
                     <h3 class="sub-pedidos">Registra tus</h3>
                     <h2 class="titulo-pedidos">Pedidos!</h2>
@@ -304,6 +322,11 @@ body {
                 </section>
                 <button type="button" class="boton2">Registrar</button>
             </a>
+            <div class="card-pedidos">
+              <h3>Ver todos los</h3>
+              <h2>Pedidos</h2>
+              <a href="Pedidos/leerpedidos.php" class="btn-ver">Ver lista</a>
+            </div>
 
         </section>
 
