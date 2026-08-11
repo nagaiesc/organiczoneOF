@@ -305,7 +305,7 @@ body {
                 <span class="sub-stock">Productos</span>
             </section>
 
-            <a href="Pedidos/formulariopedidos.php" class="enlace-tarjeta caja-pedidos">
+            <a href="../Pedidos/formulariopedidos.php" class="enlace-tarjeta caja-pedidos">
                 <header>
                     <h3 class="sub-pedidos">Registra tus</h3>
                     <h2 class="titulo-pedidos">Pedidos!</h2>
@@ -325,7 +325,7 @@ body {
             <div class="card-pedidos">
               <h3>Ver todos los</h3>
               <h2>Pedidos</h2>
-              <a href="Pedidos/leerpedidos.php" class="btn-ver">Ver lista</a>
+              <a href="../Pedidos/leerpedidos.php" class="btn-ver">Ver lista</a>
             </div>
 
         </section>

@@ -159,7 +159,7 @@ body {
         Visualiza la información completa del usuario seleccionado.
     </p>
 
-    <a href="verpedidos.php" class="btn">Ver pedidos</a>
+    <a href="leerpedidos.php" class="btn">Ver pedidos</a>
 
 </section>
     <!-- PANEL DERECHO -->
