@@ -172,7 +172,7 @@ tbody td {
                 if ($resultado->num_rows > 0) {
                     while($fila = $resultado->fetch_assoc()){
                         $id = $fila['id'];
-                        $imagen = "../Imagenes/sinimagen.png";
+                        $imagen = "../Imagenes/predeterminado.png";
 
                         $extensiones = ["jpg","jpeg","png","gif","webp"];
                         foreach ($extensiones as $ext) {
