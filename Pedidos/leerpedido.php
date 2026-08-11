@@ -19,14 +19,13 @@ if ($conexion->connect_error) {
 $id = $_GET['id'];
 
 $sql = "SELECT * FROM pedidos WHERE id = $id";
-
+ 
 $resultado = $conexion->query($sql);
 
 if ($resultado->num_rows > 0) {
 
     $fila = $resultado->fetch_assoc();
-    echo "<a href+'carrito.php?idPedido=$id'><button>Agregar al carrito</button></a>";
-
+    echo "<a href='carrito.php?idPedido=$id'><button>Agregar al carrito</button></a>";
  }else {
 
     die("Pedido no encontrado");

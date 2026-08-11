@@ -281,6 +281,9 @@ echo "<div class='botones'>
 <a class='boton-cerrar' href='../Usuarios/cerrarse.php'>
     Cerrar Sesión
 </a>
+<a class='boton-cerrar' href='../Pedidos/leerpedido.php?id=".$idPedido."'>
+    Finalizar compra
+</a>
 </div>";
 
 echo "
