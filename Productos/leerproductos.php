@@ -21,7 +21,7 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background: #969696;
+    background: #F5EEE3;
     font-family: 'Fredoka', Arial, sans-serif;
 }
 
@@ -45,7 +45,7 @@ body {
 /* PANEL NEGRO */
 
 .section-negro {
-    background: #000;
+    background: #2B140D;
     color: #fff;
     padding: 40px;
 }
