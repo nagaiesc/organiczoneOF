@@ -5,11 +5,21 @@ session_start();
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+
+    <title>Panel de Control - Admin</title>
+
+
+    <!-- FUENTE FREDOKA -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap"
           rel="stylesheet">
@@ -17,144 +27,221 @@ session_start();
 
     <style>
 
+        /* =====================================================
+           CONFIGURACIÓN GENERAL
+           ===================================================== */
+
         * {
             box-sizing: border-box;
         }
 
+
         body {
+
             margin: 0;
+
             min-height: 100vh;
 
             background: #F5EEE3;
 
             font-family: 'Fredoka', sans-serif;
+
             color: #2B140D;
 
             display: flex;
+
             justify-content: center;
+
             align-items: center;
 
-            padding: 30px 20px;
+            padding: 80px 30px 40px;
+
         }
 
+
+        /* =====================================================
+           PANEL PRINCIPAL
+           ===================================================== */
+
         .panel {
+
             width: 100%;
-            max-width: 1100px;
+
+            max-width: 1250px;
 
             display: grid;
 
             grid-template-columns: 1fr 1fr 1.5fr;
 
-            grid-template-rows: 200px 330px;
+            grid-template-rows: 235px 370px;
 
-            gap: 20px;
+            gap: 25px;
 
             margin: auto;
+
         }
 
+
+        /* =====================================================
+           CAJAS GENERALES
+           ===================================================== */
 
         .tarjeta {
-            border-radius: 30px;
+
+            border-radius: 35px;
+
             overflow: hidden;
 
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease,
+                        box-shadow 0.2s ease;
+
         }
+
 
         .tarjeta:hover {
-            transform: translateY(-3px);
+
+            transform: translateY(-4px);
+
+            box-shadow: 0 10px 25px rgba(43, 20, 13, 0.12);
+
         }
 
 
+        /* =====================================================
+           HISTORIAL DE USUARIOS
+           ===================================================== */
+
         .historial {
+
             background: #2B140D;
 
-            padding: 18px 20px;
+            padding: 25px;
 
             display: flex;
+
             flex-direction: column;
+
             justify-content: space-between;
+
         }
 
 
         .botones-historial {
+
             display: flex;
+
             flex-direction: column;
 
             align-items: flex-end;
 
-            gap: 8px;
+            gap: 12px;
+
         }
 
 
         .boton-amarillo {
+
             background: #FCD09F;
 
             color: #2B140D;
 
             border: none;
 
-            border-radius: 25px;
+            border-radius: 30px;
 
-            padding: 8px 20px;
+            padding: 12px 30px;
 
             font-family: 'Fredoka', sans-serif;
 
-            font-size: 17px;
+            font-size: 19px;
+
             font-weight: 600;
 
             cursor: pointer;
+
+            text-decoration: none;
+
+            display: inline-block;
+
+            transition: transform 0.2s ease,
+                        background 0.2s ease;
+
         }
 
 
         .boton-amarillo:hover {
-            transform: scale(1.04);
+
+            transform: scale(1.05);
+
+            background: #FFDDB2;
+
         }
 
 
         .titulo-historial {
+
             margin: 0;
 
             color: white;
 
-            font-size: 40px;
+            font-size: 48px;
 
             line-height: 0.9;
 
             font-weight: 700;
+
         }
 
 
         .titulo-historial span {
+
             display: block;
 
             color: #FCD09F;
 
-            font-size: 21px;
+            font-size: 25px;
 
-            margin-top: 5px;
+            margin-top: 8px;
+
         }
 
 
+        /* =====================================================
+           IMAGEN HAMBURGUESA
+           ===================================================== */
 
         .imagen-hamburguesa {
+
             background: #08A84B;
 
             display: flex;
 
             align-items: center;
+
             justify-content: center;
+
         }
 
 
         .imagen-hamburguesa img {
+
             width: 100%;
+
             height: 100%;
 
             object-fit: cover;
+
+            display: block;
+
         }
 
 
+        /* =====================================================
+           SALUDO
+           ===================================================== */
+
         .saludo {
+
             display: flex;
 
             flex-direction: column;
@@ -165,46 +252,52 @@ session_start();
 
             text-align: center;
 
-            padding: 10px;
+            padding: 20px;
+
         }
 
 
         .saludo-verde {
+
             margin: 0;
 
             color: #08A84B;
 
-            font-size: 55px;
+            font-size: 62px;
 
             font-weight: 700;
 
             line-height: 0.9;
+
         }
 
 
         .saludo-admin {
-            margin: 0;
+
+            margin: 8px 0 0 0;
 
             color: #2B140D;
 
-            font-size: 70px;
+            font-size: 78px;
 
             font-weight: 700;
 
-            line-height: 0.9;
+            line-height: 0.95;
 
             word-break: break-word;
+
         }
 
 
-        /* =========================
+        /* =====================================================
            PEDIDOS
-        ========================= */
+           ===================================================== */
 
         .pedidos {
+
             background: #08A84B;
 
-            padding: 25px;
+            padding: 30px;
 
             display: flex;
 
@@ -214,28 +307,32 @@ session_start();
 
             position: relative;
 
-            text-decoration: none;
         }
 
 
         .pedidos::before {
+
             content: "";
 
             position: absolute;
 
-            width: 170px;
-            height: 250px;
+            width: 190px;
+
+            height: 280px;
 
             background: #2B140D;
 
-            left: -75px;
-            top: 30px;
+            left: -85px;
 
-            border-radius: 0 140px 140px 0;
+            top: 35px;
+
+            border-radius: 0 150px 150px 0;
+
         }
 
 
         .botones-pedidos {
+
             position: relative;
 
             z-index: 2;
@@ -246,68 +343,96 @@ session_start();
 
             align-items: flex-end;
 
-            gap: 8px;
+            gap: 12px;
+
         }
 
 
         .boton-verde {
+
             background: #087F3B;
 
             color: white;
 
             border: none;
 
-            border-radius: 25px;
+            border-radius: 30px;
 
-            padding: 8px 20px;
+            padding: 12px 32px;
 
             font-family: 'Fredoka', sans-serif;
 
-            font-size: 17px;
+            font-size: 19px;
 
             font-weight: 600;
 
             cursor: pointer;
+
+            text-decoration: none;
+
+            display: inline-block;
+
+            transition: transform 0.2s ease,
+                        background 0.2s ease;
+
+        }
+
+
+        .boton-verde:hover {
+
+            transform: scale(1.05);
+
+            background: #096D34;
+
         }
 
 
         .texto-pedidos {
+
             position: relative;
 
             z-index: 2;
+
         }
 
 
         .texto-pequeno {
+
             margin: 0;
 
             color: #FCD09F;
 
-            font-size: 22px;
+            font-size: 25px;
 
             font-weight: 600;
+
         }
 
 
         .titulo-pedidos {
+
             margin: 0;
 
             color: white;
 
-            font-size: 45px;
+            font-size: 52px;
 
             font-weight: 700;
 
             line-height: 0.9;
+
         }
 
 
-        /*  PRODUCTOS */
+        /* =====================================================
+           PRODUCTOS
+           ===================================================== */
 
         .productos {
+
             background: #FCD09F;
 
-            padding: 25px;
+            padding: 30px;
 
             display: flex;
 
@@ -317,28 +442,32 @@ session_start();
 
             position: relative;
 
-            text-decoration: none;
         }
 
 
         .productos::before {
+
             content: "";
 
             position: absolute;
 
-            width: 150px;
-            height: 190px;
+            width: 175px;
+
+            height: 220px;
 
             background: #833518;
 
-            left: 55px;
-            top: -20px;
+            left: 65px;
 
-            border-radius: 0 0 80px 80px;
+            top: -25px;
+
+            border-radius: 0 0 90px 90px;
+
         }
 
 
         .botones-productos {
+
             position: relative;
 
             z-index: 2;
@@ -349,139 +478,234 @@ session_start();
 
             align-items: flex-end;
 
-            gap: 8px;
+            gap: 12px;
+
         }
 
 
         .boton-marron {
+
             background: #2B140D;
 
             color: white;
 
             border: none;
 
-            border-radius: 25px;
+            border-radius: 30px;
 
-            padding: 8px 20px;
+            padding: 12px 32px;
 
             font-family: 'Fredoka', sans-serif;
 
-            font-size: 17px;
+            font-size: 19px;
 
             font-weight: 600;
 
             cursor: pointer;
+
+            text-decoration: none;
+
+            display: inline-block;
+
+            transition: transform 0.2s ease,
+                        background 0.2s ease;
+
+        }
+
+
+        .boton-marron:hover {
+
+            transform: scale(1.05);
+
+            background: #432117;
+
         }
 
 
         .texto-productos {
+
             position: relative;
 
             z-index: 2;
+
         }
 
 
         .texto-productos .texto-pequeno {
+
             color: #833518;
+
         }
 
 
         .titulo-productos {
+
             margin: 0;
 
             color: #2B140D;
 
-            font-size: 45px;
+            font-size: 52px;
 
             font-weight: 700;
 
             line-height: 0.9;
+
         }
 
 
-        /* =========================
+        /* =====================================================
            IMAGEN DEL CHICO
-        ========================= */
+           ===================================================== */
 
         .imagen-chico {
+
             background: #08A84B;
 
             display: flex;
 
             align-items: center;
+
             justify-content: center;
+
         }
 
 
         .imagen-chico img {
+
             width: 100%;
+
             height: 100%;
 
             object-fit: cover;
+
+            display: block;
+
         }
 
 
-        /* =========================
+        /* =====================================================
            RESPONSIVE
-        ========================= */
+           ===================================================== */
 
-        @media (max-width: 900px) {
+        @media (max-width: 1000px) {
 
             body {
+
                 align-items: flex-start;
+
+                padding-top: 100px;
+
             }
 
+
             .panel {
+
                 grid-template-columns: 1fr 1fr;
 
                 grid-template-rows: auto;
 
-                margin-top: 20px;
+                max-width: 800px;
+
             }
+
 
             .saludo {
+
                 grid-column: 1 / -1;
 
-                min-height: 180px;
+                min-height: 220px;
+
             }
 
+
             .imagen-chico {
-                min-height: 300px;
+
+                min-height: 350px;
+
+            }
+
+
+            .imagen-hamburguesa {
+
+                min-height: 250px;
+
             }
 
         }
 
 
-        @media (max-width: 600px) {
+        @media (max-width: 650px) {
 
             body {
-                padding: 20px 15px;
+
+                padding: 90px 15px 30px;
+
             }
+
 
             .panel {
+
                 grid-template-columns: 1fr;
 
-                gap: 15px;
+                gap: 18px;
+
             }
+
 
             .tarjeta {
-                min-height: 250px;
+
+                min-height: 300px;
+
             }
+
 
             .saludo {
-                min-height: 170px;
+
+                min-height: 200px;
+
             }
+
 
             .saludo-verde {
-                font-size: 45px;
+
+                font-size: 50px;
+
             }
+
 
             .saludo-admin {
-                font-size: 55px;
+
+                font-size: 60px;
+
             }
 
-            .imagen-chico {
-                min-height: 280px;
+
+            .titulo-historial {
+
+                font-size: 42px;
+
+            }
+
+
+            .titulo-pedidos,
+
+            .titulo-productos {
+
+                font-size: 45px;
+
+            }
+
+
+            .boton-amarillo,
+
+            .boton-verde,
+
+            .boton-marron {
+
+                padding: 11px 25px;
+
+                font-size: 17px;
+
             }
 
         }
@@ -492,25 +716,30 @@ session_start();
 
 
 <body>
-    
+
+
     <?php include("nav.php"); ?>
+
 
     <main class="panel">
 
 
-        <!-- HISTORIAL DE USUARIOS -->
+        <!-- =================================================
+             HISTORIAL DE USUARIOS
+             ================================================= -->
 
         <section class="tarjeta historial">
 
             <div class="botones-historial">
 
-                <button class="boton-amarillo">
-                    Consultar
-                </button>
+                <!-- SOLO ESTE BOTÓN REDIRECCIONA -->
 
-                <button class="boton-amarillo">
+                <a href="Usuarios/leerusuarios.php"
+                   class="boton-amarillo">
+
                     Mostrar
-                </button>
+
+                </a>
 
             </div>
 
@@ -527,16 +756,23 @@ session_start();
 
         </section>
 
+
+        <!-- =================================================
+             IMAGEN HAMBURGUESA
+             ================================================= -->
+
         <section class="tarjeta imagen-hamburguesa">
 
-            <div>
-                  <img src="burger2d.jpeg"
-                     alt="Hamburguesa Organic Zone">
-              
-
-            </div>
+            <img src="burger2d.jpeg"
+                 alt="Hamburguesa Organic Zone">
 
         </section>
+
+
+        <!-- =================================================
+             SALUDO DEL ADMIN
+             ================================================= -->
+
         <section class="saludo">
 
             <h2 class="saludo-verde">
@@ -547,23 +783,33 @@ session_start();
             <h1 class="saludo-admin">
 
                 <?php
+
                     echo $_SESSION['nombre'];
+
                 ?>
 
             </h1>
 
         </section>
 
-        <a href="Pedidos/formulariopedidos.php"
-           class="tarjeta pedidos">
+
+        <!-- =================================================
+             GESTIONAR PEDIDOS
+             ================================================= -->
+
+        <section class="tarjeta pedidos">
 
 
             <div class="botones-pedidos">
 
-                <button type="button" class="boton-verde">
-                    Mostrar
-                </button>
+                <!-- SOLO EL BOTÓN REDIRECCIONA -->
 
+                <a href="Pedidos/leerpedidos.php"
+                   class="boton-verde">
+
+                    Mostrar
+
+                </a>
 
             </div>
 
@@ -571,32 +817,53 @@ session_start();
             <div class="texto-pedidos">
 
                 <p class="texto-pequeno">
+
                     Gestionar
+
                 </p>
 
+
                 <h2 class="titulo-pedidos">
+
                     Pedidos
+
                 </h2>
 
             </div>
 
 
-        </a>
+        </section>
 
 
-        <a href="Productos/formularioproductos.php"
-           class="tarjeta productos">
+        <!-- =================================================
+             GESTIONAR PRODUCTOS
+             ================================================= -->
+
+        <section class="tarjeta productos">
 
 
             <div class="botones-productos">
 
-                <button type="button" class="boton-marron">
-                    Registrar
-                </button>
 
-                <button type="button" class="boton-marron">
+                <!-- REGISTRAR PRODUCTO -->
+
+                <a href="Productos/formularioproductos.php"
+                   class="boton-marron">
+
+                    Registrar
+
+                </a>
+
+
+                <!-- MOSTRAR PRODUCTOS -->
+
+                <a href="Productos/leerproductos.php"
+                   class="boton-marron">
+
                     Mostrar
-                </button>
+
+                </a>
+
 
             </div>
 
@@ -604,25 +871,32 @@ session_start();
             <div class="texto-productos">
 
                 <p class="texto-pequeno">
+
                     Gestionar
+
                 </p>
 
+
                 <h2 class="titulo-productos">
+
                     Productos
+
                 </h2>
 
             </div>
 
 
-        </a>
+        </section>
 
+
+        <!-- =================================================
+             IMAGEN DEL CHICO
+             ================================================= -->
 
         <section class="tarjeta imagen-chico">
 
-
-            <div>
-              <img src="chicoburger.jpeg"
-            </div>
+            <img src="chicoburger.jpeg"
+                 alt="Organic Zone">
 
         </section>
 

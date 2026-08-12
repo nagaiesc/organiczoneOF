@@ -3,18 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Registro de Productos</title>
+
+<!-- Fuente Fredoka -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 
 <style>
+
 body {
-  background-image: url("../Fondo1.png");
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
   margin: 0;
-  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-family: 'Fredoka', sans-serif;
   color: #111;
   min-height: 100vh;
 }
@@ -111,6 +118,7 @@ body {
     flex-direction: column;
   }
 }
+
 .fil {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -126,7 +134,7 @@ body {
 }
 
 .fil label {
-    font-family: 'Inter', Arial, sans-serif;
+    font-family: 'Fredoka', sans-serif;
     font-size: 15px;
     font-weight: 600;
     color: #333;
@@ -138,7 +146,7 @@ body {
     border: 2px solid #dce8d8;
     border-radius: 12px;
     background-color: #fff;
-    font-family: 'Inter', Arial, sans-serif;
+    font-family: 'Fredoka', sans-serif;
     font-size: 15px;
     box-sizing: border-box;
     outline: none;
@@ -166,7 +174,7 @@ button[type="submit"] {
     border-radius: 14px;
     background-color: #000000;
     color: white;
-    font-family: 'Inter', Arial, sans-serif;
+    font-family: 'Fredoka', sans-serif;
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
@@ -177,6 +185,7 @@ button[type="submit"]:hover {
     background-color: #000000;
     transform: translateY(-2px);
 }
+
 </style>
 </head>
 
@@ -184,12 +193,18 @@ button[type="submit"]:hover {
 
 <div class="cajp">
 
-  <div class="nav">ORGANIC ZONE</div>
+  <div class="nav">
+    ORGANIC ZONE
+  </div>
 
-  <div class="titu">Registro de Producto</div>
+  <div class="titu">
+    Registro de Producto
+  </div>
 
 <form action="productos.php" method="post" enctype="multipart/form-data">
+
     <div class="fil">
+
         <div>
             <label>Nombre</label>
             <input type="text" name="nombre">
@@ -226,7 +241,9 @@ button[type="submit"]:hover {
 
     </div>
 
-    <button type="submit">Guardar Producto</button>
+    <button type="submit">
+        Guardar Producto
+    </button>
 
 </form>
 
@@ -235,43 +252,61 @@ button[type="submit"]:hover {
   </div>
 
 </div>
+
 <script>
-  $("form").validate({
+
+$("form").validate({
+
     rules:{
+
       nombre:{
             required:true
-            },
+      },
+
       descripcion:{
            required:true
       },
+
       precio:{
            required:true
       },
+
       costo:{
           required:true
       },
+
       stock:{
           required:true
-      },
+      }
+
     },
+
     messages:{
+
       nombre:{
            required:"Este campo no puede ir vacio"
       },
+
       descripcion:{
            required:"Este campo debe llenarse"
       },
+
       precio:{
            required:"Este campo no puede ir vacío"
       },
+
       costo:{
-          required:"Este campo no puede ir vacío"
+           required:"Este campo no puede ir vacío"
       },
+
       stock:{
-          required:"Este campo no puede ir vacío"
+           required:"Este campo no puede ir vacío"
       }
+
     }
-  });
+
+});
+
 </script>
 
 </body>
