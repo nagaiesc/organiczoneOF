@@ -1,8 +1,16 @@
 <?php
+
 session_start();
+if (!isset($_SESSION['rol']) || !isset($_SESSION['nombre'])) {
+
+    header("Location: ../Pedidos/leerpedido.php");
+    exit;
+
+}
 
 $rol = $_SESSION['rol'];
 $nombreVendedor = $_SESSION['nombre'];
+
 ?>
 
 <!DOCTYPE html>
