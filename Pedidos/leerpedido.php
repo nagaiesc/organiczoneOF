@@ -13,21 +13,18 @@ $conexion = new mysqli(
     $nombreBaseDeDatos
 );
 
-// Verificar conexión
 if ($conexion->connect_error) {
     die("Error en la conexión con la base de datos.");
 }
 
 $conexion->set_charset("utf8mb4");
 
-// VALIDAR ID
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("ID de pedido no válido.");
 }
 
 $id = (int) $_GET['id'];
 
-// CONSULTA SEGURA
 $sql = "SELECT * FROM pedidos WHERE id = ?";
 $stmt = $conexion->prepare($sql);
 
@@ -40,7 +37,6 @@ $stmt->execute();
 
 $resultado = $stmt->get_result();
 
-// COMPROBAR PEDIDO
 if ($resultado->num_rows === 0) {
     die("Pedido no encontrado.");
 }
@@ -50,15 +46,11 @@ $fila = $resultado->fetch_assoc();
 $stmt->close();
 $conexion->close();
 
-
-// ESCAPAR DATOS PARA HTML
 function limpiar($dato)
 {
     return htmlspecialchars($dato ?? '', ENT_QUOTES, 'UTF-8');
 }
 
-
-// ESTADO DEL PEDIDO
 $estado = strtolower(trim($fila['estado'] ?? ''));
 
 $claseEstado = "estado-default";
