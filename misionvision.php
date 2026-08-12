@@ -58,13 +58,22 @@ body{
 .vision h2{
     font-size:55px;
     color:#2b0a00;
-    margin-bottom:10px;
+    margin:0 0 10px;
 }
 
 .vision p{
     font-size:18px;
     line-height:1.6;
 }
+@media(max-width:900px){
+    .about h1{
+    font-size:70px;
+    }
+    .mision,.vision{
+    width:90%;
+    }
+
+    }
 </style>
 
 <body>

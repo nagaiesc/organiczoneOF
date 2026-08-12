@@ -24,7 +24,6 @@ if(mysqli_num_rows($resultado) > 0){
     $_SESSION['rol']=$fila['rol'];
     $_SESSION['estado']=$fila['estado'];
 
-    session_start();
 
     if($_SESSION['estado']=="inactivo"){
 
@@ -41,6 +40,13 @@ if(mysqli_num_rows($resultado) > 0){
         exit();
 
     }
+
+    if($_SESSION['rol']=="cliente"){
+
+    header("Location:../vistacliente.php");
+    exit();
+
+}
 
 if($_SESSION['rol']=="admin"){
 

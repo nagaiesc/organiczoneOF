@@ -30,20 +30,35 @@ $SQL="INSERT INTO usuarios (CI, nombre, direccion, celular, rol, estado)
 <body>
 
 <?php
-    if($conexion->query($SQL) ==TRUE){
-       echo "
-       <script>
+    if($conexion->query($SQL) == TRUE){
+
+    if($rol == "cliente"){
+
+        $pagina = "../paginaprincipal.php";
+        $mensaje = "Tu cuenta de cliente ha sido registrada correctamente";
+
+    }else{
+
+        $pagina = "../Usuarios/leerusuarios.php";
+        $mensaje = "El usuario ha sido registrado correctamente";
+
+    }
+
+    echo "
+    <script>
         Swal.fire({
             title: 'Registro exitoso',
-            text: 'El cliente ha sido registrado correctamente',
+            text: '$mensaje',
             icon: 'success',
             confirmButtonText: 'Aceptar'
         }).then(() => {
-            window.location.href = '../Usuarios/leerusuarios.php';
+            window.location.href = '$pagina';
         });
-        </script>
-        ";
-    } else {
+    </script>
+    ";
+
+} else {
+
     echo "
     <script>
         Swal.fire({
