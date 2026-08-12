@@ -518,13 +518,10 @@ body {
 </head>
 
 <body>
-
 <header class="topbar">
-
     <div class="logo">
         ORGANIC<span>ZONE</span>
     </div>
-
     <div class="topbar-buttons">
 
         <a href="leerpedidos.php" class="top-btn">
