@@ -314,8 +314,18 @@ body {
                     Registrar
                 </button>
             </a>
+              <a href="../Ventas/leerventas.php" class="enlace-tarjeta caja-pedidos">
+                <header>
+                    <h3 class="sub-pedidos">Visualiza tus</h3>
+                    <h2 class="titulo-pedidos">Ventas!</h2>
+                </header>
+                <button type="button" class="boton1">
+                    Registrar
+                </button>
+            </a>
 
-            <a href="http://localhost/organiczoneOF/Productos/formularioproductos.php" class="enlace-tarjeta caja-productos">
+
+            <a href="http://localhost/organiczoneOF/Productos/formularioproductos.php" class="enlace-tarjeta caja-productos" id=cajaverde>
                 <section class="grupo-texto-productos">
                     <h3 class="sub-productos">Registra tus</h3>
                     <h2 class="titulo-productos">Productos</h2>
