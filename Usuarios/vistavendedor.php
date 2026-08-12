@@ -1,13 +1,9 @@
 <?php
 session_start();
-?>
 
-<?php
 // suma stock 
 $conexion = new mysqli("localhost", "root", "", "organiczoneBD");
 $total_stock = 0;
-
-
 
 if (!$conexion->connect_error) {
     $sql_stock = "SELECT SUM(stock) as total FROM productos";
@@ -52,7 +48,6 @@ body {
     grid-template-columns: 340px 1fr;
     gap:45px;
     align-items:center;
-
 }
 
 /*section izquierda*/
@@ -127,6 +122,9 @@ body {
     padding: 25px 20px;
     text-align: center;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .titulo-stock {
@@ -152,7 +150,7 @@ body {
     opacity: 0.9;
 }
 
-/* pedidos contenedor  */
+/* tarjetas tipo pedidos / ventas (Grandes) */
 .caja-pedidos {
     background: #0A4A1B;
     color: #fff;
@@ -163,6 +161,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-height: 160px;
 }
 
 .sub-pedidos {
@@ -180,7 +179,53 @@ body {
     line-height: 1;
 }
 
-/* boton producros */
+/* Tarjeta pequeña para Ver Pedidos */
+.card-pedidos-peque {
+    background: #2B140D;
+    color: #FCD09F;
+    border-radius: 30px;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.card-pedidos-peque h3 {
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.card-pedidos-peque h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 5px 0;
+    color: #FCD09F;
+    line-height: 1.1;
+}
+
+.btn-ver {
+    display: inline-block;
+    background-color: #12A33C;
+    color: #ffffff;
+    padding: 8px 18px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.btn-ver:hover {
+    background-color: #0d822f;
+}
+
+/* boton productos y pedidos */
 .boton1 {
     background: #12A33C;
     color: #fff;
@@ -235,25 +280,6 @@ body {
     border: none;
     cursor: pointer;
 }
-.card-pedidos {
-    background-color: #2e5d32; /* O el color verde/beige de tu paleta */
-    border-radius: 20px;
-    padding: 20px;
-    color: #ffffff;
-    text-align: center;
-}
-
-.btn-ver {
-    display: inline-block;
-    background-color: #00e676; /* Verde brillante o el color que prefieras para el botón */
-    color: #000000;
-    padding: 10px 20px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
 
 @media (max-width: 900px) {
     .caja-principal {
@@ -277,12 +303,10 @@ body {
     }
 }
 
-
 </style>
 </head>
 <body>
-        <?php include("../nav.php"); ?>
-
+    <?php include("../nav.php"); ?>
 
 <article class="caja-principal">
 
@@ -314,29 +338,32 @@ body {
                     Registrar
                 </button>
             </a>
-              <a href="../Ventas/leerventas.php" class="enlace-tarjeta caja-pedidos">
-                <header>
-                    <h3 class="sub-pedidos">Visualiza tus</h3>
-                    <h2 class="titulo-pedidos">Ventas!</h2>
-                </header>
-                <button type="button" class="boton1">
-                    Registrar
-                </button>
-            </a>
 
-
-            <a href="http://localhost/organiczoneOF/Productos/formularioproductos.php" class="enlace-tarjeta caja-productos" id=cajaverde>
+            <a href="http://localhost/organiczoneOF/Productos/formularioproductos.php" class="enlace-tarjeta caja-productos" id="cajaverde">
                 <section class="grupo-texto-productos">
                     <h3 class="sub-productos">Registra tus</h3>
                     <h2 class="titulo-productos">Productos</h2>
                 </section>
                 <button type="button" class="boton2">Registrar</button>
             </a>
-            <div class="card-pedidos">
-              <h3>Ver todos los</h3>
-              <h2>Pedidos</h2>
-              <a href="../Pedidos/leerpedidos.php" class="btn-ver">Ver lista</a>
-            </div>
+
+            <a href="../Pedidos/leerpedidos.php" class="enlace-tarjeta card-pedidos-peque">
+                <header>
+                    <h3>Ver todos los</h3>
+                    <h2>Pedidos</h2>
+                </header>
+                <span class="btn-ver">Ver lista</span>
+            </a>
+
+            <a href="../Ventas/leerventas.php" class="enlace-tarjeta caja-pedidos">
+                <header>
+                    <h3 class="sub-pedidos">Visualiza tus</h3>
+                    <h2 class="titulo-pedidos">Ventas!</h2>
+                </header>
+                <button type="button" class="boton1">
+                    Ver
+                </button>
+            </a>
 
         </section>
 
