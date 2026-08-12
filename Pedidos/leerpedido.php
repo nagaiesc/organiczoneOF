@@ -24,6 +24,8 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 
 $idPedido = (int) $_GET['id'];
 
+$sql = "SELECT * FROM pedidos WHERE id = ?";
+$stmt = $conexion->prepare($sql);
 
 /* =========================================================
    BUSCAR PEDIDO
@@ -927,7 +929,6 @@ body {
 
 
 <header class="topbar">
-
     <div class="logo">
 
         ORGANIC<span>ZONE</span>
