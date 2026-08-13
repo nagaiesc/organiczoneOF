@@ -90,6 +90,7 @@ body {
 .section-blanco {
     background: #fff;
     padding: 40px;
+    overflow-x: auto;
 }
 
 .section-clientes {
@@ -115,6 +116,7 @@ thead th {
 tbody td {
     border-bottom: 1px solid #ddd;
     padding: 12px;
+    vertical-align: middle;
 }
 
 tbody tr:hover {
@@ -122,28 +124,42 @@ tbody tr:hover {
 }
 
 
-/* BOTONES */
+/* BOTONES Y ACCIONES */
+
+.acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+    min-width: 110px;
+}
+
+.acciones a {
+    text-decoration: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 
 .acciones button {
+    width: 100%;
+    max-width: 100px;
     background: #000;
     color: #fff;
     border: none;
     padding: 6px 12px;
-    margin-right: 5px;
     cursor: pointer;
     font-weight: 600;
     border-radius: 5px;
     transition: 0.3s ease;
     font-family: 'Fredoka', Arial, sans-serif;
+    font-size: 14px;
 }
 
 .acciones button:hover {
     background: #222;
     transform: scale(1.05);
-}
-
-.acciones a {
-    text-decoration: none;
 }
 
 
@@ -202,7 +218,7 @@ tbody tr:hover {
 
 
         <p class="desc">
-            Visualiza todos los pedidps registrados en el sistema.<br>
+            Visualiza todos los pedidos registrados en el sistema.<br>
             Administra información, estados y roles de manera rápida.
         </p>
 
@@ -241,6 +257,8 @@ tbody tr:hover {
 
                         <th>Teléfono</th>
 
+                        <th style="text-align: center;">Acciones</th>
+
                     </tr>
 
                 </thead>
@@ -268,7 +286,7 @@ tbody tr:hover {
 
                     echo "
                     <tr>
-                        <td colspan='7'>
+                        <td colspan='8'>
                             Hubo un error en la conexión
                         </td>
                     </tr>";
@@ -366,6 +384,13 @@ tbody tr:hover {
                             <button>
                                 Mostrar
                             </button>
+                        </a>";
+ 
+                        echo "
+                        <a href='verstockpedido.php?pedido=$id'>
+                             <button>
+                                Stock
+                             </button>
                         </a>";
 
 
