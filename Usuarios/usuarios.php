@@ -1,59 +1,90 @@
 <?php 
+
 $nombreServidor = "localhost";
 $nombreUsuario = "root";
 $contraseñaBaseDeDatos = "";
 $nombreBaseDeDatos = "organiczoneBD";
 
-$conexion = new mysqli($nombreServidor, $nombreUsuario, $contraseñaBaseDeDatos, $nombreBaseDeDatos);
+$conexion = new mysqli(
+    $nombreServidor,
+    $nombreUsuario,
+    $contraseñaBaseDeDatos,
+    $nombreBaseDeDatos
+);
+
 if ($conexion->connect_error) {
     die("conexion fallida: " . $conexion->connect_error);
 }
 
-$CI=$_POST['CI'];
-$nombre=$_POST['nombre'];
+$CI = $_POST['CI'];
+$nombre = $_POST['nombre'];
 $direccion = $_POST['direccion'];
 $celular = $_POST['celular'];
 $rol = $_POST['rol'];
-$estado = $_POST['estado'];
 
-$SQL="INSERT INTO usuarios (CI, nombre, direccion, celular, rol, estado)
+/*
+   El estado no se pide en el formulario.
+   Se registra automáticamente como activo.
+*/
+$estado = "activo";
+
+$SQL = "INSERT INTO usuarios (CI, nombre, direccion, celular, rol, estado)
         VALUES ('$CI', '$nombre', '$direccion', '$celular', '$rol', '$estado')";
 
-
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
+
 <body>
 
-<?php
-    if($conexion->query($SQL) == TRUE){
+<?php  
 
-    if($rol == "cliente"){
+if ($conexion->query($SQL) == TRUE) {
 
-        $pagina = "../paginaprincipal.php";
+    if ($rol == "cliente") {
+
         $mensaje = "Tu cuenta de cliente ha sido registrada correctamente";
 
-    }else{
+    } else {
 
-        $pagina = "../Usuarios/leerusuarios.php";
         $mensaje = "El usuario ha sido registrado correctamente";
 
     }
 
+    /*
+       Después del registro, todos los usuarios
+       vuelven al formulario de inicio de sesión.
+    */
+    $pagina = "../Usuarios/formulariosesion.php";
+
     echo "
     <script>
+
         Swal.fire({
+
             title: 'Registro exitoso',
+
             text: '$mensaje',
+
             icon: 'success',
+
             confirmButtonText: 'Aceptar'
+
         }).then(() => {
+
             window.location.href = '$pagina';
+
         });
+
     </script>
     ";
 
@@ -61,19 +92,28 @@ $SQL="INSERT INTO usuarios (CI, nombre, direccion, celular, rol, estado)
 
     echo "
     <script>
+
         Swal.fire({
+
             title: 'Error',
+
             text: '". $conexion->error ."',
-            icon: 'error'
+
+            icon: 'error',
+
+            confirmButtonText: 'Aceptar'
+
         });
+
     </script>
     ";
-     }
 
-     $conexion->close();
+}
+
+$conexion->close();
 
 ?>
 
-
 </body>
+
 </html>
