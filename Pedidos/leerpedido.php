@@ -5,23 +5,40 @@ $usuario = "root";
 $contrasena = "";
 $bd = "organiczoneBD";
 
-$conn = new mysqli($servidor, $usuario, $contrasena, $bd);
+$conn = new mysqli(
+    $servidor,
+    $usuario,
+    $contrasena,
+    $bd
+);
 
 if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
 $conn->set_charset("utf8mb4");
+
+
+/* ==========================================
+   VALIDAR ID
+========================================== */
+
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("ID de pedido no válido.");
 }
 
 $idPedido = (int) $_GET['id'];
 
-$sql = "SELECT * FROM pedidos WHERE id = ?";
-$stmt = $conn->prepare($sql);
 
-$sqlPedido = "SELECT * FROM pedidos WHERE id = ?";
+/* ==========================================
+   OBTENER PEDIDO
+========================================== */
+
+$sqlPedido = "
+    SELECT *
+    FROM pedidos
+    WHERE id = ?
+";
 
 $stmtPedido = $conn->prepare($sqlPedido);
 
@@ -41,6 +58,12 @@ if ($resultadoPedido->num_rows === 0) {
 $pedido = $resultadoPedido->fetch_assoc();
 
 $stmtPedido->close();
+
+
+/* ==========================================
+   OBTENER PRODUCTOS
+========================================== */
+
 $sqlCarrito = "
     SELECT
         c.pedidos_id,
@@ -67,6 +90,11 @@ $stmtCarrito->execute();
 
 $resultadoCarrito = $stmtCarrito->get_result();
 
+
+/* ==========================================
+   FUNCIÓN LIMPIAR
+========================================== */
+
 function limpiar($dato)
 {
     return htmlspecialchars(
@@ -75,6 +103,11 @@ function limpiar($dato)
         'UTF-8'
     );
 }
+
+
+/* ==========================================
+   ESTADO
+========================================== */
 
 $estado = strtolower(
     trim($pedido['estado'] ?? '')
@@ -129,7 +162,29 @@ $totalFactura = 0;
 </title>
 
 
+<!-- ==========================================
+     FREDOKA
+========================================== -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+
 <style>
+
+/* ==========================================
+   GENERAL
+========================================== */
 
 * {
     box-sizing: border-box;
@@ -143,112 +198,227 @@ body {
 
 body {
 
+    background: #ffffff;
+
+    color: #2B140D;
+
     font-family:
+        'Fredoka',
         Arial,
-        Helvetica,
         sans-serif;
 
-    background: #eef1f3;
+    min-height: 100vh;
 
-    color: #222;
 }
+
+
+/* ==========================================
+   BARRA SUPERIOR
+   ESTILO PARECIDO A TU NAV
+========================================== */
 
 .topbar {
 
-    width: 100%;
+    position: relative;
 
-    background: #111;
+    width: 92%;
 
-    color: white;
+    max-width: 1350px;
 
-    padding: 18px 5%;
+    min-height: 68px;
+
+    margin: 20px auto 0;
+
+    background:
+        rgba(43, 20, 13, 0.96);
+
+    border-radius: 50px;
+
+    padding:
+        0 25px;
 
     display: flex;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
-    align-items: center;
+    align-items:
+        center;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, 0.18);
+
+    font-family:
+        'Fredoka',
+        sans-serif;
+
 }
+
+
+/* ==========================================
+   LOGO
+========================================== */
 
 .logo {
-
-    font-size: 22px;
-
-    font-weight: 800;
-
-    letter-spacing: 1px;
-}
-
-.logo span {
-
-    color: #8bc34a;
-}
-
-.topbar-buttons {
-
-    display: flex;
-
-    gap: 10px;
-}
-
-.top-btn {
 
     text-decoration: none;
 
     color: white;
 
-    border: 1px solid #555;
+    font-size: 27px;
 
-    padding: 9px 16px;
+    font-weight: 700;
 
-    border-radius: 6px;
+    letter-spacing:
+        0.5px;
 
-    font-size: 14px;
+}
+
+
+.logo span {
+
+    color: #0ba84a;
+
+}
+
+
+/* ==========================================
+   BOTONES DEL NAV
+========================================== */
+
+.topbar-buttons {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.top-btn {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    text-decoration: none;
+
+    color: white;
+
+    padding:
+        11px 18px;
+
+    border-radius: 30px;
+
+    border: none;
+
+    background:
+        rgba(255,255,255,0.13);
+
+    font-family:
+        'Fredoka',
+        sans-serif;
+
+    font-size: 16px;
+
+    font-weight: 500;
 
     cursor: pointer;
 
-    background: transparent;
+    transition:
+        0.3s ease;
 
-    transition: .2s;
 }
+
 
 .top-btn:hover {
 
-    background: #333;
+    background:
+        rgba(252, 208, 159, 0.90);
+
+    color: #2B140D;
+
+    transform:
+        translateY(-2px);
+
 }
+
+
+/* BOTÓN IMPRIMIR */
 
 .top-btn.green {
 
-    background: #7cb342;
+    background: #0ba84a;
 
-    border-color: #7cb342;
+    color: white;
+
 }
+
 
 .top-btn.green:hover {
 
-    background: #689f38;
+    background: #098f40;
+
+    color: white;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 5px 15px
+        rgba(11,168,74,0.30);
+
 }
+
+
+/* ==========================================
+   CONTENEDOR
+========================================== */
+
 .contenedor {
 
     width: 92%;
 
     max-width: 1100px;
 
-    margin: 40px auto;
+    margin:
+        35px auto 50px;
+
 }
+
+
+/* ==========================================
+   FACTURA
+========================================== */
 
 .factura {
 
     background: white;
 
-    border-radius: 14px;
+    border-radius: 20px;
 
     overflow: hidden;
 
+    border:
+        1px solid #eeeeee;
+
     box-shadow:
         0 10px 35px
-        rgba(0,0,0,.10);
+        rgba(43,20,13,0.09);
+
 }
+
+
+/* ==========================================
+   CABECERA
+========================================== */
 
 .factura-header {
 
@@ -256,58 +426,87 @@ body {
 
     display: flex;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
-    align-items: flex-start;
+    align-items:
+        flex-start;
 
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom:
+        1px solid #eeeeee;
+
 }
+
 
 .empresa h1 {
 
     margin: 0;
 
-    font-size: 30px;
+    font-size: 34px;
+
+    font-weight: 700;
+
 }
+
 
 .empresa h1 span {
 
-    color: #7cb342;
+    color: #0ba84a;
+
 }
+
 
 .empresa p {
 
-    margin-top: 8px;
+    margin:
+        8px 0 0;
 
-    color: #777;
+    color: #888;
 
     font-size: 14px;
+
 }
+
 
 .factura-titulo {
 
     text-align: right;
+
 }
+
 
 .factura-titulo h2 {
 
     margin: 0;
 
-    font-size: 30px;
+    font-size: 32px;
+
+    font-weight: 700;
+
+    color: #2B140D;
+
 }
+
 
 .numero {
 
-    margin-top: 8px;
+    margin-top: 7px;
 
-    color: #777;
+    color: #888;
 
     font-size: 14px;
+
 }
+
+
+/* ==========================================
+   INFORMACIÓN
+========================================== */
 
 .info {
 
-    padding: 30px 40px;
+    padding:
+        30px 40px;
 
     display: grid;
 
@@ -317,204 +516,301 @@ body {
     gap: 40px;
 
     border-bottom:
-        1px solid #eee;
+        1px solid #eeeeee;
+
 }
+
 
 .info-box h3 {
 
     margin:
         0 0 15px;
 
-    font-size: 13px;
+    font-size: 12px;
 
     color: #888;
 
     text-transform:
         uppercase;
 
-    letter-spacing: 1px;
+    letter-spacing:
+        1px;
+
 }
+
 
 .info-box p {
 
-    margin: 7px 0;
+    margin:
+        8px 0;
 
     font-size: 15px;
 
-    color: #333;
+    color: #444;
+
 }
+
 
 .info-box strong {
 
-    color: #111;
+    color: #2B140D;
+
 }
+
+
+/* ==========================================
+   ESTADO
+========================================== */
 
 .estado-contenedor {
 
-    padding: 22px 40px;
+    padding:
+        20px 40px;
 
-    background: #fafafa;
+    background:
+        #fafafa;
 
     display: flex;
 
     justify-content:
         space-between;
 
-    align-items: center;
+    align-items:
+        center;
+
+    border-bottom:
+        1px solid #eeeeee;
+
 }
+
 
 .estado-label {
 
     color: #777;
 
     font-size: 14px;
+
 }
+
 
 .estado {
 
     padding:
-        8px 16px;
+        8px 17px;
 
-    border-radius: 30px;
+    border-radius:
+        30px;
 
-    font-size: 13px;
+    font-size:
+        12px;
 
-    font-weight: bold;
+    font-weight:
+        700;
 
     text-transform:
         uppercase;
+
 }
+
+
+/* ESTADOS */
 
 .estado-pendiente {
 
     background: #fff3cd;
 
     color: #856404;
+
 }
+
 
 .estado-proceso {
 
-    background: #cfe2ff;
+    background: #dcecff;
 
-    color: #084298;
+    color: #24527a;
+
 }
+
 
 .estado-enviado {
 
-    background: #d1ecf1;
+    background: #d8f1f2;
 
-    color: #0c5460;
+    color: #27666b;
+
 }
+
 
 .estado-entregado {
 
-    background: #d1e7dd;
+    background: #d9f2dc;
 
-    color: #0f5132;
+    color: #24652b;
+
 }
+
 
 .estado-cancelado {
 
     background: #f8d7da;
 
     color: #842029;
+
 }
+
 
 .estado-default {
 
-    background: #e9ecef;
+    background: #eeeeee;
 
-    color: #495057;
+    color: #555;
+
 }
+
+
+/* ==========================================
+   PRODUCTOS
+========================================== */
 
 .productos {
 
-    padding: 35px 40px;
+    padding:
+        35px 40px 20px;
+
 }
+
 
 .productos h3 {
 
-    margin-top: 0;
+    margin:
+        0 0 20px;
 
-    margin-bottom: 20px;
+    font-size: 20px;
 
-    font-size: 18px;
+    color: #2B140D;
+
 }
+
+
+/* ==========================================
+   TABLA
+========================================== */
 
 .tabla {
 
     width: 100%;
 
     border-collapse:
-        collapse;
+        separate;
+
+    border-spacing: 0;
+
+    border:
+        1px solid #e9e9e9;
+
+    border-radius:
+        12px;
+
+    overflow: hidden;
+
 }
+
 
 .tabla th {
 
-    background: #111;
+    background: #2B140D;
 
     color: white;
 
-    padding: 14px;
+    padding: 15px;
 
     text-align: left;
 
     font-size: 13px;
+
+    font-weight: 600;
+
 }
+
 
 .tabla td {
 
-    padding: 16px 14px;
+    padding:
+        16px 15px;
 
     border-bottom:
-        1px solid #eee;
+        1px solid #eeeeee;
 
     font-size: 14px;
+
+    color: #444;
+
 }
 
-.tabla tr:hover {
 
-    background: #fafafa;
+.tabla tr:last-child td {
+
+    border-bottom:
+        none;
+
 }
+
+
+.tabla tbody tr:hover {
+
+    background:
+        #fafafa;
+
+}
+
 
 .texto-derecha {
 
     text-align: right;
+
 }
+
 
 .texto-centro {
 
     text-align: center;
+
 }
+
+
+/* ==========================================
+   PRODUCTO
+========================================== */
 
 .producto-nombre {
 
-    font-weight: 700;
+    font-weight:
+        600;
 
-    color: #222;
+    color:
+        #2B140D;
+
 }
+
 
 .producto-descripcion {
 
-    margin-top: 4px;
+    margin-top:
+        4px;
 
-    color: #888;
+    color:
+        #999;
 
-    font-size: 12px;
+    font-size:
+        12px;
+
 }
 
-.sin-productos {
 
-    padding: 30px;
-
-    text-align: center;
-
-    color: #888;
-
-    background: #fafafa;
-
-    border-radius: 8px;
-}
+/* ==========================================
+   RESUMEN
+========================================== */
 
 .resumen {
 
@@ -524,13 +820,29 @@ body {
         flex-end;
 
     padding:
-        10px 40px 35px;
+        15px 40px 35px;
+
 }
+
 
 .resumen-box {
 
     width: 350px;
+
+    padding:
+        18px 22px;
+
+    background:
+        #fafafa;
+
+    border:
+        1px solid #eeeeee;
+
+    border-radius:
+        14px;
+
 }
+
 
 .total-linea {
 
@@ -539,282 +851,527 @@ body {
     justify-content:
         space-between;
 
-    padding: 10px 0;
+    padding:
+        8px 0;
 
-    color: #555;
+    color:
+        #666;
+
+    font-size:
+        14px;
+
 }
+
 
 .total-final {
 
     border-top:
-        2px solid #111;
+        2px solid #2B140D;
 
-    margin-top: 10px;
+    margin-top:
+        10px;
 
-    padding-top: 18px;
+    padding-top:
+        16px;
 
     display: flex;
 
     justify-content:
         space-between;
 
-    font-size: 24px;
+    font-size:
+        23px;
 
-    font-weight: bold;
+    font-weight:
+        700;
 
-    color: #111;
+    color:
+        #2B140D;
+
 }
+
 
 .total-precio {
 
-    color: #4c8c2b;
+    color:
+        #0ba84a;
+
 }
+
+
+/* ==========================================
+   DIRECCIÓN
+========================================== */
 
 .direccion {
 
     margin:
         0 40px 35px;
 
-    padding: 20px;
+    padding:
+        20px;
 
-    background: #f6f7f8;
+    background:
+        #f7f7f7;
 
     border-left:
-        4px solid #7cb342;
+        5px solid #0ba84a;
 
-    border-radius: 5px;
+    border-radius:
+        10px;
+
 }
+
 
 .direccion h3 {
 
     margin:
         0 0 8px;
 
-    font-size: 13px;
+    font-size:
+        12px;
 
-    color: #777;
+    color:
+        #888;
 
     text-transform:
         uppercase;
+
+    letter-spacing:
+        1px;
+
 }
+
 
 .direccion p {
 
-    margin: 0;
+    margin:
+        0;
 
-    color: #333;
+    color:
+        #444;
+
+    font-size:
+        14px;
+
 }
+
+
+/* ==========================================
+   FOOTER
+========================================== */
 
 .factura-footer {
 
-    padding: 25px 40px;
+    padding:
+        27px 40px;
 
-    background: #111;
+    background:
+        #2B140D;
 
-    color: #aaa;
+    color:
+        #bdb1ac;
 
-    text-align: center;
+    text-align:
+        center;
 
-    font-size: 13px;
+    font-size:
+        13px;
+
 }
+
 
 .factura-footer strong {
 
-    color: white;
+    color:
+        white;
+
+    font-size:
+        14px;
+
 }
+
+
+/* ==========================================
+   BOTONES INFERIORES
+========================================== */
 
 .acciones {
 
-    margin-top: 25px;
+    margin-top:
+        25px;
 
-    display: flex;
+    display:
+        flex;
 
     justify-content:
         space-between;
 
-    align-items: center;
+    align-items:
+        center;
+
 }
+
 
 .btn {
 
-    display: inline-block;
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
 
     padding:
         12px 20px;
 
-    border-radius: 6px;
+    border-radius:
+        30px;
 
-    text-decoration: none;
+    text-decoration:
+        none;
 
-    font-size: 14px;
+    font-family:
+        'Fredoka',
+        sans-serif;
 
-    font-weight: bold;
+    font-size:
+        15px;
 
-    cursor: pointer;
+    font-weight:
+        600;
 
-    border: none;
+    cursor:
+        pointer;
 
-    transition: .2s;
+    border:
+        none;
+
+    transition:
+        0.3s ease;
+
 }
+
+
+/* VOLVER */
 
 .btn-volver {
 
-    background: #555;
+    background:
+        #2B140D;
 
-    color: white;
+    color:
+        white;
+
 }
+
 
 .btn-volver:hover {
 
-    background: #333;
+    background:
+        #4a2519;
+
+    transform:
+        translateY(-2px);
+
 }
+
+
+/* IMPRIMIR */
 
 .btn-imprimir {
 
-    background: #111;
+    background:
+        #0ba84a;
 
-    color: white;
+    color:
+        white;
+
 }
+
 
 .btn-imprimir:hover {
 
-    background: #333;
+    background:
+        #098f40;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 5px 15px
+        rgba(11,168,74,0.25);
+
 }
 
-@media(max-width:700px) {
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width: 700px) {
+
 
     .topbar {
 
-        flex-direction:
-            column;
+        width: 95%;
 
-        gap: 15px;
+        padding:
+            0 15px;
+
+        min-height:
+            60px;
+
     }
+
+
+    .logo {
+
+        display:
+            none;
+
+    }
+
+
+    .topbar {
+
+        justify-content:
+            center;
+
+    }
+
+
+    .topbar-buttons {
+
+        gap:
+            5px;
+
+    }
+
+
+    .top-btn {
+
+        padding:
+            9px 12px;
+
+        font-size:
+            13px;
+
+    }
+
 
     .contenedor {
 
-        width: 95%;
+        width:
+            95%;
 
-        margin:
-            20px auto;
+        margin-top:
+            25px;
+
     }
+
 
     .factura-header {
 
-        padding: 25px;
+        padding:
+            28px;
 
         flex-direction:
             column;
 
-        gap: 20px;
+        gap:
+            20px;
+
     }
+
 
     .factura-titulo {
 
-        text-align: left;
+        text-align:
+            left;
+
     }
+
 
     .info {
 
         grid-template-columns:
             1fr;
 
-        padding: 25px;
+        padding:
+            25px;
+
+        gap:
+            20px;
+
     }
+
 
     .estado-contenedor {
 
-        padding: 20px;
+        padding:
+            20px 25px;
 
-        gap: 15px;
+        gap:
+            15px;
 
         flex-direction:
             column;
 
         align-items:
             flex-start;
+
     }
+
 
     .productos {
 
-        padding: 20px;
+        padding:
+            25px 20px 15px;
 
         overflow-x:
             auto;
+
     }
+
+
+    .tabla {
+
+        min-width:
+            650px;
+
+    }
+
 
     .resumen {
 
         padding:
-            10px 20px 25px;
+            15px 20px 25px;
+
     }
+
+
+    .resumen-box {
+
+        width:
+            100%;
+
+    }
+
 
     .direccion {
 
         margin:
             0 20px 25px;
+
     }
+
+
+    .factura-footer {
+
+        padding:
+            25px 20px;
+
+    }
+
 
     .acciones {
 
         flex-direction:
             column;
 
-        gap: 10px;
+        gap:
+            10px;
 
         align-items:
             stretch;
+
     }
+
 
     .btn {
 
-        text-align: center;
+        width:
+            100%;
+
     }
 
 }
 
+
+/* ==========================================
+   IMPRESIÓN
+========================================== */
+
 @media print {
+
 
     body {
 
-        background: white;
+        background:
+            white;
+
     }
+
 
     .topbar,
     .acciones {
 
-        display: none;
+        display:
+            none !important;
+
     }
+
 
     .contenedor {
 
-        width: 100%;
+        width:
+            100%;
 
-        max-width: none;
+        max-width:
+            none;
 
-        margin: 0;
+        margin:
+            0;
+
     }
+
 
     .factura {
 
-        box-shadow: none;
+        box-shadow:
+            none;
 
-        border-radius: 0;
+        border-radius:
+            0;
+
+        border:
+            none;
+
     }
+
 
     .factura-footer {
 
-        background: white;
+        background:
+            white;
 
-        color: #555;
+        color:
+            #555;
 
         border-top:
             1px solid #ddd;
+
     }
+
 
     .factura-footer strong {
 
-        color: #111;
+        color:
+            #2B140D;
+
     }
 
 }
@@ -827,61 +1384,104 @@ body {
 <body>
 
 
+<!-- ==========================================
+     BARRA SUPERIOR
+========================================== -->
+
 <header class="topbar">
-    <div class="logo">
 
-        ORGANIC<span>ZONE</span>
 
-    </div>
+    <a
+        href="paginaprincipal.php"
+        class="logo"
+    >
+
+        Organic<span>Zone</span>
+
+    </a>
 
 
     <div class="topbar-buttons">
+
+
+        <!-- VOLVER A PEDIDOS -->
 
         <a
             href="leerpedidos.php"
             class="top-btn"
         >
+
             ← Pedidos
+
         </a>
 
+
+        <!-- IMPRIMIR -->
 
         <button
             onclick="window.print()"
             class="top-btn green"
         >
+
             🖨 Imprimir factura
+
         </button>
+
 
     </div>
 
+
 </header>
 
+
+
+<!-- ==========================================
+     CONTENEDOR PRINCIPAL
+========================================== -->
 
 <main class="contenedor">
 
 
 <div class="factura">
 
+
+<!-- ==========================================
+     CABECERA DE FACTURA
+========================================== -->
+
 <section class="factura-header">
+
 
     <div class="empresa">
 
+
         <h1>
+
             ORGANIC<span>ZONE</span>
+
         </h1>
 
+
         <p>
+
             Productos naturales y orgánicos
+
         </p>
+
 
     </div>
 
 
+
     <div class="factura-titulo">
 
+
         <h2>
+
             FACTURA
+
         </h2>
+
 
         <div class="numero">
 
@@ -889,81 +1489,142 @@ body {
 
         </div>
 
+
     </div>
 
+
 </section>
+
+
+
+<!-- ==========================================
+     INFORMACIÓN
+========================================== -->
 
 <section class="info">
 
 
     <div class="info-box">
 
+
         <h3>
+
             Información del cliente
+
         </h3>
+
 
         <p>
 
             <strong>
-                <?= limpiar($pedido['nombre']) ?>
+
+                <?= limpiar(
+                    $pedido['nombre']
+                ) ?>
+
             </strong>
 
         </p>
 
-        <p>
-
-            TELEFONO
-            <?= limpiar($pedido['telefono']) ?>
-
-        </p>
 
         <p>
 
-            DIRECCION
-            <?= limpiar($pedido['direccion']) ?>
+            <strong>
+                Teléfono:
+            </strong>
+
+            <?= limpiar(
+                $pedido['telefono']
+            ) ?>
 
         </p>
+
+
+        <p>
+
+            <strong>
+                Dirección:
+            </strong>
+
+            <?= limpiar(
+                $pedido['direccion']
+            ) ?>
+
+        </p>
+
 
     </div>
 
 
+
     <div class="info-box">
 
+
         <h3>
+
             Información del pedido
+
         </h3>
+
 
         <p>
 
             Pedido:
+
             <strong>
-                #<?= limpiar($pedido['id']) ?>
+
+                #<?= limpiar(
+                    $pedido['id']
+                ) ?>
+
             </strong>
 
         </p>
 
+
         <p>
 
-            📅
-            <?= limpiar($pedido['fecha']) ?>
+            Fecha:
+
+            <strong>
+
+                <?= limpiar(
+                    $pedido['fecha']
+                ) ?>
+
+            </strong>
 
         </p>
+
 
         <p>
 
             Vendedor:
+
             <strong>
-                <?= limpiar($pedido['nombrevendedor']) ?>
+
+                <?= limpiar(
+                    $pedido['nombrevendedor']
+                ) ?>
+
             </strong>
 
         </p>
+
 
     </div>
 
 
 </section>
 
+
+
+<!-- ==========================================
+     ESTADO
+========================================== -->
+
 <section class="estado-contenedor">
+
 
     <span class="estado-label">
 
@@ -976,44 +1637,67 @@ body {
         class="estado <?= $claseEstado ?>"
     >
 
-        <?= limpiar($pedido['estado']) ?>
+        <?= limpiar(
+            $pedido['estado']
+        ) ?>
 
     </span>
 
+
 </section>
+
+
+
+<!-- ==========================================
+     PRODUCTOS
+========================================== -->
+
 <section class="productos">
 
+
     <h3>
+
         Detalle del pedido
+
     </h3>
 
 
-    <?php if ($resultadoCarrito->num_rows > 0): ?>
+    <?php if (
+        $resultadoCarrito->num_rows > 0
+    ): ?>
 
 
     <table class="tabla">
 
+
         <thead>
 
+
             <tr>
+
 
                 <th>
                     Producto
                 </th>
 
+
                 <th class="texto-centro">
                     Cantidad
                 </th>
+
 
                 <th class="texto-derecha">
                     Precio
                 </th>
 
+
                 <th class="texto-derecha">
                     Subtotal
                 </th>
 
+
             </tr>
+
 
         </thead>
 
@@ -1021,18 +1705,31 @@ body {
         <tbody>
 
 
-        <?php while ($producto = $resultadoCarrito->fetch_assoc()): ?>
+        <?php while (
+            $producto =
+            $resultadoCarrito->fetch_assoc()
+        ): ?>
 
 
             <?php
 
-            $cantidad = (int) $producto['cantidad'];
+            $cantidad =
+                (int)
+                $producto['cantidad'];
 
-            $precio = (float) $producto['precio'];
 
-            $subtotal = (float) $producto['costototal'];
+            $precio =
+                (float)
+                $producto['precio'];
 
-            $totalFactura += $subtotal;
+
+            $subtotal =
+                (float)
+                $producto['costototal'];
+
+
+            $totalFactura +=
+                $subtotal;
 
             ?>
 
@@ -1042,22 +1739,32 @@ body {
 
                 <td>
 
+
                     <div class="producto-nombre">
 
-                        <?= limpiar($producto['nombre']) ?>
+                        <?= limpiar(
+                            $producto['nombre']
+                        ) ?>
 
                     </div>
 
 
-                    <?php if (!empty($producto['descripcion'])): ?>
+                    <?php if (
+                        !empty(
+                            $producto['descripcion']
+                        )
+                    ): ?>
 
                         <div class="producto-descripcion">
 
-                            <?= limpiar($producto['descripcion']) ?>
+                            <?= limpiar(
+                                $producto['descripcion']
+                            ) ?>
 
                         </div>
 
                     <?php endif; ?>
+
 
                 </td>
 
@@ -1070,21 +1777,28 @@ body {
 
 
                 <td class="texto-derecha">
-<span class="total-precio">
 
-    Bs. <?= $totalFactura ?>
-
-</span>
+                    Bs.
+                    <?= number_format(
+                        $precio,
+                        2
+                    ) ?>
 
                 </td>
 
 
                 <td class="texto-derecha">
-<span class="total-precio">
 
-    Bs. <?= $totalFactura ?>
 
-</span>
+                    <strong class="total-precio">
+
+                        Bs.
+                        <?= number_format(
+                            $subtotal,
+                            2
+                        ) ?>
+
+                    </strong>
 
 
                 </td>
@@ -1097,6 +1811,7 @@ body {
 
 
         </tbody>
+
 
     </table>
 
@@ -1115,98 +1830,167 @@ body {
 
 
 </section>
+
+
+
+<!-- ==========================================
+     RESUMEN
+========================================== -->
+
 <section class="resumen">
+
 
     <div class="resumen-box">
 
 
         <div class="total-linea">
 
-            <span>
-                Pedido
-            </span>
 
             <span>
-                #<?= limpiar($pedido['id']) ?>
+
+                Pedido
+
             </span>
+
+
+            <span>
+
+                #<?= limpiar(
+                    $pedido['id']
+                ) ?>
+
+            </span>
+
 
         </div>
 
 
         <div class="total-linea">
 
-            <span>
-                Productos
-            </span>
 
             <span>
-                <?= $resultadoCarrito->num_rows ?>
+
+                Productos
+
             </span>
+
+
+            <span>
+
+                <?= $resultadoCarrito->num_rows ?>
+
+            </span>
+
 
         </div>
 
 
         <div class="total-final">
 
+
             <span>
+
                 TOTAL
+
             </span>
+
 
             <span class="total-precio">
 
                 Bs.
-<span class="total-precio">
-
-    Bs. <?= $totalFactura ?>
-
-</span>
-
+                <?= number_format(
+                    $totalFactura,
+                    2
+                ) ?>
 
             </span>
+
 
         </div>
 
 
     </div>
 
+
 </section>
 
+
+
+<!-- ==========================================
+     DIRECCIÓN
+========================================== -->
 
 <section class="direccion">
 
+
     <h3>
+
         Dirección de entrega
+
     </h3>
+
 
     <p>
 
-        <?= limpiar($pedido['direccion']) ?>
+        <?= limpiar(
+            $pedido['direccion']
+        ) ?>
 
     </p>
 
+
 </section>
+
+
+
+<!-- ==========================================
+     FOOTER
+========================================== -->
+
 <footer class="factura-footer">
 
+
     <strong>
+
         Gracias por comprar en OrganicZone
+
     </strong>
+
 
     <br>
 
-    Esta factura corresponde al pedido
-    #<?= limpiar($pedido['id']) ?>.
+
+    Productos naturales, orgánicos
+    y preparados con dedicación.
+
+
+    <br><br>
+
+
+    Cochabamba, Bolivia · 2026
+
 
 </footer>
 
 
 </div>
+
+
+
+<!-- ==========================================
+     BOTONES INFERIORES
+========================================== -->
+
 <div class="acciones">
 
+
     <a
-        href="formulariopedidos.php"
+        href="leerpedidos.php"
         class="btn btn-volver"
     >
+
         ← Volver a pedidos
+
     </a>
 
 
@@ -1214,8 +1998,11 @@ body {
         onclick="window.print()"
         class="btn btn-imprimir"
     >
+
         🖨 Imprimir factura
+
     </button>
+
 
 </div>
 
@@ -1227,6 +2014,7 @@ body {
 
 </html>
 
+
 <?php
 
 $stmtCarrito->close();
@@ -1234,4 +2022,3 @@ $stmtCarrito->close();
 $conn->close();
 
 ?>
-
