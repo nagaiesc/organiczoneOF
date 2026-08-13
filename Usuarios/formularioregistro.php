@@ -145,7 +145,7 @@
 
         .opt-admin { background-color: var(--dark-green-btn); }
         .opt-vendedor { background-color: var(--accent-orange); color: var(--text-brown); }
-        .opt-cliente {background-color: var(--canva-green);}        .opt-activo { background-color: var(--dark-green-btn); }
+        .opt-activo { background-color: var(--dark-green-btn); }
         .opt-inactivo { background-color: var(--bg-page); color: var(--canva-green); }
 
         
@@ -227,14 +227,13 @@
                     <label>Rol</label>
                     <section class="options-container">
                         <button type="button" class="option-box opt-admin" onclick="$(this).find('input').prop('checked', true).trigger('change')">
-                            <input type="radio" name="rol" value="admin"> Admin
+                            <input type="radio" name="rol" value="admin" checked> Admin
                         </button>
                         <button type="button" class="option-box opt-vendedor" onclick="$(this).find('input').prop('checked', true).trigger('change')">
                             <input type="radio" name="rol" value="vendedor"> Vendedor
                         </button>
-                        <button type="button" class="option-box opt-cliente" onclick="$(this).find('input').prop('checked', true).trigger('change')">
+                        <button type="button" class="option-box opt-vendedor" onclick="$(this).find('input').prop('checked', true).trigger('change')">
                             <input type="radio" name="rol" value="cliente"> Cliente
-                        </button>
                         </button>
                     </section>
                 </article>
@@ -255,46 +254,23 @@
     <script>
     $("form").validate({
         rules:{
-            CI:{
-                 required:true 
-                },
-            nombre:{
-                 required:true 
-                },
-            direccion:{ 
-                required:true
-            },
-            celular:{
-                 required:true
-                }
+            CI:{ required:true },
+            nombre:{ required:true },
+            direccion:{ required:true },
+            celular:{ required:true }
         },
         messages:{
-            CI:{ 
-                required:"este campo no puede estar vacio" 
-            },
-            nombre:{ 
-                required:"este campo no puede estar vacio"
-             },
-            direccion:{ 
-                required:"este campo no puede estar vacio"
-             },
-            celular:{ 
-                required:"este campo no puede estar vacio"
-             }
+            CI:{ required:"este campo no puede estar vacio" },
+            nombre:{ required:"este campo no puede estar vacio" },
+            direccion:{ required:"este campo no puede estar vacio" },
+            celular:{ required:"este campo no puede estar vacio" }
         }
     });
 
     $('.options-container input[type="radio"]').on('change', function() {
         $(this).closest('.options-container').find('.option-box').blur(); 
     });
-
-
-
-    boton.classList.add("active");
-
-
-
-</script>
+    </script>
 
 </body>
 </html>

@@ -138,7 +138,7 @@ function obtenerImagenProducto(int $id): string
         </div>
 
         <div class="hero-imagen">
-            <img src="../beyondft.png" alt="Producto Organic Zone">
+            <img src="../chkioz.jpg" alt="Producto Organic Zone">
         </div>
     </section>
 
@@ -227,7 +227,6 @@ function obtenerImagenProducto(int $id): string
 
 </main>
 
-<!-- MODAL PARA CREAR PEDIDO -->
 <div class="modal-overlay" id="modalPedido">
     <div class="modal-caja">
         <button type="button" class="modal-cerrar" data-cerrar-modal="modalPedido">×</button>

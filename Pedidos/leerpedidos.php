@@ -283,7 +283,9 @@ tbody tr:hover {
                 } else {
 
                     $sql = "SELECT * FROM pedidos
-                            WHERE nombrevendedor = '$nombreVendedor'";
+                            WHERE estado = 'Pendiente'
+                            OR nombrevendedor = '$nombreVendedor'
+                            ORDER BY id DESC";
 
                 }
 
