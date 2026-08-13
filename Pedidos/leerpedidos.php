@@ -233,13 +233,9 @@ body {
 ===================================================== */
 
 .section-blanco {
-
-    background: #ffffff;
-
-    padding: 45px;
-
+    background: #fff;
+    padding: 40px;
     overflow-x: auto;
-
 }
 
 
@@ -307,25 +303,10 @@ thead th {
 
 }
 
-thead th:first-child {
-
-    border-radius: 10px 0 0 0;
-
-}
-
-thead th:last-child {
-
-    border-radius: 0 10px 0 0;
-
-}
-
-
-/* FILAS */
-
-tbody tr {
-
-    transition: 0.2s ease;
-
+tbody td {
+    border-bottom: 1px solid #ddd;
+    padding: 12px;
+    vertical-align: middle;
 }
 
 tbody tr:hover {
@@ -389,7 +370,23 @@ tbody td:nth-child(4) {
 }
 
 
-/* BOTONES */
+/* BOTONES Y ACCIONES */
+
+.acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+    min-width: 110px;
+}
+
+.acciones a {
+    text-decoration: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 
 .acciones button {
 
@@ -412,8 +409,6 @@ tbody td:nth-child(4) {
     transition: all 0.2s ease;
 
 }
-
-
 /* =====================================================
    BOTÓN EDITAR
 ===================================================== */
@@ -616,13 +611,8 @@ tbody td:nth-child(4) {
 
 
         <p class="desc">
-
-            Visualiza todos los pedidos
-            registrados en el sistema.<br><br>
-
-            Administra información, estados
-            y pedidos de manera rápida.
-
+            Visualiza todos los pedidos registrados en el sistema.<br>
+            Administra información, estados y roles de manera rápida.
         </p>
 
 
@@ -645,7 +635,32 @@ tbody td:nth-child(4) {
 
             </h2>
 
-        </section>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Nombre</th>
+
+                        <th>Fecha</th>
+
+                        <th>Estado</th>
+
+                        <th>Nombre vendedor</th>
+
+                        <th>Dirección</th>
+
+                        <th>Teléfono</th>
+
+                        <th style="text-align: center;">Acciones</th>
+
+                    </tr>
+
+                </thead>
 
 
 
@@ -804,6 +819,13 @@ tbody td:nth-child(4) {
 
                             </button>
 
+                        </a>";
+ 
+                        echo "
+                        <a href='verstockpedido.php?pedido=$id'>
+                             <button>
+                                Stock
+                             </button>
                         </a>";
 
 
