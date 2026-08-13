@@ -233,9 +233,13 @@ body {
 ===================================================== */
 
 .section-blanco {
-    background: #fff;
+
+    background: #ffffff;
+
     padding: 40px;
+
     overflow-x: auto;
+
 }
 
 
@@ -283,7 +287,9 @@ table {
 }
 
 
-/* ENCABEZADOS */
+/* =====================================================
+   ENCABEZADOS
+===================================================== */
 
 thead th {
 
@@ -303,10 +309,27 @@ thead th {
 
 }
 
-tbody td {
-    border-bottom: 1px solid #ddd;
-    padding: 12px;
-    vertical-align: middle;
+thead th:first-child {
+
+    border-radius: 10px 0 0 0;
+
+}
+
+thead th:last-child {
+
+    border-radius: 0 10px 0 0;
+
+}
+
+
+/* =====================================================
+   FILAS
+===================================================== */
+
+tbody tr {
+
+    transition: 0.2s ease;
+
 }
 
 tbody tr:hover {
@@ -316,7 +339,9 @@ tbody tr:hover {
 }
 
 
-/* CELDAS */
+/* =====================================================
+   CELDAS
+===================================================== */
 
 tbody td {
 
@@ -334,7 +359,7 @@ tbody td {
 
 
 /* =====================================================
-   ESTADOS
+   ESTADO
 ===================================================== */
 
 tbody td:nth-child(4) {
@@ -352,49 +377,42 @@ tbody td:nth-child(4) {
 
     display: flex;
 
-    align-items: center;
-
-    gap: 7px;
-
-    min-width: 350px;
-
-}
-
-
-/* ENLACES */
-
-.acciones a {
-
-    text-decoration: none;
-
-}
-
-
-/* BOTONES Y ACCIONES */
-
-.acciones {
-    display: flex;
     flex-direction: column;
+
     gap: 6px;
+
     align-items: center;
+
     justify-content: center;
+
     min-width: 110px;
+
 }
 
 .acciones a {
+
     text-decoration: none;
+
     width: 100%;
+
     display: flex;
+
     justify-content: center;
+
 }
+
+
+/* =====================================================
+   BOTONES
+===================================================== */
 
 .acciones button {
+
+    width: 100%;
 
     border: none;
 
     padding: 8px 13px;
-
-    margin-right: 3px;
 
     border-radius: 9px;
 
@@ -409,6 +427,8 @@ tbody td:nth-child(4) {
     transition: all 0.2s ease;
 
 }
+
+
 /* =====================================================
    BOTÓN EDITAR
 ===================================================== */
@@ -433,10 +453,33 @@ tbody td:nth-child(4) {
 
 
 /* =====================================================
-   BOTÓN ELIMINAR
+   BOTÓN STOCK
 ===================================================== */
 
 .acciones a:nth-child(2) button {
+
+    background: #0ba84a;
+
+    color: white;
+
+}
+
+.acciones a:nth-child(2) button:hover {
+
+    background: #2B140D;
+
+    color: white;
+
+    transform: translateY(-2px);
+
+}
+
+
+/* =====================================================
+   BOTÓN ELIMINAR
+===================================================== */
+
+.acciones a:nth-child(3) button {
 
     background: #f4e5e1;
 
@@ -444,7 +487,7 @@ tbody td:nth-child(4) {
 
 }
 
-.acciones a:nth-child(2) button:hover {
+.acciones a:nth-child(3) button:hover {
 
     background: #8a3021;
 
@@ -459,7 +502,7 @@ tbody td:nth-child(4) {
    BOTÓN MOSTRAR
 ===================================================== */
 
-.acciones a button {
+.acciones a:nth-child(4) button {
 
     background: #0ba84a;
 
@@ -467,7 +510,7 @@ tbody td:nth-child(4) {
 
 }
 
-.acciones a button:hover {
+.acciones a:nth-child(4) button:hover {
 
     background: #2B140D;
 
@@ -611,8 +654,13 @@ tbody td:nth-child(4) {
 
 
         <p class="desc">
-            Visualiza todos los pedidos registrados en el sistema.<br>
-            Administra información, estados y roles de manera rápida.
+
+            Visualiza todos los pedidos
+            registrados en el sistema.<br><br>
+
+            Administra información, estados
+            y roles de manera rápida.
+
         </p>
 
 
@@ -635,37 +683,14 @@ tbody td:nth-child(4) {
 
             </h2>
 
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>ID</th>
-
-                        <th>Nombre</th>
-
-                        <th>Fecha</th>
-
-                        <th>Estado</th>
-
-                        <th>Nombre vendedor</th>
-
-                        <th>Dirección</th>
-
-                        <th>Teléfono</th>
-
-                        <th style="text-align: center;">Acciones</th>
-
-                    </tr>
-
-                </thead>
+        </section>
 
 
+        <!-- =================================================
+             ÚNICA TABLA
+        ================================================== -->
 
         <table>
-
 
             <thead>
 
@@ -685,12 +710,15 @@ tbody td:nth-child(4) {
 
                     <th>Teléfono</th>
 
-                    <th>Acciones</th>
+                    <th style="text-align: center;">
+
+                        Acciones
+
+                    </th>
 
                 </tr>
 
             </thead>
-
 
 
             <tbody>
@@ -804,7 +832,9 @@ tbody td:nth-child(4) {
                     echo "<td class='acciones'>";
 
 
-                    /* ADMIN */
+                    /* =================================================
+                       ADMIN
+                    ================================================== */
 
                     if ($rol == "admin") {
 
@@ -820,12 +850,18 @@ tbody td:nth-child(4) {
                             </button>
 
                         </a>";
- 
+
+
                         echo "
+
                         <a href='verstockpedido.php?pedido=$id'>
-                             <button>
+
+                            <button>
+
                                 Stock
-                             </button>
+
+                            </button>
+
                         </a>";
 
 
@@ -847,7 +883,9 @@ tbody td:nth-child(4) {
                     }
 
 
-                    /* MOSTRAR */
+                    /* =================================================
+                       MOSTRAR
+                    ================================================== */
 
                     echo "
 
@@ -862,7 +900,9 @@ tbody td:nth-child(4) {
                     </a>";
 
 
-                    /* VENDEDOR */
+                    /* =================================================
+                       VENDEDOR
+                    ================================================== */
 
                     if(
                         $rol == "vendedor"
@@ -899,7 +939,9 @@ tbody td:nth-child(4) {
                     }
 
 
-                    /* VENTA */
+                    /* =================================================
+                       VENTA
+                    ================================================== */
 
                     if($estado == "En proceso"){
 
@@ -959,9 +1001,7 @@ tbody td:nth-child(4) {
 
 <script>
 
-
 function confirmarEliminacion(id){
-
 
     Swal.fire({
 
@@ -983,7 +1023,6 @@ function confirmarEliminacion(id){
 
     }).then((result) => {
 
-
         if (result.isConfirmed) {
 
             window.location =
@@ -994,7 +1033,6 @@ function confirmarEliminacion(id){
     });
 
 }
-
 
 </script>
 
