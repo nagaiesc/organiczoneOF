@@ -1,21 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <?php
-
+<?php
 session_start();
 
-session_unset();
+$_SESSION = [];
 session_destroy();
 
-header("Location: ../Usuarios/formulariosesion.php");
+header('Location: formulariosesion.php');
 exit();
-
 ?>
-</body>
-</html>

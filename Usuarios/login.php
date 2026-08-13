@@ -1,61 +1,68 @@
 <?php
-session_start(); // Inicia la sesión
+session_start();
 
-$conexion = mysqli_connect("localhost","root","","organiczoneBD");
+$conexion = mysqli_connect("localhost", "root", "", "organiczoneBD");
 
-$CI=$_POST['CI'];
-$nombre=$_POST['nombre'];
-/*$rol = $_POST['rol'];*/
+if (!$conexion) {
+    die("Error en la conexión con la base de datos.");
+}
 
-$sql = "SELECT * FROM usuarios
-        WHERE CI='$CI'
-        AND nombre='$nombre'
-        "; 
+$CI = trim($_POST['CI'] ?? '');
+$nombre = trim($_POST['nombre'] ?? '');
 
-$resultado = mysqli_query($conexion,$sql);
+if ($CI === '' || $nombre === '') {
+    die("Debes completar todos los campos.");
+}
 
-if(mysqli_num_rows($resultado) > 0){
+$stmt = mysqli_prepare(
+    $conexion,
+    "SELECT * FROM usuarios WHERE CI = ? AND nombre = ? LIMIT 1"
+);
+
+mysqli_stmt_bind_param($stmt, "ss", $CI, $nombre);
+mysqli_stmt_execute($stmt);
+$resultado = mysqli_stmt_get_result($stmt);
+
+if (mysqli_num_rows($resultado) > 0) {
 
     $fila = mysqli_fetch_assoc($resultado);
 
-    // Guardar datos en la sesión
     $_SESSION['CI'] = $fila['CI'];
     $_SESSION['nombre'] = $fila['nombre'];
-    $_SESSION['rol']=$fila['rol'];
-    $_SESSION['estado']=$fila['estado'];
+    $_SESSION['rol'] = $fila['rol'];
+    $_SESSION['estado'] = $fila['estado'];
 
+    mysqli_stmt_close($stmt);
+    mysqli_close($conexion);
 
-    if($_SESSION['estado']=="inactivo"){
-
-        header("Location:../cambiar/verUsuario.php");
+    if ($_SESSION['estado'] === "inactivo") {
+        header("Location: ../cambiar/verUsuario.php");
         exit();
-
     }
 
- 
-    // Movido dentro del bloque de éxito para que evalúe correctamente y no pase de largo al else
-    if($_SESSION['rol']=="vendedor"){
-
-        header("Location:vistavendedor.php");
+    if ($_SESSION['rol'] === "vendedor") {
+        header("Location: vistavendedor.php");
         exit();
-
     }
 
-    if($_SESSION['rol']=="cliente"){
+    if ($_SESSION['rol'] === "admin") {
+        header("Location: ../vistaadmin.php");
+        exit();
+    }
 
-    header("Location:../vistacliente.php");
+    if ($_SESSION['rol'] === "cliente") {
+        // Cada inicio de sesión de cliente comienza sin un pedido activo anterior.
+        unset($_SESSION['pedido_id'], $_SESSION['pedido_confirmado']);
+        header("Location: ../Cliente/vistacliente.php");
+        exit();
+    }
+
+    echo "Rol de usuario no reconocido.";
     exit();
 
-}
-
-if($_SESSION['rol']=="admin"){
-
-
-    header("Location:../vistaadmin.php");
-    exit();
-    }
-
-}else{
-    echo  "Usuario o contraseña incorrectos";
+} else {
+    mysqli_stmt_close($stmt);
+    mysqli_close($conexion);
+    echo "Usuario o contraseña incorrectos";
 }
 ?>
