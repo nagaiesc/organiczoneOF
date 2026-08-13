@@ -436,37 +436,10 @@ if (session_status() == PHP_SESSION_NONE) {
         <!--   MENÚ -->
 
         <div class="item">
-
-            <a href="#">
-
+            <a href="Hamburguesas.php">
                 Menú
-
-                <span class="flecha">
-                    ▶
-                </span>
-
             </a>
-
-
-            <div class="submenu">
-
-                <a href="/organiczoneOF/hamburguesas.php">
-
-                    Hamburguesas
-
-                </a>
-
-
-                <a href="/organiczoneOF/refrescos.php">
-
-                    Refrescos
-
-                </a>
-
-            </div>
-
         </div>
-
 
     </section>
 
