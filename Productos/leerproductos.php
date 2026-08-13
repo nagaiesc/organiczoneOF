@@ -1,395 +1,770 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Lista de Productos</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    Lista de Productos
+</title>
+
+
+<!-- SWEET ALERT -->
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+
+<!-- FUENTE FREDOKA -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+
 
 <style>
+
+/* =========================================
+   ESTILOS GENERALES
+========================================= */
 
 * {
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
+
     min-height: 100%;
+
     margin: 0;
+
     padding: 0;
-    background: #F5EEE3;
-    font-family: 'Fredoka', Arial, sans-serif;
+
 }
 
 body {
+
+    background: #ffffff;
+
+    font-family: 'Fredoka', Arial, sans-serif;
+
     display: flex;
+
     justify-content: center;
+
     align-items: center;
-    padding: 35px;
+
+    padding: 35px 20px;
+
+    color: #2B140D;
+
 }
 
-/* =========================
+
+/* =========================================
    CONTENEDOR PRINCIPAL
-========================= */
+========================================= */
 
 .principal-grid {
+
     display: grid;
+
     grid-template-columns: 390px 1fr;
+
     width: 96vw;
+
     max-width: 1600px;
+
     min-height: 820px;
 
     background: white;
-    box-shadow: 0px 10px 45px rgba(88, 88, 88, 0.15);
 
-    border-radius: 18px;
+    border-radius: 24px;
+
     overflow: hidden;
+
+    box-shadow:
+        0 15px 45px rgba(43, 20, 13, 0.14);
+
 }
 
-/* =========================
+
+/* =========================================
    PANEL IZQUIERDO
-========================= */
+========================================= */
 
 .section-negro {
+
     background: #2B140D;
+
     color: white;
+
     padding: 45px 40px;
+
+    display: flex;
+
+    flex-direction: column;
+
 }
+
+
+/* =========================================
+   NAVEGACIÓN
+========================================= */
 
 .nav-inner {
+
     margin-bottom: 70px;
+
 }
+
 
 .nav-inner a {
-    color: #e6e6e6;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 1px;
 
-    transition: 0.3s;
+    display: inline-flex;
+
+    align-items: center;
+
+    text-decoration: none;
+
+    color: white;
+
+    background: rgba(255,255,255,0.10);
+
+    padding: 10px 17px;
+
+    border-radius: 30px;
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+    transition: 0.3s ease;
+
 }
+
 
 .nav-inner a:hover {
-    color: #97d395;
-}
 
-.contrato-titulo {
-    font-size: 52px;
-    line-height: 1.05;
-    font-weight: 700;
-    margin: 0 0 35px 0;
-}
+    background: #FCD09F;
 
-.desc {
-    color: #c9c0bd;
-    margin-top: 28px;
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-/* =========================
-   BOTÓN REGISTRAR
-========================= */
-
-#boton {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #F5EEE3;
     color: #2B140D;
-
-    padding: 13px 22px;
-
-    border-radius: 50px;
-
-    font-size: 16px;
-    font-weight: 700;
-
-    text-decoration: none;
-
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-
-    transition: all 0.25s ease;
-}
-
-#boton:hover {
-    background: #97d395;
-    color: #1d2b1d;
 
     transform: translateY(-2px);
 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.22);
 }
 
-/* =========================
+
+/* =========================================
+   TITULO
+========================================= */
+
+.contrato-titulo {
+
+    font-size: 52px;
+
+    line-height: 1.05;
+
+    font-weight: 700;
+
+    margin: 0 0 35px 0;
+
+    letter-spacing: -1px;
+
+}
+
+
+/* Línea verde */
+
+.contrato-titulo::after {
+
+    content: "";
+
+    display: block;
+
+    width: 65px;
+
+    height: 6px;
+
+    background: #0ba84a;
+
+    border-radius: 10px;
+
+    margin-top: 22px;
+
+}
+
+
+/* =========================================
+   BOTÓN REGISTRAR
+========================================= */
+
+#boton {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: fit-content;
+
+    background: #0ba84a;
+
+    color: white;
+
+    padding: 13px 22px;
+
+    border-radius: 30px;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 6px 18px rgba(11,168,74,0.22);
+
+    transition: 0.3s ease;
+
+}
+
+
+#boton:hover {
+
+    background: #098d3e;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 9px 22px rgba(11,168,74,0.30);
+
+}
+
+
+/* =========================================
+   DESCRIPCIÓN
+========================================= */
+
+.desc {
+
+    color: #d1c9c6;
+
+    margin-top: 28px;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    max-width: 280px;
+
+}
+
+
+/* =========================================
    PANEL DERECHO
-========================= */
+========================================= */
 
 .section-blanco {
+
     background: #ffffff;
+
     padding: 45px;
+
     overflow-x: auto;
+
 }
+
+
+/* =========================================
+   TITULO TABLA
+========================================= */
 
 .section-clientes {
-    border-bottom: 1px solid #eee;
-    margin-bottom: 25px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    margin-bottom: 28px;
+
     padding-bottom: 18px;
+
 }
+
 
 .section-clientes h2 {
+
     margin: 0;
+
     color: #2B140D;
+
     font-size: 28px;
+
     font-weight: 700;
+
 }
 
-/* =========================
+
+/* =========================================
    TABLA
-========================= */
+========================================= */
 
 table {
+
     width: 100%;
+
     border-collapse: separate;
+
     border-spacing: 0;
+
     min-width: 900px;
+
 }
 
-thead th {
-    background: #F5EEE3;
-    color: #2B140D;
 
-    padding: 15px 12px;
+/* ENCABEZADO */
+
+thead th {
+
+    background: #2B140D;
+
+    color: white;
+
+    padding: 15px 13px;
 
     text-align: left;
 
     font-size: 14px;
-    font-weight: 700;
 
-    border-bottom: 2px solid #2B140D;
+    font-weight: 600;
+
+    border-bottom: 3px solid #0ba84a;
+
 }
 
+
+/* Bordes superiores */
+
 thead th:first-child {
-    border-radius: 10px 0 0 0;
+
+    border-radius: 12px 0 0 0;
+
 }
 
 thead th:last-child {
-    border-radius: 0 10px 0 0;
+
+    border-radius: 0 12px 0 0;
+
 }
+
+
+/* FILAS */
 
 tbody tr {
-    transition: background 0.2s ease;
+
+    transition: 0.2s ease;
+
 }
+
 
 tbody tr:hover {
-    background: #faf7f2;
+
+    background: #f5faf7;
+
 }
 
+
+/* CELDAS */
+
 tbody td {
-    padding: 14px 12px;
+
+    padding: 15px 13px;
 
     border-bottom: 1px solid #eeeeee;
 
     color: #3a302c;
 
     font-size: 14px;
+
     vertical-align: middle;
+
 }
 
-/* =========================
-   IMAGEN
-========================= */
+
+/* =========================================
+   IMÁGENES
+========================================= */
 
 tbody td img {
+
     display: block;
 
-    width: 70px !important;
-    height: 70px !important;
+    width: 72px !important;
+
+    height: 72px !important;
 
     object-fit: cover;
 
-    border-radius: 12px;
+    border-radius: 14px;
 
-    border: 1px solid #eee;
+    border: 2px solid #eeeeee;
 
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    box-shadow:
+        0 4px 12px rgba(43,20,13,0.10);
+
+    transition: 0.3s ease;
+
 }
 
-/* =========================
+
+tbody tr:hover td img {
+
+    border-color: #0ba84a;
+
+    transform: scale(1.04);
+
+}
+
+
+/* =========================================
    ACCIONES
-========================= */
+========================================= */
 
 .acciones {
+
     display: flex;
+
     align-items: center;
+
     gap: 7px;
 
     min-width: 270px;
+
 }
 
-/* Todos los botones */
+
+/* TODOS LOS BOTONES */
 
 .acciones a {
+
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
 
     min-width: 78px;
-    height: 34px;
+
+    height: 36px;
 
     padding: 0 12px;
 
-    border-radius: 9px;
+    border-radius: 20px;
 
     text-decoration: none;
 
     font-family: 'Fredoka', Arial, sans-serif;
 
     font-size: 13px;
+
     font-weight: 600;
 
     cursor: pointer;
 
-    transition: all 0.2s ease;
+    transition: 0.25s ease;
+
 }
 
-/* Evitamos estilos del button antiguo */
 
-.acciones button {
-    display: none;
-}
-
-/* EDITAR */
+/* =========================================
+   EDITAR
+========================================= */
 
 .btn-editar {
-    background: #F5EEE3;
+
+    background: #FCD09F;
+
     color: #2B140D;
 
-    border: 1px solid #e2d7c8;
+    border: 1px solid #f2c38d;
+
 }
+
 
 .btn-editar:hover {
+
     background: #2B140D;
+
     color: white;
 
     transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 12px rgba(43,20,13,0.20);
+
 }
 
-/* ELIMINAR */
+
+/* =========================================
+   ELIMINAR
+========================================= */
 
 .btn-eliminar {
-    background: #f4e5e1;
-    color: #8a3021;
 
-    border: 1px solid #e6cbc5;
+    background: #fff0ed;
+
+    color: #963a2a;
+
+    border: 1px solid #edcfc8;
+
 }
+
 
 .btn-eliminar:hover {
-    background: #8a3021;
+
+    background: #963a2a;
+
     color: white;
 
     transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 12px rgba(150,58,42,0.20);
+
 }
 
-/* MOSTRAR */
+
+/* =========================================
+   MOSTRAR
+========================================= */
 
 .btn-mostrar {
-    background: #97d395;
-    color: #1d3b20;
 
-    border: 1px solid #83c581;
+    background: #0ba84a;
+
+    color: white;
+
+    border: 1px solid #0ba84a;
+
 }
 
+
 .btn-mostrar:hover {
-    background: #2B140D;
+
+    background: #098d3e;
+
     color: white;
 
     transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 12px rgba(11,168,74,0.25);
+
 }
 
-/* =========================
+
+/* =========================================
+   MENSAJE SIN PRODUCTOS
+========================================= */
+
+tbody td[colspan] {
+
+    text-align: center;
+
+    padding: 35px;
+
+    color: #888;
+
+    font-size: 15px;
+
+}
+
+
+/* =========================================
+   SWEET ALERT
+========================================= */
+
+.popup-organic {
+
+    border-radius: 20px !important;
+
+    font-family: 'Fredoka', Arial, sans-serif !important;
+
+}
+
+
+/* =========================================
    RESPONSIVE
-========================= */
+========================================= */
 
 @media (max-width: 1000px) {
 
     body {
+
         padding: 20px;
+
+        align-items: flex-start;
+
     }
+
 
     .principal-grid {
+
         grid-template-columns: 1fr;
+
+        width: 96vw;
+
     }
+
 
     .section-negro {
+
+        min-height: 400px;
+
         padding: 35px;
+
     }
+
 
     .nav-inner {
+
         margin-bottom: 40px;
+
     }
+
 
     .contrato-titulo {
-        font-size: 42px;
+
+        font-size: 44px;
+
     }
 
+
     .section-blanco {
+
         padding: 30px;
+
     }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .contrato-titulo {
+
+        font-size: 38px;
+
+    }
+
+
+    .section-negro {
+
+        padding: 30px;
+
+    }
+
+
+    .section-blanco {
+
+        padding: 20px;
+
+    }
+
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
 <section class="principal-grid">
 
-    <!-- PANEL IZQUIERDO -->
+
+    <!-- =====================================
+         PANEL IZQUIERDO
+    ====================================== -->
 
     <section class="section-negro">
 
+
         <nav class="nav-inner">
+
             <a href="../Usuarios/vistavendedor.php">
-                INICIO
+
+                ← Inicio
+
             </a>
+
         </nav>
 
+
         <h1 class="contrato-titulo">
+
             LISTA DE<br>
+
             PRODUCTOS
+
         </h1>
 
-        <a href="http://localhost/organiczoneOF/Productos/formularioproductos.php" id="boton">
+
+        <a
+            href="http://localhost/organiczoneOF/Productos/formularioproductos.php"
+            id="boton"
+        >
+
             + Registrar Producto
+
         </a>
 
+
         <p class="desc">
+
             Visualiza los productos registrados
-            en el sistema.<br><br>
+            en el sistema.
+
+            <br><br>
 
             Administra precios, stock y costos
             de forma rápida.
+
         </p>
+
 
     </section>
 
 
-    <!-- PANEL DERECHO -->
+    <!-- =====================================
+         PANEL DERECHO
+    ====================================== -->
 
     <section class="section-blanco">
+
 
         <section class="section-clientes">
 
             <h2>
+
                 Productos Registrados
+
             </h2>
 
         </section>
@@ -397,18 +772,42 @@ tbody td img {
 
         <table>
 
+
             <thead>
 
                 <tr>
 
-                    <th>Imagen</th>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Precio</th>
-                    <th>Costo</th>
-                    <th>Stock</th>
-                    <th>Acciones</th>
+                    <th>
+                        Imagen
+                    </th>
+
+                    <th>
+                        ID
+                    </th>
+
+                    <th>
+                        Nombre
+                    </th>
+
+                    <th>
+                        Descripción
+                    </th>
+
+                    <th>
+                        Precio
+                    </th>
+
+                    <th>
+                        Costo
+                    </th>
+
+                    <th>
+                        Stock
+                    </th>
+
+                    <th>
+                        Acciones
+                    </th>
 
                 </tr>
 
@@ -416,6 +815,7 @@ tbody td img {
 
 
             <tbody>
+
 
             <?php
 
@@ -426,13 +826,22 @@ tbody td img {
                 "organiczoneBD"
             );
 
+
             if ($conexion->connect_error) {
 
-                echo "<tr>
+                echo "
+
+                    <tr>
+
                         <td colspan='8'>
+
                             Error en la conexión
+
                         </td>
-                      </tr>";
+
+                    </tr>
+
+                ";
 
             }
 
@@ -442,141 +851,260 @@ tbody td img {
             $resultado = $conexion->query($sql);
 
 
-            if ($resultado->num_rows > 0) {
+            if ($resultado && $resultado->num_rows > 0) {
+
 
                 while($fila = $resultado->fetch_assoc()){
 
+
                     $id = $fila['id'];
 
-                    $imagen = "../Imagenes/predeterminado.png";
+
+                    /* IMAGEN PREDETERMINADA */
+
+                    $imagen =
+                        "../Imagenes/predeterminado.png";
 
 
                     $extensiones = [
+
                         "jpg",
                         "jpeg",
                         "png",
                         "gif",
                         "webp"
+
                     ];
 
 
                     foreach ($extensiones as $ext) {
 
-                        $ruta = "../Imagenes/P-" . $id . "." . $ext;
+
+                        $ruta =
+                            "../Imagenes/P-" .
+                            $id .
+                            "." .
+                            $ext;
+
 
                         if (file_exists($ruta)) {
 
                             $imagen = $ruta;
 
                             break;
+
                         }
+
                     }
 
 
                     echo "<tr>";
 
 
-                    echo "<td>
+                    /* IMAGEN */
+
+                    echo "
+
+                        <td>
 
                             <img
-                                src='$imagen'
+
+                                src='" .
+                                htmlspecialchars($imagen) .
+                                "'
+
                                 alt='Imagen del producto'
+
                             >
 
-                          </td>";
+                        </td>
+
+                    ";
 
 
-                    echo "<td>
+                    /* ID */
+
+                    echo "
+
+                        <td>
+
                             {$fila['id']}
-                          </td>";
+
+                        </td>
+
+                    ";
 
 
-                    echo "<td>
+                    /* NOMBRE */
+
+                    echo "
+
+                        <td>
+
                             {$fila['nombre']}
-                          </td>";
+
+                        </td>
+
+                    ";
 
 
-                    echo "<td>
+                    /* DESCRIPCIÓN */
+
+                    echo "
+
+                        <td>
+
                             {$fila['descripcion']}
-                          </td>";
+
+                        </td>
+
+                    ";
 
 
-                    echo "<td>
-                            {$fila['precio']}
-                          </td>";
+                    /* PRECIO */
+
+                    echo "
+
+                        <td>
+
+                            <strong
+                                style='color:#0ba84a;'
+                            >
+
+                                Bs. {$fila['precio']}
+
+                            </strong>
+
+                        </td>
+
+                    ";
 
 
-                    echo "<td>
-                            {$fila['costo']}
-                          </td>";
+                    /* COSTO */
+
+                    echo "
+
+                        <td>
+
+                            Bs. {$fila['costo']}
+
+                        </td>
+
+                    ";
 
 
-                    echo "<td>
+                    /* STOCK */
+
+                    echo "
+
+                        <td>
+
                             {$fila['stock']}
-                          </td>";
+
+                        </td>
+
+                    ";
 
 
-                    echo "<td class='acciones'>
+                    /* ACCIONES */
+
+                    echo "
+
+                        <td class='acciones'>
+
 
                             <a
+
                                 href='editarproducto.php?id=$id'
+
                                 class='btn-editar'
+
                             >
+
                                 Editar
+
                             </a>
 
 
                             <a
+
                                 href='#'
+
                                 class='btn-eliminar'
+
                                 onclick='confirmarEliminacion($id); return false;'
+
                             >
+
                                 Eliminar
+
                             </a>
 
 
                             <a
+
                                 href='leerproducto.php?id=$id'
+
                                 class='btn-mostrar'
+
                             >
+
                                 Mostrar
+
                             </a>
 
-                          </td>";
+
+                        </td>
+
+                    ";
 
 
                     echo "</tr>";
 
                 }
 
+
             } else {
 
-                echo "<tr>
+
+                echo "
+
+                    <tr>
 
                         <td colspan='8'>
+
                             No hay productos registrados
+
                         </td>
 
-                      </tr>";
+                    </tr>
+
+                ";
 
             }
+
 
             $conexion->close();
 
             ?>
 
+
             </tbody>
+
 
         </table>
 
+
     </section>
+
 
 </section>
 
 
 <script>
 
-function confirmarEliminacion(id){
+function confirmarEliminacion(id) {
+
 
     Swal.fire({
 
@@ -588,7 +1116,7 @@ function confirmarEliminacion(id){
 
         showCancelButton: true,
 
-        confirmButtonColor: "#97d395",
+        confirmButtonColor: "#0ba84a",
 
         cancelButtonColor: "#2B140D",
 
@@ -604,18 +1132,24 @@ function confirmarEliminacion(id){
 
     }).then((result) => {
 
+
         if (result.isConfirmed) {
+
 
             window.location =
                 "eliminarproducto.php?id=" + id;
+
 
         }
 
     });
 
+
 }
 
 </script>
 
+
 </body>
+
 </html>
