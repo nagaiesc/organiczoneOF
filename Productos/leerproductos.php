@@ -357,7 +357,7 @@ tbody td img {
     <section class="section-negro">
 
         <nav class="nav-inner">
-            <a href="../maquetados/maquetadoAdmin.php">
+            <a href="../Usuarios/vistavendedor.php">
                 INICIO
             </a>
         </nav>
