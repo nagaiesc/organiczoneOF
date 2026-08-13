@@ -7,9 +7,15 @@
 </head>
 <body>
     <?php
-    session_start();
-    session_destroy();
-    header("Location: ../Usuarios/formulariosesion.php");
-    ?>
+
+session_start();
+
+session_unset();
+session_destroy();
+
+header("Location: ../Usuarios/formulariosesion.php");
+exit();
+
+?>
 </body>
 </html>
