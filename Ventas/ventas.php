@@ -10,7 +10,7 @@ $BDnombre = "organiczoneBD";
   $metodo = $_POST['metodo'];
   $pedidos_id = $_POST['pedidos_id'];
   
-  $estado= "Pendiente";
+  $estado= "En proceso";
 
  $sqlTotal = "SELECT SUM(costototal) AS total FROM carrito WHERE pedidos_id = '$pedidos_id'";
  $resultado = $conn->query($sqlTotal);

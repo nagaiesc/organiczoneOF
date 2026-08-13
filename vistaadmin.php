@@ -73,7 +73,7 @@ session_start();
 
             grid-template-columns: 1fr 1fr 1.5fr;
 
-            grid-template-rows: 235px 370px;
+            grid-template-rows: 235px 370px 235px;
 
             gap: 25px;
 
@@ -554,6 +554,69 @@ session_start();
 
 
         /* =====================================================
+           VENTAS (NUEVO MÓDULO)
+           ===================================================== */
+
+        .ventas {
+
+            grid-column: 1 / -1;
+
+            background: #2B140D;
+
+            padding: 30px 40px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            position: relative;
+
+        }
+
+
+        .texto-ventas {
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        .texto-ventas .texto-pequeno {
+
+            color: #FCD09F;
+
+        }
+
+
+        .titulo-ventas {
+
+            margin: 0;
+
+            color: white;
+
+            font-size: 52px;
+
+            font-weight: 700;
+
+            line-height: 0.9;
+
+        }
+
+
+        .botones-ventas {
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        /* =====================================================
            IMAGEN DEL CHICO
            ===================================================== */
 
@@ -659,6 +722,24 @@ session_start();
             }
 
 
+            .ventas {
+
+                flex-direction: column;
+
+                justify-content: space-between;
+
+                align-items: flex-start;
+
+            }
+
+
+            .botones-ventas {
+
+                align-self: flex-end;
+
+            }
+
+
             .saludo {
 
                 min-height: 200px;
@@ -689,7 +770,9 @@ session_start();
 
             .titulo-pedidos,
 
-            .titulo-productos {
+            .titulo-productos,
+
+            .titulo-ventas {
 
                 font-size: 45px;
 
@@ -897,6 +980,42 @@ session_start();
 
             <img src="chicoburger.jpeg"
                  alt="Organic Zone">
+
+        </section>
+
+
+        <!-- =================================================
+             GESTIONAR VENTAS
+             ================================================= -->
+
+        <section class="tarjeta ventas">
+
+            <div class="texto-ventas">
+
+                <p class="texto-pequeno">
+
+                    Gestionar
+
+                </p>
+
+                <h2 class="titulo-ventas">
+
+                    Ventas
+
+                </h2>
+
+            </div>
+
+            <div class="botones-ventas">
+
+                <a href="Ventas/leerventas.php"
+                   class="boton-amarillo">
+
+                    Mostrar
+
+                </a>
+
+            </div>
 
         </section>
 

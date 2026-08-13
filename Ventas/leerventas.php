@@ -220,7 +220,7 @@ tbody tr:hover {
             echo "<td>" . $fila['pedidos_id'] . "</td>";
 
             echo "<td class='acciones'>";
-            echo "<a href='editarventa.php?id=$id'><button>Editar</button></a>";
+            echo "<a href='registroeditarventa.php?id=$id'><button>Editar</button></a>";
             echo "<a href='#' onclick='confirmarEliminacion($id)'><button>Eliminar</button></a>";
             echo "<a href='leerventa.php?id=$id'><button>Mostrar</button></a>";
             echo "</td>";

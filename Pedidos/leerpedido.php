@@ -19,7 +19,7 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 $idPedido = (int) $_GET['id'];
 
 $sql = "SELECT * FROM pedidos WHERE id = ?";
-$stmt = $conexion->prepare($sql);
+$stmt = $conn->prepare($sql);
 
 $sqlPedido = "SELECT * FROM pedidos WHERE id = ?";
 
@@ -1203,7 +1203,7 @@ body {
 <div class="acciones">
 
     <a
-        href="leerpedidos.php"
+        href="formulariopedidos.php"
         class="btn btn-volver"
     >
         ← Volver a pedidos
