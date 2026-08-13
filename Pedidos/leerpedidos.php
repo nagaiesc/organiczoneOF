@@ -909,7 +909,12 @@ tbody td:nth-child(4) {
                         &&
                         $estado == "Pendiente"
                     ){
-
+                        echo "
+                        <a href='verstockpedido.php?pedido=$id' class='boton-stock'>
+                        <button>
+                             Stock
+                        </button>
+                        </a>";
 
                         echo "
 
