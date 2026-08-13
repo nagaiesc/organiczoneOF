@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -8,194 +10,348 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<!-- Fuente Fredoka -->
+<!-- FUENTE FREDOKA -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+
 
 <style>
 
-/* ============================= */
-/* ESTILOS GENERALES */
-/* ============================= */
+/* =====================================================
+   ESTILOS GENERALES
+===================================================== */
 
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    background: #969696;
-    font-family: 'Fredoka', sans-serif;
+* {
+    box-sizing: border-box;
 }
+
+html,
+body {
+
+    min-height: 100%;
+
+    margin: 0;
+
+    padding: 0;
+
+    background: #F5EEE3;
+
+    font-family: 'Fredoka', Arial, sans-serif;
+
+    color: #2B140D;
+}
+
 
 body {
+
     display: flex;
+
     justify-content: center;
+
     align-items: center;
+
+    padding: 35px;
 }
 
-/* ============================= */
-/* CAJA PRINCIPAL */
-/* ============================= */
+
+/* =====================================================
+   CONTENEDOR PRINCIPAL
+===================================================== */
 
 .principal-grid {
+
     display: grid;
-    grid-template-columns: 440px 1fr;
+
+    grid-template-columns: 390px 1fr;
+
     width: 96vw;
+
     max-width: 1600px;
+
     min-height: 820px;
 
-    box-shadow: 0px 6px 40px rgba(88, 88, 88, 0.16);
+    background: #ffffff;
 
-    border-radius: 10px;
+    border-radius: 18px;
+
     overflow: hidden;
+
+    box-shadow:
+        0 10px 45px rgba(43, 20, 13, 0.15);
 }
 
-/* ============================= */
-/* PANEL IZQUIERDO */
-/* ============================= */
+
+/* =====================================================
+   PANEL IZQUIERDO
+===================================================== */
 
 .section-negro {
-    background: #000;
-    color: #fff;
-    padding: 40px;
+
+    background: #2B140D;
+
+    color: white;
+
+    padding: 45px 40px;
 }
+
+
+/* =====================================================
+   NAVEGACIÓN
+===================================================== */
+
+.nav-inner {
+
+    margin-bottom: 70px;
+}
+
 
 .nav-inner a {
-    color: #e0e0e0;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 17px;
-}
 
-.nav-inner a:hover {
-    color: #0ba84a;
-}
-
-.contrato-titulo {
-    font-size: 2.6em;
-    font-weight: 700;
-    margin-top: 40px;
-    line-height: 1.1;
-}
-
-.desc {
-    color: #bababa;
-    margin-top: 20px;
-    line-height: 1.6;
-    font-size: 17px;
-}
-
-/* ============================= */
-/* BOTON REGISTRAR */
-/* ============================= */
-
-#boton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 8px;
-
-    background-color: #ffffff;
-    color: #000;
-
-    padding: 13px 25px;
-
-    border-radius: 50px;
-
-    font-size: 18px;
-    font-weight: 600;
+    color: #ffffff;
 
     text-decoration: none;
 
-    width: fit-content;
+    font-size: 15px;
 
-    margin-top: 25px;
+    font-weight: 600;
+
+    letter-spacing: 1px;
 
     transition: 0.3s ease;
 }
 
-#boton:hover {
-    background: #0ba84a;
-    color: white;
-    transform: translateY(-3px);
+
+.nav-inner a:hover {
+
+    color: #0ba84a;
 }
 
-/* ============================= */
-/* PANEL DERECHO */
-/* ============================= */
+
+/* =====================================================
+   TÍTULO
+===================================================== */
+
+.contrato-titulo {
+
+    font-size: 52px;
+
+    line-height: 1.05;
+
+    font-weight: 700;
+
+    margin: 0 0 35px 0;
+
+    color: #ffffff;
+}
+
+
+/* =====================================================
+   DESCRIPCIÓN
+===================================================== */
+
+.desc {
+
+    color: #d6ccc8;
+
+    margin-top: 28px;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   BOTÓN REGISTRAR USUARIO
+===================================================== */
+
+#boton {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #0ba84a;
+
+    color: white;
+
+    padding: 13px 22px;
+
+    border-radius: 50px;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.18);
+
+    transition: all 0.25s ease;
+}
+
+
+#boton:hover {
+
+    background: #ffffff;
+
+    color: #2B140D;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =====================================================
+   PANEL DERECHO
+===================================================== */
 
 .section-blanco {
-    background: #fff;
+
+    background: #ffffff;
+
     padding: 40px;
 
     overflow-x: auto;
 }
 
+
+/* =====================================================
+   CABECERA
+===================================================== */
+
 .section-clientes {
-    border-bottom: 1px solid #eee;
-    margin-bottom: 20px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    margin-bottom: 25px;
+
+    padding-bottom: 18px;
 }
 
+
 .section-clientes h2 {
-    font-size: 30px;
-    margin-top: 0;
-    margin-bottom: 25px;
+
+    margin: 0;
+
+    color: #2B140D;
+
+    font-size: 28px;
+
     font-weight: 700;
 }
 
-/* ============================= */
-/* TABLA */
-/* ============================= */
+
+/* =====================================================
+   TABLA
+===================================================== */
 
 table {
+
     width: 100%;
-    border-collapse: collapse;
-    min-width: 950px;
+
+    border-collapse: separate;
+
+    border-spacing: 0;
+
+    min-width: 1050px;
 }
 
-thead th {
-    border-bottom: 3px solid #000;
 
-    padding: 14px 12px;
+/* =====================================================
+   ENCABEZADOS
+===================================================== */
+
+thead th {
+
+    background: #2B140D;
+
+    color: #ffffff;
+
+    padding: 15px 12px;
 
     text-align: left;
 
+    font-size: 14px;
+
     font-weight: 700;
 
-    font-size: 16px;
+    border-bottom: 3px solid #0ba84a;
 
     white-space: nowrap;
 }
 
+
+/* Primera esquina */
+
+thead th:first-child {
+
+    border-radius: 10px 0 0 0;
+}
+
+
+/* Última esquina */
+
+thead th:last-child {
+
+    border-radius: 0 10px 0 0;
+}
+
+
+/* =====================================================
+   CUERPO DE TABLA
+===================================================== */
+
+tbody tr {
+
+    transition: background 0.2s ease;
+}
+
+
+tbody tr:hover {
+
+    background: #f1fbf5;
+}
+
+
 tbody td {
-    border-bottom: 1px solid #ddd;
 
     padding: 14px 12px;
 
-    font-size: 15px;
+    border-bottom: 1px solid #eeeeee;
+
+    color: #3a302c;
+
+    font-size: 14px;
 
     vertical-align: middle;
 }
 
-tbody tr {
-    transition: 0.2s ease;
-}
 
-tbody tr:hover {
-    background: #f5f5f5;
-}
-
-/* ============================= */
-/* COLUMNA ACCIONES */
-/* ============================= */
+/* =====================================================
+   COLUMNA ACCIONES
+===================================================== */
 
 th:last-child {
-    min-width: 330px;
+
+    min-width: 360px;
 }
 
+
 td.acciones {
-    min-width: 330px;
+
+    min-width: 360px;
 
     display: flex;
 
@@ -203,429 +359,729 @@ td.acciones {
 
     align-items: center;
 
-    gap: 8px;
+    gap: 7px;
 }
 
-/* ============================= */
-/* BOTONES DE ACCIONES */
-/* ============================= */
+
+/* =====================================================
+   ENLACES
+===================================================== */
 
 .acciones a {
+
     text-decoration: none;
-    display: inline-block;
+
+    display: inline-flex;
 }
 
-.acciones button {
-    background: #000;
 
-    color: #fff;
+/* =====================================================
+   BOTONES
+===================================================== */
+
+.acciones button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 34px;
+
+    padding: 8px 12px;
 
     border: none;
 
-    padding: 9px 14px;
+    border-radius: 9px;
 
     cursor: pointer;
 
-    font-family: 'Fredoka', sans-serif;
+    font-family: 'Fredoka', Arial, sans-serif;
 
-    font-size: 14px;
+    font-size: 13px;
 
     font-weight: 600;
 
-    border-radius: 8px;
-
     white-space: nowrap;
 
-    transition:
-        background-color 0.25s ease,
-        color 0.25s ease,
-        transform 0.2s ease,
-        box-shadow 0.25s ease;
+    transition: all 0.2s ease;
 }
 
-/* Efecto general */
+
+/* =====================================================
+   EFECTO GENERAL
+===================================================== */
 
 .acciones button:hover {
-    background: #222;
+
     transform: translateY(-2px);
 }
 
-/* ============================= */
-/* BOTON HACER VENDEDOR */
-/* ============================= */
 
-.acciones a[href*="cambiarVendedor"] button {
-    background: #0ba84a;
-}
-
-.acciones a[href*="cambiarVendedor"] button:hover {
-    background: #087c37;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 12px rgba(11, 168, 74, 0.3);
-}
-
-/* ============================= */
-/* BOTON HACER USUARIO */
-/* ============================= */
-
-.acciones a[href*="cambiarUsuario"] button {
-    background: #2b140d;
-}
-
-.acciones a[href*="cambiarUsuario"] button:hover {
-    background: #4a2115;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 12px rgba(43, 20, 13, 0.3);
-}
-
-/* ============================= */
-/* BOTON BLOQUEAR */
-/* ============================= */
-
-.acciones a[href*="bloquear"] button {
-    background: #000;
-}
-
-/* Al pasar el mouse se vuelve rojo */
-
-.acciones a[href*="bloquear"] button:hover {
-    background: #d62828;
-
-    color: #fff;
-
-    transform: scale(1.05);
-
-    box-shadow:
-        0 0 0 3px rgba(214, 40, 40, 0.15),
-        0 6px 15px rgba(214, 40, 40, 0.35);
-}
-
-/* ============================= */
-/* BOTON DESBLOQUEAR */
-/* ============================= */
-
-.acciones a[href*="desbloquear"] button {
-    background: #0ba84a;
-}
-
-.acciones a[href*="desbloquear"] button:hover {
-    background: #087c37;
-
-    transform: scale(1.05);
-
-    box-shadow: 0 6px 15px rgba(11, 168, 74, 0.3);
-}
-
-/* ============================= */
-/* EDITAR */
-/* ============================= */
+/* =====================================================
+   EDITAR
+===================================================== */
 
 .acciones a[href*="editarusuario"] button {
-    background: #000;
+
+    background: #F5EEE3;
+
+    color: #2B140D;
+
+    border: 1px solid #e2d7c8;
 }
+
 
 .acciones a[href*="editarusuario"] button:hover {
-    background: #333;
+
+    background: #2B140D;
+
+    color: #ffffff;
 }
 
-/* ============================= */
-/* ELIMINAR */
-/* ============================= */
+
+/* =====================================================
+   ELIMINAR
+===================================================== */
 
 .acciones a[href="#"] button {
-    background: #000;
+
+    background: #f4e5e1;
+
+    color: #8a3021;
+
+    border: 1px solid #e6cbc5;
 }
+
 
 .acciones a[href="#"] button:hover {
-    background: #d62828;
+
+    background: #8a3021;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 5px 12px rgba(138, 48, 33, 0.25);
 }
 
-/* ============================= */
-/* MOSTRAR */
-/* ============================= */
+
+/* =====================================================
+   MOSTRAR
+===================================================== */
 
 .acciones a[href*="leerusuario"] button {
-    background: #555;
+
+    background: #0ba84a;
+
+    color: #ffffff;
 }
+
 
 .acciones a[href*="leerusuario"] button:hover {
-    background: #333;
+
+    background: #2B140D;
+
+    color: #ffffff;
 }
 
-/* ============================= */
-/* RESPONSIVE */
-/* ============================= */
+
+/* =====================================================
+   HACER VENDEDOR
+===================================================== */
+
+.acciones a[href*="cambiarVendedor"] button {
+
+    background: #0ba84a;
+
+    color: #ffffff;
+}
+
+
+.acciones a[href*="cambiarVendedor"] button:hover {
+
+    background: #087c37;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 5px 12px rgba(11, 168, 74, 0.25);
+}
+
+
+/* =====================================================
+   HACER USUARIO
+===================================================== */
+
+.acciones a[href*="cambiarUsuario"] button {
+
+    background: #2B140D;
+
+    color: #ffffff;
+}
+
+
+.acciones a[href*="cambiarUsuario"] button:hover {
+
+    background: #4a2115;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 5px 12px rgba(43, 20, 13, 0.25);
+}
+
+
+/* =====================================================
+   BLOQUEAR
+===================================================== */
+
+.acciones a[href*="bloquear"] button {
+
+    background: #f4e5e1;
+
+    color: #8a3021;
+
+    border: 1px solid #e6cbc5;
+}
+
+
+.acciones a[href*="bloquear"] button:hover {
+
+    background: #8a3021;
+
+    color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 12px rgba(138, 48, 33, 0.25);
+}
+
+
+/* =====================================================
+   DESBLOQUEAR
+===================================================== */
+
+.acciones a[href*="desbloquear"] button {
+
+    background: #0ba84a;
+
+    color: #ffffff;
+}
+
+
+.acciones a[href*="desbloquear"] button:hover {
+
+    background: #087c37;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 12px rgba(11, 168, 74, 0.25);
+}
+
+
+/* =====================================================
+   CELDA ESTADO
+===================================================== */
+
+tbody td:nth-child(6) {
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
 
 @media (max-width: 1100px) {
 
     body {
+
         align-items: flex-start;
+
         padding: 20px;
-        box-sizing: border-box;
     }
 
+
     .principal-grid {
+
         grid-template-columns: 1fr;
+
         width: 100%;
+
         min-height: auto;
     }
 
+
     .section-negro {
+
+        padding: 35px;
+    }
+
+
+    .section-blanco {
+
         padding: 30px;
     }
 
-    .section-blanco {
+
+    .nav-inner {
+
+        margin-bottom: 40px;
+    }
+
+
+    .contrato-titulo {
+
+        font-size: 44px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    body {
+
+        padding: 10px;
+    }
+
+
+    .principal-grid {
+
+        border-radius: 12px;
+    }
+
+
+    .section-negro {
+
         padding: 30px;
+    }
+
+
+    .section-blanco {
+
+        padding: 20px;
+    }
+
+
+    .contrato-titulo {
+
+        font-size: 38px;
     }
 
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
 <section class="principal-grid">
 
-    <!-- ============================= -->
-    <!-- PANEL IZQUIERDO -->
-    <!-- ============================= -->
+
+    <!-- =================================================
+         PANEL IZQUIERDO
+    ================================================== -->
 
     <section class="section-negro">
 
+
         <nav class="nav-inner">
-            <a href="../maquetados/maquetadoAdmin.php">
+
+            <a href="../vistaadmin.php">
+
                 INICIO
+
             </a>
+
         </nav>
 
+
         <h1 class="contrato-titulo">
-            LISTA DE USUARIOS
+
+            LISTA DE<br>
+            USUARIOS
+
         </h1>
 
-        <a href="formularioregistro.php" id="boton">
+
+        <a
+            href="formularioregistro.php"
+            id="boton"
+        >
+
             Registrar Usuario
+
         </a>
 
+
         <p class="desc">
-            Visualiza todos los usuarios registrados en el sistema.<br>
-            Administra información, estados y roles de manera rápida.
+
+            Visualiza todos los usuarios registrados
+            en el sistema.<br><br>
+
+            Administra información, estados
+            y roles de manera rápida.
+
         </p>
+
 
     </section>
 
 
-    <!-- ============================= -->
-    <!-- PANEL DERECHO -->
-    <!-- ============================= -->
+
+    <!-- =================================================
+         PANEL DERECHO
+    ================================================== -->
 
     <section class="section-blanco">
 
+
         <section class="section-clientes">
 
+
             <h2>
+
                 Usuarios Registrados
+
             </h2>
 
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>CI</th>
-
-                        <th>Nombre</th>
-
-                        <th>Celular</th>
-
-                        <th>Dirección</th>
-
-                        <th>Rol</th>
-
-                        <th>Estado</th>
-
-                        <th>Acciones</th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody>
-
-                <?php
-
-                $nombreServidor = "localhost";
-                $nombreUsuario = "root";
-                $contraseñaBaseDeDatos = "";
-                $nombreBaseDeDatos = "organiczoneBD";
-
-                $conexion = new mysqli(
-                    $nombreServidor,
-                    $nombreUsuario,
-                    $contraseñaBaseDeDatos,
-                    $nombreBaseDeDatos
-                );
-
-
-                if ($conexion->connect_error) {
-
-                    echo "<tr>
-                            <td colspan='7'>
-                                Hubo un error en la conexión
-                            </td>
-                          </tr>";
-
-                }
-
-
-                $sql = "SELECT * FROM usuarios";
-
-                $resultado = $conexion->query($sql);
-
-
-                if ($resultado->num_rows > 0) {
-
-                    while($fila = $resultado->fetch_assoc()) {
-
-                        $CI = $fila['CI'];
-
-                        echo "<tr>";
-
-                        echo "<td>" . $fila['CI'] . "</td>";
-
-                        echo "<td>" . $fila['nombre'] . "</td>";
-
-                        echo "<td>" . $fila['celular'] . "</td>";
-
-                        echo "<td>" . $fila['direccion'] . "</td>";
-
-                        echo "<td>" . $fila['rol'] . "</td>";
-
-                        echo "<td>" . $fila['estado'] . "</td>";
-
-
-                        /*
-                        ========================================
-                        ACCIONES
-                        ========================================
-                        */
-
-                        echo "<td class='acciones'>";
-
-
-                        /* EDITAR */
-
-                        echo "
-                        <a href='editarusuario.php?CI=$CI'>
-                            <button>Editar</button>
-                        </a>
-                        ";
-
-
-                        /* ELIMINAR */
-
-                        echo "
-                        <a href='#' onclick='confirmarEliminacion($CI)'>
-                            <button>Eliminar</button>
-                        </a>
-                        ";
-
-
-                        /* MOSTRAR */
-
-                        echo "
-                        <a href='leerusuario.php?CI=$CI'>
-                            <button>Mostrar</button>
-                        </a>
-                        ";
-
-
-                        /*
-                        ========================================
-                        CAMBIAR ROL
-                        ========================================
-                        */
-
-                        if ($fila["rol"] == "usuario") {
-
-                            echo "
-                            <a href='../cambiar/cambiarVendedor.php?CI=$CI'>
-                                <button>Hacer Vendedor</button>
-                            </a>
-                            ";
-
-                        } elseif ($fila["rol"] == "vendedor") {
-
-                            echo "
-                            <a href='../cambiar/cambiarUsuario.php?CI=$CI'>
-                                <button>Hacer Usuario</button>
-                            </a>
-                            ";
-
-                        }
-
-
-                        /*
-                        ========================================
-                        BLOQUEAR / DESBLOQUEAR
-                        ========================================
-                        */
-
-                        if ($fila["estado"] == "inactivo") {
-
-                            echo "
-                            <a href='../cambiar/desbloquear.php?CI=$CI'>
-                                <button>Desbloquear</button>
-                            </a>
-                            ";
-
-                        } elseif ($fila["estado"] == "activo") {
-
-                            echo "
-                            <a href='../cambiar/bloquear.php?CI=$CI'>
-                                <button>Bloquear</button>
-                            </a>
-                            ";
-
-                        }
-
-
-                        echo "</td>";
-
-                        echo "</tr>";
-
-                    }
-
-                } else {
-
-                    echo "
-                    <tr>
-                        <td colspan='7'>
-                            Sin usuarios para mostrar.
-                        </td>
-                    </tr>
-                    ";
-
-                }
-
-                ?>
-
-                </tbody>
-
-            </table>
 
         </section>
 
+
+        <table>
+
+
+            <thead>
+
+                <tr>
+
+                    <th>CI</th>
+
+                    <th>Nombre</th>
+
+                    <th>Celular</th>
+
+                    <th>Dirección</th>
+
+                    <th>Rol</th>
+
+                    <th>Estado</th>
+
+                    <th>Acciones</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+            <?php
+
+            $nombreServidor = "localhost";
+
+            $nombreUsuario = "root";
+
+            $contraseñaBaseDeDatos = "";
+
+            $nombreBaseDeDatos = "organiczoneBD";
+
+
+            $conexion = new mysqli(
+
+                $nombreServidor,
+
+                $nombreUsuario,
+
+                $contraseñaBaseDeDatos,
+
+                $nombreBaseDeDatos
+
+            );
+
+
+            if ($conexion->connect_error) {
+
+                echo "
+
+                <tr>
+
+                    <td colspan='7'>
+
+                        Hubo un error en la conexión
+
+                    </td>
+
+                </tr>";
+
+            }
+
+
+            $sql = "SELECT * FROM usuarios";
+
+
+            $resultado = $conexion->query($sql);
+
+
+            if ($resultado->num_rows > 0) {
+
+
+                while($fila = $resultado->fetch_assoc()) {
+
+
+                    $CI = $fila['CI'];
+
+
+                    echo "<tr>";
+
+
+                    echo "<td>"
+                        . $fila['CI'] .
+                        "</td>";
+
+
+                    echo "<td>"
+                        . $fila['nombre'] .
+                        "</td>";
+
+
+                    echo "<td>"
+                        . $fila['celular'] .
+                        "</td>";
+
+
+                    echo "<td>"
+                        . $fila['direccion'] .
+                        "</td>";
+
+
+                    echo "<td>"
+                        . $fila['rol'] .
+                        "</td>";
+
+
+                    echo "<td>"
+                        . $fila['estado'] .
+                        "</td>";
+
+
+                    /*
+                    ========================================
+                    ACCIONES
+                    ========================================
+                    */
+
+                    echo "<td class='acciones'>";
+
+
+                    /* EDITAR */
+
+                    echo "
+
+                    <a href='editarusuario.php?CI=$CI'>
+
+                        <button>
+
+                            Editar
+
+                        </button>
+
+                    </a>
+
+                    ";
+
+
+                    /* ELIMINAR */
+
+                    echo "
+
+                    <a
+                        href='#'
+                        onclick='confirmarEliminacion($CI)'
+                    >
+
+                        <button>
+
+                            Eliminar
+
+                        </button>
+
+                    </a>
+
+                    ";
+
+
+                    /* MOSTRAR */
+
+                    echo "
+
+                    <a href='leerusuario.php?CI=$CI'>
+
+                        <button>
+
+                            Mostrar
+
+                        </button>
+
+                    </a>
+
+                    ";
+
+
+                    /*
+                    ========================================
+                    CAMBIAR ROL
+                    ========================================
+                    */
+
+                    if ($fila["rol"] == "usuario") {
+
+
+                        echo "
+
+                        <a
+                            href='../cambiar/cambiarVendedor.php?CI=$CI'
+                        >
+
+                            <button>
+
+                                Hacer Vendedor
+
+                            </button>
+
+                        </a>
+
+                        ";
+
+
+                    } elseif ($fila["rol"] == "vendedor") {
+
+
+                        echo "
+
+                        <a
+                            href='../cambiar/cambiarUsuario.php?CI=$CI'
+                        >
+
+                            <button>
+
+                                Hacer Usuario
+
+                            </button>
+
+                        </a>
+
+                        ";
+
+                    }
+
+
+                    /*
+                    ========================================
+                    BLOQUEAR / DESBLOQUEAR
+                    ========================================
+                    */
+
+                    if ($fila["estado"] == "inactivo") {
+
+
+                        echo "
+
+                        <a
+                            href='../cambiar/desbloquear.php?CI=$CI'
+                        >
+
+                            <button>
+
+                                Desbloquear
+
+                            </button>
+
+                        </a>
+
+                        ";
+
+
+                    } elseif ($fila["estado"] == "activo") {
+
+
+                        echo "
+
+                        <a
+                            href='../cambiar/bloquear.php?CI=$CI'
+                        >
+
+                            <button>
+
+                                Bloquear
+
+                            </button>
+
+                        </a>
+
+                        ";
+
+                    }
+
+
+                    echo "</td>";
+
+
+                    echo "</tr>";
+
+                }
+
+
+            } else {
+
+
+                echo "
+
+                <tr>
+
+                    <td colspan='7'>
+
+                        Sin usuarios para mostrar.
+
+                    </td>
+
+                </tr>
+
+                ";
+
+            }
+
+            ?>
+
+
+            </tbody>
+
+
+        </table>
+
+
     </section>
+
 
 </section>
 
 
+
 <script>
 
+
 function confirmarEliminacion(CI) {
+
 
     Swal.fire({
 
@@ -637,9 +1093,9 @@ function confirmarEliminacion(CI) {
 
         showCancelButton: true,
 
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "#0ba84a",
 
-        cancelButtonColor: "#d33",
+        cancelButtonColor: "#2B140D",
 
         confirmButtonText: "Sí, eliminar",
 
@@ -647,7 +1103,9 @@ function confirmarEliminacion(CI) {
 
     }).then((result) => {
 
+
         if (result.isConfirmed) {
+
 
             window.location =
                 "eliminarusuario.php?CI=" + CI;
@@ -656,9 +1114,13 @@ function confirmarEliminacion(CI) {
 
     });
 
+
 }
+
 
 </script>
 
+
 </body>
+
 </html>
