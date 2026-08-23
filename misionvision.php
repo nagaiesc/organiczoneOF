@@ -139,7 +139,7 @@ include("nav.php");
 <footer>
 
 <?php  
-include("footer.php");
+include("contacto.php");
 ?>
 
 </footer>

@@ -35,7 +35,7 @@ if ($pedidoId > 0) {
         :root{--verde:#12A33C;--verde-oscuro:#0A4A1B;--cafe:#2B140D;--crema:#FCD09F;--fondo:#F5EEE3}
         *{box-sizing:border-box}body{margin:0;background:var(--fondo);font-family:'Nunito',sans-serif;color:var(--cafe);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:25px}
         .caja{width:min(700px,100%);background:white;border-radius:42px;padding:45px;box-shadow:0 18px 45px rgba(43,20,13,.14);text-align:center}
-        .marca{font-family:'Fredoka',sans-serif;font-size:48px;color:var(--verde);line-height:.75}.marca span{display:block;font-size:17px;color:var(--cafe)}
+        .marca{font-family: 'Fredoka', sans-serif;font-size: 84px;line-height: .75; font-weight: 700; min-width: 110px;;color:var(--verde);line-height:.75}.marca span{display:block;font-size:17px;color:var(--cafe)}
         h1{font-family:'Fredoka',sans-serif;font-size:50px;margin:35px 0 10px}.sub{color:#777;margin-bottom:35px}
         .numero{font-size:20px;font-weight:900}.numero strong{color:var(--verde)}
         .estado{margin:25px auto;padding:18px;border-radius:25px;background:#fff3dc;color:#8a5b18;font-family:'Fredoka',sans-serif;font-size:30px;width:fit-content;min-width:220px}

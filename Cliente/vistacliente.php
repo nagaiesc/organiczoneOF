@@ -80,7 +80,7 @@ function obtenerImagenProducto(int $id): string
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organic Zone | Cliente</title>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -89,7 +89,7 @@ function obtenerImagenProducto(int $id): string
 <body>
 
 <header class="barra-cliente">
-    <a class="logo" href="../paginaprincipal.php">
+    <a class="logo">
         <span>My</span> Oz
     </a>
 
@@ -106,9 +106,9 @@ function obtenerImagenProducto(int $id): string
         </div>
 
         <button type="button" class="boton-carrito" id="abrirCarrito" aria-label="Abrir carrito">
-            🛒
-            <span id="contadorCarrito">0</span>
-        </button>
+    <i class="fa-solid fa-cart-shopping"></i>
+    <span id="contadorCarrito">0</span>
+</button>
 
         <a class="boton-salir" href="../Usuarios/cerrarse.php">Salir</a>
     </div>
