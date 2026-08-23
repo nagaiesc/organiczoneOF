@@ -94,21 +94,26 @@ a { color: inherit; }
 .usuario-mini span { font-size: 12px; opacity: .85; }
 .usuario-mini strong { font-size: 15px; }
 .boton-carrito {
-       width: 47px;
+    width: 47px;
     height: 47px;
-    border: 0;
+    border: none;
     border-radius: 50%;
     background: var(--cafe);
-    color: white;
+    color: #FCD09F;
     position: relative;
-    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+    font-family: Arial, sans-serif;
 }
-
 
 .boton-carrito i {
     display: block;
-    font-size: 21px;
-    line-height: 1;
+    font-size: 17px;
+    line-height: normal;
     color: #FCD09F;
 }
 
@@ -138,7 +143,6 @@ a { color: inherit; }
     padding: 0;
     margin: 0;
 }
-
 .boton-salir {
     background: var(--crema);
     color: var(--cafe);
