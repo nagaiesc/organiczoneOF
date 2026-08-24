@@ -1,17 +1,16 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['CI']) || ($_SESSION['rol'] ?? '') !== 'cliente') {
-    header('Location: ../Usuarios/formulariosesion.php');
-    exit();
-}
-
-$pedidoId = (int) ($_SESSION['pedido_id'] ?? 0);
+$pedidoId = isset($_GET['id'])
+    ? (int) $_GET['id']
+    : (int) ($_SESSION['pedido_id'] ?? 0);
 
 if ($pedidoId <= 0) {
-    header('Location: vistacliente.php');
+    header('Location: index.php');
     exit();
 }
+
+$_SESSION['pedido_id'] = $pedidoId;
 
 $conexion = new mysqli('localhost', 'root', '', 'organiczoneBD');
 
@@ -28,7 +27,7 @@ $pedido = $stmtPedido->get_result()->fetch_assoc();
 $stmtPedido->close();
 
 if (!$pedido) {
-    header('Location: vistacliente.php');
+    header('Location: index.php');
     exit();
 }
 
@@ -66,7 +65,7 @@ $conexion->close();
         body{margin:0;background:var(--fondo);font-family:'Nunito',sans-serif;color:var(--cafe);padding:35px 20px}
         .comprobante{width:min(850px,100%);margin:auto;background:white;border-radius:42px;overflow:hidden;box-shadow:0 18px 45px rgba(43,20,13,.14)}
         .cabecera{background:var(--verde);color:white;padding:42px 48px;display:flex;justify-content:space-between;gap:20px;align-items:end}
-        .marca{font-family:'Fredoka',sans-serif;font-size:48px;line-height:.8}.marca span{display:block;font-size:18px;color:var(--crema)}
+        .marca{font-family: 'Fredoka', sans-serif;font-size: 78px;line-height: .75;font-weight: 700;min-width: 110px;}.marca span{display:block;font-size:18px;color:var(--crema)}
         .numero{text-align:right}.numero small{display:block;opacity:.8}.numero strong{font-family:'Fredoka',sans-serif;font-size:32px}
         .contenido{padding:42px 48px}
         .estado{display:inline-block;padding:10px 15px;border-radius:30px;background:#fff1d9;color:#8b5b13;font-weight:900;margin-bottom:25px}
@@ -113,7 +112,7 @@ $conexion->close();
         <div class="total"><span>Total</span><strong>Bs. <?= number_format($total,0,',','.') ?></strong></div>
 
         <div class="acciones">
-            <a class="verde" href="consultar_pedido.php">Consultar estado</a>
+            <a class="verde" href="consultar_pedido.php?id=<?= (int)$pedido['id'] ?>">Consultar estado</a>
             <a class="cafe" href="nuevo_pedido.php">Nueva compra</a>
         </div>
     </main>

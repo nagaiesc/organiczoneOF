@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $conexion = new mysqli(
     "localhost",
     "root",
@@ -15,7 +17,12 @@ $sql = "SELECT * FROM productos ORDER BY id DESC";
 
 $resultado = $conexion->query($sql);
 
+if (!$resultado) {
+    die("Error al consultar productos: " . $conexion->error);
+}
+
 ?>
+
 <!DOCTYPE html>
 
 <html lang="es">
@@ -37,8 +44,8 @@ $resultado = $conexion->query($sql);
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap"
           rel="stylesheet">
 
-
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -67,39 +74,32 @@ $resultado = $conexion->query($sql);
             margin: 0;
             font-size: clamp(55px, 8vw, 90px);
             font-weight: 700;
-            color: #0c8d2f;
+            color: #2B140D;
         }
-
 
         .titulo-menu p {
             margin-top: 10px;
             font-size: 20px;
             color: #6d6d6d;
-
         }
 
         .productos {
             display: grid;
-            grid-template-columns:
-            repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 35px;
-
         }
-
 
         .carta {
             background-color: white;
             border-radius: 30px;
             overflow: hidden;
-            box-shadow:0 10px 30px rgba(43, 20, 13, 0.12);
-            transition:
-            transform 0.3s ease,
-            box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(43, 20, 13, 0.12);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .carta:hover {
             transform: translateY(-8px);
-            box-shadow:0 18px 35px rgba(43, 20, 13, 0.18);
+            box-shadow: 0 18px 35px rgba(43, 20, 13, 0.18);
         }
 
         .imagen {
@@ -146,13 +146,12 @@ $resultado = $conexion->query($sql);
             align-items: center;
             gap: 15px;
             margin-top: 20px;
-
         }
 
         .precio {
             font-size: 25px;
             font-weight: 700;
-            color: #0c8d2f;
+            color: #2B140D;
         }
 
         .disponible {
@@ -166,21 +165,19 @@ $resultado = $conexion->query($sql);
             border-radius: 30px;
             padding: 60px 30px;
             text-align: center;
-            box-shadow:0 10px 30px rgba(43, 20, 13, 0.10);
+            box-shadow: 0 10px 30px rgba(43, 20, 13, 0.10);
         }
 
         .sin-productos h2 {
             margin: 0 0 10px;
             color: #2B140D;
             font-size: 30px;
-
         }
 
         .sin-productos p {
             margin: 0;
             color: #777;
             font-size: 18px;
-
         }
 
         @media (max-width: 700px) {
@@ -191,131 +188,149 @@ $resultado = $conexion->query($sql);
                 padding-bottom: 50px;
             }
 
-
             .productos {
                 grid-template-columns: 1fr;
             }
 
-
             .titulo-menu h1 {
                 font-size: 55px;
             }
+
             .imagen {
                 height: 280px;
             }
+
         }
+
     </style>
+
 </head>
 
-
 <body>
+
     <nav>
-        <?php
-        include("nav.php");
-        ?>
+        <?php include("nav.php"); ?>
     </nav>
 
     <section class="menu-productos">
+
         <div class="titulo-menu">
+
             <h1>Menú</h1>
+
             <p>
                 Descubre todos nuestros productos
             </p>
+
         </div>
 
-
         <div class="productos">
-            <?php
-            if ($resultado && $resultado->num_rows > 0) {
-                while ($producto = $resultado->fetch_assoc()) {
+
+            <?php if ($resultado->num_rows > 0): ?>
+
+                <?php while ($producto = $resultado->fetch_assoc()): ?>
+
+                    <?php
+
                     $id = $producto['id'];
-                    $imagen =
-                    "Imagenes/predeterminado.png";
-                    $extensiones = ["jpg", "jpeg", "png","gif","webp"];
+
+                    $imagen = "Imagenes/predeterminado.png";
+
+                    $extensiones = ["jpg", "jpeg", "png", "gif", "webp"];
 
                     foreach ($extensiones as $extension) {
-                        $ruta =
-                        "Imagenes/P-" .
-                        $id .
-                        "." .
-                        $extension;
+
+                        $ruta = "Imagenes/P-" . $id . "." . $extension;
 
                         if (file_exists($ruta)) {
+
                             $imagen = $ruta;
+
                             break;
+
                         }
+
                     }
-            ?>
+
+                    ?>
 
                     <article class="carta">
+
                         <div class="imagen">
+
                             <img
                                 src="<?= htmlspecialchars($imagen) ?>"
                                 alt="<?= htmlspecialchars($producto['nombre']) ?>"
                             >
+
                         </div>
 
                         <div class="informacion">
-                            <h2>
 
-                                <?= htmlspecialchars(
-                                    $producto['nombre']
-                                ) ?>
+                            <h2>
+                                <?= htmlspecialchars($producto['nombre']) ?>
                             </h2>
 
                             <p class="descripcion">
-                                <?= htmlspecialchars(
-                                    $producto['descripcion']
-                                ) ?>
+                                <?= htmlspecialchars($producto['descripcion']) ?>
                             </p>
 
                             <div class="parte-inferior">
 
                                 <span class="precio">
-                                    <?= htmlspecialchars(
-                                        $producto['precio']
-                                    ) ?>
-                                    Bs
+                                    <?= htmlspecialchars($producto['precio']) ?> Bs
                                 </span>
+
                                 <span class="disponible">
-                                 <?php
+
+                                    <?php
+
                                     if ($producto['stock'] > 0) {
                                         echo "Disponible";
                                     } else {
                                         echo "Agotado";
                                     }
+
                                     ?>
+
                                 </span>
+
                             </div>
+
                         </div>
+
                     </article>
-            <?php
-                }
-            } else {
-            ?>
+
+                <?php endwhile; ?>
+
+            <?php else: ?>
+
                 <div class="sin-productos">
+
                     <h2>
                         No hay productos disponibles
                     </h2>
+
                     <p>
                         Pronto tendremos nuevos productos para ti.
                     </p>
+
                 </div>
-            <?php
-            }
-            ?>
+
+            <?php endif; ?>
+
         </div>
 
     </section>
 
-    <footer>
-        <?php
-        include("footer.php");
-        ?>
-    </footer>
+    <?php include("footer.php"); ?>
+
 </body>
+
 </html>
+
 <?php
+
 $conexion->close();
 
 ?>

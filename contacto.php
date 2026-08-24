@@ -1,629 +1,660 @@
-<style>
+<?php
 
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
-
-
-/* =====================================================
-   CONTACTO - ORGANIC ZONE
-===================================================== */
-
-*{
-    box-sizing:border-box;
+// Iniciar sesión antes de enviar cualquier contenido al navegador
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 
-body{
-    margin:0;
-    background:#F4F1EE;
-    font-family:'Fredoka', Arial, sans-serif;
-    color:#2B140D;
-}
+?>
 
+<!DOCTYPE html>
+<html lang="es">
 
-/* =====================================================
-   SECCIÓN PRINCIPAL
-===================================================== */
+<head>
 
-.contacto{
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    min-height:100vh;
+    <title>Contacto - Organic Zone</title>
 
-    background:#F4F1EE;
+    <style>
 
-    padding:110px 7% 100px;
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
 
-    position:relative;
 
-    overflow:hidden;
-}
+        /* =====================================================
+           CONFIGURACIÓN GENERAL
+        ===================================================== */
 
+        * {
+            box-sizing: border-box;
+        }
 
-/* DECORACIÓN DE FONDO */
+        body {
+            margin: 0;
+            background: #F4F1EE;
+            font-family: 'Fredoka', Arial, sans-serif;
+            color: #2B140D;
+        }
 
-.contacto::before{
 
-    content:"";
+        /* =====================================================
+           SECCIÓN PRINCIPAL
+        ===================================================== */
 
-    position:absolute;
+        .contacto {
 
-    width:420px;
-    height:420px;
+            min-height: 100vh;
 
-    background:#0ba84a;
+            background: #F4F1EE;
 
-    border-radius:50%;
+            padding: 110px 7% 100px;
 
-    right:-180px;
-    top:-150px;
+            position: relative;
 
-    opacity:.12;
-}
+            overflow: hidden;
+        }
 
 
-.contacto::after{
+        /* =====================================================
+           DECORACIÓN DE FONDO
+        ===================================================== */
 
-    content:"";
+        .contacto::before {
 
-    position:absolute;
+            content: "";
 
-    width:300px;
-    height:300px;
+            position: absolute;
 
-    background:#2B140D;
+            width: 420px;
+            height: 420px;
 
-    border-radius:50%;
+            background: #0ba84a;
 
-    left:-150px;
-    bottom:-150px;
+            border-radius: 50%;
 
-    opacity:.08;
-}
+            right: -180px;
+            top: -150px;
 
+            opacity: .12;
+        }
 
-/* =====================================================
-   ENCABEZADO
-===================================================== */
 
-.titulo{
+        .contacto::after {
 
-    position:relative;
+            content: "";
 
-    z-index:2;
+            position: absolute;
 
-    max-width:1050px;
+            width: 300px;
+            height: 300px;
 
-    margin:0 auto 75px;
+            background: #2B140D;
 
-    text-align:center;
-}
+            border-radius: 50%;
 
+            left: -150px;
+            bottom: -150px;
 
-.titulo h4{
+            opacity: .08;
+        }
 
-    display:inline-block;
 
-    margin:0 0 18px;
+        /* =====================================================
+           ENCABEZADO
+        ===================================================== */
 
-    padding:8px 18px;
+        .titulo {
 
-    background:#0ba84a;
+            position: relative;
 
-    color:white;
+            z-index: 2;
 
-    border-radius:50px;
+            max-width: 1050px;
 
-    font-size:13px;
+            margin: 0 auto 75px;
 
-    font-weight:600;
+            text-align: center;
+        }
 
-    letter-spacing:2px;
 
-}
+        .titulo h4 {
 
+            display: inline-block;
 
-.titulo h1{
+            margin: 0 0 18px;
 
-    margin:0;
+            padding: 8px 18px;
 
-    color:#2B140D;
+            background: #0ba84a;
 
-    font-size:clamp(45px,6vw,82px);
+            color: white;
 
-    line-height:.98;
+            border-radius: 50px;
 
-    font-weight:700;
+            font-size: 13px;
 
-    letter-spacing:-2px;
+            font-weight: 600;
 
-}
+            letter-spacing: 2px;
+        }
 
 
-.titulo h1::first-line{
-    color:#2B140D;
-}
+        .titulo h1 {
 
+            margin: 0;
 
-.titulo p{
+            color: #2B140D;
 
-    max-width:750px;
+            font-size: clamp(45px, 6vw, 82px);
 
-    margin:30px auto 0;
+            line-height: .98;
 
-    color:#6d5d57;
+            font-weight: 700;
 
-    font-size:18px;
+            letter-spacing: -2px;
+        }
 
-    line-height:1.7;
 
-}
+        .titulo h1::first-line {
 
+            color: #2B140D;
+        }
 
-/* =====================================================
-   CONTENEDOR DE INFORMACIÓN
-===================================================== */
 
-.info{
+        .titulo p {
 
-    position:relative;
+            max-width: 750px;
 
-    z-index:2;
+            margin: 30px auto 0;
 
-    max-width:1200px;
+            color: #6d5d57;
 
-    margin:auto;
+            font-size: 18px;
 
-    display:grid;
+            line-height: 1.7;
+        }
 
-    grid-template-columns:1.2fr .8fr .8fr;
 
-    gap:18px;
+        /* =====================================================
+           CONTENEDOR DE INFORMACIÓN
+        ===================================================== */
 
-}
+        .info {
 
+            position: relative;
 
-/* =====================================================
-   TARJETAS
-===================================================== */
+            z-index: 2;
 
-.carta{
+            max-width: 1200px;
 
-    position:relative;
+            margin: auto;
 
-    min-height:390px;
+            display: grid;
 
-    padding:38px;
+            grid-template-columns: 1.2fr .8fr .8fr;
 
-    border-radius:30px;
+            gap: 18px;
+        }
 
-    background:#ffffff;
 
-    border:1px solid rgba(43,20,13,.08);
+        /* =====================================================
+           TARJETAS
+        ===================================================== */
 
-    box-shadow:0 15px 45px rgba(43,20,13,.08);
+        .carta {
 
-    overflow:hidden;
+            position: relative;
 
-    transition:.35s ease;
+            min-height: 390px;
 
-}
+            padding: 38px;
 
+            border-radius: 30px;
 
-.carta:hover{
+            background: #ffffff;
 
-    transform:translateY(-10px);
+            border: 1px solid rgba(43, 20, 13, .08);
 
-    box-shadow:0 25px 55px rgba(43,20,13,.14);
+            box-shadow: 0 15px 45px rgba(43, 20, 13, .08);
 
-}
+            overflow: hidden;
 
+            transition: .35s ease;
+        }
 
-/* =====================================================
-   TARJETA DIRECCIÓN
-===================================================== */
 
-.carta:first-child{
+        .carta:hover {
 
-    background:#2B140D;
+            transform: translateY(-10px);
 
-    color:white;
+            box-shadow: 0 25px 55px rgba(43, 20, 13, .14);
+        }
 
-    min-height:430px;
 
-}
+        /* =====================================================
+           PRIMERA TARJETA
+        ===================================================== */
 
+        .carta:first-child {
 
-.carta:first-child::after{
+            background: #2B140D;
 
-    content:"01";
+            color: white;
 
-    position:absolute;
+            min-height: 430px;
+        }
 
-    right:-20px;
 
-    bottom:-50px;
+        .carta:first-child::after {
 
-    font-size:180px;
+            content: "01";
 
-    font-weight:700;
+            position: absolute;
 
-    color:rgba(255,255,255,.04);
+            right: -20px;
 
-}
+            bottom: -50px;
 
+            font-size: 180px;
 
-.carta:first-child h2{
+            font-weight: 700;
 
-    color:white;
+            color: rgba(255, 255, 255, .04);
+        }
 
-}
 
+        .carta:first-child h2 {
 
-.carta:first-child p{
+            color: white;
+        }
 
-    color:#ded3cf;
 
-}
+        .carta:first-child p {
 
+            color: #ded3cf;
+        }
 
-/* =====================================================
-   NUMERACIÓN
-===================================================== */
 
-.carta::before{
+        /* =====================================================
+           LÍNEA DECORATIVA
+        ===================================================== */
 
-    content:"";
+        .carta::before {
 
-    display:block;
+            content: "";
 
-    width:42px;
+            display: block;
 
-    height:6px;
+            width: 42px;
 
-    border-radius:20px;
+            height: 6px;
 
-    background:#0ba84a;
+            border-radius: 20px;
 
-    margin-bottom:35px;
+            background: #0ba84a;
 
-}
+            margin-bottom: 35px;
+        }
 
 
-.carta:nth-child(2)::after{
+        /* =====================================================
+           NÚMEROS
+        ===================================================== */
 
-    content:"02";
+        .carta:nth-child(2)::after {
 
-    position:absolute;
+            content: "02";
 
-    right:20px;
+            position: absolute;
 
-    bottom:-30px;
+            right: 20px;
 
-    font-size:120px;
+            bottom: -30px;
 
-    font-weight:700;
+            font-size: 120px;
 
-    color:rgba(43,20,13,.04);
+            font-weight: 700;
 
-}
+            color: rgba(43, 20, 13, .04);
+        }
 
 
-.carta:nth-child(3)::after{
+        .carta:nth-child(3)::after {
 
-    content:"03";
+            content: "03";
 
-    position:absolute;
+            position: absolute;
 
-    right:20px;
+            right: 20px;
 
-    bottom:-30px;
+            bottom: -30px;
 
-    font-size:120px;
+            font-size: 120px;
 
-    font-weight:700;
+            font-weight: 700;
 
-    color:rgba(43,20,13,.04);
+            color: rgba(43, 20, 13, .04);
+        }
 
-}
 
+        /* =====================================================
+           TÍTULOS DE LAS TARJETAS
+        ===================================================== */
 
-/* =====================================================
-   TÍTULOS
-===================================================== */
+        .carta h2 {
 
-.carta h2{
+            position: relative;
 
-    position:relative;
+            z-index: 2;
 
-    z-index:2;
+            margin: 0 0 25px;
 
-    margin:0 0 25px;
+            color: #2B140D;
 
-    color:#2B140D;
+            font-size: 31px;
 
-    font-size:31px;
+            font-weight: 700;
 
-    font-weight:700;
+            line-height: 1.05;
+        }
 
-    line-height:1.05;
 
-}
+        /* =====================================================
+           TEXTO
+        ===================================================== */
 
+        .carta p {
 
-/* =====================================================
-   TEXTO
-===================================================== */
+            position: relative;
 
-.carta p{
+            z-index: 2;
 
-    position:relative;
+            margin: 0 0 16px;
 
-    z-index:2;
+            color: #6d5d57;
 
-    margin:0 0 16px;
+            font-size: 17px;
 
-    color:#6d5d57;
+            line-height: 1.7;
+        }
 
-    font-size:17px;
 
-    line-height:1.7;
+        /* =====================================================
+           TARJETA DE TELÉFONO
+        ===================================================== */
 
-}
+        .carta:nth-child(2) {
 
+            background: #ffffff;
+        }
 
-/* =====================================================
-   CONTACTO
-===================================================== */
 
-.carta:nth-child(2){
+        .carta:nth-child(2) p:first-of-type {
 
-    background:#ffffff;
+            color: #0ba84a;
 
-}
+            font-size: 29px;
 
+            font-weight: 700;
+        }
 
-.carta:nth-child(2) p:first-of-type{
 
-    color:#0ba84a;
+        /* =====================================================
+           TARJETA DE CORREO
+        ===================================================== */
 
-    font-size:29px;
+        .carta:nth-child(3) {
 
-    font-weight:700;
+            background: #E9F5EC;
+        }
 
-}
 
+        .correo {
 
-/* =====================================================
-   CORREO
-===================================================== */
+            display: inline-block;
 
-.carta:nth-child(3){
+            color: #2B140D;
 
-    background:#E9F5EC;
+            background: white;
 
-}
+            padding: 10px 15px;
 
+            border-radius: 12px;
 
-.correo{
+            font-size: 16px !important;
 
-    display:inline-block;
+            font-weight: 600;
 
-    color:#2B140D;
+            word-break: break-word;
+        }
 
-    background:white;
 
-    padding:10px 15px;
+        /* =====================================================
+           COLORES DE LAS LÍNEAS
+        ===================================================== */
 
-    border-radius:12px;
+        .carta:nth-child(2)::before {
 
-    font-size:16px !important;
+            background: #2B140D;
+        }
 
-    font-weight:600;
 
-    word-break:break-word;
+        .carta:nth-child(3)::before {
 
-}
+            background: #0ba84a;
+        }
 
 
-/* =====================================================
-   EFECTO DECORATIVO
-===================================================== */
+        /* =====================================================
+           RESPONSIVE - TABLET
+        ===================================================== */
 
-.carta:nth-child(2)::before{
+        @media (max-width: 1000px) {
 
-    background:#2B140D;
+            .contacto {
 
-}
+                padding: 90px 5% 70px;
+            }
 
 
-.carta:nth-child(3)::before{
+            .info {
 
-    background:#0ba84a;
+                grid-template-columns: 1fr 1fr;
+            }
 
-}
 
+            .carta:first-child {
 
-/* =====================================================
-   RESPONSIVE
-===================================================== */
+                grid-column: span 2;
+            }
 
-@media(max-width:1000px){
+        }
 
-    .contacto{
 
-        padding:90px 5% 70px;
+        /* =====================================================
+           RESPONSIVE - CELULAR
+        ===================================================== */
 
-    }
+        @media (max-width: 650px) {
 
-    .info{
+            .contacto {
 
-        grid-template-columns:1fr 1fr;
+                padding: 70px 20px;
+            }
 
-    }
 
-    .carta:first-child{
+            .titulo {
 
-        grid-column:span 2;
+                margin-bottom: 50px;
+            }
 
-    }
 
-}
+            .titulo h1 {
 
+                font-size: 48px;
+            }
 
-@media(max-width:650px){
 
-    .contacto{
+            .titulo p {
 
-        padding:70px 20px;
+                font-size: 16px;
+            }
 
-    }
 
-    .titulo{
+            .info {
 
-        margin-bottom:50px;
+                grid-template-columns: 1fr;
+            }
 
-    }
 
-    .titulo h1{
+            .carta:first-child {
 
-        font-size:48px;
+                grid-column: auto;
+            }
 
-    }
 
-    .titulo p{
+            .carta {
 
-        font-size:16px;
+                min-height: 320px;
+            }
 
-    }
+        }
 
-    .info{
+    </style>
 
-        grid-template-columns:1fr;
-
-    }
-
-    .carta:first-child{
-
-        grid-column:auto;
-
-    }
-
-    .carta{
-
-        min-height:320px;
-
-    }
-
-}
-
-</style>
+</head>
 
 
 <body>
 
-<nav>
-    <?php
-    include("nav.php");
-    ?>
-</nav>
+
+    <!-- =====================================================
+         BARRA DE NAVEGACIÓN
+    ===================================================== -->
+
+    <nav>
+
+        <?php
+
+        include("nav.php");
+
+        ?>
+
+    </nav>
 
 
-<section class="contacto">
+    <!-- =====================================================
+         SECCIÓN CONTACTO
+    ===================================================== -->
+
+    <section class="contacto">
 
 
-    <!-- ================================================
-         ENCABEZADO
-    ================================================= -->
+        <!-- ENCABEZADO -->
 
-    <div class="titulo">
+        <div class="titulo">
 
-        <h4>VISÍTANOS</h4>
+            <h4>VISÍTANOS</h4>
 
-        <h1>
-            Ven a conocer<br>
-            Organic Zone
-        </h1>
-
-        <p>
-            Estamos listos para recibirte. Encuentra nuestra ubicación,
-            contáctanos o escríbenos para conocer más sobre nuestras
-            hamburguesas gourmet elaboradas con ingredientes orgánicos.
-        </p>
-
-    </div>
-
-
-    <!-- ================================================
-         INFORMACIÓN
-    ================================================= -->
-
-    <div class="info">
-
-
-        <!-- DIRECCIÓN -->
-
-        <div class="carta">
-
-            <h2>
-                Encuéntranos
-            </h2>
+            <h1>
+                Ven a conocer<br>
+                Organic Zone
+            </h1>
 
             <p>
-                Colegio Pedro Poveda,
-                Plazuela Tarija,
-                Av. América,
-                Cochabamba, Bolivia.
-            </p>
-
-            <p>
-                Un espacio pensado para disfrutar
-                de una experiencia diferente,
-                saludable y deliciosa.
+                Estamos listos para recibirte. Encuentra nuestra ubicación,
+                contáctanos o escríbenos para conocer más sobre nuestras
+                hamburguesas gourmet elaboradas con ingredientes orgánicos.
             </p>
 
         </div>
 
 
-        <!-- CONTACTO -->
+        <!-- =================================================
+             INFORMACIÓN
+        ================================================= -->
 
-        <div class="carta">
+        <div class="info">
 
-            <h2>
-                Hablemos
-            </h2>
 
-            <p>
-                +591 70376053
-            </p>
+            <!-- =============================================
+                 DIRECCIÓN
+            ============================================== -->
 
-            <p>
-                Llámanos para realizar consultas,
-                conocer nuestros productos
-                o coordinar una reserva.
-            </p>
+            <div class="carta">
+
+                <h2>
+                    Encuéntranos
+                </h2>
+
+                <p>
+                    Colegio Pedro Poveda,
+                    Plazuela Tarija,
+                    Av. América,
+                    Cochabamba, Bolivia.
+                </p>
+
+                <p>
+                    Un espacio pensado para disfrutar
+                    de una experiencia diferente,
+                    saludable y deliciosa.
+                </p>
+
+            </div>
+
+
+            <!-- =============================================
+                 TELÉFONO
+            ============================================== -->
+
+            <div class="carta">
+
+                <h2>
+                    Hablemos
+                </h2>
+
+                <p>
+                    +591 70376053
+                </p>
+
+                <p>
+                    Llámanos para realizar consultas,
+                    conocer nuestros productos
+                    o coordinar una reserva.
+                </p>
+
+            </div>
+
+
+            <!-- =============================================
+                 CORREO
+            ============================================== -->
+
+            <div class="carta">
+
+                <h2>
+                    Escríbenos
+                </h2>
+
+                <p class="correo">
+                    organiczone@gmail.com
+                </p>
+
+                <p>
+                    También puedes comunicarte
+                    con nosotros por correo.
+                    Estaremos encantados de atenderte.
+                </p>
+
+            </div>
+
 
         </div>
 
-
-        <!-- CORREO -->
-
-        <div class="carta">
-
-            <h2>
-                Escríbenos
-            </h2>
-
-            <p class="correo">
-                organiczone@gmail.com
-            </p>
-
-            <p>
-                También puedes comunicarte
-                con nosotros por correo.
-                Estaremos encantados de atenderte.
-            </p>
-
-        </div>
+    </section>
 
 
-    </div>
+</body>
 
-</section>
+</html>

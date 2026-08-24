@@ -1,11 +1,6 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['CI']) || !isset($_SESSION['rol']) || $_SESSION['rol'] !== 'cliente') {
-    header('Location: ../Usuarios/formulariosesion.php');
-    exit();
-}
-
 $conexion = new mysqli('localhost', 'root', '', 'organiczoneBD');
 
 if ($conexion->connect_error) {
@@ -14,24 +9,23 @@ if ($conexion->connect_error) {
 
 $conexion->set_charset('utf8mb4');
 
-$ci = (int) $_SESSION['CI'];
-$usuario = null;
+/*
+ * El cliente no necesita registrarse.
+ * El pedido es el identificador de la compra.
+ *
+ * Si se entra con ?pedido=123, tomamos ese pedido.
+ * Si no, usamos el pedido guardado en la sesión.
+ */
+if (isset($_GET['pedido'])) {
+    $pedidoId = (int) $_GET['pedido'];
 
-$stmtUsuario = $conexion->prepare('SELECT CI, nombre, direccion, celular FROM usuarios WHERE CI = ? LIMIT 1');
-$stmtUsuario->bind_param('i', $ci);
-$stmtUsuario->execute();
-$resultadoUsuario = $stmtUsuario->get_result();
-$usuario = $resultadoUsuario->fetch_assoc();
-$stmtUsuario->close();
-
-if (!$usuario) {
-    session_unset();
-    session_destroy();
-    header('Location: ../Usuarios/formulariosesion.php');
-    exit();
+    if ($pedidoId > 0) {
+        $_SESSION['pedido_id'] = $pedidoId;
+    }
+} else {
+    $pedidoId = isset($_SESSION['pedido_id']) ? (int) $_SESSION['pedido_id'] : 0;
 }
 
-$pedidoId = isset($_SESSION['pedido_id']) ? (int) $_SESSION['pedido_id'] : 0;
 $pedidoEstado = '';
 $pedidoConfirmado = !empty($_SESSION['pedido_confirmado']);
 
@@ -80,7 +74,7 @@ function obtenerImagenProducto(int $id): string
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organic Zone | Cliente</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -89,7 +83,7 @@ function obtenerImagenProducto(int $id): string
 <body>
 
 <header class="barra-cliente">
-    <a class="logo">
+    <a class="logo" href="../paginaprincipal.php">
         <span>My</span> Oz
     </a>
 
@@ -101,16 +95,25 @@ function obtenerImagenProducto(int $id): string
 
     <div class="acciones-header">
         <div class="usuario-mini">
-            <span>Hola,</span>
-            <strong><?= htmlspecialchars($usuario['nombre']) ?></strong>
+            <?php if (!empty($_SESSION['nombre'])): ?>
+                <span>Hola,</span>
+                <strong><?= htmlspecialchars($_SESSION['nombre']) ?></strong>
+            <?php else: ?>
+                <span>Compra</span>
+                <strong>Sin registro</strong>
+            <?php endif; ?>
         </div>
 
         <button type="button" class="boton-carrito" id="abrirCarrito" aria-label="Abrir carrito">
-    <i class="fa-solid fa-cart-shopping"></i>
-    <span id="contadorCarrito">0</span>
-</button>
+            🛒
+            <span id="contadorCarrito">0</span>
+        </button>
 
-        <a class="boton-salir" href="../Usuarios/cerrarse.php">Salir</a>
+        <?php if (!empty($_SESSION['nombre'])): ?>
+            <a class="boton-salir" href="../Usuarios/cerrarse.php">Salir</a>
+        <?php else: ?>
+            <a class="boton-salir" href="../Usuarios/formulariosesion.php">Iniciar sesión</a>
+        <?php endif; ?>
     </div>
 </header>
 
@@ -240,18 +243,18 @@ function obtenerImagenProducto(int $id): string
         <form id="formPedido">
             <div class="campo-modal">
                 <label>Nombre</label>
-                <input type="text" name="nombre" value="<?= htmlspecialchars($usuario['nombre']) ?>" required>
+                <input type="text" name="nombre" placeholder="Escribe tu nombre" required>
             </div>
 
             <div class="dos-columnas">
                 <div class="campo-modal">
                     <label>Teléfono</label>
-                    <input type="text" name="telefono" value="<?= htmlspecialchars($usuario['celular'] ?? '') ?>" required>
+                    <input type="text" name="telefono" placeholder="Tu número de teléfono" required>
                 </div>
 
                 <div class="campo-modal">
                     <label>Dirección</label>
-                    <input type="text" name="direccion" value="<?= htmlspecialchars($usuario['direccion'] ?? '') ?>" required>
+                    <input type="text" name="direccion" placeholder="Tu dirección" required>
                 </div>
             </div>
 
@@ -311,14 +314,9 @@ function obtenerImagenProducto(int $id): string
         pedidoConfirmado: <?= $pedidoConfirmado ? 'true' : 'false' ?>
     };
 </script>
-
 <script src="js/cliente.js"></script>
-
-<?php include("../footer.php"); ?>
-
 </body>
 </html>
-
 <?php
 $conexion->close();
 ?>

@@ -359,15 +359,9 @@ if (session_status() == PHP_SESSION_NONE) {
     <!--  LOGO -->
 
     <div>
-
-        <a
-            href="/organiczoneOF/paginaprincipal.php"
-            id="orga"
-        >
-
-            <h1>OrganicZone</h1>
-
-        </a>
+<a href="Cliente/vistacliente.php" id="orga">
+    <h1>OrganicZone</h1>
+</a>
 
     </div>
 
@@ -438,6 +432,12 @@ if (session_status() == PHP_SESSION_NONE) {
         <div class="item">
             <a href="Hamburguesas.php">
                 Menú
+            </a>
+        </div>
+
+        <div class="item">
+            <a href="/organiczoneOF/Cliente/index.php">
+                Comprar
             </a>
         </div>
 
