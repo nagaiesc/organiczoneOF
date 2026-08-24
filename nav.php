@@ -359,15 +359,9 @@ if (session_status() == PHP_SESSION_NONE) {
     <!--  LOGO -->
 
     <div>
-
-        <a
-            href="/organiczoneOF/paginaprincipal.php"
-            id="orga"
-        >
-
-            <h1>OrganicZone</h1>
-
-        </a>
+<a href="Cliente/vistacliente.php" id="orga">
+    <h1>OrganicZone</h1>
+</a>
 
     </div>
 
