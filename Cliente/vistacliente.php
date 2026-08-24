@@ -312,7 +312,7 @@ function obtenerImagenProducto(int $id): string
 
 <script src="js/cliente.js"></script>
 
-<?php include("footer.php"); ?>
+<?php include("../footer.php"); ?>
 
 </body>
 </html>
