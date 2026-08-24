@@ -53,7 +53,7 @@ if (mysqli_num_rows($resultado) > 0) {
     if ($_SESSION['rol'] === "cliente") {
         // Cada inicio de sesión de cliente comienza sin un pedido activo anterior.
         unset($_SESSION['pedido_id'], $_SESSION['pedido_confirmado']);
-        header("Location: ../Cliente/vistacliente.php");
+        header("Location: ../Cliente/index.php");
         exit();
     }
 

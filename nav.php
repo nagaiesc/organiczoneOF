@@ -441,6 +441,12 @@ if (session_status() == PHP_SESSION_NONE) {
             </a>
         </div>
 
+        <div class="item">
+            <a href="/organiczoneOF/Cliente/index.php">
+                Comprar
+            </a>
+        </div>
+
     </section>
 
 

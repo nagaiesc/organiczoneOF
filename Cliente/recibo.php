@@ -1,17 +1,16 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['CI']) || ($_SESSION['rol'] ?? '') !== 'cliente') {
-    header('Location: ../Usuarios/formulariosesion.php');
-    exit();
-}
-
-$pedidoId = (int) ($_SESSION['pedido_id'] ?? 0);
+$pedidoId = isset($_GET['id'])
+    ? (int) $_GET['id']
+    : (int) ($_SESSION['pedido_id'] ?? 0);
 
 if ($pedidoId <= 0) {
-    header('Location: vistacliente.php');
+    header('Location: index.php');
     exit();
 }
+
+$_SESSION['pedido_id'] = $pedidoId;
 
 $conexion = new mysqli('localhost', 'root', '', 'organiczoneBD');
 
@@ -28,7 +27,7 @@ $pedido = $stmtPedido->get_result()->fetch_assoc();
 $stmtPedido->close();
 
 if (!$pedido) {
-    header('Location: vistacliente.php');
+    header('Location: index.php');
     exit();
 }
 
@@ -113,7 +112,7 @@ $conexion->close();
         <div class="total"><span>Total</span><strong>Bs. <?= number_format($total,0,',','.') ?></strong></div>
 
         <div class="acciones">
-            <a class="verde" href="consultar_pedido.php">Consultar estado</a>
+            <a class="verde" href="consultar_pedido.php?id=<?= (int)$pedido['id'] ?>">Consultar estado</a>
             <a class="cafe" href="nuevo_pedido.php">Nueva compra</a>
         </div>
     </main>

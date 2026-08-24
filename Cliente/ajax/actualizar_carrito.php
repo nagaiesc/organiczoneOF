@@ -2,11 +2,7 @@
 session_start();
 header('Content-Type: application/json; charset=utf-8');
 
-if (!isset($_SESSION['CI']) || ($_SESSION['rol'] ?? '') !== 'cliente') {
-    http_response_code(401);
-    echo json_encode(['ok' => false, 'mensaje' => 'Sesión no válida.']);
-    exit();
-}
+
 
 $pedidoId = (int) ($_SESSION['pedido_id'] ?? 0);
 $productoId = (int) ($_POST['productos_id'] ?? 0);

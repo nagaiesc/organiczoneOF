@@ -258,7 +258,7 @@ async function finalizarCompra() {
 
         pedidoConfirmado = true;
         cerrarCarrito();
-        window.location.href = 'recibo.php';
+        window.location.href = 'recibo.php?id=' + respuesta.pedido_id;
     } catch (error) {
         alert(error.message);
     }
