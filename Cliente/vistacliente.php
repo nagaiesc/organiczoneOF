@@ -105,7 +105,7 @@ function obtenerImagenProducto(int $id): string
             <strong><?= htmlspecialchars($usuario['nombre']) ?></strong>
         </div>
 
-        <button type="button" class="boton-carrito" id="abrirCarrito" aria-label="Abrir carrito">
+       <button type="button" class="boton-carrito" id="abrirCarrito" aria-label="Abrir carrito">
     <i class="fa-solid fa-cart-shopping"></i>
     <span id="contadorCarrito">0</span>
 </button>
