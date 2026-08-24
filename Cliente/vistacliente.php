@@ -311,9 +311,14 @@ function obtenerImagenProducto(int $id): string
         pedidoConfirmado: <?= $pedidoConfirmado ? 'true' : 'false' ?>
     };
 </script>
+
 <script src="js/cliente.js"></script>
+
+<?php include("../footer.php"); ?>
+
 </body>
 </html>
+
 <?php
 $conexion->close();
 ?>
