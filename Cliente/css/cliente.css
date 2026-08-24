@@ -110,37 +110,55 @@ a { color: inherit; }
     cursor: pointer;
     flex-shrink: 0;
 }
+.boton-carrito {
+    width: 47px;
+    height: 47px;
+    border: none;
+    border-radius: 50%;
+    background: var(--cafe);
+    color: #FCD09F;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+    font-family: Arial, sans-serif;
+}
 
 .boton-carrito i {
-    font-size: 21px;
-    color: #FCD09F;
     display: block;
+    font-size: 15px;
+    line-height: 1;
+    color: #FCD09F;
 }
 
 .boton-carrito:hover {
-    background: #FCD09F;
+    background: #3b1d13;
 }
 
 .boton-carrito:hover i {
-    color: #2B140D;
+    color: #ffffff;
 }
 
 #contadorCarrito {
     position: absolute;
-    top: -3px;
     right: -3px;
+    top: -3px;
     width: 20px;
     height: 20px;
     border-radius: 50%;
     background: #FCD09F;
-    color: #2B140D;
-    font-family: 'Fredoka', sans-serif;
+    color: var(--cafe);
     font-size: 11px;
     font-weight: 900;
     display: flex;
     align-items: center;
     justify-content: center;
     line-height: 1;
+    padding: 0;
+    margin: 0;
 }
 .boton-salir {
     background: var(--crema);
