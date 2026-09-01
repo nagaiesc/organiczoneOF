@@ -805,490 +805,196 @@ tbody td[colspan] {
 
             Visualiza los productos registrados
             en el sistema.
-
             <br><br>
-
             Administra precios, stock y costos
             de forma rápida.
-
         </p>
-
-
     </section>
 
-
-    <!-- =====================================
-         PANEL DERECHO
-    ====================================== -->
-
     <section class="section-blanco">
-
-
         <section class="section-clientes">
-
             <h2>
-
                 Productos Registrados
-
             </h2>
-
         </section>
 
 
         <table>
-
-
             <thead>
-
                 <tr>
-
                     <th>
                         Imagen
                     </th>
-
                     <th>
                         ID
                     </th>
-
                     <th>
                         Nombre
                     </th>
-
                     <th>
                         Descripción
                     </th>
-
                     <th>
                         Precio
                     </th>
-
                     <th>
                         Costo
                     </th>
-
                     <th>
                         Stock
                     </th>
-
                     <th>
                         Acciones
                     </th>
-
                 </tr>
-
             </thead>
-
-
             <tbody>
 
 
             <?php
-
-            $conexion = new mysqli(
-                "localhost",
-                "root",
-                "",
-                "organiczoneBD"
-            );
-
+            $conexion = new mysqli("localhost","root","","organiczoneBD");
 
             if ($conexion->connect_error) {
-
-                echo "
-
-                    <tr>
-
-                        <td colspan='8'>
-
-                            Error en la conexión
-
-                        </td>
-
-                    </tr>
-
-                ";
-
+                echo "<tr> <td colspan='8'>Error en la conexión </td> </tr> ";
             }
 
-
-            /* STOCK BAJO
-               Consideramos bajo stock cuando quedan
-               5 unidades o menos. */
             $stockBajo = 5;
-
             $sql = "SELECT * FROM productos";
 
             $resultado = $conexion->query($sql);
-
-
             if ($resultado && $resultado->num_rows > 0) {
-
-
                 while($fila = $resultado->fetch_assoc()){
-
-
                     $id = $fila['id'];
-
-
-                    /* IMAGEN PREDETERMINADA */
 
                     $imagen =
                         "../Imagenes/predeterminado.png";
-
-
                     $extensiones = [
-
                         "jpg",
                         "jpeg",
                         "png",
                         "gif",
                         "webp"
-
                     ];
-
-
                     foreach ($extensiones as $ext) {
-
-
                         $ruta =
                             "../Imagenes/P-" .
                             $id .
                             "." .
                             $ext;
-
-
                         if (file_exists($ruta)) {
-
                             $imagen = $ruta;
-
                             break;
-
                         }
 
                     }
 
-
                     echo "<tr>";
 
-
-                    /* IMAGEN */
-
-                    echo "
-
-                        <td>
-
-                            <img
-
-                                src='" .
-                                htmlspecialchars($imagen) .
-                                "'
-
-                                alt='Imagen del producto'
-
-                            >
-
-                        </td>
-
-                    ";
+                    echo "<td><img src='" .htmlspecialchars($imagen) ."'alt='Imagen del producto' > </td>";
 
 
-                    /* ID */
-
-                    echo "
-
-                        <td>
-
-                            {$fila['id']}
-
-                        </td>
-
-                    ";
-
-
-                    /* NOMBRE */
-
-                    echo "
-
-                        <td>
-
-                            {$fila['nombre']}
-
-                        </td>
-
-                    ";
-
-
-                    /* DESCRIPCIÓN */
-
-                    echo "
-
-                        <td>
-
-                            {$fila['descripcion']}
-
-                        </td>
-
-                    ";
-
-
-                    /* PRECIO */
-
-                    echo "
-
-                        <td>
-
-                            <strong
-                                style='color:#0ba84a;'
-                            >
-
-                                Bs. {$fila['precio']}
-
-                            </strong>
-
-                        </td>
-
-                    ";
-
-
-                    /* COSTO */
-
-                    echo "
-
-                        <td>
-
-                            Bs. {$fila['costo']}
-
-                        </td>
-
-                    ";
-
-
-                    /* STOCK */
+                    echo "<td>{$fila['id']}</td> ";
+                    echo "<td> {$fila['nombre']}</td>";
+                    echo "<td> {$fila['descripcion']}</td> ";
+                    echo "<td><strong style='color:#0ba84a;'>Bs. {$fila['precio']}</strong></td> ";
+                    echo " <td> Bs. {$fila['costo']} </td> ";
 
                     $stock = (int) $fila['stock'];
-
                     if ($stock <= 0) {
-
                         $claseStock = "stock-sin";
-
                         $textoStock = "Sin stock";
-
                     } elseif ($stock <= $stockBajo) {
-
                         $claseStock = "stock-bajo";
-
                         $textoStock = "Stock: " . $stock;
-
                     } else {
-
                         $claseStock = "stock-normal";
-
                         $textoStock = "Stock: " . $stock;
-
                     }
 
                     echo "
-
                         <td>
-
                             <span class='$claseStock'>
-
                                 $textoStock
-
                             </span>
-
                         </td>
-
                     ";
-
-
-                    /* ACCIONES */
-
                     echo "
-
                         <td class='acciones'>
-
-
-                            <a
-
-                                href='editarproducto.php?id=$id'
-
-                                class='btn-editar'
-
-                            >
-
-                                Editar
-
-                            </a>
-
-
-                            <a
-
-                                href='#'
-
-                                class='btn-eliminar'
-
-                                onclick='confirmarEliminacion($id); return false;'
-
-                            >
-
-                                Eliminar
-
-                            </a>
-
-
-                            <a
-
-                                href='leerproducto.php?id=$id'
-
-                                class='btn-mostrar'
-
-                            >
-
-                                Mostrar
-
-                            </a>
-
-
+                            <a href='editarproducto.php?id=$id' class='btn-editar'> Editar </a>
+                            <a href='#' class='btn-eliminar' onclick='confirmarEliminacion($id); return false;'>Eliminar</a>
+                            <ahref='leerproducto.php?id=$id'class='btn-mostrar'>Mostrar</ahref=>
                         </td>
-
                     ";
-
-
                     echo "</tr>";
-
                 }
-
-
             } else {
-
-
                 echo "
-
                     <tr>
-
                         <td colspan='8'>
-
                             No hay productos registrados
-
                         </td>
-
                     </tr>
-
                 ";
-
             }
-
-
             $conexion->close();
-
             ?>
-
-
             </tbody>
-
-
         </table>
-
-
     </section>
-
-
 </section>
-
-
 <script>
 
 <?php
 
-/* NOTIFICACIÓN DE PRODUCTOS CON BAJO STOCK */
-
 $productosBajoStock = [];
-
 $resultadoStock = $conexion->query(
     "SELECT nombre, stock FROM productos WHERE stock <= $stockBajo ORDER BY stock ASC"
 );
 
 if ($resultadoStock && $resultadoStock->num_rows > 0) {
-
     while ($productoStock = $resultadoStock->fetch_assoc()) {
-
         $productosBajoStock[] =
             $productoStock['nombre'] . " (" . $productoStock['stock'] . " unidades)";
-
     }
-
 }
 
 ?>
-
 <?php if (count($productosBajoStock) > 0): ?>
 
 Swal.fire({
-
     title: "Productos con bajo stock",
-
     html: "Estos productos necesitan reposición:<br><br><strong><?= htmlspecialchars(implode('<br>', $productosBajoStock)) ?></strong>",
-
     icon: "warning",
-
     confirmButtonColor: "#0ba84a",
-
     confirmButtonText: "Entendido",
-
     customClass: {
-
         popup: "popup-stock"
-
     }
-
 });
 
 <?php endif; ?>
 
-
 function confirmarEliminacion(id) {
-
-
     Swal.fire({
 
         title: "¿Estás seguro?",
-
         text: "No podrás revertir esta acción",
-
         icon: "warning",
-
         showCancelButton: true,
-
         confirmButtonColor: "#0ba84a",
-
         cancelButtonColor: "#2B140D",
-
         confirmButtonText: "Sí, eliminar",
-
         cancelButtonText: "Cancelar",
-
         customClass: {
-
             popup: 'popup-organic'
-
         }
 
     }).then((result) => {
-
-
         if (result.isConfirmed) {
-
-
             window.location =
                 "eliminarproducto.php?id=" + id;
-
-
         }
-
     });
-
-
 }
 
 </script>
