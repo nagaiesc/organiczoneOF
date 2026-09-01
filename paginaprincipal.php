@@ -713,12 +713,11 @@ if (session_status() === PHP_SESSION_NONE) {
     </section>
     <section class="oz-cta">
         <h2>
-            Tu próximo<br>
-            favorito está aquí.
+            ESCRIBE TUS COMENTARIOS<br>
+            !AYUDANOS A MEJORAR¡
         </h2>
         <p>
-            Descubre el menú de Organic Zone
-            y encuentra algo que te sorprenda.
+         Tus comentarios nos valen verga JAJSJSA
         </p>
         <a href="Cliente/vistacliente.php"
             class="oz-btn oz-btn-principal">

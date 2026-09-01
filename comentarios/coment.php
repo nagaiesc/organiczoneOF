@@ -9,7 +9,7 @@
     <?php
     $asu=$_POST["asu"];
     $come=$_POST["come"];
-    $archivo=fopen("ejemplo.txt","a"); /*$archivo=fopen("ejemplo.txt","w");*/
+    $archivo=fopen("ejemplo.txt","a");
     fwrite($archivo, "ASUNTO:" .PHP_EOL);
     fwrite($archivo,$asu .PHP_EOL);
     fwrite($archivo, "COMENTARIO:" .PHP_EOL);
