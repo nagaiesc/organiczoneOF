@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="coment" method="POST">
+    <form action="coment.php" method="POST">
         <label for="">ASUNTO</label>
         <input type="text" name="asu" id="">
         <label for="">COMENTARIO</label>
