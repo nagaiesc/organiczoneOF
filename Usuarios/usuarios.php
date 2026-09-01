@@ -40,8 +40,6 @@ $SQL = "INSERT INTO usuarios (CI, nombre, direccion, celular, rol, estado)
 
     <meta charset="UTF-8">
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 </head>
 
 <body>
