@@ -14,7 +14,7 @@
     fwrite($archivo,$asu .PHP_EOL);
     fwrite($archivo, "COMENTARIO:" .PHP_EOL);
     fwrite($archivo, $come .PHP_EOL);
-    echo "<a href='revisar2.php'>ir a comentarios</a>"
+    echo "<a href='revisar.php'>ir a comentarios</a>"
     ?>
 </body>
 </html>
