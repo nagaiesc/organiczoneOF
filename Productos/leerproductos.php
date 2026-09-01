@@ -596,6 +596,71 @@ tbody td[colspan] {
 
 
 /* =========================================
+   STOCK BAJO
+========================================= */
+
+.stock-bajo {
+
+    display: inline-block;
+
+    background: #FCD09F;
+
+    color: #8A4B08;
+
+    padding: 7px 13px;
+
+    border-radius: 20px;
+
+    font-weight: 700;
+
+}
+
+.stock-sin {
+
+    display: inline-block;
+
+    background: #fff0ed;
+
+    color: #963a2a;
+
+    padding: 7px 13px;
+
+    border-radius: 20px;
+
+    font-weight: 700;
+
+}
+
+.stock-normal {
+
+    display: inline-block;
+
+    background: #eaf7ec;
+
+    color: #0ba84a;
+
+    padding: 7px 13px;
+
+    border-radius: 20px;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================
+   SWEET ALERT STOCK BAJO
+========================================= */
+
+.popup-stock {
+
+    border-radius: 20px !important;
+
+    font-family: 'Fredoka', Arial, sans-serif !important;
+
+}
+
+/* =========================================
    SWEET ALERT
 ========================================= */
 
@@ -846,6 +911,11 @@ tbody td[colspan] {
             }
 
 
+            /* STOCK BAJO
+               Consideramos bajo stock cuando quedan
+               5 unidades o menos. */
+            $stockBajo = 5;
+
             $sql = "SELECT * FROM productos";
 
             $resultado = $conexion->query($sql);
@@ -995,11 +1065,37 @@ tbody td[colspan] {
 
                     /* STOCK */
 
+                    $stock = (int) $fila['stock'];
+
+                    if ($stock <= 0) {
+
+                        $claseStock = "stock-sin";
+
+                        $textoStock = "Sin stock";
+
+                    } elseif ($stock <= $stockBajo) {
+
+                        $claseStock = "stock-bajo";
+
+                        $textoStock = "Stock: " . $stock;
+
+                    } else {
+
+                        $claseStock = "stock-normal";
+
+                        $textoStock = "Stock: " . $stock;
+
+                    }
+
                     echo "
 
                         <td>
 
-                            {$fila['stock']}
+                            <span class='$claseStock'>
+
+                                $textoStock
+
+                            </span>
 
                         </td>
 
@@ -1102,6 +1198,54 @@ tbody td[colspan] {
 
 
 <script>
+
+<?php
+
+/* NOTIFICACIÓN DE PRODUCTOS CON BAJO STOCK */
+
+$productosBajoStock = [];
+
+$resultadoStock = $conexion->query(
+    "SELECT nombre, stock FROM productos WHERE stock <= $stockBajo ORDER BY stock ASC"
+);
+
+if ($resultadoStock && $resultadoStock->num_rows > 0) {
+
+    while ($productoStock = $resultadoStock->fetch_assoc()) {
+
+        $productosBajoStock[] =
+            $productoStock['nombre'] . " (" . $productoStock['stock'] . " unidades)";
+
+    }
+
+}
+
+?>
+
+<?php if (count($productosBajoStock) > 0): ?>
+
+Swal.fire({
+
+    title: "Productos con bajo stock",
+
+    html: "Estos productos necesitan reposición:<br><br><strong><?= htmlspecialchars(implode('<br>', $productosBajoStock)) ?></strong>",
+
+    icon: "warning",
+
+    confirmButtonColor: "#0ba84a",
+
+    confirmButtonText: "Entendido",
+
+    customClass: {
+
+        popup: "popup-stock"
+
+    }
+
+});
+
+<?php endif; ?>
+
 
 function confirmarEliminacion(id) {
 
