@@ -721,7 +721,7 @@ if (session_status() === PHP_SESSION_NONE) {
         </p>
         <a href="Cliente/vistacliente.php"
             class="oz-btn oz-btn-principal">
-            Explorar menú
+            Explorar comentarios
         </a>
     </section>
     <footer>

@@ -346,6 +346,9 @@ if (session_status() == PHP_SESSION_NONE) {
     .zona-sesion {
         display: none;
     }
+    function Producto{
+        
+    }
 }
 
 </style>
@@ -493,6 +496,9 @@ if (session_status() == PHP_SESSION_NONE) {
 
         ?>
 
+    </section>
+    <section>
+       <button onclick="Producto()">Producto mas vendido</button>
     </section>
 
 
