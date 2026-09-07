@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 $conexion = new mysqli('localhost', 'root', '', 'organiczoneBD');
 
 if ($conexion->connect_error) {
@@ -22,11 +23,10 @@ $pedidoEstado = '';
 $pedidoConfirmado = !empty($_SESSION['pedido_confirmado']);
 
 if ($pedidoId > 0) {
-
     $stmtPedido = $conexion->prepare(
-        'SELECT id, estado, nombre, direccion, telefono, metodo 
-         FROM pedidos 
-         WHERE id = ? 
+        'SELECT id, estado, nombre, direccion, telefono, metodo
+         FROM pedidos
+         WHERE id = ?
          LIMIT 1'
     );
 
@@ -39,15 +39,12 @@ if ($pedidoId > 0) {
     $stmtPedido->close();
 
     if ($pedido) {
-
         $pedidoEstado = $pedido['estado'];
 
         if ($pedidoEstado !== 'Pendiente') {
             $pedidoConfirmado = true;
         }
-
     } else {
-
         unset(
             $_SESSION['pedido_id'],
             $_SESSION['pedido_confirmado']
@@ -60,8 +57,8 @@ if ($pedidoId > 0) {
 }
 
 $resultadoProductos = $conexion->query(
-    'SELECT id, nombre, descripcion, precio, stock 
-     FROM productos 
+    'SELECT id, nombre, descripcion, precio, stock
+     FROM productos
      ORDER BY id DESC'
 );
 
@@ -76,7 +73,6 @@ function obtenerImagenProducto(int $id): string
     ];
 
     foreach ($extensiones as $extension) {
-
         $rutaFisica = __DIR__ . '/../Imagenes/P-' . $id . '.' . $extension;
 
         if (file_exists($rutaFisica)) {
@@ -86,11 +82,9 @@ function obtenerImagenProducto(int $id): string
 
     return '../Imagenes/predeterminado.png';
 }
-
 ?>
 
 <!DOCTYPE html>
-
 <html lang="es">
 
 <head>
@@ -128,9 +122,7 @@ function obtenerImagenProducto(int $id): string
 <header class="barra-cliente">
 
     <a class="logo" href="../paginaprincipal.php">
-
         <span>My</span> Oz
-
     </a>
 
     <nav class="nav-cliente">
@@ -216,9 +208,7 @@ function obtenerImagenProducto(int $id): string
 
 </header>
 
-
 <main class="contenedor-principal">
-
 
     <section class="hero-cliente">
 
@@ -235,10 +225,8 @@ function obtenerImagenProducto(int $id): string
             </h1>
 
             <p class="hero-descripcion">
-
                 Elige tus productos favoritos y arma tu pedido
                 de forma rápida y sencilla.
-
             </p>
 
             <?php if ($pedidoId > 0): ?>
@@ -273,7 +261,6 @@ function obtenerImagenProducto(int $id): string
 
         </div>
 
-
         <div class="hero-imagen">
 
             <img
@@ -284,7 +271,6 @@ function obtenerImagenProducto(int $id): string
         </div>
 
     </section>
-
 
     <section
         class="seccion-productos"
@@ -304,7 +290,6 @@ function obtenerImagenProducto(int $id): string
                 </h2>
 
             </div>
-
 
             <div
                 class="estado-compra <?= $pedidoId > 0 ? 'activo' : '' ?>"
@@ -330,7 +315,6 @@ function obtenerImagenProducto(int $id): string
 
         </div>
 
-
         <div class="productos-grid">
 
             <?php if ($resultadoProductos && $resultadoProductos->num_rows > 0): ?>
@@ -348,7 +332,6 @@ function obtenerImagenProducto(int $id): string
                     $imagen = obtenerImagenProducto($idProducto);
 
                     ?>
-
 
                     <article class="producto-card">
 
@@ -375,7 +358,6 @@ function obtenerImagenProducto(int $id): string
 
                         </div>
 
-
                         <div class="producto-info">
 
                             <h3>
@@ -385,7 +367,6 @@ function obtenerImagenProducto(int $id): string
                             <p>
                                 <?= htmlspecialchars($producto['descripcion']) ?>
                             </p>
-
 
                             <div class="producto-pie">
 
@@ -398,7 +379,6 @@ function obtenerImagenProducto(int $id): string
                                         '.'
                                     ) ?>
                                 </strong>
-
 
                                 <button
                                     type="button"
@@ -424,9 +404,7 @@ function obtenerImagenProducto(int $id): string
             <?php else: ?>
 
                 <div class="sin-productos">
-
                     No hay productos disponibles en este momento.
-
                 </div>
 
             <?php endif; ?>
@@ -434,7 +412,6 @@ function obtenerImagenProducto(int $id): string
         </div>
 
     </section>
-
 
     <section class="seccion-informacion">
 
@@ -454,7 +431,6 @@ function obtenerImagenProducto(int $id): string
 
         </div>
 
-
         <div class="info-card crema">
 
             <span>
@@ -470,7 +446,6 @@ function obtenerImagenProducto(int $id): string
             </p>
 
         </div>
-
 
         <div class="info-card cafe">
 
@@ -492,7 +467,6 @@ function obtenerImagenProducto(int $id): string
 
 </main>
 
-
 <div
     class="modal-overlay"
     id="modalPedido"
@@ -508,7 +482,6 @@ function obtenerImagenProducto(int $id): string
             ×
         </button>
 
-
         <p class="modal-etiqueta">
             NUEVO PEDIDO
         </p>
@@ -518,75 +491,73 @@ function obtenerImagenProducto(int $id): string
         </h2>
 
         <p class="modal-descripcion">
-
             Confirma tus datos y elige cómo realizarás el pago.
-
         </p>
 
-
-        <form id="formPedido">
+        <form
+            id="formPedido"
+            method="POST"
+            novalidate
+        >
 
             <div class="campo-modal">
 
-                <label>
+                <label for="nombre">
                     Nombre
                 </label>
 
                 <input
                     type="text"
+                    id="nombre"
                     name="nombre"
                     placeholder="Escribe tu nombre"
-                    required
                 >
 
             </div>
-
 
             <div class="dos-columnas">
 
                 <div class="campo-modal">
 
-                    <label>
+                    <label for="telefono">
                         Teléfono
                     </label>
 
                     <input
                         type="text"
+                        id="telefono"
                         name="telefono"
                         placeholder="Tu número de teléfono"
-                        required
                     >
 
                 </div>
 
-
                 <div class="campo-modal">
 
-                    <label>
+                    <label for="direccion">
                         Dirección
                     </label>
 
                     <input
                         type="text"
+                        id="direccion"
                         name="direccion"
                         placeholder="Tu dirección"
-                        required
                     >
 
                 </div>
 
             </div>
 
-
             <div class="campo-modal">
 
-                <label>
+                <label for="metodo">
                     Método de pago
                 </label>
 
                 <select
+                    id="metodo"
                     name="metodo"
-                    required
                 >
 
                     <option value="">
@@ -609,7 +580,6 @@ function obtenerImagenProducto(int $id): string
 
             </div>
 
-
             <button
                 type="submit"
                 class="boton-principal ancho-completo"
@@ -618,7 +588,6 @@ function obtenerImagenProducto(int $id): string
             </button>
 
         </form>
-
 
         <p
             class="mensaje-form"
@@ -629,12 +598,10 @@ function obtenerImagenProducto(int $id): string
 
 </div>
 
-
 <div
     class="carrito-overlay"
     id="carritoOverlay"
 ></div>
-
 
 <aside
     class="carrito-panel"
@@ -655,7 +622,6 @@ function obtenerImagenProducto(int $id): string
 
         </div>
 
-
         <button
             type="button"
             class="modal-cerrar"
@@ -665,7 +631,6 @@ function obtenerImagenProducto(int $id): string
         </button>
 
     </div>
-
 
     <div
         class="carrito-contenido"
@@ -690,7 +655,6 @@ function obtenerImagenProducto(int $id): string
 
     </div>
 
-
     <div class="carrito-footer">
 
         <div class="total-linea">
@@ -705,7 +669,6 @@ function obtenerImagenProducto(int $id): string
 
         </div>
 
-
         <button
             type="button"
             class="boton-principal ancho-completo"
@@ -719,7 +682,6 @@ function obtenerImagenProducto(int $id): string
 
 </aside>
 
-
 <script>
 
 window.ORGANIC_ZONE = {
@@ -729,17 +691,140 @@ window.ORGANIC_ZONE = {
 
 </script>
 
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
+<script>
+
+$(document).ready(function () {
+
+    $("#formPedido").validate({
+
+        rules: {
+
+            nombre: {
+                required: true,
+                minlength: 2,
+                maxlength: 100
+            },
+
+            telefono: {
+                required: true,
+                digits: true,
+                minlength: 7,
+                maxlength: 15
+            },
+
+            direccion: {
+                required: true,
+                minlength: 5,
+                maxlength: 200
+            },
+
+            metodo: {
+                required: true
+            }
+
+        },
+
+        messages: {
+
+            nombre: {
+                required: "Este campo no puede estar vacío",
+                minlength: "El nombre debe tener al menos 2 caracteres",
+                maxlength: "El nombre no puede superar los 100 caracteres"
+            },
+
+            telefono: {
+                required: "Este campo no puede estar vacío",
+                digits: "Solo se permiten números",
+                minlength: "Ingresa un teléfono válido",
+                maxlength: "El teléfono no puede superar los 15 números"
+            },
+
+            direccion: {
+                required: "Este campo no puede estar vacío",
+                minlength: "La dirección debe tener al menos 5 caracteres",
+                maxlength: "La dirección no puede superar los 200 caracteres"
+            },
+
+            metodo: {
+                required: "Selecciona un método de pago"
+            }
+
+        },
+
+        errorElement: "span",
+
+        errorClass: "error",
+
+        errorPlacement: function (error, element) {
+
+            error.insertAfter(element);
+
+        },
+
+        highlight: function (element) {
+
+            $(element).addClass("input-error");
+
+        },
+
+        unhighlight: function (element) {
+
+            $(element).removeClass("input-error");
+
+        },
+
+        invalidHandler: function (event, validator) {
+
+            if (validator.numberOfInvalids() > 0) {
+
+                $(validator.errorList[0].element).focus();
+
+            }
+
+        }
+
+    });
+
+});
+
+</script>
+
+<style>
+
+.campo-modal .error {
+    display: block;
+    width: 100%;
+    margin-top: 6px;
+    color: #D62828;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.campo-modal input.input-error,
+.campo-modal select.input-error {
+    border-color: #D62828;
+    box-shadow: 0 0 0 3px rgba(214, 40, 40, 0.08);
+}
+
+.campo-modal input:not(.input-error):focus,
+.campo-modal select:not(.input-error):focus {
+    border-color: #0BA84A;
+    box-shadow: 0 0 0 3px rgba(11, 168, 74, 0.10);
+}
+
+</style>
 
 <script src="js/cliente.js"></script>
 
-
 <?php include("../footer.php"); ?>
 
-
 </body>
-
 </html>
-
 
 <?php
 

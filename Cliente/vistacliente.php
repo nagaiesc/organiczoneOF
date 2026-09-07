@@ -1,3 +1,4 @@
+```php
 <?php
 
 session_start();
@@ -18,7 +19,10 @@ $conexion->set_charset('utf8mb4');
 $ci = (int) $_SESSION['CI'];
 $usuario = null;
 
-$stmtUsuario = $conexion->prepare('SELECT CI, nombre, direccion, celular FROM usuarios WHERE CI = ? LIMIT 1');
+$stmtUsuario = $conexion->prepare(
+    'SELECT CI, nombre, direccion, celular FROM usuarios WHERE CI = ? LIMIT 1'
+);
+
 $stmtUsuario->bind_param('i', $ci);
 $stmtUsuario->execute();
 
@@ -28,6 +32,7 @@ $usuario = $resultadoUsuario->fetch_assoc();
 $stmtUsuario->close();
 
 if (!$usuario) {
+
     session_unset();
     session_destroy();
 
@@ -35,7 +40,9 @@ if (!$usuario) {
     exit();
 }
 
-$pedidoId = isset($_SESSION['pedido_id']) ? (int) $_SESSION['pedido_id'] : 0;
+$pedidoId = isset($_SESSION['pedido_id'])
+    ? (int) $_SESSION['pedido_id']
+    : 0;
 
 $pedidoEstado = '';
 
@@ -97,6 +104,7 @@ function obtenerImagenProducto(int $id): string
         $rutaFisica = __DIR__ . '/../Imagenes/P-' . $id . '.' . $extension;
 
         if (file_exists($rutaFisica)) {
+
             return '../Imagenes/P-' . $id . '.' . $extension;
         }
     }
@@ -759,9 +767,26 @@ $(document).ready(function() {
 
         },
 
+        invalidHandler: function(event, validator) {
+
+            if (validator.numberOfInvalids() > 0) {
+
+                $(validator.errorList[0].element).focus();
+
+            }
+
+        },
+
         submitHandler: function(form) {
 
-            form.submit();
+            $(form).find("button[type='submit']").prop("disabled", true);
+
+            form.dispatchEvent(
+                new Event("submit", {
+                    bubbles: true,
+                    cancelable: true
+                })
+            );
 
         }
 
@@ -795,6 +820,11 @@ $(document).ready(function() {
     box-shadow: 0 0 0 3px rgba(11, 168, 74, 0.10);
 }
 
+.campo-modal input,
+.campo-modal select {
+    font-family: 'Nunito', sans-serif;
+}
+
 </style>
 
 <script src="js/cliente.js"></script>
@@ -810,3 +840,4 @@ $(document).ready(function() {
 $conexion->close();
 
 ?>
+```
