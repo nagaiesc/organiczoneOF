@@ -209,10 +209,21 @@
             font-size: 28px;
         }
     }
-
+    .regresar {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 18px;
+    border-radius: 100px;
+    background: #f9c98f;
+    color: white;
+    text-decoration: none;
+    z-index: 10;
+}
     </style>
 </head>
 <body>
+    <a href="../paginaprincipal.php" class="regresar">Volver a la pagina</a>
     <form action="coment.php" method="POST">
         <label for="asu">ASUNTO</label>
         <input type="text" name="asu" placeholder="Escribe el asunto...">

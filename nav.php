@@ -287,6 +287,40 @@ if (session_status() == PHP_SESSION_NONE) {
 
     box-shadow: 0 5px 15px rgba(184, 50, 50, 0.35);
 }
+.zonaProducto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.botonProducto {
+    border-radius:100px;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 20px;
+    border-radius: 30px;
+    background: #FCD09F;
+    color: #2B140D;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
+}
+
+.botonProducto:hover {
+    color: #2B140D;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(252, 208, 159, 0.40);
+}
+
+.botonProducto:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
 
 
 @media (max-width: 900px) {
@@ -346,10 +380,9 @@ if (session_status() == PHP_SESSION_NONE) {
     .zona-sesion {
         display: none;
     }
-    function Producto{
-        
-    }
+
 }
+
 
 </style>
 
@@ -497,9 +530,10 @@ if (session_status() == PHP_SESSION_NONE) {
         ?>
 
     </section>
-    <section>
-       <button onclick="Producto()">Producto mas vendido</button>
+    <section class="zonaProducto">
+    <button class="botonProducto" onclick="window.location.href='productoBest.php'">Producto más vendido</button>
     </section>
+
 
 
 </nav>
@@ -508,7 +542,6 @@ if (session_status() == PHP_SESSION_NONE) {
 <!--EFECTO AL HACER SCROLL -->
 
 <script>
-
 window.addEventListener("scroll", function () {
 
     const barra = document.getElementById("barra");
