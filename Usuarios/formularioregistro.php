@@ -148,11 +148,7 @@
             color: var(--text-brown);
         }
 
-        .opt-activo {
-            background-color: var(--dark-green-btn);
-        }
-
-        .opt-inactivo {
+        .opt-cliente {
             background-color: var(--bg-page);
             color: var(--canva-green);
         }
@@ -352,7 +348,7 @@
                         Vendedor
                     </button>
 
-                    <button type="button" class="option-box opt-vendedor"
+                    <button type="button" class="option-box opt-cliente"
                         onclick="$(this).find('input').prop('checked', true).trigger('change')">
                         <input type="radio" name="rol" value="cliente">
                         Cliente
@@ -399,87 +395,101 @@
 </section>
 
 <script>
-
-    $("#usuariosForm").validate({
-
-        rules: {
-
-            CI: {
-                required: true
-            },
-
-            nombre: {
-                required: true
-            },
-
-            direccion: {
-                required: true
-            },
-
-            celular: {
-                required: true
-            }
-
+$("#usuariosForm").validate({
+    rules: {
+        CI: {
+            required: true
         },
-
-        messages: {
-
-            CI: {
-                required: "Este campo no puede estar vacío"
-            },
-
-            nombre: {
-                required: "Este campo no puede estar vacío"
-            },
-
-            direccion: {
-                required: "Este campo no puede estar vacío"
-            },
-
-            celular: {
-                required: "Este campo no puede estar vacío"
-            }
-
+        nombre: {
+            required: true
         },
-
-        submitHandler: function(form) {
-
-            $("#modalRegistro").addClass("active");
-
-            $("#cerrarModal").off("click").on("click", function() {
-
-                $("#modalRegistro").removeClass("active");
-
-                setTimeout(function() {
-
-                    window.location.href = "formulariosesion.php";
-
-                }, 200);
-
-            });
-
+        direccion: {
+            required: true
+        },
+        celular: {
+            required: true
         }
+    },
 
-    });
-
-    $(".options-container input[type='radio']").on("change", function() {
-
-        $(this)
-            .closest(".options-container")
-            .find(".option-box")
-            .blur();
-
-    });
-
-    $("#modalRegistro").on("click", function(e) {
-
-        if (e.target === this) {
-
-            $("#modalRegistro").removeClass("active");
-
+    messages: {
+        CI: {
+            required: "Este campo no puede estar vacío"
+        },
+        nombre: {
+            required: "Este campo no puede estar vacío"
+        },
+        direccion: {
+            required: "Este campo no puede estar vacío"
+        },
+        celular: {
+            required: "Este campo no puede estar vacío"
         }
+    },
 
-    });
+    submitHandler: function(form) {
+
+        $.ajax({
+            url: "usuarios.php",
+            type: "POST",
+            data: $(form).serialize(),
+            dataType: "json",
+
+            success: function(respuesta) {
+
+                if (respuesta.estado === "exito") {
+
+                    $("#modalRegistro").addClass("active");
+
+                } else {
+
+                    alert(respuesta.mensaje);
+
+                }
+
+            },
+
+            error: function(xhr) {
+
+                console.log(xhr.responseText);
+
+                alert("Ocurrió un error al intentar registrar el usuario.");
+
+            }
+        });
+
+        return false;
+    }
+});
+
+$(".options-container input[type='radio']").on("change", function() {
+
+    $(this)
+        .closest(".options-container")
+        .find(".option-box")
+        .blur();
+
+});
+
+$("#cerrarModal").on("click", function() {
+
+    $("#modalRegistro").removeClass("active");
+
+    setTimeout(function() {
+        window.location.href = "formulariosesion.php";
+    }, 200);
+
+});
+
+$("#modalRegistro").on("click", function(e) {
+
+    if (e.target === this) {
+
+        $("#modalRegistro").removeClass("active");
+
+    }
+
+});
+
 
 </script>
 
