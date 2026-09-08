@@ -1,4 +1,5 @@
 <?php 
+session_start();
 $servidor = "localhost";
 $nombre = "root";
 $contraseña = "";
@@ -14,12 +15,15 @@ $conn = new mysqli($servidor, $nombre, $contraseña, $BDnombre);
   $sql= "SELECT pedidos.fecha, SUM(ventas.costototal) AS ventas FROM ventas INNER JOIN pedidos ON ventas.pedidos_id = pedidos.id  GROUP BY pedidos.fecha";
   
   $resultado = $conn->query($sql);
+
+  $fecha = [];
+  $ventas = [];
   //Paso 2 Mover Datos al array
   while ($fila = $resultado->fetch_assoc()){
     $fecha[] = $fila["fecha"];
     $ventas[] = $fila["ventas"];
   }
-  $resultado = $conn->query($sql);
+  
 
 ?>
 
@@ -42,17 +46,36 @@ $conn = new mysqli($servidor, $nombre, $contraseña, $BDnombre);
     </div>
 
     <script>
-        const ctx = document.getElementById('graficoVentas');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: fechas,
-                datasets: [{
-                    label: 'Ingresos Totales ($)',
-                    data: ventas
-                }]
-            }
-        });
+    const config = {
+  type: 'line',
+  data: {
+    datasets: [{
+      borderColor: Utils.CHART_COLORS.red,
+      borderWidth: 1,
+      radius: 0,
+      data: data,
+    },
+    {
+      borderColor: Utils.CHART_COLORS.blue,
+      borderWidth: 1,
+      radius: 0,
+      data: data2,       }]
+    },
+    options: {
+      animation,
+      interaction: {
+       intersect: false
+    },
+    plugins: {
+      legend: false
+    },
+    scales: {
+      x: {
+        type: 'linear'
+      }
+    }
+  }
+};
     </script>
 </body>
 </html>
