@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+header('Content-Type: application/json; charset=utf-8');
 
 $nombreServidor = "localhost";
 $nombreUsuario = "root";
@@ -13,107 +15,96 @@ $conexion = new mysqli(
 );
 
 if ($conexion->connect_error) {
-    die("conexion fallida: " . $conexion->connect_error);
+    echo json_encode([
+        "estado" => "error",
+        "mensaje" => "Error de conexión con la base de datos."
+    ]);
+    exit;
 }
 
-$CI = $_POST['CI'];
-$nombre = $_POST['nombre'];
-$direccion = $_POST['direccion'];
-$celular = $_POST['celular'];
-$rol = $_POST['rol'];
+$conexion->set_charset("utf8mb4");
 
-/*
-   El estado no se pide en el formulario.
-   Se registra automáticamente como activo.
-*/
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    echo json_encode([
+        "estado" => "error",
+        "mensaje" => "Solicitud no válida."
+    ]);
+    exit;
+}
+
+$CI = trim($_POST['CI'] ?? '');
+$nombre = trim($_POST['nombre'] ?? '');
+$direccion = trim($_POST['direccion'] ?? '');
+$celular = trim($_POST['celular'] ?? '');
+$rol = trim($_POST['rol'] ?? '');
+
 $estado = "activo";
 
-$SQL = "INSERT INTO usuarios (CI, nombre, direccion, celular, rol, estado)
-        VALUES ('$CI', '$nombre', '$direccion', '$celular', '$rol', '$estado')";
+if (
+    $CI === '' ||
+    $nombre === '' ||
+    $direccion === '' ||
+    $celular === '' ||
+    $rol === ''
+) {
+    echo json_encode([
+        "estado" => "error",
+        "mensaje" => "Todos los campos son obligatorios."
+    ]);
+    exit;
+}
 
-?>
+$sql = "INSERT INTO usuarios 
+        (CI, nombre, direccion, celular, rol, estado)
+        VALUES (?, ?, ?, ?, ?, ?)";
 
-<!DOCTYPE html>
-<html lang="es">
+$stmt = $conexion->prepare($sql);
 
-<head>
+if (!$stmt) {
+    echo json_encode([
+        "estado" => "error",
+        "mensaje" => "Error al preparar el registro: " . $conexion->error
+    ]);
+    exit;
+}
 
-    <meta charset="UTF-8">
+$stmt->bind_param(
+    "ssssss",
+    $CI,
+    $nombre,
+    $direccion,
+    $celular,
+    $rol,
+    $estado
+);
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+if ($stmt->execute()) {
 
-</head>
-
-<body>
-
-<?php  
-
-if ($conexion->query($SQL) == TRUE) {
-
-    if ($rol == "cliente") {
-
-        $mensaje = "Tu cuenta de cliente ha sido registrada correctamente";
-
-    } else {
-
-        $mensaje = "El usuario ha sido registrado correctamente";
-
-    }
-
-    /*
-       Después del registro, todos los usuarios
-       vuelven al formulario de inicio de sesión.
-    */
-    $pagina = "../Usuarios/formulariosesion.php";
-
-    echo "
-    <script>
-
-        Swal.fire({
-
-            title: 'Registro exitoso',
-
-            text: '$mensaje',
-
-            icon: 'success',
-
-            confirmButtonText: 'Aceptar'
-
-        }).then(() => {
-
-            window.location.href = '$pagina';
-
-        });
-
-    </script>
-    ";
+    echo json_encode([
+        "estado" => "exito",
+        "mensaje" => "El usuario ha sido registrado correctamente."
+    ]);
 
 } else {
 
-    echo "
-    <script>
+    if ($stmt->errno == 1062) {
 
-        Swal.fire({
+        echo json_encode([
+            "estado" => "error",
+            "mensaje" => "El Carnet de Identidad ya está registrado."
+        ]);
 
-            title: 'Error',
+    } else {
 
-            text: '". $conexion->error ."',
-
-            icon: 'error',
-
-            confirmButtonText: 'Aceptar'
-
-        });
-
-    </script>
-    ";
-
+        echo json_encode([
+            "estado" => "error",
+            "mensaje" => "No se pudo registrar el usuario: " . $stmt->error
+        ]);
+    }
 }
 
+$stmt->close();
 $conexion->close();
 
 ?>
 
-</body>
-
-</html>

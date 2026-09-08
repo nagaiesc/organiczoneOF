@@ -33,8 +33,85 @@ function cerrarCarrito() {
 
 function mostrarMensaje(texto, error = false) {
     if (!mensajePedido) return;
+
     mensajePedido.textContent = texto;
     mensajePedido.style.color = error ? '#b3261e' : '#0A4A1B';
+}
+
+function mostrarAlerta(titulo, mensaje, tipo = 'success') {
+    const alertaAnterior = document.getElementById('ozAlerta');
+
+    if (alertaAnterior) {
+        alertaAnterior.remove();
+    }
+
+    let icono = '✓';
+    let clase = 'success';
+
+    if (tipo === 'error') {
+        icono = '!';
+        clase = 'error';
+    }
+
+    if (tipo === 'warning') {
+        icono = '!';
+        clase = 'warning';
+    }
+
+    const alerta = document.createElement('div');
+
+    alerta.id = 'ozAlerta';
+
+    alerta.innerHTML = `
+        <div class="oz-alerta-fondo">
+            <div class="oz-alerta-caja ${clase}">
+
+                <button
+                    type="button"
+                    class="oz-alerta-cerrar"
+                    aria-label="Cerrar">
+                    ×
+                </button>
+
+                <div class="oz-alerta-icono">
+                    ${icono}
+                </div>
+
+                <h2>${escaparHtml(titulo)}</h2>
+
+                <p>${escaparHtml(mensaje)}</p>
+
+                <button
+                    type="button"
+                    class="oz-alerta-boton">
+                    Aceptar
+                </button>
+
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(alerta);
+
+    const botonAceptar = alerta.querySelector('.oz-alerta-boton');
+    const botonCerrar = alerta.querySelector('.oz-alerta-cerrar');
+
+    botonAceptar.addEventListener('click', cerrarAlerta);
+    botonCerrar.addEventListener('click', cerrarAlerta);
+
+    alerta.querySelector('.oz-alerta-fondo').addEventListener('click', (evento) => {
+        if (evento.target.classList.contains('oz-alerta-fondo')) {
+            cerrarAlerta();
+        }
+    });
+
+    function cerrarAlerta() {
+        alerta.classList.add('oz-alerta-saliendo');
+
+        setTimeout(() => {
+            alerta.remove();
+        }, 250);
+    }
 }
 
 async function enviar(url, opciones = {}) {
@@ -91,7 +168,12 @@ async function crearPedido(evento) {
         actualizarEstadoVisual();
         await cargarCarrito();
 
-        alert('Pedido #' + pedidoId + ' creado correctamente. Ya puedes agregar productos.');
+        mostrarAlerta(
+            '¡Pedido creado!',
+            'Pedido #' + pedidoId + ' creado correctamente. Ya puedes agregar productos.',
+            'success'
+        );
+
     } catch (error) {
         mostrarMensaje(error.message, true);
     } finally {
@@ -105,10 +187,17 @@ function actualizarEstadoVisual() {
     if (estadoCompra) {
         if (pedidoId > 0) {
             estadoCompra.classList.add('activo');
-            estadoCompra.innerHTML = '<span class="punto"></span> Pedido #' + pedidoId + ' listo para agregar productos';
+
+            estadoCompra.innerHTML =
+                '<span class="punto"></span> Pedido #' +
+                pedidoId +
+                ' listo para agregar productos';
+
         } else {
             estadoCompra.classList.remove('activo');
-            estadoCompra.innerHTML = '<span class="punto bloqueado"></span> Genera un pedido para comprar';
+
+            estadoCompra.innerHTML =
+                '<span class="punto bloqueado"></span> Genera un pedido para comprar';
         }
     }
 }
@@ -120,12 +209,18 @@ async function agregarProducto(productoId) {
     }
 
     if (pedidoConfirmado) {
-        alert('Este pedido ya fue finalizado. Crea una nueva compra para agregar productos.');
+        mostrarAlerta(
+            'Pedido finalizado',
+            'Este pedido ya fue finalizado. Crea una nueva compra para agregar productos.',
+            'warning'
+        );
+
         return;
     }
 
     try {
         const datos = new FormData();
+
         datos.append('productos_id', productoId);
         datos.append('cantidad', '1');
 
@@ -140,8 +235,13 @@ async function agregarProducto(productoId) {
         if (respuesta.mensaje) {
             console.log(respuesta.mensaje);
         }
+
     } catch (error) {
-        alert(error.message);
+        mostrarAlerta(
+            'No se pudo agregar',
+            error.message,
+            'error'
+        );
     }
 }
 
@@ -150,6 +250,7 @@ async function actualizarCantidad(productoId, cantidad) {
 
     try {
         const datos = new FormData();
+
         datos.append('productos_id', productoId);
         datos.append('cantidad', cantidad);
 
@@ -159,8 +260,13 @@ async function actualizarCantidad(productoId, cantidad) {
         });
 
         await cargarCarrito();
+
     } catch (error) {
-        alert(error.message);
+        mostrarAlerta(
+            'Error',
+            error.message,
+            'error'
+        );
     }
 }
 
@@ -169,6 +275,7 @@ async function eliminarProducto(productoId) {
 
     try {
         const datos = new FormData();
+
         datos.append('productos_id', productoId);
 
         await enviar('ajax/eliminar_carrito.php', {
@@ -177,29 +284,46 @@ async function eliminarProducto(productoId) {
         });
 
         await cargarCarrito();
+
     } catch (error) {
-        alert(error.message);
+        mostrarAlerta(
+            'Error',
+            error.message,
+            'error'
+        );
     }
 }
 
 async function cargarCarrito() {
     if (!pedidoId) {
-        renderCarrito([] , 0);
+        renderCarrito([], 0);
         return;
     }
 
     try {
         const respuesta = await enviar('ajax/obtener_carrito.php');
-        renderCarrito(respuesta.items || [], Number(respuesta.total || 0));
+
+        renderCarrito(
+            respuesta.items || [],
+            Number(respuesta.total || 0)
+        );
+
     } catch (error) {
         console.error(error);
     }
 }
 
 function renderCarrito(items, total) {
-    contadorCarrito.textContent = items.reduce((suma, item) => suma + Number(item.cantidad), 0);
-    totalCarrito.textContent = 'Bs. ' + formatearNumero(total);
-    finalizarPedido.disabled = items.length === 0 || pedidoConfirmado;
+    contadorCarrito.textContent = items.reduce(
+        (suma, item) => suma + Number(item.cantidad),
+        0
+    );
+
+    totalCarrito.textContent =
+        'Bs. ' + formatearNumero(total);
+
+    finalizarPedido.disabled =
+        items.length === 0 || pedidoConfirmado;
 
     if (items.length === 0) {
         carritoContenido.innerHTML = `
@@ -209,22 +333,62 @@ function renderCarrito(items, total) {
                 <p>Agrega productos para verlos aquí.</p>
             </div>
         `;
+
         return;
     }
 
     carritoContenido.innerHTML = items.map((item) => `
         <div class="item-carrito">
+
             <div class="item-superior">
-                <h3>${escaparHtml(item.nombre)}</h3>
-                <span class="item-precio">Bs. ${formatearNumero(item.costototal)}</span>
+
+                <h3>
+                    ${escaparHtml(item.nombre)}
+                </h3>
+
+                <span class="item-precio">
+                    Bs. ${formatearNumero(item.costototal)}
+                </span>
+
             </div>
-            <p class="item-detalle">Bs. ${formatearNumero(item.precio)} cada uno</p>
+
+            <p class="item-detalle">
+                Bs. ${formatearNumero(item.precio)} cada uno
+            </p>
+
             <div class="controles-cantidad">
-                <button type="button" onclick="actualizarCantidad(${item.productos_id}, ${Number(item.cantidad) - 1})">−</button>
-                <span>${item.cantidad}</span>
-                <button type="button" onclick="actualizarCantidad(${item.productos_id}, ${Number(item.cantidad) + 1})">+</button>
-                <button type="button" class="eliminar-item" onclick="eliminarProducto(${item.productos_id})">Eliminar</button>
+
+                <button
+                    type="button"
+                    onclick="actualizarCantidad(
+                        ${item.productos_id},
+                        ${Number(item.cantidad) - 1}
+                    )">
+                    −
+                </button>
+
+                <span>
+                    ${item.cantidad}
+                </span>
+
+                <button
+                    type="button"
+                    onclick="actualizarCantidad(
+                        ${item.productos_id},
+                        ${Number(item.cantidad) + 1}
+                    )">
+                    +
+                </button>
+
+                <button
+                    type="button"
+                    class="eliminar-item"
+                    onclick="eliminarProducto(${item.productos_id})">
+                    Eliminar
+                </button>
+
             </div>
+
         </div>
     `).join('');
 }
@@ -252,42 +416,105 @@ async function finalizarCompra() {
     }
 
     try {
-        const respuesta = await enviar('ajax/finalizar_pedido.php', {
-            method: 'POST'
-        });
+        const respuesta = await enviar(
+            'ajax/finalizar_pedido.php',
+            {
+                method: 'POST'
+            }
+        );
 
         pedidoConfirmado = true;
+
         cerrarCarrito();
-        window.location.href = 'recibo.php?id=' + respuesta.pedido_id;
+
+        window.location.href =
+            'recibo.php?id=' + respuesta.pedido_id;
+
     } catch (error) {
-        alert(error.message);
+        mostrarAlerta(
+            'No se pudo finalizar',
+            error.message,
+            'error'
+        );
     }
 }
 
-document.getElementById('abrirPedido')?.addEventListener('click', abrirModalPedido);
-document.getElementById('abrirCarrito')?.addEventListener('click', abrirCarrito);
-document.getElementById('cerrarCarrito')?.addEventListener('click', cerrarCarrito);
-carritoOverlay?.addEventListener('click', cerrarCarrito);
-formPedido?.addEventListener('submit', crearPedido);
-finalizarPedido?.addEventListener('click', finalizarCompra);
+document
+    .getElementById('abrirPedido')
+    ?.addEventListener(
+        'click',
+        abrirModalPedido
+    );
 
-document.querySelectorAll('[data-cerrar-modal]').forEach((boton) => {
-    boton.addEventListener('click', () => {
-        const id = boton.getAttribute('data-cerrar-modal');
-        document.getElementById(id)?.classList.remove('visible');
+document
+    .getElementById('abrirCarrito')
+    ?.addEventListener(
+        'click',
+        abrirCarrito
+    );
+
+document
+    .getElementById('cerrarCarrito')
+    ?.addEventListener(
+        'click',
+        cerrarCarrito
+    );
+
+carritoOverlay?.addEventListener(
+    'click',
+    cerrarCarrito
+);
+
+formPedido?.addEventListener(
+    'submit',
+    crearPedido
+);
+
+finalizarPedido?.addEventListener(
+    'click',
+    finalizarCompra
+);
+
+document
+    .querySelectorAll('[data-cerrar-modal]')
+    .forEach((boton) => {
+
+        boton.addEventListener('click', () => {
+
+            const id =
+                boton.getAttribute('data-cerrar-modal');
+
+            document
+                .getElementById(id)
+                ?.classList.remove('visible');
+
+        });
+
     });
-});
 
-document.querySelectorAll('.boton-agregar').forEach((boton) => {
-    boton.addEventListener('click', () => {
-        agregarProducto(Number(boton.dataset.productoId));
+document
+    .querySelectorAll('.boton-agregar')
+    .forEach((boton) => {
+
+        boton.addEventListener('click', () => {
+
+            agregarProducto(
+                Number(boton.dataset.productoId)
+            );
+
+        });
+
     });
-});
 
-modalPedido?.addEventListener('click', (evento) => {
-    if (evento.target === modalPedido) {
-        cerrarModalPedido();
+modalPedido?.addEventListener(
+    'click',
+    (evento) => {
+
+        if (evento.target === modalPedido) {
+            cerrarModalPedido();
+        }
+
     }
-});
+);
 
 cargarCarrito();
