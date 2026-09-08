@@ -1,6 +1,5 @@
 <?php
 
-/* Evita iniciar la sesión dos veces */
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -9,134 +8,191 @@ if (session_status() == PHP_SESSION_NONE) {
 
 <style>
 
-/* BARRA PRINCIPAL */
+:root {
+    --verde: #12A33C;
+    --verde-oscuro: #0A4A1B;
+    --verde-claro: #EAF7EC;
+    --cafe: #2B140D;
+    --crema: #FCD09F;
+    --blanco: #FFFFFF;
+}
 
 #barra {
-    background: rgba(18, 163, 60, 0.90);
+    width: min(1280px, 92%);
+    height: 76px;
 
     position: fixed;
-    top: 20px;
+    top: 22px;
     left: 50%;
     transform: translateX(-50%);
 
-    width: 92%;
-    max-width: 1350px;
-    min-height: 68px;
+    padding: 0 22px 0 28px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 25px;
+
+    background: rgba(18, 163, 60, .94);
 
     border-radius: 50px;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 0 25px;
-    box-sizing: border-box;
+    box-shadow: 0 10px 28px rgba(18, 163, 60, .20);
 
     z-index: 1000;
 
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    font-family: 'Nunito', sans-serif;
 
-    font-family: 'Fredoka', sans-serif;
-
-    transition: 0.5s ease;
+    transition:
+        background .4s ease,
+        box-shadow .4s ease,
+        transform .4s ease;
 }
-
-
-/*CAMBIO AL HACER SCROLL */
 
 #barra.desliza {
-    background: rgba(43, 20, 13, 0.96);
+    background: rgba(43, 20, 13, .97);
 
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    box-shadow:
+        0 10px 28px rgba(43, 20, 13, .28);
 }
 
+#barra > div {
+    width: 70px;
+    min-width: 70px;
 
-/* LOGO */
-
-#orga {
-    text-decoration: none;
-    color: white;
+    height: 70px;
 
     display: flex;
     align-items: center;
+    justify-content: center;
+}
 
-    margin-left: 5px;
+#orga {
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    color: var(--blanco);
+
+    line-height: .72;
+
+    transition: .3s ease;
+}
+
+#orga:hover {
+    transform: scale(1.06);
 }
 
 #orga h1 {
     margin: 0;
 
-    font-size: 27px;
-    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    letter-spacing: 0.5px;
+    font-family: 'Fredoka', sans-serif;
+
+    font-size: 0;
+
+    line-height: .72;
 }
 
+#orga h1::before {
+    content: "My";
+
+    color: var(--blanco);
+
+    font-size: 22px;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 6px;
+}
+
+#orga h1::after {
+    content: "Oz";
+
+    color: var(--crema);
+
+    font-size: 31px;
+
+    font-weight: 700;
+
+    letter-spacing: -1px;
+}
 
 #links {
+    flex: 1;
+
+    height: 100%;
+
     display: flex;
-
-    flex-direction: row;
-
     align-items: center;
     justify-content: center;
 
-    gap: 12px;
+    gap: 8px;
 }
-
-
-/* Cada elemento del menú */
 
 .item {
     position: relative;
+
+    display: flex;
+    align-items: center;
+
+    height: 100%;
 }
 
-
-/* Botones principales */
-
 .item > a {
-    display: flex;
+    height: 46px;
 
+    display: flex;
     align-items: center;
+    justify-content: center;
 
     gap: 8px;
 
+    padding: 0 20px;
+
+    background: rgba(255, 255, 255, .13);
+
+    color: var(--blanco);
+
     text-decoration: none;
 
-    color: white;
+    border-radius: 50px;
 
-    padding: 11px 18px;
+    font-family: 'Nunito', sans-serif;
 
-    border-radius: 30px;
+    font-size: 16px;
 
-    background: rgba(255, 255, 255, 0.13);
+    font-weight: 800;
 
-    font-size: 17px;
-    font-weight: 500;
+    white-space: nowrap;
 
-    transition: 0.3s ease;
+    transition: .3s ease;
 }
 
-
-/* Efecto al pasar el mouse */
-
 .item > a:hover {
-    background: rgba(252, 208, 159, 0.90);
+    background: var(--crema);
 
-    color: #2B140D;
+    color: var(--cafe);
 
     transform: translateY(-2px);
 }
 
-
 .flecha {
-    font-size: 11px;
+    font-size: 10px;
 
-    transition: 0.3s ease;
+    transition: .3s ease;
 }
-
-
-/* Girar flecha */
 
 .item:hover .flecha {
     transform: rotate(90deg);
@@ -145,269 +201,395 @@ if (session_status() == PHP_SESSION_NONE) {
 .submenu {
     position: absolute;
 
-    top: calc(100% + 10px);
+    top: 67px;
     left: 0;
 
-    min-width: 190px;
+    min-width: 205px;
 
-    background: rgba(18, 163, 60, 0.96);
+    padding: 7px;
 
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    background: rgba(18, 163, 60, .98);
 
-    border-radius: 18px;
+    border-radius: 20px;
 
-    overflow: hidden;
-
-    max-height: 0;
+    box-shadow:
+        0 12px 30px rgba(43, 20, 13, .22);
 
     opacity: 0;
 
-    transform: translateY(-8px);
+    visibility: hidden;
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    transform: translateY(-10px);
 
     transition:
-        max-height 0.4s ease,
-        opacity 0.3s ease,
-        transform 0.3s ease;
+        opacity .25s ease,
+        visibility .25s ease,
+        transform .25s ease;
 }
 
-
-/* Mostrar submenú */
-
 .item:hover .submenu {
-    max-height: 300px;
-
     opacity: 1;
+
+    visibility: visible;
 
     transform: translateY(0);
 }
-
-
-/* Links del submenú */
 
 .submenu a {
     display: block;
 
-    text-decoration: none;
+    padding: 13px 16px;
 
     color: white;
 
-    padding: 13px 17px;
+    text-decoration: none;
 
-    font-size: 16px;
+    border-radius: 15px;
 
-    font-weight: 500;
+    font-family: 'Nunito', sans-serif;
 
-    transition: 0.25s ease;
+    font-size: 15px;
+
+    font-weight: 700;
+
+    transition: .25s ease;
 }
-
-
-/* Hover del submenú */
 
 .submenu a:hover {
-    background: #FCD09F;
+    background: var(--crema);
 
-    color: #2B140D;
+    color: var(--cafe);
 
-    padding-left: 22px;
+    padding-left: 21px;
 }
-
 
 .zona-sesion {
     display: flex;
-
     align-items: center;
 
-    gap: 10px;
+    min-width: max-content;
 }
 
-
-/* Botón de sesión */
-
 .boton-sesion {
+    height: 46px;
+
     display: flex;
-
     align-items: center;
-
     justify-content: center;
+
+    padding: 0 21px;
+
+    border-radius: 50px;
 
     text-decoration: none;
 
-    padding: 11px 20px;
+    font-family: 'Nunito', sans-serif;
 
-    border-radius: 30px;
+    font-size: 15px;
 
-    font-family: 'Fredoka', sans-serif;
+    font-weight: 800;
 
-    font-size: 16px;
+    white-space: nowrap;
 
-    font-weight: 600;
-
-    transition: 0.3s ease;
+    transition: .3s ease;
 }
-
-
-/* ==============================
-   INICIAR SESIÓN
-============================== */
 
 .boton-iniciar {
-    background: #FCD09F;
+    background: var(--crema);
 
-    color: #2B140D;
+    color: var(--cafe);
 }
-
 
 .boton-iniciar:hover {
     background: white;
 
+    color: var(--cafe);
+
     transform: translateY(-2px);
 
-    box-shadow: 0 5px 15px rgba(252, 208, 159, 0.35);
+    box-shadow:
+        0 7px 17px rgba(252, 208, 159, .35);
 }
 
-
-/* ==============================
-   CERRAR SESIÓN
-============================== */
-
 .boton-cerrar {
-    background: #2B140D;
+    background: var(--cafe);
 
     color: white;
 }
 
-
 .boton-cerrar:hover {
     background: #b83232;
 
+    color: white;
+
     transform: translateY(-2px);
 
-    box-shadow: 0 5px 15px rgba(184, 50, 50, 0.35);
+    box-shadow:
+        0 7px 17px rgba(184, 50, 50, .30);
 }
+
 .zonaProducto {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    min-width: max-content;
 }
 
 .botonProducto {
-    border-radius:100px;
-    outline: none;
+    height: 46px;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 11px 20px;
-    border-radius: 30px;
-    background: #FCD09F;
-    color: #2B140D;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
+
+    padding: 0 21px;
+
+    border: none;
+    outline: none;
+
+    border-radius: 50px;
+
+    background: var(--crema);
+
+    color: var(--cafe);
+
+    font-family: 'Nunito', sans-serif;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
     white-space: nowrap;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
+
+    cursor: pointer;
+
+    transition: .3s ease;
 }
 
 .botonProducto:hover {
-    color: #2B140D;
+    background: white;
+
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(252, 208, 159, 0.40);
+
+    box-shadow:
+        0 7px 17px rgba(252, 208, 159, .35);
 }
 
 .botonProducto:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transform: scale(.97);
 }
 
-
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
 
     #barra {
-        width: 95%;
+        width: 94%;
 
-        padding: 0 15px;
+        gap: 15px;
+
+        padding-left: 20px;
+        padding-right: 18px;
     }
 
-    #orga h1 {
-        font-size: 22px;
+    #barra > div {
+        width: 62px;
+        min-width: 62px;
     }
 
-    #links {
-        gap: 5px;
+    #orga h1::before {
+        font-size: 19px;
+    }
+
+    #orga h1::after {
+        font-size: 28px;
     }
 
     .item > a {
-        padding: 9px 12px;
+        padding: 0 15px;
 
-        font-size: 14px;
+        font-size: 15px;
     }
 
-    .boton-sesion {
-        padding: 9px 13px;
+    .boton-sesion,
+    .botonProducto {
+        padding: 0 16px;
 
         font-size: 14px;
     }
 }
 
+@media (max-width: 1050px) {
+
+    #barra {
+        gap: 8px;
+
+        padding-left: 15px;
+        padding-right: 12px;
+    }
+
+    #links {
+        gap: 3px;
+    }
+
+    .item > a {
+        padding: 0 11px;
+
+        font-size: 13px;
+    }
+
+    .boton-sesion,
+    .botonProducto {
+        padding: 0 12px;
+
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 850px) {
+
+    #barra {
+        height: 70px;
+
+        border-radius: 50px;
+    }
+
+    #barra > div {
+        width: 55px;
+        min-width: 55px;
+    }
+
+    #orga {
+        width: 50px;
+        height: 58px;
+    }
+
+    #orga h1::before {
+        font-size: 16px;
+    }
+
+    #orga h1::after {
+        font-size: 24px;
+    }
+
+    .item > a {
+        height: 43px;
+
+        padding: 0 9px;
+
+        font-size: 12px;
+    }
+
+    .boton-sesion,
+    .botonProducto {
+        height: 43px;
+
+        padding: 0 10px;
+
+        font-size: 12px;
+    }
+}
 
 @media (max-width: 700px) {
 
     #barra {
-        min-height: 60px;
+        width: 94%;
+
+        height: 64px;
+
+        padding: 0 10px;
+
+        gap: 5px;
     }
 
-    #orga {
+    #barra > div {
         display: none;
     }
 
-    #barra {
-        justify-content: center;
-    }
-
     #links {
-        gap: 4px;
+        gap: 3px;
     }
 
     .item > a {
-        padding: 8px 10px;
+        height: 42px;
 
-        font-size: 13px;
+        padding: 0 10px;
+
+        font-size: 12px;
+    }
+
+    .flecha {
+        display: none;
     }
 
     .zona-sesion {
         display: none;
     }
 
+    .botonProducto {
+        height: 42px;
+
+        padding: 0 11px;
+
+        font-size: 11px;
+    }
 }
 
+@media (max-width: 500px) {
+
+    #barra {
+        width: 94%;
+
+        height: 60px;
+
+        justify-content: center;
+
+        border-radius: 50px;
+    }
+
+    #links {
+        width: 100%;
+
+        justify-content: center;
+    }
+
+    .item > a {
+        height: 40px;
+
+        padding: 0 8px;
+
+        font-size: 10px;
+    }
+
+    .zonaProducto {
+        display: none;
+    }
+
+    .submenu {
+        top: 57px;
+
+        min-width: 175px;
+    }
+
+    .submenu a {
+        font-size: 13px;
+    }
+}
 
 </style>
 
-
-<!-- BARRA DE NAVEGACIÓN -->
-
 <nav id="barra">
 
-
-    <!--  LOGO -->
-
     <div>
-<a href="Cliente/vistacliente.php" id="orga">
-    <h1>OrganicZone</h1>
-</a>
+
+        <a href="Cliente/vistacliente.php" id="orga">
+
+            <h1>OrganicZone</h1>
+
+        </a>
 
     </div>
 
-
-    <!--MENÚ PRINCIPAL -->
-
     <section id="links">
-
-
-        <!-- NOSOTROS -->
 
         <div class="item">
 
@@ -421,21 +603,15 @@ if (session_status() == PHP_SESSION_NONE) {
 
             </a>
 
-
             <div class="submenu">
 
                 <a href="/organiczoneOF/misionvision.php">
-
                     Misión y Visión
-
                 </a>
 
             </div>
 
         </div>
-
-
-        <!--  ABOUT US -->
 
         <div class="item">
 
@@ -449,99 +625,73 @@ if (session_status() == PHP_SESSION_NONE) {
 
             </a>
 
-
             <div class="submenu">
 
                 <a href="/organiczoneOF/contacto.php">
-
                     Contacto
-
                 </a>
 
             </div>
 
         </div>
 
-
-        <!--   MENÚ -->
-
         <div class="item">
+
             <a href="Hamburguesas.php">
                 Menú
             </a>
+
         </div>
 
         <div class="item">
+
             <a href="/organiczoneOF/Cliente/index.php">
                 Comprar
             </a>
+
         </div>
 
     </section>
 
-
-    <!-- BOTONES DE SESIÓN -->
-
     <section class="zona-sesion">
 
-        <?php
-
-        /* Si existe el nombre, significa que inició sesión */
-
-        if (isset($_SESSION['nombre'])) {
-
-        ?>
-
-            <!--USUARIO CON SESIÓN -->
+        <?php if (isset($_SESSION['nombre'])): ?>
 
             <a
                 href="/organiczoneOF/Usuarios/cerrarse.php"
                 class="boton-sesion boton-cerrar"
             >
-
                 Cerrar sesión
-
             </a>
 
-
-        <?php
-
-        } else {
-
-        ?>
-
-
-            <!-- USUARIO SIN SESIÓN -->
+        <?php else: ?>
 
             <a
                 href="/organiczoneOF/Usuarios/formulariosesion.php"
                 class="boton-sesion boton-iniciar"
             >
-
                 Iniciar sesión
-
             </a>
 
-
-        <?php
-
-        }
-
-        ?>
+        <?php endif; ?>
 
     </section>
+
     <section class="zonaProducto">
-    <button class="botonProducto" onclick="window.location.href='productoBest.php'">Producto más vendido</button>
+
+        <button
+            class="botonProducto"
+            onclick="window.location.href='productoBest.php'"
+        >
+            Producto más vendido
+        </button>
+
     </section>
-
-
 
 </nav>
 
-
-<!--EFECTO AL HACER SCROLL -->
-
 <script>
+
 window.addEventListener("scroll", function () {
 
     const barra = document.getElementById("barra");

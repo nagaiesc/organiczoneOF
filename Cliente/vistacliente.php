@@ -1,4 +1,3 @@
-```php
 <?php
 
 session_start();
@@ -840,4 +839,4 @@ $(document).ready(function() {
 $conexion->close();
 
 ?>
-```
+

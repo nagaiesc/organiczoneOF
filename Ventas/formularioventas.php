@@ -12,13 +12,17 @@ $BDnombre = "organiczoneBD";
 
 $conn = new mysqli($servidor, $nombre, $contraseña, $BDnombre);
 
-if($conn->connect_error) {
-    die ("conexion fallida" . $conn->connect_error);
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
 }
 
-// Buscamos los productos del pedido para luego mostrar el stock
-$sqlCarrito = "SELECT productos_id, cantidad FROM carrito WHERE pedidos_id = '$pedidos_id'";
-$resultadoCarrito = $conn->query($sqlCarrito);
+$conn->set_charset("utf8mb4");
+
+$sqlCarrito = "SELECT productos_id, cantidad FROM carrito WHERE pedidos_id = ?";
+$stmtCarrito = $conn->prepare($sqlCarrito);
+$stmtCarrito->bind_param("i", $pedidos_id);
+$stmtCarrito->execute();
+$resultadoCarrito = $stmtCarrito->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -27,34 +31,41 @@ $resultadoCarrito = $conn->query($sqlCarrito);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Registrar Venta - OrganicZone</title>
-<!-- Tipografía Fredoka de Google Fonts -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/localization/messages_es.min.js"></script>
 
 <style>
-body {
-    background: #EAF7EC;
+* {
     margin: 0;
-    font-family: 'Fredoka', sans-serif;
-    color: #111;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #F5EEE3;
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    color: #2B140D;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
+    padding: 30px;
 }
 
-/* Tarjeta principal estilo vistavendedor */
 .caja-formulario {
-    background: #46b666;
+    background: #12A33C;
     width: 100%;
-    max-width: 700px;
-    border-radius: 45px;
-    padding: 40px;
-    box-sizing: border-box;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    max-width: 760px;
+    border-radius: 38px;
+    padding: 38px;
+    box-shadow: 0 18px 45px rgba(43, 20, 13, .15);
 }
 
 .caja-titulos {
@@ -63,27 +74,28 @@ body {
 }
 
 .texto-saludo {
-    font-size: 32px;
-    color: #EAF7EC;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 30px;
+    color: #FCD09F;
     margin: 0;
     font-weight: 600;
 }
 
 .texto-rol {
-    font-size: 52px;
-    color: #2B140D;
-    margin: -5px 0 0 0;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 54px;
+    color: #FFFFFF;
+    margin: 0;
     font-weight: 700;
     line-height: 1;
 }
 
-/* Contenedor de la Tabla */
 .caja-tabla {
     background: #0A4A1B;
-    border-radius: 30px;
-    padding: 20px;
+    border-radius: 27px;
+    padding: 18px;
     margin-bottom: 25px;
-    overflow: hidden;
+    overflow-x: auto;
 }
 
 table {
@@ -94,18 +106,20 @@ table {
 
 th {
     color: #FCD09F;
-    font-size: 18px;
-    font-weight: 700;
-    padding: 10px 15px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    padding: 10px 12px;
     text-align: center;
 }
 
 td {
-    background: #ffffff;
+    background: #FFFFFF;
     color: #2B140D;
+    font-family: 'Nunito', sans-serif;
     font-size: 16px;
-    font-weight: 600;
-    padding: 12px 15px;
+    font-weight: 700;
+    padding: 13px 12px;
     text-align: center;
 }
 
@@ -119,11 +133,10 @@ td:last-child {
     border-bottom-right-radius: 15px;
 }
 
-/* Sección del Pago */
 .caja-pago {
     background: #FCD09F;
-    border-radius: 30px;
-    padding: 25px 30px;
+    border-radius: 27px;
+    padding: 24px 28px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -131,63 +144,132 @@ td:last-child {
 }
 
 .grupo-campo {
+    width: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 15px;
 }
 
-label {
-    font-size: 22px;
-    font-weight: 700;
+.grupo-campo label {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 21px;
+    font-weight: 600;
     color: #2B140D;
 }
 
 select {
-    font-family: 'Fredoka', sans-serif;
+    height: 48px;
+    min-width: 220px;
+    padding: 0 18px;
+    font-family: 'Nunito', sans-serif;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
     color: #2B140D;
-    background: #EAF7EC;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
+    background: #FFFFFF;
+    border: 3px solid transparent;
+    border-radius: 50px;
     outline: none;
     cursor: pointer;
+    transition: .3s ease;
 }
 
-/* Botón principal estilo vistavendedor */
+select:focus {
+    border-color: #12A33C;
+}
+
+select.error {
+    border-color: #B83232;
+}
+
+label.error {
+    color: #B83232 !important;
+    font-family: 'Nunito', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+}
+
 .boton-registrar {
+    min-width: 220px;
+    height: 50px;
     background: #2B140D;
-    color: #ffffff;
+    color: #FFFFFF;
     font-family: 'Fredoka', sans-serif;
     font-size: 20px;
-    font-weight: 700;
-    padding: 12px 40px;
-    border-radius: 25px;
+    font-weight: 600;
+    padding: 0 35px;
+    border-radius: 50px;
     border: none;
     cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.2s ease;
+    transition: .3s ease;
 }
 
 .boton-registrar:hover {
+    background: #0A4A1B;
     transform: translateY(-2px);
-    background: #1a0b08;
+    box-shadow: 0 8px 18px rgba(43, 20, 13, .20);
 }
 
-@media (max-width: 600px) {
+.boton-registrar:active {
+    transform: scale(.98);
+}
+
+@media (max-width: 650px) {
+    body {
+        padding: 15px;
+    }
+
     .caja-formulario {
-        padding: 25px;
+        padding: 25px 18px;
         border-radius: 30px;
     }
-    .texto-rol {
-        font-size: 40px;
+
+    .texto-saludo {
+        font-size: 25px;
     }
+
+    .texto-rol {
+        font-size: 42px;
+    }
+
+    .caja-tabla {
+        padding: 12px;
+    }
+
+    th {
+        font-size: 14px;
+    }
+
+    td {
+        font-size: 14px;
+        padding: 11px 8px;
+    }
+
+    .caja-pago {
+        padding: 22px 15px;
+    }
+
     .grupo-campo {
         flex-direction: column;
+        gap: 8px;
+    }
+
+    .grupo-campo label {
+        font-size: 19px;
+    }
+
+    select {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .boton-registrar {
+        width: 100%;
     }
 }
 </style>
 </head>
+
 <body>
 
 <article class="caja-formulario">
@@ -198,59 +280,120 @@ select {
     </header>
 
     <div class="caja-tabla">
-        <table> 
-            <tr> 
-                <th>Producto</th> 
-                <th>Stock disponible</th> 
-                <th>Cantidad solicitada</th> 
+
+        <table>
+            <tr>
+                <th>Producto</th>
+                <th>Stock disponible</th>
+                <th>Cantidad solicitada</th>
             </tr>
 
-            <?php 
-            while ($producto = $resultadoCarrito->fetch_assoc()) { 
-                $productos_id = $producto['productos_id']; 
+            <?php
+            while ($producto = $resultadoCarrito->fetch_assoc()) {
+
+                $productos_id = $producto['productos_id'];
                 $cantidad = $producto['cantidad'];
 
-                // Buscar el producto
-                $sqlProducto = "SELECT nombre, stock FROM productos WHERE id = '$productos_id'";
-                $resultadoProducto = $conn->query($sqlProducto); 
+                $sqlProducto = "SELECT nombre, stock FROM productos WHERE id = ?";
+                $stmtProducto = $conn->prepare($sqlProducto);
+                $stmtProducto->bind_param("i", $productos_id);
+                $stmtProducto->execute();
+
+                $resultadoProducto = $stmtProducto->get_result();
                 $datosProducto = $resultadoProducto->fetch_assoc();
             ?>
 
-            <tr> 
-                <td><?php echo $datosProducto['nombre']; ?></td> 
-                <td><?php echo $datosProducto['stock']; ?></td> 
-                <td><?php echo $cantidad; ?></td> 
+            <tr>
+                <td>
+                    <?php echo htmlspecialchars($datosProducto['nombre']); ?>
+                </td>
+
+                <td>
+                    <?php echo htmlspecialchars($datosProducto['stock']); ?>
+                </td>
+
+                <td>
+                    <?php echo htmlspecialchars($cantidad); ?>
+                </td>
             </tr>
 
-            <?php 
-            } 
-            ?> 
-        </table> 
+            <?php
+                $stmtProducto->close();
+            }
+            ?>
+
+        </table>
+
     </div>
 
-    <form action="ventas.php" method="POST" class="caja-pago">
+    <form action="ventas.php" method="POST" class="caja-pago" id="formVenta" novalidate>
 
-        <input type="hidden" name="pedidos_id" value="<?php echo $pedidos_id; ?>">
+        <input type="hidden" name="pedidos_id" value="<?php echo htmlspecialchars($pedidos_id); ?>" >
 
         <div class="grupo-campo">
-            <label>Método de Pago:</label>
-            <select name="metodo" required>
-                <option value="">Seleccione</option>
+
+            <label for="metodo">Método de Pago:</label>
+
+            <select name="metodo" id="metodo" >
                 <option value="Efectivo">Efectivo</option>
                 <option value="QR">QR</option>
                 <option value="Transferencia">Transferencia</option>
             </select>
+
         </div>
 
-        <button type="submit" class="boton-registrar">Registrar Venta</button>
+        <button type="submit" class="boton-registrar">
+            Registrar Venta
+        </button>
 
     </form>
 
 </article>
 
+<script>
+$(document).ready(function() {
+
+    $("#formVenta").validate({
+
+        rules: {
+            metodo: {
+                required: true
+            }
+        },
+
+        messages: {
+            metodo: {
+                required: "Selecciona un método de pago"
+            }
+        },
+
+        errorElement: "label",
+
+        errorPlacement: function(error, element) {
+            error.insertAfter(element);
+        },
+
+        highlight: function(element) {
+            $(element).addClass("error");
+        },
+
+        unhighlight: function(element) {
+            $(element).removeClass("error");
+        },
+
+        submitHandler: function(form) {
+            form.submit();
+        }
+
+    });
+
+});
+</script>
+
 </body>
 </html>
 
-<?php 
-    $conn->close(); 
+<?php
+$stmtCarrito->close();
+$conn->close();
 ?>
