@@ -719,7 +719,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <p>
          Tus comentarios nos valen verga JAJSJSA
         </p>
-        <a href="Cliente/vistacliente.php"
+        <a href="comentarios/comentario.php"
             class="oz-btn oz-btn-principal">
             Explorar comentarios
         </a>

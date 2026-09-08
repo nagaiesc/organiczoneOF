@@ -6,3 +6,7 @@ ASUNTO:
 comida
 COMENTARIO:
 mi hamburguesa tenia caca
+ASUNTO:
+mi caca
+COMENTARIO:
+tranque su baño
