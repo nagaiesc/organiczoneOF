@@ -88,7 +88,7 @@ borderWidth: 2
                     },
                     title: {
                         display: true,
-                        text: 'Productos más vendidos'
+                        text: 'Productos más bestia '
                     }
                 },
                 scales: {
