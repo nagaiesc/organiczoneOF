@@ -10,7 +10,7 @@ $conn = new mysqli($servidor, $nombre, $contraseña, $BDnombre);
   if($conn->connect_error) {
     die ("conexion fallida" . $conn->connect_error);
   }
-  $id= $_SESSION["id"];
+  $id= $_SESSION["CI"];
  //Paso 1 Consulta SQL
   $sql= "SELECT pedidos.fecha, SUM(ventas.costototal) AS ventas FROM ventas INNER JOIN pedidos ON ventas.pedidos_id = pedidos.id  GROUP BY pedidos.fecha";
   
@@ -33,49 +33,49 @@ $conn = new mysqli($servidor, $nombre, $contraseña, $BDnombre);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <h2>Reporte de Ingresos Totales por Día</h2>
 
-    <script>
-        const fechas = <?php echo json_encode($fecha); ?>;
-        const ventas = <?php echo json_encode($ventas); ?>;
-    </script>
+
     <div style="width: 500px; height: 300px;">
         <canvas id="graficoVentas"></canvas>
     </div>
 
     <script>
-    const config = {
-  type: 'line',
-  data: {
-    datasets: [{
-      borderColor: Utils.CHART_COLORS.red,
-      borderWidth: 1,
-      radius: 0,
-      data: data,
+    const fecha = <?php echo json_encode($fecha); ?>;
+    const ventas = <?php echo json_encode($ventas); ?>;
+
+    const contexto = document.getElementById("graficoVentas");
+
+
+    new Chart(contexto, {
+
+    type: "pie",
+
+    data: {
+
+        labels: ventas,
+
+        datasets: [{
+
+            label: "Ventas",
+
+            data: fecha
+
+        }]
+
     },
-    {
-      borderColor: Utils.CHART_COLORS.blue,
-      borderWidth: 1,
-      radius: 0,
-      data: data2,       }]
-    },
+
     options: {
-      animation,
-      interaction: {
-       intersect: false
-    },
-    plugins: {
-      legend: false
-    },
-    scales: {
-      x: {
-        type: 'linear'
-      }
+
+        responsive: true
+
     }
-  }
-};
+
+});
+
     </script>
 </body>
 </html>
