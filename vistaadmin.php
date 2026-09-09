@@ -139,8 +139,9 @@ session_start();
         }
 
 
-        .boton-amarillo {
-
+        .boton-amarillo,
+        .boton-amarillito 
+        {
             background: #FCD09F;
 
             color: #2B140D;
@@ -169,7 +170,9 @@ session_start();
         }
 
 
-        .boton-amarillo:hover {
+        .boton-amarillo:hover,
+        .boton-amarillito:hover 
+        {
 
             transform: scale(1.05);
 
@@ -733,7 +736,9 @@ session_start();
             }
 
 
-            .botones-ventas {
+            .botones-ventas,
+            .boton-dia 
+            {
 
                 align-self: flex-end;
 
@@ -780,6 +785,8 @@ session_start();
 
 
             .boton-amarillo,
+
+            .boton-amarillito,
 
             .boton-verde,
 
@@ -1014,7 +1021,12 @@ session_start();
                     Mostrar
 
                 </a>
-
+            </div>
+            <div class="boton-dia">
+                <a href="ventasDia.php"
+                class="boton-amarillito">
+                Ventas del dia
+                </a>
             </div>
 
         </section>
