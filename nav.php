@@ -77,13 +77,14 @@ if (session_status() == PHP_SESSION_NONE) {
     color: var(--blanco);
     font-family: 'Fredoka', sans-serif;
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.5px;
-    line-height: 1;
-    margin-bottom: 2px;
+    
+    margin-bottom: 1px;
 }
 
 #orga h1::after {
+    margin-top: 0.5px;
     content: "Oz";
     color: var(--crema);
     font-family: 'Fredoka', sans-serif;

@@ -1,15 +1,29 @@
 <?php
+
 $servidor = "localhost";
 $nombre = "root";
 $contraseña = "";
 $BDnombre = "organiczoneBD";
-$conn = new mysqli($servidor, $nombre, $contraseña, $BDnombre);
+
+$conn = new mysqli(
+    $servidor,
+    $nombre,
+    $contraseña,
+    $BDnombre
+);
+
 if ($conn->connect_error) {
-    die("Conexion fallida");
+    die("Conexión fallida");
 }
-$sql = "SELECT productos.nombre, SUM(carrito.cantidad) AS cantidad
+
+$conn->set_charset("utf8mb4");
+
+$sql = "SELECT 
+            productos.nombre,
+            SUM(carrito.cantidad) AS cantidad
         FROM carrito
-        INNER JOIN productos ON carrito.productos_id = productos.id
+        INNER JOIN productos 
+            ON carrito.productos_id = productos.id
         GROUP BY productos.id, productos.nombre
         ORDER BY cantidad DESC";
 
@@ -19,96 +33,786 @@ if (!$resultado) {
     die("Error en la consulta: " . $conn->error);
 }
 
-$resultado = $conn->query($sql);
 $productos = [];
 $cantidades = [];
+
 while ($fila = $resultado->fetch_assoc()) {
+
     $productos[] = $fila['nombre'];
-    $cantidades[] = $fila['cantidad'];
+    $cantidades[] = (int)$fila['cantidad'];
+
 }
+
+$totalUnidades = array_sum($cantidades);
+$totalProductos = count($productos);
+
+$productoTop = $totalProductos > 0 ? $productos[0] : "Sin datos";
+$cantidadTop = $totalProductos > 0 ? $cantidades[0] : 0;
+
 ?>
+
 <!DOCTYPE html>
-<html>
+
+<html lang="es">
+
 <head>
-    <title>Productos más vendidos</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+>
+
+<title>Organic Zone | Productos más vendidos</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+
+:root {
+    --verde: #0BA84A;
+    --verde-oscuro: #087A37;
+    --verde-suave: #EAF7EC;
+    --cafe: #2B140D;
+    --cafe-suave: #5A382D;
+    --crema: #FCD09F;
+    --crema-suave: #FFF5E8;
+    --blanco: #FFFFFF;
+    --gris: #77716D;
+    --borde: #EEE7E2;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(11,168,74,.08),
+            transparent 30%
+        ),
+        #F8FBF8;
+    color: var(--cafe);
+    font-family: 'Nunito', sans-serif;
+}
+
+.contenedor {
+    width: min(1250px, 92%);
+    margin: 0 auto;
+    padding: 35px 0 50px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 45px;
+}
+
+.logo {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: .72;
+    transition: .3s ease;
+}
+
+.logo:hover {
+    transform: translateY(-2px);
+}
+
+.logo .my {
+    color: var(--cafe);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    margin-left: 9px;
+    letter-spacing: .5px;
+}
+
+.logo .oz {
+    margin-top: 1.2px;
+    color: var(--verde);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 59px;
+    font-weight: 700;
+    letter-spacing: -3px;
+}
+
+.boton-volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 12px 21px;
+    border-radius: 50px;
+    background: var(--cafe);
+    color: white;
+    text-decoration: none;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    transition: .3s ease;
+    box-shadow: 0 7px 18px rgba(43,20,13,.13);
+}
+
+.boton-volver:hover {
+    background: var(--verde);
+    transform: translateY(-2px);
+    box-shadow: 0 9px 22px rgba(11,168,74,.20);
+}
+
+.encabezado {
+    margin-bottom: 30px;
+}
+
+.etiqueta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 12px;
+    color: var(--verde);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.etiqueta::before {
+    content: "";
+    width: 28px;
+    height: 4px;
+    background: var(--verde);
+    border-radius: 10px;
+}
+
+.titulo {
+    margin: 0;
+    font-family: 'Fredoka', sans-serif;
+    font-size: clamp(38px, 5vw, 62px);
+    line-height: .98;
+    font-weight: 700;
+    letter-spacing: -1.5px;
+}
+
+.titulo span {
+    color: var(--verde);
+}
+
+.descripcion {
+    max-width: 650px;
+    margin: 18px 0 0;
+    color: var(--gris);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.resumen {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.tarjeta {
+    position: relative;
+    overflow: hidden;
+    min-height: 145px;
+    padding: 24px;
+    border-radius: 28px;
+    border: 1px solid var(--borde);
+    background: var(--blanco);
+    box-shadow: 0 10px 30px rgba(43,20,13,.07);
+    transition: .3s ease;
+}
+
+.tarjeta:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(43,20,13,.11);
+}
+
+.tarjeta::after {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    right: -25px;
+    bottom: -35px;
+    border-radius: 50%;
+    background: rgba(11,168,74,.08);
+}
+
+.tarjeta.verde {
+    background: var(--verde);
+    border-color: var(--verde);
+    color: white;
+}
+
+.tarjeta.verde::after {
+    background: rgba(255,255,255,.12);
+}
+
+.tarjeta.crema {
+    background: var(--crema-suave);
+    border-color: #F2DFC6;
+}
+
+.tarjeta.cafe {
+    background: var(--cafe);
+    border-color: var(--cafe);
+    color: white;
+}
+
+.tarjeta.cafe::after {
+    background: rgba(252,208,159,.10);
+}
+
+.tarjeta-label {
+    position: relative;
+    z-index: 2;
+    margin: 0 0 8px;
+    font-size: 13px;
+    font-weight: 800;
+    opacity: .78;
+    text-transform: uppercase;
+    letter-spacing: .7px;
+}
+
+.tarjeta-valor {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 31px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.tarjeta-extra {
+    position: relative;
+    z-index: 2;
+    margin: 7px 0 0;
+    font-size: 13px;
+    opacity: .75;
+}
+
+.grafico-contenedor {
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: 32px;
+    padding: 30px;
+    box-shadow: 0 12px 35px rgba(43,20,13,.08);
+}
+
+.grafico-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.grafico-titulo {
+    margin: 0;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.grafico-subtitulo {
+    margin: 5px 0 0;
+    color: var(--gris);
+    font-size: 14px;
+}
+
+.indicador {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 15px;
+    border-radius: 50px;
+    background: var(--verde-suave);
+    color: var(--verde-oscuro);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.indicador-punto {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--verde);
+    box-shadow: 0 0 0 4px rgba(11,168,74,.12);
+}
+
+.canvas-wrapper {
+    position: relative;
+    width: 100%;
+    height: 520px;
+}
+
+.sin-datos {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 24px;
+    background: var(--verde-suave);
+    color: var(--cafe-suave);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 20px;
+    padding: 30px;
+}
+
+.footer-decorativo {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.footer-decorativo span {
+    width: 55px;
+    height: 5px;
+    border-radius: 10px;
+    background: var(--crema);
+}
+
+@media (max-width: 850px) {
+
+    .resumen {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        margin-bottom: 35px;
+    }
+
+    .grafico-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .canvas-wrapper {
+        height: 480px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .contenedor {
+        width: 94%;
+        padding-top: 25px;
+    }
+
+    .header {
+        margin-bottom: 30px;
+    }
+
+    .logo .oz {
+        font-size: 36px;
+    }
+
+    .logo .my {
+        font-size: 20px;
+    }
+
+    .boton-volver {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+
+    .titulo {
+        font-size: 42px;
+    }
+
+    .grafico-contenedor {
+        padding: 20px;
+        border-radius: 24px;
+    }
+
+    .canvas-wrapper {
+        height: 430px;
+    }
+
+}
+
+</style>
+
 </head>
+
 <body>
-<h1>Productos más vendidos</h1>
+
+<div class="contenedor">
+
+<header class="header">
+
+<a
+href="Cliente/vistacliente.php"
+class="logo"
+aria-label="Ir a My Oz"
+
+>
+<span class="my">My</span>
+
+<span class="oz">Oz</span>
+
+</a>
+
+<a
+href="paginaprincipal.php"
+class="boton-volver"
+
+>
+
+Volver
+
+
+</a>
+
+</header>
+
+<section class="encabezado">
+
+<p class="etiqueta">
+    ORGANIC ZONE
+</p>
+
+<h1 class="titulo">
+    Productos más <span>vendidos.</span>
+</h1>
+
+<p class="descripcion">
+    Descubre cuáles son los productos que más se han vendido.
+    La información se organiza automáticamente según la cantidad
+    registrada en los pedidos.
+</p>
+
+</section>
+
+<section class="resumen">
+
+<article class="tarjeta verde">
+
+<p class="tarjeta-label">
+    Producto destacado
+</p>
+
+<h2 class="tarjeta-valor">
+    <?= htmlspecialchars($productoTop) ?>
+</h2>
+
+<p class="tarjeta-extra">
+    <?= $cantidadTop ?> unidades vendidas
+</p>
+
+</article>
+
+<article class="tarjeta crema">
+
+<p class="tarjeta-label">
+    Unidades vendidas
+</p>
+
+<h2 class="tarjeta-valor">
+    <?= $totalUnidades ?>
+</h2>
+
+<p class="tarjeta-extra">
+    Cantidad total registrada
+</p>
+
+</article>
+
+<article class="tarjeta cafe">
+
+<p class="tarjeta-label">
+    Productos analizados
+</p>
+
+<h2 class="tarjeta-valor">
+    <?= $totalProductos ?>
+</h2>
+
+<p class="tarjeta-extra">
+    Productos con ventas registradas
+</p>
+
+</article>
+
+</section>
+
+<section class="grafico-contenedor">
+
+<div class="grafico-header">
+
+<div>
+
+<h2 class="grafico-titulo">
+    Ranking de productos
+</h2>
+
+<p class="grafico-subtitulo">
+    Ordenados de mayor a menor cantidad vendida
+</p>
+
+</div>
+
+<div class="indicador">
+
+<span class="indicador-punto"></span>
+
+Ventas registradas
+
+</div>
+
+</div>
+
+<?php if ($totalProductos > 0): ?>
+
+<div class="canvas-wrapper">
+
 <canvas id="grafico"></canvas>
- <script>
-        const data = {
-            labels: <?php echo json_encode($productos); ?>,
-            datasets: [{
-                label: 'Productos vendidos',
-                data: <?php echo json_encode($cantidades); ?>,
-backgroundColor: [
-    'rgba(255, 99, 132, 0.7)',
-    'rgba(54, 162, 235, 0.7)',
-    'rgba(255, 206, 86, 0.7)',
-    'rgba(75, 192, 192, 0.7)',
-    'rgba(153, 102, 255, 0.7)',
-    'rgba(255, 159, 64, 0.7)',
-    'rgba(46, 204, 113, 0.7)',
-    'rgba(231, 76, 60, 0.7)',
-    'rgba(52, 73, 94, 0.7)',
-    'rgba(241, 196, 15, 0.7)'
-],
-borderColor: [
-    'rgb(255, 99, 132)',
-    'rgb(54, 162, 235)',
-    'rgb(255, 206, 86)',
-    'rgb(75, 192, 192)',
-    'rgb(153, 102, 255)',
-    'rgb(255, 159, 64)',
-    'rgb(46, 204, 113)',
-    'rgb(231, 76, 60)',
-    'rgb(52, 73, 94)',
-    'rgb(241, 196, 15)'
-],
-borderWidth: 2
-            }]
-        };
 
-        const config = {
-            type: 'bar',
-            data: data,
-            options: {
-                indexAxis: 'y',
+</div>
 
-                elements: {
-                    bar: {
-                        borderWidth: 2
-                    }
+<?php else: ?>
+
+<div class="sin-datos">
+
+No existen ventas registradas para mostrar en el gráfico.
+
+</div>
+
+<?php endif; ?>
+
+</section>
+
+<div class="footer-decorativo">
+    <span></span>
+</div>
+
+</div>
+
+<?php if ($totalProductos > 0): ?>
+
+<script>
+
+const productos = <?= json_encode(
+    $productos,
+    JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+) ?>;
+
+const cantidades = <?= json_encode(
+    $cantidades
+) ?>;
+
+const ctx = document.getElementById('grafico');
+
+new Chart(ctx, {
+
+    type: 'bar',
+
+    data: {
+
+        labels: productos,
+
+        datasets: [{
+
+            label: 'Unidades vendidas',
+
+            data: cantidades,
+
+            backgroundColor: 'rgba(11, 168, 74, 0.78)',
+
+            borderColor: '#0BA84A',
+
+            borderWidth: 2,
+
+            borderRadius: 12,
+
+            borderSkipped: false,
+
+            barThickness: 28,
+
+            hoverBackgroundColor: '#087A37',
+
+            hoverBorderColor: '#087A37'
+
+        }]
+
+    },
+
+    options: {
+
+        indexAxis: 'y',
+
+        responsive: true,
+
+        maintainAspectRatio: false,
+
+        animation: {
+
+            duration: 900,
+
+            easing: 'easeOutQuart'
+
+        },
+
+        interaction: {
+
+            intersect: false,
+
+            mode: 'index'
+
+        },
+
+        plugins: {
+
+            legend: {
+
+                display: false
+
+            },
+
+            tooltip: {
+
+                backgroundColor: '#2B140D',
+
+                titleFont: {
+
+                    family: 'Fredoka',
+
+                    size: 14
+
                 },
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'right'
-                    },
-                    title: {
-                        display: true,
-                        text: 'Productos más bestia '
-                    }
-                },
-                scales: {
-                    x: {
-                        beginAtZero: true,
 
-                        ticks: {
-                            precision: 0
-                        }
+                bodyFont: {
+
+                    family: 'Nunito',
+
+                    size: 13
+
+                },
+
+                padding: 13,
+
+                cornerRadius: 12,
+
+                displayColors: false,
+
+                callbacks: {
+
+                    label: function(context) {
+
+                        return context.parsed.x + ' unidades vendidas';
+
                     }
+
                 }
+
             }
-        };
-        new Chart(
-            document.getElementById('grafico'),
-            config
-        );
-    </script>
-</body>
-</html>
+
+        },
+
+        scales: {
+
+            x: {
+
+                beginAtZero: true,
+
+                ticks: {
+
+                    precision: 0,
+
+                    color: '#77716D',
+
+                    font: {
+
+                        family: 'Nunito',
+
+                        size: 12
+
+                    }
+
+                },
+
+                grid: {
+
+                    color: 'rgba(43,20,13,.07)'
+
+                }
+
+            },
+
+            y: {
+
+                ticks: {
+
+                    color: '#2B140D',
+
+                    font: {
+
+                        family: 'Fredoka',
+
+                        size: 13,
+
+                        weight: '600'
+
+                    }
+
+                },
+
+                grid: {
+
+                    display: false
+
+                }
+
+            }
+
+        }
+
+    }
+
+});
+
+</script>
+
+<?php endif; ?>
+
 <?php
+
 $conn->close();
+
 ?>
+
+</body>
+
+</html>
