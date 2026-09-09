@@ -49,33 +49,19 @@ $conn = new mysqli($servidor, $nombre, $contraseña, $BDnombre);
 
     const contexto = document.getElementById("graficoVentas");
 
-
-    new Chart(contexto, {
-
-    type: "pie",
-
-    data: {
-
-        labels: ventas,
-
-        datasets: [{
-
-            label: "Ventas",
-
-            data: fecha
-
-        }]
-
-    },
-
-    options: {
-
-        responsive: true
-
-    }
-
-});
-
+        new Chart(contexto, {
+            type: "bar", // Cambiado a barras para alinearlo con el de semana
+            data: {
+                labels: fecha,   // CORRECTO: Las fechas van en labels
+                datasets: [{
+                    label: "Ingresos Totales ($)",
+                    data: ventas // CORRECTO: Los montos numéricos van en data
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
     </script>
 </body>
 </html>
