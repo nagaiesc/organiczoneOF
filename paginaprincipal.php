@@ -713,12 +713,9 @@ if (session_status() === PHP_SESSION_NONE) {
     </section>
     <section class="oz-cta">
         <h2>
-            ESCRIBE TUS COMENTARIOS<br>
-            !AYUDANOS A MEJORAR¡
+            Escribe tus Comentarios<br>
+            ! AYUDANOS A MEJORAR ¡
         </h2>
-        <p>
-         Tus comentarios nos valen verga JAJSJSA
-        </p>
         <a href="comentarios/comentario.php"
             class="oz-btn oz-btn-principal">
             Explorar comentarios

@@ -8,6 +8,8 @@ if (session_status() == PHP_SESSION_NONE) {
 
 <style>
 
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+
 :root {
     --verde: #12A33C;
     --verde-oscuro: #0A4A1B;
@@ -17,51 +19,32 @@ if (session_status() == PHP_SESSION_NONE) {
     --blanco: #FFFFFF;
 }
 
-#barra {
-    width: min(1280px, 92%);
-    height: 76px;
+* {
+    box-sizing: border-box;
+}
 
+#barra {
+    width: min(1080px, 90%);
+    height: 72px;
     position: fixed;
-    top: 22px;
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
-
-    padding: 0 22px 0 28px;
-
+    padding: 0 14px 0 16px;
     display: flex;
     align-items: center;
-
-    gap: 25px;
-
-    background: rgba(18, 163, 60, .94);
-
-    border-radius: 50px;
-
-    box-shadow: 0 10px 28px rgba(18, 163, 60, .20);
-
+    gap: 8px;
+    background: rgba(18, 163, 60, 0.96);
+    border-radius: 40px;
+    box-shadow: 0 10px 28px rgba(18, 163, 60, 0.20);
     z-index: 1000;
-
-    font-family: 'Nunito', sans-serif;
-
-    transition:
-        background .4s ease,
-        box-shadow .4s ease,
-        transform .4s ease;
+    font-family: 'Fredoka', sans-serif;
 }
 
-#barra.desliza {
-    background: rgba(43, 20, 13, .97);
-
-    box-shadow:
-        0 10px 28px rgba(43, 20, 13, .28);
-}
-
-#barra > div {
-    width: 70px;
-    min-width: 70px;
-
-    height: 70px;
-
+#barra > div:first-child {
+    width: 62px;
+    min-width: 62px;
+    height: 62px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -70,508 +53,299 @@ if (session_status() == PHP_SESSION_NONE) {
 #orga {
     width: 62px;
     height: 62px;
-
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-
     text-decoration: none;
-
-    color: var(--blanco);
-
-    line-height: .72;
-
-    transition: .3s ease;
-}
-
-#orga:hover {
-    transform: scale(1.06);
 }
 
 #orga h1 {
     margin: 0;
-
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    justify-content: center;
     font-family: 'Fredoka', sans-serif;
-
     font-size: 0;
-
-    line-height: .72;
+    line-height: 0.75;
+    white-space: nowrap;
 }
 
 #orga h1::before {
     content: "My";
-
     color: var(--blanco);
-
-    font-size: 22px;
-
-    font-weight: 600;
-
-    letter-spacing: 1px;
-
-    margin-bottom: 6px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    line-height: 1;
+    margin-bottom: 2px;
 }
 
 #orga h1::after {
     content: "Oz";
-
     color: var(--crema);
-
-    font-size: 31px;
-
+    font-family: 'Fredoka', sans-serif;
+    font-size: 32px;
     font-weight: 700;
-
     letter-spacing: -1px;
+    line-height: 0.8;
 }
 
 #links {
-    flex: 1;
-
-    height: 100%;
-
     display: flex;
     align-items: center;
-    justify-content: center;
-
-    gap: 8px;
+    gap: 4px;
+    height: 100%;
+    flex: 1;
 }
 
 .item {
     position: relative;
-
+    height: 100%;
     display: flex;
     align-items: center;
-
-    height: 100%;
 }
 
 .item > a {
-    height: 46px;
-
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    gap: 8px;
-
-    padding: 0 20px;
-
-    background: rgba(255, 255, 255, .13);
-
+    gap: 5px;
+    padding: 0 13px;
     color: var(--blanco);
-
     text-decoration: none;
-
-    border-radius: 50px;
-
-    font-family: 'Nunito', sans-serif;
-
-    font-size: 16px;
-
-    font-weight: 800;
-
+    border-radius: 22px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
     white-space: nowrap;
-
-    transition: .3s ease;
+    transition: all 0.2s ease;
 }
 
 .item > a:hover {
-    background: var(--crema);
-
-    color: var(--cafe);
-
-    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.16);
 }
 
 .flecha {
-    font-size: 10px;
-
-    transition: .3s ease;
+    font-size: 9px;
+    transition: transform 0.2s ease;
 }
 
-.item:hover .flecha {
+.item:hover > a .flecha {
     transform: rotate(90deg);
 }
 
 .submenu {
     position: absolute;
-
-    top: 67px;
-    left: 0;
-
-    min-width: 205px;
-
+    top: 57px;
+    left: 50%;
+    transform: translate(-50%, -8px);
+    min-width: 190px;
     padding: 7px;
-
-    background: rgba(18, 163, 60, .98);
-
-    border-radius: 20px;
-
-    box-shadow:
-        0 12px 30px rgba(43, 20, 13, .22);
-
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: var(--blanco);
+    border: 2px solid rgba(252, 208, 159, 0.75);
+    border-radius: 24px;
+    box-shadow: 0 12px 30px rgba(43, 20, 13, 0.20);
     opacity: 0;
-
     visibility: hidden;
-
-    transform: translateY(-10px);
-
+    pointer-events: none;
     transition:
-        opacity .25s ease,
-        visibility .25s ease,
-        transform .25s ease;
+        opacity 0.22s ease,
+        visibility 0.22s ease,
+        transform 0.22s ease;
+    z-index: 2000;
 }
 
-.item:hover .submenu {
+.item:hover .submenu,
+.submenu:hover {
     opacity: 1;
-
     visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
+}
 
-    transform: translateY(0);
+.submenu::after {
+    content: "";
+    position: absolute;
+    top: -12px;
+    left: 0;
+    right: 0;
+    height: 14px;
+    background: transparent;
 }
 
 .submenu a {
-    display: block;
-
-    padding: 13px 16px;
-
-    color: white;
-
+    width: 100%;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 9px 14px;
+    color: var(--cafe);
+    background: transparent;
+    border-radius: 18px;
     text-decoration: none;
-
-    border-radius: 15px;
-
-    font-family: 'Nunito', sans-serif;
-
-    font-size: 15px;
-
-    font-weight: 700;
-
-    transition: .25s ease;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all 0.2s ease;
 }
 
 .submenu a:hover {
-    background: var(--crema);
-
-    color: var(--cafe);
-
-    padding-left: 21px;
+    color: var(--blanco);
+    background: var(--verde);
+    transform: scale(1.02);
 }
 
 .zona-sesion {
     display: flex;
     align-items: center;
-
-    min-width: max-content;
+    justify-content: center;
+    min-width: auto;
 }
 
 .boton-sesion {
-    height: 46px;
-
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    padding: 0 21px;
-
-    border-radius: 50px;
-
+    padding: 0 14px;
+    border-radius: 22px;
     text-decoration: none;
-
-    font-family: 'Nunito', sans-serif;
-
-    font-size: 15px;
-
-    font-weight: 800;
-
+    font-family: 'Fredoka', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
     white-space: nowrap;
-
-    transition: .3s ease;
+    transition: all 0.2s ease;
 }
 
 .boton-iniciar {
-    background: var(--crema);
-
     color: var(--cafe);
+    background: var(--crema);
 }
 
 .boton-iniciar:hover {
-    background: white;
-
-    color: var(--cafe);
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 7px 17px rgba(252, 208, 159, .35);
+    background: var(--blanco);
+    transform: translateY(-1px);
 }
 
 .boton-cerrar {
-    background: var(--cafe);
-
-    color: white;
+    color: var(--cafe);
+    background: var(--crema);
 }
 
 .boton-cerrar:hover {
-    background: #b83232;
-
-    color: white;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 7px 17px rgba(184, 50, 50, .30);
+    background: var(--blanco);
+    transform: translateY(-1px);
 }
 
 .zonaProducto {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    min-width: max-content;
+    min-width: auto;
 }
 
 .botonProducto {
-    height: 46px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 0 21px;
-
+    height: 42px;
+    padding: 0 14px;
     border: none;
-    outline: none;
-
-    border-radius: 50px;
-
-    background: var(--crema);
-
-    color: var(--cafe);
-
-    font-family: 'Nunito', sans-serif;
-
-    font-size: 15px;
-
-    font-weight: 800;
-
+    border-radius: 22px;
+    color: var(--blanco);
+    background: var(--cafe);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
     white-space: nowrap;
-
     cursor: pointer;
-
-    transition: .3s ease;
+    transition: all 0.2s ease;
 }
 
 .botonProducto:hover {
-    background: white;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 7px 17px rgba(252, 208, 159, .35);
+    background: #432116;
+    transform: translateY(-1px);
 }
 
-.botonProducto:active {
-    transform: scale(.97);
-}
-
-@media (max-width: 1200px) {
+@media (max-width: 950px) {
 
     #barra {
         width: 94%;
-
-        gap: 15px;
-
-        padding-left: 20px;
-        padding-right: 18px;
-    }
-
-    #barra > div {
-        width: 62px;
-        min-width: 62px;
-    }
-
-    #orga h1::before {
-        font-size: 19px;
-    }
-
-    #orga h1::after {
-        font-size: 28px;
-    }
-
-    .item > a {
-        padding: 0 15px;
-
-        font-size: 15px;
-    }
-
-    .boton-sesion,
-    .botonProducto {
-        padding: 0 16px;
-
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 1050px) {
-
-    #barra {
-        gap: 8px;
-
-        padding-left: 15px;
-        padding-right: 12px;
+        gap: 5px;
+        padding: 0 10px;
     }
 
     #links {
-        gap: 3px;
+        gap: 2px;
     }
 
     .item > a {
-        padding: 0 11px;
-
-        font-size: 13px;
+        padding: 0 9px;
+        font-size: 14px;
     }
 
     .boton-sesion,
     .botonProducto {
-        padding: 0 12px;
-
+        padding: 0 10px;
         font-size: 13px;
     }
 }
 
-@media (max-width: 850px) {
+@media (max-width: 760px) {
 
     #barra {
-        height: 70px;
-
-        border-radius: 50px;
+        height: auto;
+        min-height: 68px;
+        padding: 8px 10px;
+        border-radius: 30px;
+        flex-wrap: wrap;
     }
 
-    #barra > div {
+    #barra > div:first-child {
+        height: 52px;
         width: 55px;
         min-width: 55px;
     }
 
     #orga {
-        width: 50px;
-        height: 58px;
+        width: 55px;
+        height: 52px;
     }
 
     #orga h1::before {
-        font-size: 16px;
+        font-size: 12px;
     }
 
     #orga h1::after {
-        font-size: 24px;
+        font-size: 27px;
+    }
+
+    #links {
+        height: 52px;
+        overflow-x: auto;
     }
 
     .item > a {
-        height: 43px;
-
+        height: 38px;
+        font-size: 13px;
         padding: 0 9px;
-
-        font-size: 12px;
     }
 
     .boton-sesion,
     .botonProducto {
-        height: 43px;
-
-        padding: 0 10px;
-
+        height: 38px;
         font-size: 12px;
-    }
-}
-
-@media (max-width: 700px) {
-
-    #barra {
-        width: 94%;
-
-        height: 64px;
-
-        padding: 0 10px;
-
-        gap: 5px;
-    }
-
-    #barra > div {
-        display: none;
-    }
-
-    #links {
-        gap: 3px;
-    }
-
-    .item > a {
-        height: 42px;
-
-        padding: 0 10px;
-
-        font-size: 12px;
-    }
-
-    .flecha {
-        display: none;
-    }
-
-    .zona-sesion {
-        display: none;
-    }
-
-    .botonProducto {
-        height: 42px;
-
-        padding: 0 11px;
-
-        font-size: 11px;
-    }
-}
-
-@media (max-width: 500px) {
-
-    #barra {
-        width: 94%;
-
-        height: 60px;
-
-        justify-content: center;
-
-        border-radius: 50px;
-    }
-
-    #links {
-        width: 100%;
-
-        justify-content: center;
-    }
-
-    .item > a {
-        height: 40px;
-
-        padding: 0 8px;
-
-        font-size: 10px;
-    }
-
-    .zonaProducto {
-        display: none;
+        padding: 0 9px;
     }
 
     .submenu {
-        top: 57px;
-
-        min-width: 175px;
-    }
-
-    .submenu a {
-        font-size: 13px;
+        top: 49px;
     }
 }
 
@@ -580,13 +354,9 @@ if (session_status() == PHP_SESSION_NONE) {
 <nav id="barra">
 
     <div>
-
         <a href="Cliente/vistacliente.php" id="orga">
-
             <h1>OrganicZone</h1>
-
         </a>
-
     </div>
 
     <section id="links">
@@ -594,13 +364,8 @@ if (session_status() == PHP_SESSION_NONE) {
         <div class="item">
 
             <a href="#">
-
                 Nosotros
-
-                <span class="flecha">
-                    ▶
-                </span>
-
+                <span class="flecha">▶</span>
             </a>
 
             <div class="submenu">
@@ -616,13 +381,8 @@ if (session_status() == PHP_SESSION_NONE) {
         <div class="item">
 
             <a href="#">
-
                 About Us
-
-                <span class="flecha">
-                    ▶
-                </span>
-
+                <span class="flecha">▶</span>
             </a>
 
             <div class="submenu">
@@ -657,19 +417,13 @@ if (session_status() == PHP_SESSION_NONE) {
 
         <?php if (isset($_SESSION['nombre'])): ?>
 
-            <a
-                href="/organiczoneOF/Usuarios/cerrarse.php"
-                class="boton-sesion boton-cerrar"
-            >
+            <a href="/organiczoneOF/Usuarios/cerrarse.php" class="boton-sesion boton-cerrar">
                 Cerrar sesión
             </a>
 
         <?php else: ?>
 
-            <a
-                href="/organiczoneOF/Usuarios/formulariosesion.php"
-                class="boton-sesion boton-iniciar"
-            >
+            <a href="/organiczoneOF/Usuarios/formulariosesion.php" class="boton-sesion boton-iniciar">
                 Iniciar sesión
             </a>
 
@@ -681,31 +435,10 @@ if (session_status() == PHP_SESSION_NONE) {
 
         <button
             class="botonProducto"
-            onclick="window.location.href='productoBest.php'"
-        >
+            onclick="window.location.href='productoBest.php'">
             Producto más vendido
         </button>
 
     </section>
 
 </nav>
-
-<script>
-
-window.addEventListener("scroll", function () {
-
-    const barra = document.getElementById("barra");
-
-    if (window.scrollY > 50) {
-
-        barra.classList.add("desliza");
-
-    } else {
-
-        barra.classList.remove("desliza");
-
-    }
-
-});
-
-</script>
