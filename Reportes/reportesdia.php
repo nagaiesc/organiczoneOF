@@ -1,16 +1,4 @@
 <?php 
-session_start();
-$servidor = "localhost";
-$nombre = "root";
-$contraseña = "";
-$BDnombre = "organiczoneBD";
-
-$conn = new mysqli($servidor, $nombre, $contraseña, $BDnombre);
-
-  if($conn->connect_error) {
-    die ("conexion fallida" . $conn->connect_error);
-  }
-  $id= $_SESSION["CI"];
  //Paso 1 Consulta SQL
   $sql= "SELECT pedidos.fecha, SUM(ventas.costototal) AS ventas FROM ventas INNER JOIN pedidos ON ventas.pedidos_id = pedidos.id  GROUP BY pedidos.fecha";
   
@@ -27,41 +15,30 @@ $conn = new mysqli($servidor, $nombre, $contraseña, $BDnombre);
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <h2>Reporte de Ingresos Totales por Día</h2>
 
+<!-- Estructura visual para el panel -->
+<section class="grafico">
+    <h2 class="titulo-grafico">Ingresos por día</h2>
+    <canvas id="graficoDias"></canvas>
+</section>
 
-    <div style="width: 500px; height: 300px;">
-        <canvas id="graficoVentas"></canvas>
-    </div>
+<script>
+const dias = <?php echo json_encode($dias); ?>;
+const ingresosDias = <?php echo json_encode($ingresosDias); ?>;
 
-    <script>
-    const fecha = <?php echo json_encode($fecha); ?>;
-    const ventas = <?php echo json_encode($ventas); ?>;
-
-    const contexto = document.getElementById("graficoVentas");
-
-        new Chart(contexto, {
-            type: "bar", // Cambiado a barras para alinearlo con el de semana
-            data: {
-                labels: fecha,   // CORRECTO: Las fechas van en labels
-                datasets: [{
-                    label: "Ingresos Totales ($)",
-                    data: ventas // CORRECTO: Los montos numéricos van en data
-                }]
-            },
-            options: {
-                responsive: true
-            }
-        });
-    </script>
-</body>
-</html>
+const ctxDias = document.getElementById('graficoDias');
+new Chart(ctxDias, {
+    type: 'bar',
+    data: {
+        labels: dias,
+        datasets: [{
+            label: 'Ingresos en Bs.',
+            data: ingresosDias
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false
+    }
+});
+</script>
