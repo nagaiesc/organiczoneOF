@@ -4,23 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Usuarios</title>
+
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-page: #f4ffef;
-            --canva-green: #0ba84a;
-            --text-brown: #2e140d;
-            --input-bg: #f4ffef;
-            --accent-orange: #ffc982;
-            --dark-green-btn: #064d22;
+            --bg-page: #F4F1EE;
+            --canva-green: #0BA84A;
+            --text-brown: #2B140D;
+            --input-bg: #F4FFEF;
+            --accent-cream: #FCD09F;
+            --dark-green: #064D22;
+            --soft-green: #EAF7EC;
+            --error-red: #D62828;
         }
 
-        body, html {
+        html,
+        body {
             margin: 0;
             padding: 0;
             font-family: 'Fredoka', sans-serif;
@@ -34,7 +40,7 @@
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 50px 20px 20px 80px;
+            padding: 32px 20px 5px 80px;
             box-sizing: border-box;
         }
 
@@ -50,7 +56,7 @@
             color: var(--canva-green);
             font-size: 120px;
             font-weight: 700;
-            margin: -10px 0 0 0;
+            margin: -7px 0 0 0;
             line-height: 0.85;
         }
 
@@ -60,7 +66,7 @@
             align-items: flex-end;
             flex-grow: 1;
             width: 100%;
-            margin-top: 20px;
+            margin-top: 8px;
         }
 
         main {
@@ -73,7 +79,7 @@
             min-height: 500px;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 -5px 25px rgba(0,0,0,0.05);
+            box-shadow: 0 -5px 25px rgba(43,20,13,0.08);
         }
 
         form {
@@ -97,7 +103,7 @@
 
         input {
             background-color: var(--input-bg);
-            border: none;
+            border: 3px solid transparent;
             border-radius: 35px;
             padding: 16px 25px;
             font-family: 'Fredoka', sans-serif;
@@ -107,10 +113,16 @@
             width: 100%;
             box-sizing: border-box;
             color: var(--text-brown);
+            transition: .25s ease;
+        }
+
+        input:focus {
+            border-color: var(--accent-cream);
+            box-shadow: 0 0 0 4px rgba(252,208,159,.20);
         }
 
         .input-orange {
-            background-color: var(--accent-orange);
+            background-color: var(--accent-cream);
         }
 
         .options-container {
@@ -128,7 +140,7 @@
             font-weight: 700;
             cursor: pointer;
             color: white;
-            transition: 0.2s;
+            transition: .2s;
             position: relative;
         }
 
@@ -140,16 +152,16 @@
         }
 
         .opt-admin {
-            background-color: var(--dark-green-btn);
+            background-color: var(--dark-green);
         }
 
         .opt-vendedor {
-            background-color: var(--accent-orange);
+            background-color: var(--accent-cream);
             color: var(--text-brown);
         }
 
         .opt-cliente {
-            background-color: var(--bg-page);
+            background-color: var(--input-bg);
             color: var(--canva-green);
         }
 
@@ -175,31 +187,43 @@
             font-size: 30px;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.3s;
+            transition: .3s;
         }
 
         .btn-submit:hover {
             transform: scale(1.05);
-            background-color: #1a0b07;
+            background-color: var(--dark-green);
+        }
+
+        .btn-submit:disabled {
+            opacity: .7;
+            cursor: wait;
+            transform: none;
         }
 
         label.error {
-            color: var(--accent-orange);
+            color: var(--accent-cream);
             font-size: 14px;
             margin-top: 5px;
             font-weight: 400;
         }
 
+        input.input-error {
+            border-color: var(--error-red);
+            box-shadow: 0 0 0 4px rgba(214,40,40,.15);
+        }
+
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(46, 20, 13, 0.45);
+            background: rgba(43,20,13,.55);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 9999;
             padding: 20px;
             box-sizing: border-box;
+            backdrop-filter: blur(5px);
         }
 
         .modal-overlay.active {
@@ -208,26 +232,42 @@
 
         .modal-organic {
             width: 100%;
-            max-width: 420px;
+            max-width: 430px;
             background-color: var(--bg-page);
-            border-radius: 40px;
-            padding: 35px;
+            border-radius: 42px;
+            padding: 38px;
             box-sizing: border-box;
             text-align: center;
-            box-shadow: 0 15px 45px rgba(46, 20, 13, 0.25);
-            transform: scale(0.9);
+            box-shadow: 0 20px 60px rgba(43,20,13,.30);
+            transform: scale(.75);
             opacity: 0;
-            transition: 0.25s ease;
+            transition: .3s ease;
         }
 
         .modal-overlay.active .modal-organic {
-            transform: scale(1);
-            opacity: 1;
+            animation: modalEntrada .4s ease forwards;
+        }
+
+        @keyframes modalEntrada {
+            0% {
+                transform: scale(.75);
+                opacity: 0;
+            }
+
+            70% {
+                transform: scale(1.04);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         .modal-check {
-            width: 68px;
-            height: 68px;
+            width: 70px;
+            height: 70px;
             margin: 0 auto 18px;
             border-radius: 50%;
             background-color: var(--canva-green);
@@ -237,6 +277,22 @@
             align-items: center;
             font-size: 38px;
             font-weight: 700;
+            box-shadow: 0 8px 20px rgba(11,168,74,.25);
+            animation: checkEntrada .5s ease .15s both;
+        }
+
+        @keyframes checkEntrada {
+            0% {
+                transform: scale(0) rotate(-30deg);
+            }
+
+            70% {
+                transform: scale(1.15) rotate(5deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(0);
+            }
         }
 
         .modal-organic h2 {
@@ -247,7 +303,7 @@
         }
 
         .modal-organic p {
-            color: var(--text-brown);
+            color: #5E4B44;
             font-size: 18px;
             font-weight: 400;
             line-height: 1.4;
@@ -269,12 +325,69 @@
             font-size: 18px;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.25s;
+            transition: .25s;
         }
 
         .modal-button:hover {
-            background-color: var(--dark-green-btn);
+            background-color: var(--canva-green);
+            transform: scale(1.05);
+        }
+
+        .popup-organic,
+        .popup-error {
+            border-radius: 38px !important;
+            font-family: 'Fredoka', sans-serif !important;
+            padding: 30px !important;
+            box-shadow: 0 20px 60px rgba(43,20,13,.30) !important;
+        }
+
+        .popup-organic .swal2-title,
+        .popup-error .swal2-title {
+            color: var(--text-brown) !important;
+            font-family: 'Fredoka', sans-serif !important;
+            font-size: 29px !important;
+            font-weight: 700 !important;
+        }
+
+        .popup-organic .swal2-html-container,
+        .popup-error .swal2-html-container {
+            color: #66544D !important;
+            font-family: 'Fredoka', sans-serif !important;
+            font-size: 17px !important;
+            line-height: 1.4 !important;
+        }
+
+        .popup-organic .swal2-confirm {
+            background: var(--canva-green) !important;
+            border-radius: 30px !important;
+            font-family: 'Fredoka', sans-serif !important;
+            font-weight: 700 !important;
+            padding: 12px 30px !important;
+            box-shadow: 0 7px 18px rgba(11,168,74,.22) !important;
+            transition: .2s !important;
+        }
+
+        .popup-organic .swal2-confirm:hover {
+            background: var(--dark-green) !important;
             transform: scale(1.04);
+        }
+
+        .popup-error .swal2-confirm {
+            background: var(--error-red) !important;
+            border-radius: 30px !important;
+            font-family: 'Fredoka', sans-serif !important;
+            font-weight: 700 !important;
+            padding: 12px 30px !important;
+            transition: .2s !important;
+        }
+
+        .popup-error .swal2-confirm:hover {
+            background: #A91F1F !important;
+            transform: scale(1.04);
+        }
+
+        .swal2-icon {
+            font-family: 'Fredoka', sans-serif !important;
         }
 
         @media (max-width: 900px) {
@@ -396,16 +509,20 @@
 
 <script>
 $("#usuariosForm").validate({
+
     rules: {
         CI: {
             required: true
         },
+
         nombre: {
             required: true
         },
+
         direccion: {
             required: true
         },
+
         celular: {
             required: true
         }
@@ -415,18 +532,34 @@ $("#usuariosForm").validate({
         CI: {
             required: "Este campo no puede estar vacío"
         },
+
         nombre: {
             required: "Este campo no puede estar vacío"
         },
+
         direccion: {
             required: "Este campo no puede estar vacío"
         },
+
         celular: {
             required: "Este campo no puede estar vacío"
         }
     },
 
+    errorElement: "label",
+    errorClass: "error",
+
+    highlight: function(element) {
+        $(element).addClass("input-error");
+    },
+
+    unhighlight: function(element) {
+        $(element).removeClass("input-error");
+    },
+
     submitHandler: function(form) {
+
+        $(".btn-submit").prop("disabled", true);
 
         $.ajax({
             url: "usuarios.php",
@@ -436,24 +569,77 @@ $("#usuariosForm").validate({
 
             success: function(respuesta) {
 
+                $(".btn-submit").prop("disabled", false);
+
                 if (respuesta.estado === "exito") {
 
                     $("#modalRegistro").addClass("active");
 
+                } else if (respuesta.estado === "duplicado") {
+
+                    Swal.fire({
+                        icon: "warning",
+                        title: "CI ya registrado",
+                        html: "El Carnet de Identidad <strong>ya está registrado</strong> en Organic Zone.",
+                        confirmButtonText: "Entendido",
+                        confirmButtonColor: "#0BA84A",
+                        customClass: {
+                            popup: "popup-error"
+                        },
+                        showClass: {
+                            popup: "animate__animated animate__zoomIn"
+                        },
+                        hideClass: {
+                            popup: "animate__animated animate__zoomOut"
+                        }
+                    }).then(function() {
+                        $("#CI").val("").focus();
+                    });
+
                 } else {
 
-                    alert(respuesta.mensaje);
+                    Swal.fire({
+                        icon: "error",
+                        title: "No se pudo registrar",
+                        html: respuesta.mensaje || "Ocurrió un error al intentar registrar el usuario.",
+                        confirmButtonText: "Entendido",
+                        confirmButtonColor: "#D62828",
+                        customClass: {
+                            popup: "popup-error"
+                        },
+                        showClass: {
+                            popup: "animate__animated animate__zoomIn"
+                        },
+                        hideClass: {
+                            popup: "animate__animated animate__zoomOut"
+                        }
+                    });
 
                 }
-
             },
 
             error: function(xhr) {
 
+                $(".btn-submit").prop("disabled", false);
+
+                Swal.fire({
+                    icon: "error",
+                    title: "Ocurrió un error",
+                    html: "Ocurrió un error al intentar registrar el usuario.",
+                    confirmButtonText: "Entendido",
+                    confirmButtonColor: "#D62828",
+                    customClass: {
+                        popup: "popup-error"
+                    },
+                    showClass: {
+                        popup: "animate__animated animate__zoomIn"
+                    },
+                    hideClass: {
+                        popup: "animate__animated animate__zoomOut"
+                    }
+                });
+
                 console.log(xhr.responseText);
-
-                alert("Ocurrió un error al intentar registrar el usuario.");
-
             }
         });
 
@@ -476,21 +662,17 @@ $("#cerrarModal").on("click", function() {
 
     setTimeout(function() {
         window.location.href = "formulariosesion.php";
-    }, 200);
+    }, 250);
 
 });
 
 $("#modalRegistro").on("click", function(e) {
 
     if (e.target === this) {
-
         $("#modalRegistro").removeClass("active");
-
     }
 
 });
-
-
 </script>
 
 </body>

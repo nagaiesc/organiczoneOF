@@ -79,7 +79,6 @@ if (session_status() == PHP_SESSION_NONE) {
     font-size: 15px;
     font-weight: 600;
     letter-spacing: 0.5px;
-    
     margin-bottom: 1px;
 }
 
@@ -296,6 +295,7 @@ if (session_status() == PHP_SESSION_NONE) {
         padding: 0 10px;
         font-size: 13px;
     }
+
 }
 
 @media (max-width: 760px) {
@@ -348,98 +348,117 @@ if (session_status() == PHP_SESSION_NONE) {
     .submenu {
         top: 49px;
     }
+
 }
 
 </style>
 
 <nav id="barra">
 
-    <div>
-        <a href="Cliente/vistacliente.php" id="orga">
-            <h1>OrganicZone</h1>
+<div>
+
+    <a href="/organiczoneOF/paginaprincipal.php" id="orga">
+
+        <h1>OrganicZone</h1>
+
+    </a>
+
+</div>
+
+<section id="links">
+
+    <div class="item">
+
+        <a href="#">
+
+            Nosotros
+
+            <span class="flecha">▶</span>
+
         </a>
+
+        <div class="submenu">
+
+            <a href="/organiczoneOF/misionvision.php">
+                Misión y Visión
+            </a>
+
+        </div>
+
     </div>
 
-    <section id="links">
+    <div class="item">
 
-        <div class="item">
+        <a href="#">
 
-            <a href="#">
-                Nosotros
-                <span class="flecha">▶</span>
-            </a>
+            About Us
 
-            <div class="submenu">
+            <span class="flecha">▶</span>
 
-                <a href="/organiczoneOF/misionvision.php">
-                    Misión y Visión
-                </a>
+        </a>
 
-            </div>
+        <div class="submenu">
 
-        </div>
-
-        <div class="item">
-
-            <a href="#">
-                About Us
-                <span class="flecha">▶</span>
-            </a>
-
-            <div class="submenu">
-
-                <a href="/organiczoneOF/contacto.php">
-                    Contacto
-                </a>
-
-            </div>
-
-        </div>
-
-        <div class="item">
-
-            <a href="Hamburguesas.php">
-                Menú
+            <a href="/organiczoneOF/contacto.php">
+                Contacto
             </a>
 
         </div>
 
-        <div class="item">
+    </div>
 
-            <a href="/organiczoneOF/Cliente/index.php">
-                Comprar
-            </a>
+    <div class="item">
 
-        </div>
+        <a href="/organiczoneOF/Hamburguesas.php">
+            Menú
+        </a>
 
-    </section>
+    </div>
 
-    <section class="zona-sesion">
+    <div class="item">
 
-        <?php if (isset($_SESSION['nombre'])): ?>
+        <a href="/organiczoneOF/Cliente/index.php">
+            Comprar
+        </a>
 
-            <a href="/organiczoneOF/Usuarios/cerrarse.php" class="boton-sesion boton-cerrar">
-                Cerrar sesión
-            </a>
+    </div>
 
-        <?php else: ?>
+</section>
 
-            <a href="/organiczoneOF/Usuarios/formulariosesion.php" class="boton-sesion boton-iniciar">
-                Iniciar sesión
-            </a>
+<section class="zona-sesion">
 
-        <?php endif; ?>
+    <?php if (isset($_SESSION['nombre'])): ?>
 
-    </section>
+        <a
+            href="/organiczoneOF/Usuarios/cerrarse.php"
+            class="boton-sesion boton-cerrar"
+        >
+            Cerrar sesión
+        </a>
 
-    <section class="zonaProducto">
+    <?php else: ?>
 
-        <button
-            class="botonProducto"
-            onclick="window.location.href='productoBest.php'">
-            Producto más vendido
-        </button>
+        <a
+            href="/organiczoneOF/Usuarios/formulariosesion.php"
+            class="boton-sesion boton-iniciar"
+        >
+            Iniciar sesión
+        </a>
 
-    </section>
+    <?php endif; ?>
+
+</section>
+
+<section class="zonaProducto">
+
+    <button
+        type="button"
+        class="botonProducto"
+        onclick="window.location.href='/organiczoneOF/productoBest.php'"
+    >
+        Producto más vendido
+    </button>
+
+</section>
 
 </nav>

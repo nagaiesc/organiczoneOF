@@ -155,7 +155,7 @@ body {
 }
 
 .logo .oz {
-    margin-top: 1.2px;
+    margin-top: 1px;
     color: var(--verde);
     font-family: 'Fredoka', sans-serif;
     font-size: 59px;

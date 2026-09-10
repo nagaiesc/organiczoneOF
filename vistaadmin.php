@@ -1,4 +1,3 @@
-```php
 <?php
 session_start();
 ?>
@@ -11,10 +10,12 @@ session_start();
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
 *{
     box-sizing:border-box;
 }
+
 body{
     margin:0;
     min-height:100vh;
@@ -23,9 +24,10 @@ body{
     color:#2B140D;
     display:flex;
     justify-content:center;
-    align-items:center;
-    padding:80px 30px 40px;
+    align-items:flex-start;
+    padding:125px 30px 45px;
 }
+
 .panel{
     width:100%;
     max-width:1250px;
@@ -33,17 +35,20 @@ body{
     grid-template-columns:1fr 1fr 1.5fr;
     grid-template-rows:235px 370px 235px;
     gap:25px;
-    margin:auto;
+    margin:0 auto;
 }
+
 .tarjeta{
     border-radius:35px;
     overflow:hidden;
     transition:transform 0.2s ease,box-shadow 0.2s ease;
 }
+
 .tarjeta:hover{
     transform:translateY(-4px);
     box-shadow:0 10px 25px rgba(43,20,13,0.12);
 }
+
 .historial{
     background:#2B140D;
     padding:25px;
@@ -51,12 +56,14 @@ body{
     flex-direction:column;
     justify-content:space-between;
 }
+
 .botones-historial{
     display:flex;
     flex-direction:column;
     align-items:flex-end;
     gap:12px;
 }
+
 .boton-amarillo,.boton-amarillito{
     background:#FCD09F;
     color:#2B140D;
@@ -71,10 +78,12 @@ body{
     display:inline-block;
     transition:transform 0.2s ease,background 0.2s ease;
 }
+
 .boton-amarillo:hover,.boton-amarillito:hover{
     transform:scale(1.05);
     background:#FFDDB2;
 }
+
 .titulo-historial{
     margin:0;
     color:white;
@@ -82,24 +91,28 @@ body{
     line-height:0.9;
     font-weight:700;
 }
+
 .titulo-historial span{
     display:block;
     color:#FCD09F;
     font-size:25px;
     margin-top:8px;
 }
+
 .imagen-hamburguesa{
     background:#08A84B;
     display:flex;
     align-items:center;
     justify-content:center;
 }
+
 .imagen-hamburguesa img{
     width:100%;
     height:100%;
     object-fit:cover;
     display:block;
 }
+
 .saludo{
     display:flex;
     flex-direction:column;
@@ -108,6 +121,7 @@ body{
     text-align:center;
     padding:20px;
 }
+
 .saludo-verde{
     margin:0;
     color:#08A84B;
@@ -115,6 +129,7 @@ body{
     font-weight:700;
     line-height:0.9;
 }
+
 .saludo-admin{
     margin:8px 0 0 0;
     color:#2B140D;
@@ -123,6 +138,7 @@ body{
     line-height:0.95;
     word-break:break-word;
 }
+
 .pedidos{
     background:#08A84B;
     padding:30px;
@@ -131,6 +147,7 @@ body{
     justify-content:space-between;
     position:relative;
 }
+
 .pedidos::before{
     content:"";
     position:absolute;
@@ -141,6 +158,7 @@ body{
     top:35px;
     border-radius:0 150px 150px 0;
 }
+
 .botones-pedidos{
     position:relative;
     z-index:2;
@@ -149,6 +167,7 @@ body{
     align-items:flex-end;
     gap:12px;
 }
+
 .boton-verde{
     background:#087F3B;
     color:white;
@@ -163,20 +182,24 @@ body{
     display:inline-block;
     transition:transform 0.2s ease,background 0.2s ease;
 }
+
 .boton-verde:hover{
     transform:scale(1.05);
     background:#096D34;
 }
+
 .texto-pedidos{
     position:relative;
     z-index:2;
 }
+
 .texto-pequeno{
     margin:0;
     color:#FCD09F;
     font-size:25px;
     font-weight:600;
 }
+
 .titulo-pedidos{
     margin:0;
     color:white;
@@ -184,6 +207,7 @@ body{
     font-weight:700;
     line-height:0.9;
 }
+
 .productos{
     background:#FCD09F;
     padding:30px;
@@ -192,6 +216,7 @@ body{
     justify-content:space-between;
     position:relative;
 }
+
 .productos::before{
     content:"";
     position:absolute;
@@ -202,6 +227,7 @@ body{
     top:-25px;
     border-radius:0 0 90px 90px;
 }
+
 .botones-productos{
     position:relative;
     z-index:2;
@@ -210,6 +236,7 @@ body{
     align-items:flex-end;
     gap:12px;
 }
+
 .boton-marron{
     background:#2B140D;
     color:white;
@@ -224,17 +251,21 @@ body{
     display:inline-block;
     transition:transform 0.2s ease,background 0.2s ease;
 }
+
 .boton-marron:hover{
     transform:scale(1.05);
     background:#432117;
 }
+
 .texto-productos{
     position:relative;
     z-index:2;
 }
+
 .texto-productos .texto-pequeno{
     color:#833518;
 }
+
 .titulo-productos{
     margin:0;
     color:#2B140D;
@@ -242,6 +273,7 @@ body{
     font-weight:700;
     line-height:0.9;
 }
+
 .ventas{
     grid-column:1 / -1;
     background:#2B140D;
@@ -251,13 +283,16 @@ body{
     justify-content:space-between;
     position:relative;
 }
+
 .texto-ventas{
     position:relative;
     z-index:2;
 }
+
 .texto-ventas .texto-pequeno{
     color:#FCD09F;
 }
+
 .titulo-ventas{
     margin:0;
     color:white;
@@ -265,6 +300,7 @@ body{
     font-weight:700;
     line-height:0.9;
 }
+
 .botones-ventas{
     position:relative;
     z-index:2;
@@ -272,87 +308,122 @@ body{
     gap:12px;
     align-items:center;
 }
+
 .boton-dia{
     position:relative;
     z-index:2;
 }
+
 .imagen-chico{
     background:#08A84B;
     display:flex;
     align-items:center;
     justify-content:center;
 }
+
 .imagen-chico img{
     width:100%;
     height:100%;
     object-fit:cover;
     display:block;
 }
-@media(max-width:1000px){
+
+@media(max-width:1100px){
+
     body{
-        align-items:flex-start;
-        padding-top:100px;
+        padding:120px 20px 40px;
     }
+
     .panel{
         grid-template-columns:1fr 1fr;
         grid-template-rows:auto;
-        max-width:800px;
     }
+
     .saludo{
         grid-column:1 / -1;
-        min-height:220px;
+        min-height:235px;
     }
+
+    .imagen-hamburguesa{
+        min-height:235px;
+    }
+
     .imagen-chico{
         min-height:350px;
     }
-    .imagen-hamburguesa{
-        min-height:250px;
+
+    .ventas{
+        grid-column:1 / -1;
+        min-height:235px;
     }
 }
+
 @media(max-width:650px){
+
     body{
-        padding:90px 15px 30px;
+        padding:105px 15px 30px;
     }
+
     .panel{
         grid-template-columns:1fr;
         gap:18px;
     }
+
     .tarjeta{
         min-height:300px;
     }
+
+    .saludo{
+        grid-column:auto;
+        min-height:200px;
+    }
+
     .ventas{
+        grid-column:auto;
         flex-direction:column;
         justify-content:space-between;
         align-items:flex-start;
+        min-height:300px;
     }
-    .botones-ventas,.boton-dia{
+
+    .botones-ventas,
+    .boton-dia{
         align-self:flex-end;
     }
+
     .botones-ventas{
         flex-direction:column;
     }
-    .saludo{
-        min-height:200px;
-    }
+
     .saludo-verde{
         font-size:50px;
     }
+
     .saludo-admin{
         font-size:60px;
     }
+
     .titulo-historial{
         font-size:42px;
     }
-    .titulo-pedidos,.titulo-productos,.titulo-ventas{
+
+    .titulo-pedidos,
+    .titulo-productos,
+    .titulo-ventas{
         font-size:45px;
     }
-    .boton-amarillo,.boton-amarillito,.boton-verde,.boton-marron{
+
+    .boton-amarillo,
+    .boton-amarillito,
+    .boton-verde,
+    .boton-marron{
         padding:11px 25px;
         font-size:17px;
     }
 }
 </style>
 </head>
+
 <body>
 
 <?php include("nav.php"); ?>
@@ -363,7 +434,7 @@ body{
         <div class="botones-historial">
             <a href="Usuarios/leerusuarios.php" class="boton-amarillo">Mostrar</a>
         </div>
-            <h2 class="titulo-historial">Historial<span>De usuarios</span></h2>
+        <h2 class="titulo-historial">Historial<span>De usuarios</span></h2>
     </section>
 
     <section class="tarjeta imagen-hamburguesa">
@@ -379,7 +450,8 @@ body{
         <div class="botones-pedidos">
             <a href="Pedidos/leerpedidos.php" class="boton-verde">Mostrar</a>
         </div>
-            <div class="texto-pedidos">
+
+        <div class="texto-pedidos">
             <p class="texto-pequeno">Gestionar</p>
             <h2 class="titulo-pedidos">Pedidos</h2>
         </div>
@@ -390,6 +462,7 @@ body{
             <a href="Productos/formularioproductos.php" class="boton-marron">Registrar</a>
             <a href="Productos/leerproductos.php" class="boton-marron">Mostrar</a>
         </div>
+
         <div class="texto-productos">
             <p class="texto-pequeno">Gestionar</p>
             <h2 class="titulo-productos">Productos</h2>
@@ -405,6 +478,7 @@ body{
             <p class="texto-pequeno">Gestionar</p>
             <h2 class="titulo-ventas">Ventas</h2>
         </div>
+
         <div class="botones-ventas">
             <a href="Ventas/leerventas.php" class="boton-amarillo">Mostrar</a>
             <a href="Reportes/reporteingresos.php" class="boton-amarillito">Reporte</a>
@@ -416,4 +490,3 @@ body{
 
 </body>
 </html>
-
