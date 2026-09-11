@@ -461,8 +461,9 @@ if (session_status() == PHP_SESSION_NONE) {
 
 </section class="zonaUsuario">
 <button 
+type="button"
 class="botonUsuario"
-onclick="window.location.href='/organiczoneOF/usuarioBest'">
+onclick="window.location.href='/organiczoneOF/usuarioBest.php'">
 Mejor cliente
 </button>
 <section>
