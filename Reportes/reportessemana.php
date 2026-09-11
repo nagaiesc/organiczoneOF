@@ -1,18 +1,4 @@
 <?php 
-session_start();
-
-$servidor = "localhost";
-$nombre = "root";
-$contraseña = "";
-$BDnombre = "organiczoneBD";
-
-$conn = new mysqli($servidor, $nombre, $contraseña, $BDnombre);
-
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
-
-$id = $_SESSION["CI"];
 
 // Consulta SQL simplificada
 $sql = "SELECT WEEK(pedidos.fecha) AS semana, SUM(ventas.costototal) AS ventas 
@@ -34,25 +20,15 @@ if ($resultado && $resultado->num_rows > 0) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reporte de Ingresos por Semana</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <h2>Reporte de Ingresos Totales por Semana</h2>
-
     <script>
         const semanas = <?php echo json_encode($semanas); ?>;
         const ventas = <?php echo json_encode($ventas); ?>;
     </script>
 
-    <div style="width: 500px; height: 300px;">
-        <canvas id="graficoVentasSemana"></canvas>
-    </div>
+    <section class="grafico">
+    <h2 class="titulo-grafico">Ingresos por semana</h2>
+    <canvas id="graficoVentasSemana"></canvas>
+</section>
 
     <script>
         const ctx = document.getElementById('graficoVentasSemana');
@@ -67,5 +43,3 @@ if ($resultado && $resultado->num_rows > 0) {
             }
         });
     </script>
-</body>
-</html>

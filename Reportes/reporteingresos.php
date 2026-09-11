@@ -306,6 +306,10 @@ foreach ($ingresos as $ingreso) {
             </h2>
 
         </section>
+         
+        <?php include 'reportesdia.php'; ?>
+
+        <?php include 'reportessemana.php'; ?>
 
         <section class="grafico">
 
