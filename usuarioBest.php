@@ -10,12 +10,12 @@ if ($conn->connect_error) {
 }
 $conn->set_charset("utf8mb4");
 $sql = "SELECT 
-            usuario.nombre,
+            nombre.nombre,
             COUNT(pedidos.id) AS cantidad_pedidos
         FROM pedidos
-        INNER JOIN usuario
-            ON pedidos.usuario_id = usuario.id
-        GROUP BY usuario.id, usuario.nombre
+        INNER JOIN nombre
+            ON pedidos.nombre_id = nombre.id
+        GROUP BY nombre.id, nombre.nombre
         ORDER BY cantidad_pedidos DESC";
 
 $resultado = $conn->query($sql);

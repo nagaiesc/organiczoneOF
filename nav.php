@@ -459,14 +459,14 @@ if (session_status() == PHP_SESSION_NONE) {
         Producto más vendido
     </button>
 
-</section class="zonaUsuario">
+</section>
+<section class="zonaUsuario">
 <button 
 class="botonUsuario"
-onclick="window.location.href='/organiczoneOF/usuarioBest'">
+onclick="window.location.href='/organiczoneOF/usuarioBest.php'"
+>
 Mejor cliente
 </button>
-<section>
-
 </section>
 
 </nav>
