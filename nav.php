@@ -211,7 +211,7 @@ if (session_status() == PHP_SESSION_NONE) {
     min-width: auto;
 }
 
-.boton-sesion {
+.boton-sesion  {
     height: 42px;
     display: flex;
     align-items: center;
@@ -253,7 +253,8 @@ if (session_status() == PHP_SESSION_NONE) {
     min-width: auto;
 }
 
-.botonProducto {
+.botonProducto
+{
     height: 42px;
     padding: 0 14px;
     border: none;
@@ -268,7 +269,7 @@ if (session_status() == PHP_SESSION_NONE) {
     transition: all 0.2s ease;
 }
 
-.botonProducto:hover {
+.botonProducto:hover{
     background: #432116;
     transform: translateY(-1px);
 }
@@ -291,7 +292,7 @@ if (session_status() == PHP_SESSION_NONE) {
     }
 
     .boton-sesion,
-    .botonProducto {
+    .botonProducto{
         padding: 0 10px;
         font-size: 13px;
     }
@@ -452,12 +453,19 @@ if (session_status() == PHP_SESSION_NONE) {
 <section class="zonaProducto">
 
     <button
-        type="button"
         class="botonProducto"
         onclick="window.location.href='/organiczoneOF/productoBest.php'"
     >
         Producto más vendido
     </button>
+
+</section class="zonaUsuario">
+<button 
+class="botonUsuario"
+onclick="window.location.href='/organiczoneOF/usuarioBest'">
+Mejor cliente
+</button>
+<section>
 
 </section>
 
