@@ -1,7 +1,7 @@
 <?php 
 
 // Consulta SQL simplificada
-$sql = "SELECT WEEK(pedidos.fecha) AS semana, SUM(ventas.costototal) AS ventas 
+$sql = "SELECT WEEK(pedidos.fecha) AS semana, SUM(ventas.costototal) AS ventasSemana 
         FROM ventas 
         INNER JOIN pedidos ON ventas.pedidos_id = pedidos.id 
         GROUP BY WEEK(pedidos.fecha)";
@@ -9,20 +9,20 @@ $sql = "SELECT WEEK(pedidos.fecha) AS semana, SUM(ventas.costototal) AS ventas
 $resultado = $conn->query($sql);
 
 $semanas = [];
-$ventas = [];
+$ventasSemana = [];
 
 if ($resultado && $resultado->num_rows > 0) {
     while ($fila = $resultado->fetch_assoc()) {
         // Formateamos el texto directo en PHP para que se vea claro
         $semanas[] = "Semana " . $fila["semana"];
-        $ventas[] = $fila["ventas"];
+        $ventasSemana[] = $fila["ventasSemana"];
     }
 }
 ?>
 
     <script>
         const semanas = <?php echo json_encode($semanas); ?>;
-        const ventas = <?php echo json_encode($ventas); ?>;
+        const ventasSemana = <?php echo json_encode($ventasSemana); ?>;
     </script>
 
     <section class="grafico">
@@ -31,15 +31,46 @@ if ($resultado && $resultado->num_rows > 0) {
 </section>
 
     <script>
-        const ctx = document.getElementById('graficoVentasSemana');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: semanas,
-                datasets: [{
-                    label: 'Ingresos Totales ($)',
-                    data: ventas
-                }]
+        const ctxSemanas = document.getElementById('graficoVentasSemana');
+        new Chart(ctxSemanas, {
+        type: 'doughnut',
+
+        data: {
+            labels: semanas,
+
+            datasets: [{
+                label: 'Ingresos en Bs.',
+                data: ventasSemana,
+                backgroundColor: [
+                    '#0BA84A',
+                    '#2B140D',
+                    '#FCD09F',
+                    '#087F3B',
+                    '#82D19A'
+                ],
+                borderColor: '#FFFFFF',
+                borderWidth: 2,
+                hoverOffset: 6
+            }]
+        },
+
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        font: {
+                            family: 'Fredoka',
+                            size: 14
+                        }
+                    }
+                }
             }
-        });
+        }
+    });
     </script>
+
+    

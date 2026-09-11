@@ -1,15 +1,15 @@
 <?php 
  //Paso 1 Consulta SQL
-  $sql= "SELECT pedidos.fecha, SUM(ventas.costototal) AS ventas FROM ventas INNER JOIN pedidos ON ventas.pedidos_id = pedidos.id  GROUP BY pedidos.fecha";
+  $sql= "SELECT pedidos.fecha, SUM(ventas.costototal) AS ventasDia FROM ventas INNER JOIN pedidos ON ventas.pedidos_id = pedidos.id  GROUP BY pedidos.fecha";
   
   $resultado = $conn->query($sql);
 
   $fecha = [];
-  $ventas = [];
+  $ventasDia = [];
   //Paso 2 Mover Datos al array
   while ($fila = $resultado->fetch_assoc()){
     $fecha[] = $fila["fecha"];
-    $ventas[] = $fila["ventas"];
+    $ventasDia[] = $fila["ventasDia"];
   }
   
 
@@ -23,17 +23,22 @@
 </section>
 
 <script>
-const dias = <?php echo json_encode($dias); ?>;
-const ingresosDias = <?php echo json_encode($ingresosDias); ?>;
+const fecha = <?php echo json_encode($fecha); ?>;
+const ventasDia = <?php echo json_encode($ventasDia); ?>;
 
 const ctxDias = document.getElementById('graficoDias');
 new Chart(ctxDias, {
     type: 'bar',
     data: {
-        labels: dias,
+        labels: fecha,
         datasets: [{
             label: 'Ingresos en Bs.',
-            data: ingresosDias
+            data: ventasDia,
+            backgroundColor: '#0BA84A', // Color principal (#0BA84A)
+            borderColor: '#087F3B',          // Borde (#087F3B)
+            borderWidth: 1,                    // Grosor del borde en px
+            borderRadius: 8,                   // Bordes redondeados en las barras
+            hoverBackgroundColor: '#087F3B'   // Color al pasar el cursor sobre la barra
         }]
     },
     options: {
