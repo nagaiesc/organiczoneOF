@@ -462,6 +462,7 @@ if (session_status() == PHP_SESSION_NONE) {
 </section>
 <section class="zonaUsuario">
 <button 
+type="button"
 class="botonUsuario"
 onclick="window.location.href='/organiczoneOF/usuarioBest.php'"
 >

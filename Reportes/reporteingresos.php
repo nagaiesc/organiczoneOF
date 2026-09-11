@@ -351,63 +351,66 @@ foreach ($ingresos as $ingreso) {
         const ctxMeses = document.getElementById('graficoMeses');
 
         new Chart(ctxMeses, {
-            type: 'bar',
+            type: 'line',
 
             data: {
-                labels: meses,
+              labels: meses,
 
-                datasets: [
-                    {
-                        label: 'Ingresos en Bs.',
-                        data: ingresos,
-                        backgroundColor: verdeOrganicZone,
-                        borderColor: verdeOscuro,
-                        borderWidth: 1,
-                        borderRadius: 8,
-                        hoverBackgroundColor: verdeOscuro
-                    }
-                ]
-            },
+        datasets: [{
+            label: 'Ingresos en Bs.',
+            data: ingresos,
+            borderColor: verdeOrganicZone, // Color de la línea verde (#0BA84A)
+            backgroundColor: 'rgba(11, 168, 74, 0.1)', // Fondo transparente bajo la línea
+            borderWidth: 2,
+            radius: 3,                    // Tamaño del punto en cada mes
+            tension: 0.3                   // Curvatura suave para la línea
+        }]
+    },
 
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
 
-                plugins: {
-                    legend: {
-                        labels: {
-                            font: {
-                                family: 'Fredoka',
-                                size: 14
-                            }
-                        }
-                    }
-                },
+        interaction: {
+            intersect: false,
+            mode: 'index'
+        },
 
-                scales: {
-                    x: {
-                        ticks: {
-                            font: {
-                                family: 'Fredoka'
-                            }
-                        },
-
-                        grid: {
-                            display: false
-                        }
-                    },
-
-                    y: {
-                        beginAtZero: true,
-
-                        ticks: {
-                            font: {
-                                family: 'Fredoka'
-                            }
-                        }
+        plugins: {
+            legend: {
+                labels: {
+                    font: {
+                        family: 'Fredoka',
+                        size: 14
                     }
                 }
             }
+        },
+
+        scales: {
+            x: {
+                ticks: {
+                    font: {
+                        family: 'Fredoka'
+                    }
+                },
+
+                grid: {
+                    display: false
+                }
+            },
+
+           y:      {
+                    beginAtZero: true,
+
+                        ticks: {
+                          font: {
+                            family: 'Fredoka'
+                          }
+                       }
+                   }
+               }
+           }
         });
 
         const ctxAnios = document.getElementById('graficoAnios');
