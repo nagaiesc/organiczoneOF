@@ -479,9 +479,9 @@ body {
 
         <nav class="nav-inner">
 
-            <a href="leerproductos.php">
+            <a href="leerpedidos.php">
 
-                VOLVER
+                ← Volver a pedidos
 
             </a>
 

@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+$rol = $_SESSION['rol'] ?? '';
+
+if ($rol === 'admin') {
+    $volverInicio = '../vistaadmin.php';
+} elseif ($rol === 'vendedor') {
+    $volverInicio = '../Usuarios/vistavendedor.php';
+} else {
+    $volverInicio = '../paginaprincipal.php';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -501,7 +515,7 @@ label.error {
 
 <section class="lateral">
 
-<a class="marca" href="../index.php">
+<a class="marca" href="<?php echo $volverInicio; ?>">
 
 <span class="my">My</span>
 
@@ -887,5 +901,5 @@ $(document).ready(function() {
 </body>
 
 </html>
-```
+
 

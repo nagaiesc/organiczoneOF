@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+$rol = $_SESSION['rol'] ?? '';
+
+if ($rol === 'admin') {
+    $volverInicio = '../vistaadmin.php';
+} elseif ($rol === 'vendedor') {
+    $volverInicio = '../Usuarios/vistavendedor.php';
+} else {
+    $volverInicio = '../paginaprincipal.php';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -380,7 +394,7 @@ tbody td[colspan] {
 
 <nav class="nav-inner">
 
-<a href="../Usuarios/vistavendedor.php">
+<a href="<?php echo $volverInicio; ?>">
 ← Inicio
 </a>
 
@@ -392,7 +406,7 @@ PRODUCTOS
 </h1>
 
 <a
-    href="http://localhost/organiczoneOF/Productos/formularioproductos.php"
+    href="formularioproductos.php"
     id="boton"
 >
 + Registrar Producto

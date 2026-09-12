@@ -1,5 +1,17 @@
 <?php
 
+session_start();
+
+$rol = $_SESSION['rol'] ?? '';
+
+if ($rol === 'admin') {
+    $volverInicio = '../vistaadmin.php';
+} elseif ($rol === 'vendedor') {
+    $volverInicio = '../Usuarios/vistavendedor.php';
+} else {
+    $volverInicio = '../paginaprincipal.php';
+}
+
 $servidor = "localhost";
 $usuario = "root";
 $contrasena = "";
@@ -1278,7 +1290,7 @@ body {
 
 
     <a
-        href="paginaprincipal.php"
+        href="<?php echo $volverInicio; ?>"
         class="logo"
     >
 

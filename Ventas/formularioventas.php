@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 if (isset($_GET['pedido'])) {
     $pedidos_id = $_GET['pedido'];
 } else {
@@ -347,6 +349,10 @@ label.error {
         </button>
 
     </form>
+
+    <a href="../Pedidos/leerpedidos.php" class="boton-volver">
+        ← Volver a pedidos
+    </a>
 
 </article>
 

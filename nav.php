@@ -4,6 +4,31 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+/* =========================================================
+   BOTÓN VOLVER SEGÚN EL ROL
+   ========================================================= */
+
+$rol = $_SESSION['rol'] ?? '';
+
+$paginaActual = basename($_SERVER['PHP_SELF']);
+
+$inicioRol = '';
+$textoInicioRol = '';
+
+if ($rol === 'admin' && $paginaActual !== 'vistaadmin.php') {
+
+    $inicioRol = '/organiczoneOF/vistaadmin.php';
+    $textoInicioRol = '← Volver a Admin';
+
+}
+
+if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
+
+    $inicioRol = '/organiczoneOF/Usuarios/vistavendedor.php';
+    $textoInicioRol = '← Volver a Vendedor';
+
+}
+
 ?>
 
 <style>
@@ -266,13 +291,46 @@ if (session_status() == PHP_SESSION_NONE) {
     font-weight: 500;
     white-space: nowrap;
     cursor: pointer;
-    transition: all 0.2s ease;
 }
 
 .botonProducto:hover{
     background: #432116;
     transform: translateY(-1px);
 }
+
+
+/* =========================================================
+   ÚNICAMENTE AGREGADO:
+   BOTÓN VOLVER A ADMIN / VENDEDOR
+   ========================================================= */
+
+.boton-inicio-rol {
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 14px;
+    border-radius: 22px;
+    color: var(--crema);
+    background: var(--cafe);
+    text-decoration: none;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.boton-inicio-rol:hover {
+    background: #432116;
+    color: var(--blanco);
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   LO DEMÁS SE QUEDA IGUAL
+   ========================================================= */
 
 @media (max-width: 950px) {
 
@@ -426,7 +484,25 @@ if (session_status() == PHP_SESSION_NONE) {
 
 </section>
 
+
+<!-- =====================================================
+     SESIÓN
+     ===================================================== -->
+
 <section class="zona-sesion">
+
+
+    <?php if ($inicioRol !== ''): ?>
+
+        <a
+            href="<?php echo $inicioRol; ?>"
+            class="boton-inicio-rol"
+        >
+            <?php echo $textoInicioRol; ?>
+        </a>
+
+    <?php endif; ?>
+
 
     <?php if (isset($_SESSION['nombre'])): ?>
 
@@ -450,6 +526,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 </section>
 
+
 <section class="zonaProducto">
 
     <button
@@ -459,15 +536,16 @@ if (session_status() == PHP_SESSION_NONE) {
         Producto más vendido
     </button>
 
-</section>
-<section class="zonaUsuario">
+</section class="zonaUsuario">
+
 <button 
-type="button"
 class="botonUsuario"
-onclick="window.location.href='/organiczoneOF/usuarioBest.php'"
->
+onclick="window.location.href='/organiczoneOF/usuarioBest'">
 Mejor cliente
 </button>
+
+<section>
+
 </section>
 
 </nav>

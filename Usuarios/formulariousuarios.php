@@ -98,6 +98,21 @@ label {
 }
 
 /* BOTÓN */
+.boton-volver-form {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    padding: 10px 18px;
+    border-radius: 20px;
+    background: #2B140D;
+    color: #FCD09F;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.boton-volver-form:hover { opacity: .9; }
+
 .forma button {
     width: 100%;
     background: #2b140d;
@@ -197,6 +212,10 @@ label {
             </div>
 
         </div>
+
+        <a href="leerusuarios.php" class="boton-volver-form">
+            ← Volver a usuarios
+        </a>
 
         <button type="submit">Guardar Usuario</button>
 

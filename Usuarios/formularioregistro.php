@@ -177,7 +177,22 @@
             padding-top: 20px;
         }
 
-        .btn-submit {
+        .boton-volver-registro {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    padding: 12px 18px;
+    border-radius: 22px;
+    background: #2B140D;
+    color: #FCD09F;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.boton-volver-registro:hover { opacity: .9; }
+
+.btn-submit {
             background-color: var(--text-brown);
             color: white;
             border: none;
@@ -476,6 +491,9 @@
             </article>
 
             <section class="footer-form">
+                <a href="formulariosesion.php" class="boton-volver-registro">
+                    ← Volver al inicio de sesión
+                </a>
                 <button type="submit" class="btn-submit">
                     Registrarse
                 </button>

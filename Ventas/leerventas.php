@@ -5,6 +5,14 @@ session_start();
 $rol = $_SESSION['rol'] ?? '';
 $nombreVendedor = $_SESSION['nombre'] ?? '';
 
+if ($rol === 'admin') {
+    $volverInicio = '../vistaadmin.php';
+} elseif ($rol === 'vendedor') {
+    $volverInicio = '../Usuarios/vistavendedor.php';
+} else {
+    $volverInicio = '../paginaprincipal.php';
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -683,11 +691,11 @@ tbody tr:last-child td {
 
 
         <a
-            href="formularioventas.php"
+            href="<?php echo $volverInicio; ?>"
             id="boton"
         >
 
-            + Registrar Venta
+            ← Volver al inicio
 
         </a>
 

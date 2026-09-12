@@ -232,6 +232,21 @@ body {
     cursor: not-allowed;
 }
 
+.boton-volver-form {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    padding: 10px 18px;
+    border-radius: 20px;
+    background: #2B140D;
+    color: #FCD09F;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.boton-volver-form:hover { opacity: .9; }
+
 .boton {
     width: 100%;
     height: 52px;
@@ -497,6 +512,10 @@ input.error:focus {
                 >
 
             </div>
+
+            <a href="leerpedidos.php" class="boton-volver-form">
+                ← Volver a pedidos
+            </a>
 
             <button
                 type="submit"

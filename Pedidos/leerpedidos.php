@@ -10,6 +10,14 @@ if (!isset($_SESSION['rol']) || !isset($_SESSION['nombre'])) {
 $rol = $_SESSION['rol'];
 $nombreVendedor = $_SESSION['nombre'];
 
+if ($rol === 'admin') {
+    $volverInicio = '../vistaadmin.php';
+} elseif ($rol === 'vendedor') {
+    $volverInicio = '../Usuarios/vistavendedor.php';
+} else {
+    $volverInicio = '../paginaprincipal.php';
+}
+
 $nombreServidor = "localhost";
 $nombreUsuario = "root";
 $contraseñaBaseDeDatos = "";
@@ -50,11 +58,11 @@ if (
 
         $stmtRechazar->close();
 
-        header("Location: leerpedido.php?rechazado=" . ($eliminado ? "1" : "0"));
+        header("Location: leerpedidos.php?rechazado=" . ($eliminado ? "1" : "0"));
         exit;
     }
 
-    header("Location: leerpedido.php?rechazado=0");
+    header("Location: leerpedidos.php?rechazado=0");
     exit;
 }
 
@@ -498,8 +506,8 @@ tbody td:nth-child(4) {
 
 <nav class="nav-inner">
 
-<a href="../Usuarios/vistavendedor.php">
-INICIO
+<a href="<?php echo $volverInicio; ?>">
+← INICIO
 </a>
 
 </nav>
@@ -509,9 +517,11 @@ LISTA DE<br>
 PEDIDOS
 </h1>
 
+<?php if ($rol === 'admin'): ?>
 <a href="formulariopedidos.php" id="boton">
 Registrar Pedido
 </a>
+<?php endif; ?>
 
 <p class="desc">
 Visualiza todos los pedidos
@@ -848,7 +858,7 @@ function confirmarRechazo(id) {
         if (result.isConfirmed) {
 
             window.location =
-                "leerpedido.php?rechazar=" + id;
+                "leerpedidos.php?rechazar=" + id;
 
         }
 
@@ -895,7 +905,7 @@ Swal.fire({
     window.history.replaceState(
         {},
         document.title,
-        "leerpedido.php"
+        "leerpedidos.php"
     );
 
 });
