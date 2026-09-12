@@ -540,7 +540,7 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
 
 <button 
 class="botonUsuario"
-onclick="window.location.href='/organiczoneOF/usuarioBest'">
+onclick="window.location.href='/organiczoneOF/usuarioBest.php'">
 Mejor cliente
 </button>
 
