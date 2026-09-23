@@ -18,13 +18,10 @@ if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
-$conn->set_charset("utf8mb4");
 
-$sqlCarrito = "SELECT productos_id, cantidad FROM carrito WHERE pedidos_id = ?";
-$stmtCarrito = $conn->prepare($sqlCarrito);
-$stmtCarrito->bind_param("i", $pedidos_id);
-$stmtCarrito->execute();
-$resultadoCarrito = $stmtCarrito->get_result();
+
+$sqlCarrito = "SELECT productos_id FROM carrito WHERE pedidos_id = '$pedidos_id'";
+$resultadoCarrito = $conn->query($sqlCarrito);
 ?>
 
 <!DOCTYPE html>
@@ -287,43 +284,37 @@ label.error {
             <tr>
                 <th>Producto</th>
                 <th>Stock disponible</th>
-                <th>Cantidad solicitada</th>
+                
             </tr>
-
             <?php
-            while ($producto = $resultadoCarrito->fetch_assoc()) {
+          
+            if ($resultadoCarrito->num_rows > 0) {
+                while ($producto = $resultadoCarrito->fetch_assoc()) {
+                    $productos_id = $producto['productos_id'];
+                    
+        
+                    $sqlProducto = "SELECT nombre, stock FROM productos WHERE id = '$productos_id'";
+                    $resultadoProducto = $conn->query($sqlProducto);
+                    $datosProducto = $resultadoProducto->fetch_assoc();
+                    $stock = $datosProducto['stock'];
 
-                $productos_id = $producto['productos_id'];
-                $cantidad = $producto['cantidad'];
-
-                $sqlProducto = "SELECT nombre, stock FROM productos WHERE id = ?";
-                $stmtProducto = $conn->prepare($sqlProducto);
-                $stmtProducto->bind_param("i", $productos_id);
-                $stmtProducto->execute();
-
-                $resultadoProducto = $stmtProducto->get_result();
-                $datosProducto = $resultadoProducto->fetch_assoc();
             ?>
-
             <tr>
-                <td>
-                    <?php echo htmlspecialchars($datosProducto['nombre']); ?>
-                </td>
-
-                <td>
-                    <?php echo htmlspecialchars($datosProducto['stock']); ?>
-                </td>
-
-                <td>
-                    <?php echo htmlspecialchars($cantidad); ?>
-                </td>
+                <td><?php echo $datosProducto['nombre']; ?></td>
+                <td><?php echo $stock; ?></td>
+        
+        
             </tr>
-
             <?php
-                $stmtProducto->close();
+                }
+            } else {
+            ?>
+            <tr>
+                <td colspan="4">No hay productos registrados en este pedido.</td>
+            </tr>
+            <?php
             }
             ?>
-
         </table>
 
     </div>
@@ -355,6 +346,7 @@ label.error {
     </a>
 
 </article>
+
 
 <script>
 $(document).ready(function() {
@@ -400,6 +392,5 @@ $(document).ready(function() {
 </html>
 
 <?php
-$stmtCarrito->close();
 $conn->close();
 ?>
