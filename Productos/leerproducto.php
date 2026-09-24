@@ -11,8 +11,11 @@ if (!isset($_GET['id'])) {
 
 $id = intval($_GET['id']);
 
-$sql = "SELECT * FROM productos WHERE id = $id";
-$resultado = $conexion->query($sql);
+$stmt = $conexion->prepare("SELECT * FROM productos WHERE id = ?");
+$stmt->bind_param("i",$id);
+$stmt->execute();
+
+$resultado = $stmt->get_result();
 
 if ($resultado->num_rows > 0) {
 

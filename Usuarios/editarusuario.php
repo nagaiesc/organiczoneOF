@@ -16,10 +16,13 @@ if ($conn->connect_error) {
     die("Hubo un error en la conexion");
 }
 
-$CI = $_GET['CI'];
+$CI = intval($_GET['CI']);
 
-$sql = "SELECT * FROM usuarios WHERE CI = $CI";
-$resultado = $conn->query($sql);
+$stmt = $conn->prepare("SELECT * FROM usuarios WHERE CI = ?");
+$stmt->bind_param("i",$CI);
+$stmt->execute();
+
+$resultado = $stmt->get_result();
 
 if ($resultado->num_rows > 0) {
 

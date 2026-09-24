@@ -6,10 +6,13 @@ if ($conexion->connect_error) {
     die("Error en la conexión");
 }
 
-$id = $_GET['id'];
+$id = intval($_GET['id']);
 
-$sql = "SELECT * FROM pedidos WHERE id = $id";
-$resultado = $conexion->query($sql);
+$stmt = $conexion->prepare("SELECT * FROM pedidos WHERE id = ?");
+$stmt->bind_param("i",$id);
+$stmt->execute();
+
+$resultado = $stmt->get_result();
 
 if ($resultado->num_rows == 0) {
     die("Pedido no encontrado");

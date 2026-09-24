@@ -22,9 +22,11 @@ if (!isset($_GET['CI'])) {
 
 $CI = intval($_GET['CI']);
 
-$sql = "SELECT * FROM usuarios WHERE CI = $CI";
+$stmt = $conexion->prepare("SELECT * FROM usuarios WHERE CI = ?");
+$stmt->bind_param("i",$CI);
+$stmt->execute();
 
-$resultado = $conexion->query($sql);
+$resultado = $stmt->get_result();
 
 if ($resultado->num_rows > 0) {
 
@@ -48,7 +50,6 @@ if ($resultado->num_rows > 0) {
 
 <title>Detalle Usuario</title>
 
-<!-- FUENTE FREDOKA -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 

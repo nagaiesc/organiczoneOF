@@ -8,9 +8,17 @@ $conexion = new mysqli($nombreServidor, $nombreUsuario, $contraseñaBaseDeDatos,
 if ($conexion->connect_error) {
     echo "Hubo un error en la conexion";
 }
-$CI = $_GET['CI'];
 
-$sql = "UPDATE usuarios SET estado='inactivo' WHERE CI=$CI";
+$CI = intval($_GET['CI'] ?? 0);
+
+$stmt = $conexion->prepare("UPDATE usuarios SET estado='inactivo' WHERE CI=?");
+$stmt->bind_param("i",$CI);
+
+if($stmt->execute()){
+    header("Location: ../Usuarios/leerusuarios.php");
+    exit();
+}
+
 if ($conexion->query($sql) === TRUE) {
     echo "Usuario editado correctamente";
     header("location: ../Usuarios/leerusuarios.php");

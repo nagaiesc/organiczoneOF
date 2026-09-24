@@ -6,10 +6,17 @@ if ($conexion->connect_error) {
     die("Error en la conexión");
 }
 
-$id = $_GET['id'];
+if(!isset($_GET['id']) || !is_numeric($_GET['id'])){
+    die("ID de producto no válido");
+}
 
-$sql = "SELECT * FROM productos WHERE id = $id";
-$resultado = $conexion->query($sql);
+$id = intval($_GET['id']);
+
+$stmt = $conexion->prepare("SELECT * FROM productos WHERE id = ?");
+$stmt->bind_param("i",$id);
+$stmt->execute();
+
+$resultado = $stmt->get_result();
 
 if ($resultado->num_rows == 0) {
     die("Producto no encontrado");

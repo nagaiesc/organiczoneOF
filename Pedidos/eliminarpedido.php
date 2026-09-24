@@ -10,24 +10,22 @@ if ($conexion->connect_error) {
     die("Hubo un error en la conexion");
 }
 
-$id = $_GET['id'];
+$id = intval($_GET['id'] ?? 0);
 
-// Primero eliminamos los productos del carrito que pertenecen a este pedido
-$sqlCarrito = "DELETE FROM carrito WHERE pedidos_id = $id";
+$stmt = $conexion->prepare("DELETE FROM carrito WHERE pedidos_id=?");
+$stmt->bind_param("i",$id);
 
-if ($conexion->query($sqlCarrito) === TRUE) {
-    // Ahora que el carrito ya no tiene productos relacionados con el pedido, podemos eliminar el pedido.
-    $sqlPedido = "DELETE FROM pedidos WHERE id = $id";
+if($stmt->execute()){
 
-    if ($conexion->query($sqlPedido) === TRUE) {
+    $stmt = $conexion->prepare("DELETE FROM pedidos WHERE id=?");
+    $stmt->bind_param("i",$id);
+
+    if($stmt->execute()){
         header("Location: leerpedidos.php");
         exit();
-    } else {
-        echo "Error al eliminar el pedido: " . $conexion->error;
     }
-} else {
-    echo "Error al eliminar los productos del pedido: " . $conexion->error;
 }
 
+die("No se pudo eliminar el pedido.");
 $conexion->close();
 ?>

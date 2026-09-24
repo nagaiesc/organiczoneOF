@@ -7,15 +7,21 @@ $conexion = new mysqli($nombreServidor, $nombreUsuario, $contraseñaBaseDeDatos,
 if ($conexion->connect_error) {
     echo "Hubo un error en la conexion";
 }
-$CI = $_POST['CI'];
-$nombre = $_POST['nombre'];
-$direccion = $_POST['direccion'];
-$celular = $_POST['celular'];
-$rol = $_POST['rol'];
-$estado = $_POST['estado'];
-$sql = "UPDATE usuarios SET nombre='$nombre', direccion='$direccion', celular='$celular', rol='$rol',estado='$estado' WHERE CI=$CI";
-if ($conexion->query($sql) === TRUE) {
-    echo "Usuario editado correctamente";
-    header("location: leerusuarios.php");
+
+$CI = intval($_POST['CI'] ?? 0);
+$nombre = trim($_POST['nombre'] ?? '');
+$direccion = trim($_POST['direccion'] ?? '');
+$celular = trim($_POST['celular'] ?? '');
+$rol = trim($_POST['rol'] ?? '');
+$estado = trim($_POST['estado'] ?? '');
+
+$stmt = $conexion->prepare("UPDATE usuarios SET nombre=?,direccion=?,celular=?,rol=?,estado=? WHERE CI=?");
+
+$stmt->bind_param("sssssi",$nombre,$direccion,$celular,$rol,$estado,$CI);
+
+if($stmt->execute()){
+    header("Location: leerusuarios.php");
+    exit();
 }
-?>
+
+die("No se pudo actualizar el usuario.");

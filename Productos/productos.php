@@ -10,20 +10,25 @@ $conexion = new mysqli($servidor,$usuario,$password,$BDnombre);
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
-$nombre = $_POST['nombre'];
-$descripcion = $_POST['descripcion'];
-$precio = $_POST['precio'];
-$costo = $_POST['costo'];
-$stock = $_POST['stock'];
+$nombre = trim($_POST['nombre'] ?? '');
+$descripcion = trim($_POST['descripcion'] ?? '');
+$precio = intval($_POST['precio'] ?? 0);
+$costo = intval($_POST['costo'] ?? 0);
+$stock = intval($_POST['stock'] ?? 0);
 
-$sql = "INSERT INTO productos (nombre, descripcion, precio, costo, stock)
-VALUES ('$nombre', '$descripcion', '$precio', '$costo', '$stock')";
-
-if (!$conexion->query($sql)) {
-
-    die("Error al guardar el producto: " . $conexion->error);
-
+if($nombre === '' || $descripcion === ''){
+    die("Completa todos los campos.");
 }
+
+$stmt = $conexion->prepare("INSERT INTO productos(nombre,descripcion,precio,costo,stock) VALUES(?,?,?,?,?)");
+
+$stmt->bind_param("ssiii",$nombre,$descripcion,$precio,$costo,$stock);
+
+if(!$stmt->execute()){
+    die("Error al guardar el producto.");
+}
+
+$id = $conexion->insert_id;
 
 $id = $conexion->insert_id;
 if (

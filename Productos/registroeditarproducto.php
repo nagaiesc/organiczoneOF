@@ -8,14 +8,25 @@ $conexion = new mysqli($nombreServidor, $nombreUsuario, $contraseñaBaseDeDatos,
 if ($conexion->connect_error) {
     echo "Hubo un error en la conexion";
 }
-$id = $_POST['id'];
-$nombre = $_POST['nombre'];
-$descripcion = $_POST['descripcion'];
-$precio = $_POST['precio'];
-$costo = $_POST['costo'];
-$stock = $_POST['stock'];
 
-$sql = "UPDATE productos SET nombre='$nombre',descripcion='$descripcion',precio='$precio',costo='$costo',stock='$stock' WHERE id='$id'";
+$id = intval($_POST['id'] ?? 0);
+$nombre = trim($_POST['nombre'] ?? '');
+$descripcion = trim($_POST['descripcion'] ?? '');
+$precio = intval($_POST['precio'] ?? 0);
+$costo = intval($_POST['costo'] ?? 0);
+$stock = intval($_POST['stock'] ?? 0);
+
+if($id <= 0 || $nombre === '' || $descripcion === ''){
+    die("Datos no válidos.");
+}
+
+$stmt = $conexion->prepare("UPDATE productos SET nombre=?,descripcion=?,precio=?,costo=?,stock=? WHERE id=?");
+
+$stmt->bind_param("ssiiii",$nombre,$descripcion,$precio,$costo,$stock,$id);
+
+if(!$stmt->execute()){
+    die("Error al actualizar el producto.");
+}
 
 if($conexion->query($sql)){
 

@@ -24,31 +24,26 @@ $precio = $_POST["precio"];
 
 $total = $precio * $cantidad;
 
-$buscar = "SELECT * FROM carrito 
-WHERE productos_id='$idProducto'
-AND pedidos_id='$idPedido'";
+$stmt = $conn->prepare("SELECT * FROM carrito WHERE productos_id=? AND pedidos_id=?");
+$stmt->bind_param("ii",$idProducto,$idPedido);
+$stmt->execute();
+
+$resultado = $stmt->get_result();
 
 $resultado = $conn->query($buscar);
 if($resultado->num_rows > 0){
-    $sql = "UPDATE carrito SET 
-    cantidad='$cantidad',
-    costototal='$total'
-    WHERE productos_id='$idProducto'
-    AND pedidos_id='$idPedido'";
-
+    $stmt = $conn->prepare("UPDATE carrito SET cantidad=?,costototal=? WHERE productos_id=? AND pedidos_id=?");
+$stmt->bind_param("iiii",$cantidad,$total,$idProducto,$idPedido);
 
 }else{
-    $sql = "INSERT INTO carrito
-    (productos_id, pedidos_id, cantidad, costototal)
-    VALUES
-    ('$idProducto','$idPedido','$cantidad','$total')";
-
+    $stmt = $conn->prepare("INSERT INTO carrito(productos_id,pedidos_id,cantidad,costototal) VALUES(?,?,?,?)");
+$stmt->bind_param("iiii",$idProducto,$idPedido,$cantidad,$total);
 }
 
-if($conn->query($sql)){
-
+if($stmt->execute()){
     header("Location: leercarrito.php?pedidos_id=".$idPedido);
-
+    exit();
+    
 }else{
 
     echo "Error: ".$conn->error;

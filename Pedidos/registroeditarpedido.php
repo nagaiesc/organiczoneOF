@@ -7,15 +7,20 @@ $conexion = new mysqli($nombreServidor, $nombreUsuario, $contraseñaBaseDeDatos,
 if ($conexion->connect_error) {
     echo "Hubo un error en la conexion";
 }
-$id = $_POST['id'];
-$nombre = $_POST['nombre'];
-$fecha = $_POST['fecha'];
-$estado = $_POST['estado'];
-$direccion = $_POST['direccion'];
-$telefono= $_POST['telefono'];
-$nombrevendedor = $_POST['nombrevendedor'];
-$sql = "UPDATE pedidos SET nombre='$nombre', fecha='$fecha' , estado='$estado' , nombrevendedor='$nombrevendedor' , direccion='$direccion' , telefono='$telefono' WHERE id='$id' ";
-if ($conexion->query($sql) === TRUE) {
-    header("location: leerpedidos.php");
+$id = intval($_POST['id'] ?? 0);
+$nombre = trim($_POST['nombre'] ?? '');
+$fecha = trim($_POST['fecha'] ?? '');
+$estado = trim($_POST['estado'] ?? '');
+$direccion = trim($_POST['direccion'] ?? '');
+$telefono = trim($_POST['telefono'] ?? '');
+$nombrevendedor = trim($_POST['nombrevendedor'] ?? '');
+
+$stmt = $conexion->prepare("UPDATE pedidos SET nombre=?,fecha=?,estado=?,nombrevendedor=?,direccion=?,telefono=? WHERE id=?");
+
+$stmt->bind_param("ssssssi",$nombre,$fecha,$estado,$nombrevendedor,$direccion,$telefono,$id);
+
+if($stmt->execute()){
+    header("Location: leerpedidos.php");
+    exit();
 }
 ?>
