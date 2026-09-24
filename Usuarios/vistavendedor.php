@@ -1,14 +1,17 @@
 <?php
 session_start();
+require_once "../seguridad.php";
 
-// suma stock 
-$conexion = new mysqli("localhost", "root", "", "organiczoneBD");
+verificarVendedor();
+
+$conexion = new mysqli("localhost","root","","organiczoneBD");
 $total_stock = 0;
 
-if (!$conexion->connect_error) {
+if(!$conexion->connect_error){
     $sql_stock = "SELECT SUM(stock) as total FROM productos";
     $res_stock = $conexion->query($sql_stock);
-    if ($res_stock && $fila = $res_stock->fetch_assoc()) {
+
+    if($res_stock && $fila = $res_stock->fetch_assoc()){
         $total_stock = $fila['total'] ?? 0;
     }
 }

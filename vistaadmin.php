@@ -1,5 +1,8 @@
 <?php
 session_start();
+require_once "seguridad.php";
+
+verificarAdmin();
 ?>
 <!DOCTYPE html>
 <html lang="es">
