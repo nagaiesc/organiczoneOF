@@ -76,6 +76,8 @@ $conexion->close();
         .acciones{display:flex;justify-content:center;gap:12px;margin-top:30px;flex-wrap:wrap}.acciones a{padding:13px 20px;border-radius:17px;text-decoration:none;font-weight:900}.verde{background:var(--verde);color:white}.cafe{background:var(--cafe);color:white}
         @media(max-width:600px){.cabecera,.contenido{padding:30px 25px}.cabecera{flex-direction:column;align-items:start}.numero{text-align:left}.datos{grid-template-columns:1fr}}
     </style>
+
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/organiczoneOF/includes/oz-navegacion.php'; ?>
 </head>
 <body>
 <div class="comprobante">

@@ -1,0 +1,136 @@
+/* ========================================= 
+   ORGANIC ZONE — NAVEGACIÓN DESPLEGABLE FLUIDA
+   ========================================= */ 
+
+#oz-historial { 
+    position: fixed; 
+    left: 0; 
+    z-index: 850; 
+
+    display: flex; 
+    align-items: center; 
+    justify-content: flex-start; 
+    gap: 10px; 
+
+    width: auto; 
+    height: 52px; /* Ligeramente más alto para curvas más pronunciadas */
+    padding: 0 24px 0 16px; 
+
+    background: #2B140D; /* Café sólido, sin opacidades */
+    border-radius: 0 100px 100px 0; /* Extremo derecho perfectamente curvo */
+    box-shadow: 3px 4px 15px rgba(43, 20, 13, 0.15); /* Sombra suave para dar volumen 2D */
+
+    /* ESTADO EN REPOSO: Deja asomar solo un borde limpio de 16px */
+    transform: translateX(calc(-100% + 16px));
+    
+    /* Animación de deslizamiento súper fluida (Out Quart) sin tirones */
+    transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), 
+                box-shadow 0.45s ease;
+} 
+
+/* ========================================= 
+   ESTADO DESPLEGADO (Hover / Táctil)
+   ========================================= */ 
+
+#oz-historial:hover,
+#oz-historial:focus-within { 
+    transform: translateX(0); 
+    box-shadow: 5px 8px 20px rgba(43, 20, 13, 0.25); /* La sombra crece sutilmente al salir */
+}
+
+/* ========================================= 
+   OCULTAMIENTO POR JAVASCRIPT (Límites del historial)
+   ========================================= */ 
+
+#oz-historial[hidden] { 
+    display: flex !important; 
+    transform: translateX(-100%); 
+    box-shadow: none;
+    pointer-events: none;
+} 
+
+#oz-historial .oz-historial-btn[hidden] { 
+    display: none !important; 
+} 
+
+/* ========================================= 
+   BOTONES Y EFECTOS TÁCTILES
+   ========================================= */ 
+
+.oz-historial-btn { 
+    width: 38px; 
+    height: 38px; 
+    padding: 0; 
+    margin: 0; 
+
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+
+    background: transparent; 
+    border: 0; 
+    border-radius: 50%; 
+
+    cursor: pointer; 
+    transition: background 0.2s ease, transform 0.15s ease;
+} 
+
+.oz-historial-btn:hover { 
+    background: rgba(244, 241, 238, 0.12); /* Brillo crema muy sutil */
+} 
+
+.oz-historial-btn:active { 
+    transform: scale(0.85); 
+    background: rgba(244, 241, 238, 0.25);
+}
+
+/* ========================================= 
+   FLECHAS CHEVRON (Más gruesas y marcadas)
+   ========================================= */ 
+
+.oz-triangulo { 
+    display: block; 
+    width: 12px; /* Un poco más grandes */
+    height: 12px; 
+
+    /* Grosor aumentado a 4px */
+    border-top: 4px solid #F4F1EE; 
+    border-right: 4px solid #F4F1EE; 
+    border-radius: 2.5px; 
+    
+    transition: transform 0.2s ease; 
+    pointer-events: none; 
+} 
+
+.oz-triangulo.izquierda { 
+    transform: rotate(-135deg); 
+    margin-left: 5px;
+} 
+
+.oz-triangulo.derecha { 
+    transform: rotate(45deg); 
+    margin-right: 5px;
+} 
+
+/* ========================================= 
+   MÓVIL 
+   ========================================= */ 
+
+@media (max-width: 760px) { 
+    #oz-historial { 
+        height: 46px; 
+        padding: 0 20px 0 12px; 
+        transform: translateX(calc(-100% + 14px)); /* Pestaña más discreta en móvil */
+    } 
+
+    .oz-historial-btn { 
+        width: 34px; 
+        height: 34px; 
+    } 
+
+    .oz-triangulo { 
+        width: 10px; 
+        height: 10px; 
+        border-width: 3.5px; 
+    } 
+}

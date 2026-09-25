@@ -70,6 +70,8 @@ if(mysqli_num_rows($resultado) > 0){
 <meta charset="UTF-8">
 <title>Organic Zone</title>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/organiczoneOF/includes/oz-navegacion.php'; ?>
 </head>
 
     <body>

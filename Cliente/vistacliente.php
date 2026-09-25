@@ -141,6 +141,8 @@ function obtenerImagenProducto(int $id): string
 
     <link rel="stylesheet" href="css/cliente.css">
 
+
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/organiczoneOF/includes/oz-navegacion.php'; ?>
 </head>
 
 <body>

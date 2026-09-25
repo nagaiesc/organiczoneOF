@@ -86,6 +86,8 @@ if(isset($_SESSION['segundoPaso']) && $_SESSION['segundoPaso'] === true){
         font-weight:bold;
     }
 </style>
+
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/organiczoneOF/includes/oz-navegacion.php'; ?>
 </head>
 
 <body>
