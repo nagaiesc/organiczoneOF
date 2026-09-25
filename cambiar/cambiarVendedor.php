@@ -1,4 +1,8 @@
 <?php
+session_start();
+require_once "../seguridad.php";
+verificarAdmin();
+
 $nombreServidor = "localhost";
 $nombreUsuario = "root";
 $contraseñaBaseDeDatos = "";

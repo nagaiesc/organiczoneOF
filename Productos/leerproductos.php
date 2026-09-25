@@ -1,5 +1,8 @@
 <?php
 session_start();
+require_once "../seguridad.php";
+
+verificarAdminVendedor();
 
 $rol = $_SESSION['rol'] ?? '';
 
@@ -484,29 +487,10 @@ if ($resultado && $resultado->num_rows > 0) {
 
         $id = (int)$fila['id'];
 
-        $nombre = htmlspecialchars(
-            $fila['nombre'],
-            ENT_QUOTES,
-            'UTF-8'
-        );
-
-        $descripcion = htmlspecialchars(
-            $fila['descripcion'],
-            ENT_QUOTES,
-            'UTF-8'
-        );
-
-        $precio = htmlspecialchars(
-            $fila['precio'],
-            ENT_QUOTES,
-            'UTF-8'
-        );
-
-        $costo = htmlspecialchars(
-            $fila['costo'],
-            ENT_QUOTES,
-            'UTF-8'
-        );
+        $nombre = protegerTexto($fila['nombre']);
+        $descripcion = protegerTexto($fila['descripcion']);
+        $precio = protegerTexto($fila['precio']);
+        $costo = protegerTexto($fila['costo']);
 
         $imagen = "../Imagenes/predeterminado.png";
 

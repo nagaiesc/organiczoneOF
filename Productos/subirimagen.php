@@ -1,4 +1,7 @@
 <?php
+session_start();
+require_once "../seguridad.php";
+verificarAdminVendedor();
 
 $conexion = new mysqli("localhost","root", "","organiczoneBD");
 
@@ -15,6 +18,12 @@ if (
     die("No se seleccionó ninguna imagen.");
 }
 
+$tamaño = $_FILES["imagen"]["size"];
+
+if($tamaño > 2 * 1024 * 1024){
+    die("La imagen no puede pesar más de 2 MB.");
+}
+
 $extension = strtolower(
     pathinfo(
         $_FILES["imagen"]["name"],
@@ -23,6 +32,19 @@ $extension = strtolower(
 );
 
 $permitidas = ["jpg","jpeg","png","gif","webp"];
+//seguridad para solo permitir imagenes
+$tipo = mime_content_type($_FILES["imagen"]["tmp_name"]);
+
+$tiposPermitidos = ["image/jpeg","image/png","image/gif","image/webp"];
+
+if(!in_array($tipo,$tiposPermitidos)){
+    die("El archivo no es una imagen válida.");
+}
+
+if(getimagesize($_FILES["imagen"]["tmp_name"]) === false){
+    die("El archivo no es una imagen.");
+}
+
 
 if (!in_array($extension, $permitidas)) {
     die("Formato de imagen no permitido.");

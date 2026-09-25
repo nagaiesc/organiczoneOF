@@ -460,32 +460,6 @@
             </article>
 
             <article>
-                <label>Rol</label>
-
-                <section class="options-container">
-
-                    <button type="button" class="option-box opt-admin"
-                        onclick="$(this).find('input').prop('checked', true).trigger('change')">
-                        <input type="radio" name="rol" value="admin" checked>
-                        Admin
-                    </button>
-
-                    <button type="button" class="option-box opt-vendedor"
-                        onclick="$(this).find('input').prop('checked', true).trigger('change')">
-                        <input type="radio" name="rol" value="vendedor">
-                        Vendedor
-                    </button>
-
-                    <button type="button" class="option-box opt-cliente"
-                        onclick="$(this).find('input').prop('checked', true).trigger('change')">
-                        <input type="radio" name="rol" value="cliente">
-                        Cliente
-                    </button>
-
-                </section>
-            </article>
-
-            <article>
                 <label for="direccion">Dirección</label>
                 <input type="text" name="direccion" id="direccion">
             </article>
@@ -663,15 +637,6 @@ $("#usuariosForm").validate({
 
         return false;
     }
-});
-
-$(".options-container input[type='radio']").on("change", function() {
-
-    $(this)
-        .closest(".options-container")
-        .find(".option-box")
-        .blur();
-
 });
 
 $("#cerrarModal").on("click", function() {

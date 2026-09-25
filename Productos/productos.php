@@ -1,4 +1,7 @@
 <?php
+session_start();
+require_once "../seguridad.php";
+verificarAdminVendedor();
 
 $servidor = "localhost";
 $usuario = "root";
@@ -30,18 +33,34 @@ if(!$stmt->execute()){
 
 $id = $conexion->insert_id;
 
-$id = $conexion->insert_id;
 if (
     isset($_FILES["imagen"]) &&
     $_FILES["imagen"]["error"] === UPLOAD_ERR_OK
 ) {
     $nombreOriginal = $_FILES["imagen"]["name"];
+
     $temporal = $_FILES["imagen"]["tmp_name"];
+    $tamaño = $_FILES["imagen"]["size"];
+    if($tamaño > 2 * 1024 * 1024){
+        die("La imagen no puede pesar más de 2 MB.");
+    }
 
     $extension = strtolower(
         pathinfo($nombreOriginal, PATHINFO_EXTENSION)
     );
     $permitidas = ["jpg","jpeg","png","gif","webp"];
+    $tiposPermitidos = ["image/jpeg","image/png","image/gif","image/webp"];
+    //seguridad para solo permitir imagenes
+    $tipo = mime_content_type($temporal);
+
+    if(!in_array($tipo,$tiposPermitidos)){
+        die("El archivo no es una imagen válida.");
+    }
+
+    if(getimagesize($temporal) === false){
+        die("El archivo no es una imagen.");
+    }
+    
     if (in_array($extension, $permitidas)) {
         $carpeta = "../Imagenes/";
         if (!is_dir($carpeta)) {

@@ -1,5 +1,11 @@
 <?php
 
+session_start();
+require_once "../seguridad.php";
+
+verificarAdmin();
+
+
 $nombreServidor = "localhost";
 $nombreUsuario = "root";
 $contraseñaBaseDeDatos = "";
@@ -509,7 +515,7 @@ body {
                 <span>CI</span>
 
                 <strong>
-                    <?= $fila['CI'] ?>
+                    <?= protegerTexto($fila['CI']) ?>
                 </strong>
 
             </div>
@@ -520,7 +526,7 @@ body {
                 <span>Nombre</span>
 
                 <strong>
-                    <?= $fila['nombre'] ?>
+                    <?= protegerTexto($fila['nombre']) ?>
                 </strong>
 
             </div>
@@ -531,7 +537,7 @@ body {
                 <span>Dirección</span>
 
                 <strong>
-                    <?= $fila['direccion'] ?>
+                    <?= protegerTexto($fila['direccion']) ?>
                 </strong>
 
             </div>
@@ -542,7 +548,7 @@ body {
                 <span>Celular</span>
 
                 <strong>
-                    <?= $fila['celular'] ?>
+                    <?= protegerTexto($fila['celular']) ?>
                 </strong>
 
             </div>
@@ -553,7 +559,7 @@ body {
                 <span>Rol</span>
 
                 <strong>
-                    <?= $fila['rol'] ?>
+                    <?= protegerTexto($fila['rol']) ?>
                 </strong>
 
             </div>
@@ -564,7 +570,7 @@ body {
                 <span>Estado</span>
 
                 <strong>
-                    <?= $fila['estado'] ?>
+                    <?= protegerTexto($fila['estado']) ?>
                 </strong>
 
             </div>

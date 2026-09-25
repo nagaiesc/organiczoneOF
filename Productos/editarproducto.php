@@ -1,5 +1,9 @@
 <?php
 
+session_start();
+require_once "../seguridad.php";
+verificarAdminVendedor();
+
 $conexion = new mysqli("localhost", "root", "", "organiczoneBD");
 
 if ($conexion->connect_error) {

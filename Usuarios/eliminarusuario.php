@@ -1,4 +1,7 @@
 <?php
+session_start();
+require_once "../seguridad.php";
+verificarAdmin();
 
 $conexion = new mysqli("localhost","root","","organiczoneBD");
 

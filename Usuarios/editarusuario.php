@@ -1,4 +1,7 @@
 <?php
+session_start();
+require_once "../seguridad.php";
+verificarAdmin();
 
 $nombreServidor = "localhost";
 $nombreUsuario = "root";
@@ -565,7 +568,7 @@ body {
             <input
                 type="text"
                 name="nombre"
-                value="<?= $nombre ?>"
+                value="<?= protegerTexto($nombre) ?>"
                 required
             >
 
@@ -585,7 +588,7 @@ body {
                     <input
                         type="text"
                         name="direccion"
-                        value="<?= $direccion ?>"
+                        value="<?= protegerTexto($direccion) ?>"
                         required
                     >
 
@@ -603,7 +606,7 @@ body {
                     <input
                         type="text"
                         name="celular"
-                        value="<?= $celular ?>"
+                        value="<?= protegerTexto($celular) ?>"
                         required
                     >
 
@@ -639,8 +642,8 @@ body {
                         </option>
 
 
-                        <option
-                            value="usuario"
+                       <option
+                            value="vendedor"
                             <?= $rol == 'vendedor' ? 'selected' : '' ?>
                         >
                             Vendedor
