@@ -11,49 +11,37 @@ function verificarLogin(){
 
         header("Location: /organiczoneOF/Usuarios/formulariosesion.php");
         exit();
-
     }
 
 }
 
 function verificarAdmin(){
-
     verificarLogin();
-
     if($_SESSION['rol'] !== 'admin'){
 
         header("Location: /organiczoneOF/paginaprincipal.php");
         exit();
-
     }
 
 }
 
 function verificarVendedor(){
-
     verificarLogin();
-
     if($_SESSION['rol'] !== 'vendedor'){
-
         header("Location: /organiczoneOF/paginaprincipal.php");
         exit();
-
     }
 
 }
 
 function verificarAdminVendedor(){
-
     verificarLogin();
-
     if(
         $_SESSION['rol'] !== 'admin' &&
         $_SESSION['rol'] !== 'vendedor'
     ){
-
         header("Location: /organiczoneOF/paginaprincipal.php");
         exit();
-
     }
 
 }
