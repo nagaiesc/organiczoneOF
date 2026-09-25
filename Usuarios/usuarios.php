@@ -36,7 +36,7 @@ $CI = trim($_POST['CI'] ?? '');
 $nombre = trim($_POST['nombre'] ?? '');
 $direccion = trim($_POST['direccion'] ?? '');
 $celular = trim($_POST['celular'] ?? '');
-$rol = trim($_POST['rol'] ?? '');
+$rol = "cliente";
 
 $estado = "activo";
 
@@ -44,8 +44,7 @@ if (
     $CI === '' ||
     $nombre === '' ||
     $direccion === '' ||
-    $celular === '' ||
-    $rol === ''
+    $celular === ''
 ) {
     echo json_encode([
         "estado" => "error",

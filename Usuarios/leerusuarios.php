@@ -1,3 +1,10 @@
+<?php
+session_start();
+require_once "../seguridad.php";
+
+verificarAdmin();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -10,8 +17,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<!-- FUENTE FREDOKA -->
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -22,11 +27,6 @@
 
 
 <style>
-
-/* =====================================================
-   ESTILOS GENERALES
-===================================================== */
-
 * {
     box-sizing: border-box;
 }
@@ -841,40 +841,13 @@ tbody td:nth-child(6) {
                 while($fila = $resultado->fetch_assoc()) {
 
 
-                    $CI = $fila['CI'];
-
-
-                    echo "<tr>";
-
-
-                    echo "<td>"
-                        . $fila['CI'] .
-                        "</td>";
-
-
-                    echo "<td>"
-                        . $fila['nombre'] .
-                        "</td>";
-
-
-                    echo "<td>"
-                        . $fila['celular'] .
-                        "</td>";
-
-
-                    echo "<td>"
-                        . $fila['direccion'] .
-                        "</td>";
-
-
-                    echo "<td>"
-                        . $fila['rol'] .
-                        "</td>";
-
-
-                    echo "<td>"
-                        . $fila['estado'] .
-                        "</td>";
+                    $CI = $fila['CI'];echo "<tr>";
+                    echo "<td>". protegerTexto($fila['CI']) ."</td>";
+                    echo "<td>". protegerTexto($fila['nombre']) ."</td>";
+                    echo "<td>". protegerTexto($fila['direccion'])."</td>";
+                    echo "<td>". protegerTexto($fila['celular']) ."</td>";
+                    echo "<td>". protegerTexto($fila['rol']) ."</td>";
+                    echo "<td>". protegerTexto($fila['estado'])."</td>";
 
 
                     /*

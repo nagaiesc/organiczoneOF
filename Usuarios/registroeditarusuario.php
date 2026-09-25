@@ -1,4 +1,8 @@
 <?php
+session_start();
+require_once "../seguridad.php";
+verificarAdmin();
+
 $nombreServidor = "localhost";
 $nombreUsuario = "root";
 $contraseñaBaseDeDatos = "";
@@ -14,6 +18,14 @@ $direccion = trim($_POST['direccion'] ?? '');
 $celular = trim($_POST['celular'] ?? '');
 $rol = trim($_POST['rol'] ?? '');
 $estado = trim($_POST['estado'] ?? '');
+
+if(!in_array($rol,['admin','vendedor','cliente'])){
+    die("Rol no válido.");
+}
+
+if(!in_array($estado,['activo','inactivo'])){
+    die("Estado no válido.");
+}
 
 $stmt = $conexion->prepare("UPDATE usuarios SET nombre=?,direccion=?,celular=?,rol=?,estado=? WHERE CI=?");
 
