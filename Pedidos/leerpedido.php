@@ -1376,7 +1376,7 @@ body {
     </div>
 
 <img
-    src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Pedido-<?= urlencode($pedido['id']) ?>"
+    src="QR.jpeg"
     alt="Código QR"
     class="qr-factura"
 >
