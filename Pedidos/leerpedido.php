@@ -1276,6 +1276,48 @@ body {
             #2B140D;
 
     }
+    .qr-factura {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    padding: 10px;
+}
+    #qr-factura {
+    width: 110px;
+    height: 110px;
+    margin: 12px 0 0 auto;
+}
+
+    #qr-factura img {
+    width: 90px;
+    height: 90px;
+}
+
+    .qr-personal {
+    text-align: center;
+    margin: 10px 0 20px;
+    padding: 10px;
+    background: #fafafa;
+    border: 1px solid #eeeeee;
+    border-radius: 15px;
+}
+
+    .qr-personal p {
+    margin: 0 0 12px;
+    color: #777;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+    .qr-personal img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+
+
+
 
 }
 
@@ -1366,7 +1408,6 @@ body {
 
 
 <div class="factura-titulo">
-
     <h2>
         FACTURA
     </h2>
@@ -1374,12 +1415,7 @@ body {
     <div class="numero">
         Nº<?= limpiar($pedido['id']) ?>
     </div>
-
-<img
-    src="QR.jpeg"
-    alt="Código QR"
-    class="qr-factura"
->
+    <div id="qr-factura"></div>
 
 </div>
 
@@ -1529,12 +1565,17 @@ body {
 
 <section class="productos">
 
-
     <h3>
-
         Detalle del pedido
-
     </h3>
+    <div class="qr-personal">
+        <p>Escanea para realizar el pago</p>
+        <img
+            src="../Imagenes/QR.jpeg"
+            alt="QR de pago"
+        >
+    </div>
+
 
 
     <?php if (
@@ -1862,6 +1903,26 @@ body {
 
 
 </main>
+<script>
+    const idPedido = <?= (int)$pedido['id'] ?>;
+    const nombreCliente = <?= json_encode($pedido['nombre']) ?>;
+    const totalVenta = <?= json_encode(number_format($totalFactura, 2, '.', '')) ?>;
+
+    const datosFactura =
+        "ORGANIC ZONE\n" +
+        "FACTURA: #" + idPedido + "\n" +
+        "CLIENTE: " + nombreCliente + "\n" +
+        "TOTAL: Bs. " + totalVenta;
+
+    new QRCode(document.getElementById("qr-factura"), {
+        text: datosFactura,
+        width: 110,
+        height: 110,
+        colorDark: "#2B140D",
+        colorLight: "#FFFFFF",
+        correctLevel: QRCode.CorrectLevel.H
+    });
+</script>
 
 
 </body>
