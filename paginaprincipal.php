@@ -753,6 +753,7 @@ if (session_status() === PHP_SESSION_NONE) {
     </style>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/organiczoneOF/includes/oz-navegacion.php'; ?>
+
 </head>
 
 <body>
@@ -1076,8 +1077,9 @@ if (session_status() === PHP_SESSION_NONE) {
                 </div>
 
                 <a
-                    href="#"
+                    href="Documentos/formulario-medio-ambiental-oz.pdf"
                     class="oz-btn"
+                    target="_blank"
                 >
                     Ver ficha
                 </a>
