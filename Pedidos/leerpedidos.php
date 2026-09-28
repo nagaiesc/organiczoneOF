@@ -187,7 +187,7 @@ body {
 .section-blanco {
     background: #ffffff;
     padding: 40px;
-    overflow-x: auto;
+    overflow-x: hidden;
 }
 
 .section-clientes {
@@ -201,6 +201,11 @@ body {
     color: #2B140D;
     font-size: 28px;
     font-weight: 700;
+}
+
+.table-contenedor {
+    width: 100%;
+    overflow: visible;
 }
 
 table {
@@ -300,7 +305,6 @@ tbody td:nth-child(4) {
     color: #ffffff !important;
     border-color: #0BA84A !important;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(11,168,74,.25);
 }
 
 .boton-rechazar button {
@@ -314,7 +318,6 @@ tbody td:nth-child(4) {
     color: #ffffff !important;
     border-color: #D62828 !important;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(214,40,40,.25);
 }
 
 .boton-mostrar button {
@@ -439,65 +442,412 @@ tbody td:nth-child(4) {
     color: #0BA84A !important;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
 
     body {
-        padding: 20px;
+        padding: 24px;
+        align-items: flex-start;
     }
 
     .principal-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 330px 1fr;
+        width: 100%;
+        min-height: auto;
     }
 
     .section-negro {
-        padding: 35px;
+        padding: 38px 30px;
     }
 
     .nav-inner {
-        margin-bottom: 40px;
+        margin-bottom: 55px;
     }
 
     .contrato-titulo {
-        font-size: 42px;
+        font-size: 44px;
+    }
+
+    .desc {
+        font-size: 15px;
     }
 
     .section-blanco {
         padding: 30px;
+    }
+
+    table {
+        min-width: 950px;
+    }
+}
+
+@media (max-width: 850px) {
+
+    body {
+        padding: 18px;
+    }
+
+    .principal-grid {
+        grid-template-columns: 1fr;
+        border-radius: 20px;
+    }
+
+    .section-negro {
+        padding: 36px 32px;
+        border-radius: 20px 20px 0 0;
+    }
+
+    .nav-inner {
+        margin-bottom: 38px;
+    }
+
+    .contrato-titulo {
+        font-size: 42px;
+        margin-bottom: 26px;
+    }
+
+    .desc {
+        max-width: 620px;
+    }
+
+    #boton {
+        margin-top: 2px;
+    }
+
+    .section-blanco {
+        padding: 28px;
+        border-radius: 0 0 20px 20px;
+    }
+
+    .section-clientes {
+        margin-bottom: 22px;
+    }
+
+    .section-clientes h2 {
+        font-size: 26px;
+    }
+
+    table {
+        min-width: 0;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody {
+        display: block;
+        width: 100%;
+    }
+
+    tbody tr {
+        display: block;
+        width: 100%;
+        margin-bottom: 18px;
+        padding: 18px;
+        background: #ffffff;
+        border: 1px solid #E9E3DF;
+        border-radius: 18px;
+        box-shadow: 0 5px 18px rgba(43,20,13,.06);
+    }
+
+    tbody tr:hover {
+        background: #ffffff;
+    }
+
+    tbody td {
+        display: grid;
+        grid-template-columns: 125px 1fr;
+        gap: 12px;
+        width: 100%;
+        min-height: 36px;
+        padding: 8px 0;
+        border-bottom: 1px solid #F0ECE9;
+        font-size: 13px;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    tbody td:last-child {
+        border-bottom: none;
+    }
+
+    tbody td::before {
+        color: #2B140D;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    tbody td:nth-child(1)::before {
+        content: "ID";
+    }
+
+    tbody td:nth-child(2)::before {
+        content: "Nombre";
+    }
+
+    tbody td:nth-child(3)::before {
+        content: "Fecha";
+    }
+
+    tbody td:nth-child(4)::before {
+        content: "Estado";
+    }
+
+    tbody td:nth-child(5)::before {
+        content: "Vendedor";
+    }
+
+    tbody td:nth-child(6)::before {
+        content: "Dirección";
+    }
+
+    tbody td:nth-child(7)::before {
+        content: "Teléfono";
+    }
+
+    tbody td:nth-child(8) {
+        display: block;
+        padding-top: 15px;
+        margin-top: 6px;
+    }
+
+    tbody td:nth-child(8)::before {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .acciones {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .acciones a {
+        width: 100%;
+    }
+
+    .acciones button {
+        width: 100%;
+        min-height: 36px;
+        padding: 8px 9px;
+        font-size: 12px;
     }
 }
 
 @media (max-width: 600px) {
 
     body {
-        padding: 10px;
+        display: block;
+        padding: 9px;
     }
 
     .principal-grid {
         width: 100%;
-        border-radius: 12px;
+        border-radius: 18px;
     }
 
     .section-negro {
-        padding: 30px;
+        padding: 27px 21px 29px;
+        border-radius: 18px 18px 0 0;
+    }
+
+    .nav-inner {
+        margin-bottom: 30px;
+    }
+
+    .nav-inner a {
+        font-size: 13px;
+        letter-spacing: .6px;
     }
 
     .contrato-titulo {
-        font-size: 38px;
+        font-size: 33px;
+        line-height: 1.02;
+        margin-bottom: 21px;
+    }
+
+    .desc {
+        margin-top: 19px;
+        font-size: 13px;
+        line-height: 1.55;
+    }
+
+    #boton {
+        width: 100%;
+        min-height: 45px;
+        padding: 11px 17px;
+        font-size: 14px;
     }
 
     .section-blanco {
-        padding: 20px;
+        padding: 20px 12px 23px;
+        border-radius: 0 0 18px 18px;
+    }
+
+    .section-clientes {
+        margin-bottom: 17px;
+        padding-bottom: 13px;
+    }
+
+    .section-clientes h2 {
+        font-size: 21px;
+    }
+
+    tbody tr {
+        margin-bottom: 15px;
+        padding: 15px;
+        border-radius: 16px;
+    }
+
+    tbody td {
+        grid-template-columns: 92px minmax(0, 1fr);
+        gap: 9px;
+        min-height: 34px;
+        padding: 7px 0;
+        font-size: 12px;
+        line-height: 1.35;
+    }
+
+    tbody td::before {
+        font-size: 11px;
+    }
+
+    tbody td:nth-child(8) {
+        padding-top: 14px;
+    }
+
+    .acciones {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+    }
+
+    .acciones button {
+        min-height: 35px;
+        padding: 7px 6px;
+        font-size: 11px;
     }
 
     .oz-popup {
-        width: calc(100% - 25px) !important;
+        width: calc(100% - 18px) !important;
+        max-width: 380px !important;
+        border-radius: 25px !important;
+        padding: 25px 18px 22px !important;
+    }
+
+    .oz-title {
+        font-size: 23px !important;
+    }
+
+    .oz-text {
+        font-size: 14px !important;
+    }
+
+    .oz-confirm,
+    .oz-cancel,
+    .oz-success {
+        padding: 10px 17px !important;
+        font-size: 13px !important;
+    }
+}
+
+@media (max-width: 400px) {
+
+    body {
+        padding: 6px;
+    }
+
+    .principal-grid {
+        border-radius: 15px;
+    }
+
+    .section-negro {
+        padding: 23px 17px 25px;
+        border-radius: 15px 15px 0 0;
+    }
+
+    .nav-inner {
+        margin-bottom: 27px;
+    }
+
+    .nav-inner a {
+        font-size: 12px;
+    }
+
+    .contrato-titulo {
+        font-size: 29px;
+        margin-bottom: 18px;
+    }
+
+    .desc {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    #boton {
+        min-height: 43px;
+        font-size: 13px;
+        padding: 10px 14px;
+    }
+
+    .section-blanco {
+        padding: 17px 9px 20px;
+        border-radius: 0 0 15px 15px;
+    }
+
+    .section-clientes h2 {
+        font-size: 19px;
+    }
+
+    tbody tr {
+        padding: 13px;
+        border-radius: 15px;
+        margin-bottom: 13px;
+    }
+
+    tbody td {
+        grid-template-columns: 82px minmax(0, 1fr);
+        gap: 7px;
+        padding: 6px 0;
+        font-size: 11px;
+    }
+
+    tbody td::before {
+        font-size: 10px;
+    }
+
+    .acciones {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 5px;
+    }
+
+    .acciones button {
+        min-height: 33px;
+        padding: 6px 4px;
+        font-size: 10px;
+    }
+
+    .oz-popup {
+        padding: 22px 15px 20px !important;
+    }
+
+    .oz-title {
+        font-size: 21px !important;
+    }
+
+    .oz-text {
+        font-size: 13px !important;
     }
 }
 
 </style>
 
-
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/organiczoneOF/includes/oz-navegacion.php'; ?>
+
 </head>
 
 <body>
@@ -520,9 +870,11 @@ PEDIDOS
 </h1>
 
 <?php if ($rol === 'admin'): ?>
+
 <a href="formulariopedidos.php" id="boton">
 Registrar Pedido
 </a>
+
 <?php endif; ?>
 
 <p class="desc">
@@ -544,6 +896,8 @@ Pedidos Registrados
 </h2>
 
 </section>
+
+<div class="table-contenedor">
 
 <table>
 
@@ -739,6 +1093,8 @@ if (isset($stmt) && $stmt) {
 </tbody>
 
 </table>
+
+</div>
 
 </section>
 
