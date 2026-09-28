@@ -75,6 +75,15 @@ $conexion->close();
         .total{display:flex;justify-content:flex-end;gap:30px;font-size:26px;font-weight:900;padding-top:22px}.total strong{color:var(--verde)}
         .acciones{display:flex;justify-content:center;gap:12px;margin-top:30px;flex-wrap:wrap}.acciones a{padding:13px 20px;border-radius:17px;text-decoration:none;font-weight:900}.verde{background:var(--verde);color:white}.cafe{background:var(--cafe);color:white}
         @media(max-width:600px){.cabecera,.contenido{padding:30px 25px}.cabecera{flex-direction:column;align-items:start}.numero{text-align:left}.datos{grid-template-columns:1fr}}
+        .codigo-qr{
+        display:block;
+        width:150px;
+        height:150px;
+        object-fit:contain;
+        margin:15px auto 0;
+        border-radius:12px;
+}
+
     </style>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/organiczoneOF/includes/oz-navegacion.php'; ?>
@@ -93,7 +102,11 @@ $conexion->close();
             <div class="dato"><span>Cliente</span><strong><?= htmlspecialchars($pedido['nombre']) ?></strong></div>
             <div class="dato"><span>Fecha</span><strong><?= htmlspecialchars($pedido['fecha']) ?></strong></div>
             <div class="dato"><span>Teléfono</span><strong><?= htmlspecialchars($pedido['telefono']) ?></strong></div>
-            <div class="dato"><span>Método de pago</span><strong><?= htmlspecialchars($pedido['metodo']) ?></strong></div>
+            <div class="dato">
+            <span>Método de pago</span>
+            <strong><?= htmlspecialchars($pedido['metodo']) ?></strong>
+            <img class="codigo-qr" src="Imagenes/QR.jpeg" alt="Código QR">
+            </div>
             <div class="dato" style="grid-column:1/-1"><span>Dirección</span><strong><?= htmlspecialchars($pedido['direccion']) ?></strong></div>
         </section>
 
