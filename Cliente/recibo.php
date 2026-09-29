@@ -105,7 +105,7 @@ $conexion->close();
             <div class="dato">
             <span>Método de pago</span>
             <strong><?= htmlspecialchars($pedido['metodo']) ?></strong>
-            <img class="codigo-qr" src="Imagenes/QR.jpeg" alt="Código QR">
+            <img class="codigo-qr" src="/organiczoneOF/Imagenes/QR.jpeg" alt="Código QR">
             </div>
             <div class="dato" style="grid-column:1/-1"><span>Dirección</span><strong><?= htmlspecialchars($pedido['direccion']) ?></strong></div>
         </section>
