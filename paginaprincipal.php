@@ -200,7 +200,6 @@ if (session_status() === PHP_SESSION_NONE) {
             max-width:520px;
             aspect-ratio:1 / 1;
             margin-left:auto;
-            border:3px dashed rgba(255,255,255,.70);
             border-radius:42px;
             display:flex;
             align-items:center;
@@ -804,9 +803,7 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
 
         <div class="oz-hero-imagen">
-            <span>
-                FT OZ
-            </span>
+            <img src="honeymz.png" alt="Honey MZ">
         </div>
 
     </header>
