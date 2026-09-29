@@ -1017,6 +1017,21 @@ body {
         rgba(11,168,74,0.25);
 
 }
+.qr-personal img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+.qr-personal {
+    text-align: center;
+    margin: 20px 0;
+    padding: 20px;
+    background: #fafafa;
+    border: 1px solid #eeeeee;
+}
+
 
 @media(max-width: 700px) {
 
@@ -1277,25 +1292,25 @@ body {
 
     }
     .qr-factura {
-    width: 110px;
-    height: 110px;
+    width: 100px;
+    height: 100px;
     object-fit: contain;
     padding: 10px;
 }
     #qr-factura {
-    width: 110px;
-    height: 110px;
+    width: 100px;
+    height: 100px;
     margin: 12px 0 0 auto;
 }
 
     #qr-factura img {
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
 }
 
     .qr-personal {
     text-align: center;
-    margin: 10px 0 20px;
+    margin: 10px 0 10px;
     padding: 10px;
     background: #fafafa;
     border: 1px solid #eeeeee;
@@ -1303,15 +1318,15 @@ body {
 }
 
     .qr-personal p {
-    margin: 0 0 12px;
+    margin: 0 0 10px;
     color: #777;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 300;
 }
 
     .qr-personal img {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     object-fit: contain;
 }
 
@@ -1903,27 +1918,6 @@ body {
 
 
 </main>
-<script>
-    const idPedido = <?= (int)$pedido['id'] ?>;
-    const nombreCliente = <?= json_encode($pedido['nombre']) ?>;
-    const totalVenta = <?= json_encode(number_format($totalFactura, 2, '.', '')) ?>;
-
-    const datosFactura =
-        "ORGANIC ZONE\n" +
-        "FACTURA: #" + idPedido + "\n" +
-        "CLIENTE: " + nombreCliente + "\n" +
-        "TOTAL: Bs. " + totalVenta;
-
-    new QRCode(document.getElementById("qr-factura"), {
-        text: datosFactura,
-        width: 110,
-        height: 110,
-        colorDark: "#2B140D",
-        colorLight: "#FFFFFF",
-        correctLevel: QRCode.CorrectLevel.H
-    });
-</script>
-
 
 </body>
 
