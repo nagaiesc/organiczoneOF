@@ -301,11 +301,14 @@ $conexion->close();
         <section class="datos">
 
             <div class="dato">
+
                 <span>Cliente</span>
 
                 <strong>
                     <?= htmlspecialchars($pedido['nombre']) ?>
                 </strong>
+
+
             </div>
 
             <div class="dato">
