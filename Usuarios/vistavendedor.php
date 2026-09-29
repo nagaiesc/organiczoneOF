@@ -78,7 +78,7 @@ body {
 
     display: grid;
 
-    grid-template-columns: 340px 1fr;
+    grid-template-columns: 340px minmax(0, 1fr);
 
     gap:45px;
 
@@ -175,7 +175,7 @@ body {
 
     display: grid;
 
-    grid-template-columns: 180px 1fr;
+    grid-template-columns: 180px minmax(0, 1fr);
 
     gap: 25px;
 
@@ -584,7 +584,7 @@ body {
 
     .caja-principal {
 
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
 
         gap: 20px;
 
@@ -598,7 +598,7 @@ body {
 
     .caja-fondo-verde {
 
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
 
         padding: 25px;
 

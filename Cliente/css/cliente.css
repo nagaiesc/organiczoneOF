@@ -740,12 +740,9 @@ a { color: inherit; }
     .hero-cliente { grid-template-columns: 1fr; }
     .hero-imagen { height: 300px; }
     .productos-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-    .nav-cliente { display: none; }
 }
 
 @media (max-width: 700px) {
-    .barra-cliente { width: 94%; padding: 0 12px 0 18px; }
-    .usuario-mini { display: none; }
     .hero-cliente { padding: 40px 28px; border-radius: 35px; }
     .hero-texto h1 { font-size: 58px; }
     .productos-grid,
@@ -754,4 +751,149 @@ a { color: inherit; }
     .titulo-seccion h2 { font-size: 40px; }
     .dos-columnas { grid-template-columns: 1fr; }
     .modal-caja { padding: 30px 22px; }
+}
+
+.barra-cliente {
+    width: min(1250px, 94%);
+    height: 72px;
+    min-height: 72px;
+    margin: 20px auto 0;
+    padding: 0 18px;
+    gap: 12px;
+    top: 20px;
+    border-radius: 40px;
+    background: rgba(18, 163, 60, .96);
+    box-shadow: 0 10px 28px rgba(18, 163, 60, .20);
+    font-family: 'Fredoka', sans-serif;
+}
+
+.barra-cliente .logo {
+    width: 65px;
+    min-width: 65px;
+    height: 65px;
+    margin-right: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    line-height: .8;
+    letter-spacing: -1px;
+    color: var(--crema);
+}
+
+.barra-cliente .logo span {
+    margin: 0 0 1px;
+    font-size: 15px;
+    line-height: .75;
+    font-weight: 600;
+    letter-spacing: .5px;
+    color: #fff;
+}
+
+.nav-cliente {
+    gap: 6px;
+    height: 100%;
+    min-width: 0;
+}
+
+.nav-cliente a {
+    height: 44px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.acciones-header {
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.boton-carrito {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+}
+
+.barra-cliente .boton-salir {
+    height: 44px;
+    padding: 0 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+@media (max-width: 1150px) {
+    .barra-cliente { width: 96%; gap: 7px; padding: 0 12px; }
+    .barra-cliente .logo { width: 58px; min-width: 58px; }
+    .nav-cliente { gap: 2px; }
+    .nav-cliente a { padding: 0 10px; font-size: 14px; }
+}
+
+@media (max-width: 980px) {
+    .barra-cliente {
+        width: calc(100% - 16px);
+        height: 62px;
+        min-height: 62px;
+        margin-top: 8px;
+        top: 8px;
+        padding: 6px 10px;
+        gap: 4px;
+        border-radius: 30px;
+    }
+    .barra-cliente .logo { width: 50px; min-width: 50px; height: 50px; margin-right: 2px; font-size: 26px; }
+    .barra-cliente .logo span { font-size: 12px; }
+    .nav-cliente { justify-content: space-evenly; gap: 0; }
+    .nav-cliente a { height: 36px; padding: 0 8px; font-size: 13px; }
+    .usuario-mini { display: none; }
+    .acciones-header { gap: 6px; }
+    .boton-carrito { width: 40px; height: 40px; min-width: 40px; }
+    .barra-cliente .boton-salir { height: 36px; padding: 0 12px; font-size: 13px; }
+}
+
+@media (max-width: 600px) {
+    .nav-cliente a { padding: 0 6px; font-size: 12px; }
+    .barra-cliente .boton-salir {
+        width: 36px;
+        min-width: 36px;
+        padding: 0;
+        font-size: 0;
+    }
+    .barra-cliente .boton-salir::before {
+        content: "\f2f5";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-size: 14px;
+    }
+    .barra-cliente .boton-salir[href*="formulariosesion"]::before {
+        content: "\f090";
+    }
+}
+
+@media (max-width: 400px) {
+    .barra-cliente { width: calc(100% - 10px); height: 60px; min-height: 60px; margin-top: 5px; top: 5px; padding: 5px 8px; gap: 2px; }
+    .barra-cliente .logo { width: 44px; min-width: 44px; font-size: 23px; }
+    .barra-cliente .logo span { font-size: 11px; }
+    .nav-cliente a { padding: 0 5px; font-size: 12px; }
+    .boton-carrito { width: 36px; height: 36px; min-width: 36px; }
+}
+
+@media (max-width: 360px) {
+    .barra-cliente { padding: 5px 6px; }
+    .barra-cliente .logo { width: 38px; min-width: 38px; margin-right: 0; }
+    .nav-cliente a { padding: 0 3px; font-size: 10.5px; }
+    .acciones-header { gap: 4px; }
+    .boton-carrito { width: 32px; height: 32px; min-width: 32px; }
+    .barra-cliente .boton-salir { width: 32px; min-width: 32px; height: 32px; }
 }

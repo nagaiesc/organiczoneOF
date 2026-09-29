@@ -590,8 +590,8 @@
             }
 
             main {
-                width: 96%;
-                padding: 35px 23px 30px;
+                width: 92%;
+                padding: 32px 20px 30px;
                 border-radius: 38px 38px 0 0;
             }
 

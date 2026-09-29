@@ -23,6 +23,8 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
 
 ?>
 
+<link rel="stylesheet" href="/organiczoneOF/assets/oz-responsive.css">
+
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
@@ -457,24 +459,38 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
 
 
 /* =========================================================
-   CELULAR / PANTALLAS PEQUEÑAS
-   Una sola fila: Logo | Nosotros | About Us | Menú | Comprar | ⋮
-   Los 3 puntitos despliegan: sesión, producto más vendido y mejor cliente
+   MENÚ "MÁS" (3 PUNTITOS)
+   En escritorio es invisible: el contenido se comporta igual que antes
    ========================================================= */
 
-@media (max-width: 900px) {
+.menu-mas {
+    display: contents;
+}
+
+.panel-mas {
+    display: contents;
+}
+
+.boton-puntos {
+    display: none;
+}
+
+
+/* =========================================================
+   CELULAR
+   Una sola fila: Logo · Nosotros · About Us · Menú · Comprar · ⋮
+   Los 3 puntitos despliegan: sesión, producto más vendido, mejor cliente
+   ========================================================= */
+
+@media (max-width: 980px) {
 
     #barra {
         width: calc(100% - 16px);
         top: 8px;
-
         min-height: 60px;
-
-        padding: 0 10px;
+        padding: 6px 10px;
         gap: 4px;
-
         border-radius: 30px;
-
         flex-wrap: nowrap;
     }
 
@@ -482,13 +498,13 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
     #barra > div:first-child {
         width: 50px;
         min-width: 50px;
-        height: 52px;
-        margin-right: 0;
+        height: 50px;
+        margin-right: 2px;
     }
 
     #orga {
         width: 50px;
-        height: 52px;
+        height: 50px;
     }
 
     #orga h1::before {
@@ -499,13 +515,11 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
         font-size: 26px;
     }
 
-    /* Links dentro del nav, en una sola fila */
+    /* Links siempre dentro del nav, repartidos en la fila */
     #links {
         flex: 1;
         min-width: 0;
-
         height: auto;
-
         justify-content: space-evenly;
         gap: 0;
     }
@@ -521,12 +535,12 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
         font-size: 13px;
     }
 
-    /* Submenús se abren debajo del botón */
+    /* Submenús Nosotros / About Us */
     .submenu {
         top: 46px;
         left: 0;
         transform: none;
-        min-width: 165px;
+        min-width: 170px;
     }
 
     .item:hover .submenu,
@@ -535,120 +549,131 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
         transform: none;
     }
 
+    .item:nth-child(n+2) .submenu {
+        left: auto;
+        right: -40px;
+    }
+
     .submenu a {
         min-height: 40px;
         font-size: 13px;
     }
 
-    /* Botón de 3 puntitos */
-    #btn-mas {
-        width: 38px;
-        min-width: 38px;
-        height: 38px;
+    /* Contenedor de los 3 puntitos */
+    .menu-mas {
+        display: block;
+        flex-shrink: 0;
+    }
+
+    .boton-puntos {
+        width: 40px;
+        height: 40px;
 
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-
-        gap: 4px;
 
         padding: 0;
 
         border: none;
         border-radius: 50%;
 
-        background: var(--cafe);
+        background: rgba(255, 255, 255, 0.18);
 
         cursor: pointer;
 
-        flex-shrink: 0;
+        transition: background 0.2s ease, transform 0.2s ease;
 
-        transition: background 0.2s ease;
+        -webkit-tap-highlight-color: transparent;
     }
 
-    #btn-mas:hover,
-    #btn-mas[aria-expanded="true"] {
-        background: var(--cafe-hover);
+    .boton-puntos:active {
+        transform: scale(0.94);
     }
 
-    #btn-mas span {
-        width: 4px;
-        height: 4px;
+    /* Los 3 puntos (verticales) */
+    .boton-puntos span {
+        display: block;
+
+        width: 5px;
+        height: 5px;
 
         border-radius: 50%;
 
+        background: var(--blanco);
+
+        box-shadow:
+            0 -8px 0 var(--blanco),
+            0 8px 0 var(--blanco);
+
+        transition: background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .menu-mas.abierto .boton-puntos {
         background: var(--crema);
     }
 
+    .menu-mas.abierto .boton-puntos span {
+        background: var(--cafe);
+
+        box-shadow:
+            0 -8px 0 var(--cafe),
+            0 8px 0 var(--cafe);
+    }
+
     /* Panel desplegable */
-    #menu-extra {
+    .panel-mas {
         position: absolute;
 
-        top: calc(100% + 8px);
+        top: calc(100% + 10px);
         right: 0;
 
         width: min(260px, 100%);
 
-        padding: 10px;
+        padding: 12px;
 
-        display: flex;
+        display: none;
         flex-direction: column;
-
         gap: 8px;
 
         background: var(--blanco);
 
         border: 2px solid rgba(252, 208, 159, 0.75);
-        border-radius: 22px;
+        border-radius: 24px;
 
-        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
 
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-
-        transform: translateY(-6px);
-
-        transition:
-            opacity 0.2s ease,
-            visibility 0.2s ease,
-            transform 0.2s ease;
-
-        z-index: 2000;
+        z-index: 3000;
     }
 
-    #menu-extra.abierto {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: auto;
-
-        transform: translateY(0);
+    .menu-mas.abierto .panel-mas {
+        display: flex;
+        animation: aparecerPanel 0.18s ease;
     }
 
-    #menu-extra .zona-sesion,
-    #menu-extra .zonaProducto {
+    @keyframes aparecerPanel {
+        from { opacity: 0; transform: translateY(-6px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel-mas .zona-sesion,
+    .panel-mas .zonaProducto {
         width: 100%;
-
+        margin: 0;
+        padding: 0;
         flex-direction: column;
         align-items: stretch;
-
         gap: 8px;
-
-        padding: 0;
-        margin: 0;
     }
 
-    #menu-extra .boton-sesion,
-    #menu-extra .boton-inicio-rol,
-    #menu-extra .botonProducto,
-    #menu-extra .botonUsuario {
+    .panel-mas .boton-sesion,
+    .panel-mas .boton-inicio-rol,
+    .panel-mas .botonProducto,
+    .panel-mas .botonUsuario {
         width: 100%;
         height: 42px;
-
         margin: 0;
         padding: 0 14px;
-
         font-size: 14px;
     }
 }
@@ -658,22 +683,30 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
    CELULARES MUY ANGOSTOS
    ========================================================= */
 
-@media (max-width: 380px) {
+@media (max-width: 400px) {
 
     #barra {
         width: calc(100% - 10px);
         top: 5px;
-        padding: 0 7px;
+        padding: 5px 8px;
+        gap: 2px;
     }
 
-    #barra > div:first-child,
-    #orga {
+    #barra > div:first-child {
         width: 44px;
         min-width: 44px;
     }
 
+    #orga {
+        width: 44px;
+    }
+
     #orga h1::after {
         font-size: 23px;
+    }
+
+    #orga h1::before {
+        font-size: 11px;
     }
 
     .item > a {
@@ -681,9 +714,28 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
         font-size: 12px;
     }
 
-    #btn-mas {
+    .boton-puntos {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+
+@media (max-width: 360px) {
+
+    #barra > div:first-child,
+    #orga {
+        width: 40px;
+        min-width: 40px;
+    }
+
+    .item > a {
+        padding: 0 3px;
+        font-size: 11.5px;
+    }
+
+    .boton-puntos {
         width: 34px;
-        min-width: 34px;
         height: 34px;
     }
 }
@@ -790,131 +842,127 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
     </section>
 
 
-    <!-- BOTÓN 3 PUNTITOS (solo celular) -->
+    <!-- MENÚ DE 3 PUNTITOS (en escritorio se ve igual que antes) -->
 
-    <button
-        type="button"
-        id="btn-mas"
-        aria-label="Más opciones"
-        aria-expanded="false"
-        aria-controls="menu-extra"
-    >
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-
-
-    <!-- MENÚ DESPLEGABLE: sesión, producto más vendido y mejor cliente -->
-
-    <div id="menu-extra">
-
-
-    <!-- SESIÓN -->
-
-    <section class="zona-sesion">
-
-
-        <?php if ($inicioRol !== ''): ?>
-
-            <a
-                href="<?php echo $inicioRol; ?>"
-                class="boton-inicio-rol"
-            >
-
-                <?php echo $textoInicioRol; ?>
-
-            </a>
-
-        <?php endif; ?>
-
-
-        <?php if (isset($_SESSION['nombre'])): ?>
-
-            <a
-                href="/organiczoneOF/Usuarios/cerrarse.php"
-                class="boton-sesion boton-cerrar"
-            >
-
-                Cerrar sesión
-
-            </a>
-
-        <?php else: ?>
-
-            <a
-                href="/organiczoneOF/Usuarios/formulariosesion.php"
-                class="boton-sesion boton-iniciar"
-            >
-
-                Iniciar sesión
-
-            </a>
-
-        <?php endif; ?>
-
-
-    </section>
-
-
-    <!-- PRODUCTO MÁS VENDIDO -->
-
-    <section class="zonaProducto">
+    <div class="menu-mas" id="menuMas">
 
         <button
-            class="botonProducto"
-            onclick="window.location.href='/organiczoneOF/productoBest.php'"
+            type="button"
+            class="boton-puntos"
+            id="botonPuntos"
+            aria-label="Más opciones"
+            aria-expanded="false"
         >
 
-            Producto más vendido
+            <span></span>
 
         </button>
 
-    </section>
+        <div class="panel-mas">
 
 
-    <!-- MEJOR CLIENTE -->
+            <!-- SESIÓN -->
 
-    <button
-        class="botonUsuario"
-        onclick="window.location.href='/organiczoneOF/usuarioBest.php'"
-    >
+            <section class="zona-sesion">
 
-        Mejor cliente
 
-    </button>
+                <?php if ($inicioRol !== ''): ?>
 
+                    <a
+                        href="<?php echo $inicioRol; ?>"
+                        class="boton-inicio-rol"
+                    >
+
+                        <?php echo $textoInicioRol; ?>
+
+                    </a>
+
+                <?php endif; ?>
+
+
+                <?php if (isset($_SESSION['nombre'])): ?>
+
+                    <a
+                        href="/organiczoneOF/Usuarios/cerrarse.php"
+                        class="boton-sesion boton-cerrar"
+                    >
+
+                        Cerrar sesión
+
+                    </a>
+
+                <?php else: ?>
+
+                    <a
+                        href="/organiczoneOF/Usuarios/formulariosesion.php"
+                        class="boton-sesion boton-iniciar"
+                    >
+
+                        Iniciar sesión
+
+                    </a>
+
+                <?php endif; ?>
+
+
+            </section>
+
+
+            <!-- PRODUCTO MÁS VENDIDO -->
+
+            <section class="zonaProducto">
+
+                <button
+                    class="botonProducto"
+                    onclick="window.location.href='/organiczoneOF/productoBest.php'"
+                >
+
+                    Producto más vendido
+
+                </button>
+
+            </section>
+
+
+            <!-- MEJOR CLIENTE -->
+
+            <button
+                class="botonUsuario"
+                onclick="window.location.href='/organiczoneOF/usuarioBest.php'"
+            >
+
+                Mejor cliente
+
+            </button>
+
+
+        </div>
 
     </div>
 
 
 </nav>
 
-
 <script>
 (function () {
-    var btn  = document.getElementById('btn-mas');
-    var menu = document.getElementById('menu-extra');
 
-    if (!btn || !menu) return;
+    var menu  = document.getElementById('menuMas');
+    var boton = document.getElementById('botonPuntos');
 
-    function cerrar() {
-        menu.classList.remove('abierto');
-        btn.setAttribute('aria-expanded', 'false');
-    }
+    if (!menu || !boton) return;
 
-    btn.addEventListener('click', function (e) {
+    boton.addEventListener('click', function (e) {
         e.stopPropagation();
         var abierto = menu.classList.toggle('abierto');
-        btn.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+        boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
     });
 
     document.addEventListener('click', function (e) {
-        if (!menu.contains(e.target) && e.target !== btn) cerrar();
+        if (!menu.contains(e.target)) {
+            menu.classList.remove('abierto');
+            boton.setAttribute('aria-expanded', 'false');
+        }
     });
 
-    window.addEventListener('resize', function () {
-        if (window.innerWidth > 900) cerrar();
-    });
 })();
 </script>

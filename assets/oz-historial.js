@@ -165,7 +165,7 @@
         const panel = document.getElementById('oz-historial');
         if (!panel) return;
 
-        const nav = document.getElementById('barra');
+        const nav = document.getElementById('barra') || document.querySelector('.barra-cliente');
         if (nav) {
             const rect = nav.getBoundingClientRect();
             const gap = window.innerWidth <= 760 ? 8 : 10;

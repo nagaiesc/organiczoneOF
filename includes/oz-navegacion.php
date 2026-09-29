@@ -3,3 +3,4 @@
 ?>
 <link rel="stylesheet" href="/organiczoneOF/assets/oz-historial.css">
 <script src="/organiczoneOF/assets/oz-historial.js" defer></script>
+<link rel="stylesheet" href="/organiczoneOF/assets/oz-responsive.css">

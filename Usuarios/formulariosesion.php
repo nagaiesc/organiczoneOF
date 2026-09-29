@@ -21,6 +21,10 @@
     box-sizing:border-box;
 }
 
+html{
+    -webkit-text-size-adjust:100%;
+}
+
 :root{
     --green:#12A33C;
     --green-dark:#064D22;
@@ -40,6 +44,7 @@ body{
     justify-content:center;
     align-items:center;
     min-height:100vh;
+    min-height:100dvh;
     overflow:hidden;
 }
 
@@ -70,7 +75,7 @@ header{
 /* CONTENEDOR */
 
 main{
-    width:1120px;
+    width:min(1120px, 94%);
     height:700px;
     display:grid;
     grid-template-columns:46% 54%;
@@ -318,85 +323,221 @@ label.error{
     z-index:2;
 }
 
-/* RESPONSIVE */
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+/* TABLET Y CELULAR */
 
 @media(max-width:1000px){
 
     body{
+        display:flex;
+        align-items:center;
         overflow:auto;
-        padding:30px 0;
+        padding:100px 0 36px;
     }
 
     header{
-        position:relative;
-        left:auto;
-        top:auto;
-        width:95%;
-        margin-bottom:25px;
-    }
-
-    .logo{
-        font-size:65px;
+        display:none;
     }
 
     main{
-        width:92%;
+        width:min(880px, 94%);
         height:auto;
-        min-height:700px;
-        grid-template-columns:1fr;
+        min-height:540px;
+        grid-template-columns:47% 53%;
+        border-radius:36px;
+        box-shadow:0 18px 40px rgba(43,20,13,.12);
     }
 
     .login{
-        min-height:600px;
+        padding:42px 30px;
     }
 
-    .foto{
-        height:420px;
+    .login article{
+        width:100%;
+        max-width:340px;
+    }
+
+    .titulo-login{
+        margin-bottom:24px;
+    }
+
+    .login h2{
+        font-size:clamp(38px, 5.6vw, 48px);
+    }
+
+    .login h1{
+        font-size:clamp(54px, 8vw, 68px);
+    }
+
+    label{
+        font-size:16px;
+        margin-top:12px;
+    }
+
+    input[type=text]{
+        height:48px;
+        font-size:16px;
+        border-radius:16px;
+    }
+
+    .btn,
+    .boton-registro{
+        height:48px;
+        font-size:18px;
+    }
+
+    .foto::before{
+        width:210px;
+        height:210px;
+        top:-100px;
+        right:-70px;
+    }
+
+    .foto::after{
+        width:160px;
+        height:160px;
+        bottom:-80px;
+        left:-65px;
     }
 }
 
 @media(max-width:600px){
 
     body{
-        padding:20px 0;
-    }
-
-    header{
-        width:90%;
-    }
-
-    .logo{
-        font-size:58px;
-        line-height:42px;
-    }
-
-    .logo span{
-        font-size:28px;
+        display:block;
+        padding:96px 0 32px;
     }
 
     main{
-        width:92%;
-        border-radius:30px;
-    }
-
-    .login{
-        padding:50px 25px;
-    }
-
-    .login article{
         width:90%;
-    }
-
-    .login h2{
-        font-size:47px;
-    }
-
-    .login h1{
-        font-size:70px;
+        max-width:420px;
+        min-height:0;
+        margin:0 auto;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        overflow:visible;
+        background:none;
+        box-shadow:none;
+        border-radius:0;
     }
 
     .foto{
-        height:320px;
+        order:1;
+        width:170px;
+        height:170px;
+        flex-shrink:0;
+        border-radius:50%;
+        border:6px solid #fff;
+        box-shadow:0 10px 24px rgba(43,20,13,.22);
+        margin-bottom:-88px;
+        z-index:5;
+    }
+
+    .foto::before,
+    .foto::after{
+        display:none;
+    }
+
+    .foto img{
+        border-radius:50%;
+    }
+
+    .login{
+        order:2;
+        display:block;
+        width:100%;
+        padding:112px 24px 32px;
+        border-radius:34px;
+        box-shadow:0 16px 34px rgba(18,163,60,.28);
+    }
+
+    .login article{
+        max-width:none;
+    }
+
+    .titulo-login{
+        text-align:center;
+        margin-bottom:20px;
+    }
+
+    .login h2{
+        font-size:clamp(30px, 9vw, 38px);
+    }
+
+    .login h1{
+        font-size:clamp(44px, 13vw, 56px);
+        letter-spacing:-1.5px;
+    }
+
+    .detalle-oz{
+        width:55px;
+        height:4px;
+        margin:12px auto 0;
+    }
+
+    label{
+        font-size:15px;
+        margin-top:12px;
+        margin-bottom:6px;
+    }
+
+    input[type=text]{
+        height:50px;
+        border-radius:16px;
+    }
+
+    label.error{
+        font-size:12.5px;
+        line-height:1.3;
+    }
+
+    .btn,
+    .boton-registro{
+        height:50px;
+    }
+
+    .btn{
+        margin-top:18px;
+    }
+
+    .separador-o{
+        margin:10px 0;
+    }
+}
+
+@media(max-width:360px){
+
+    main{
+        width:92%;
+    }
+
+    .foto{
+        width:140px;
+        height:140px;
+        margin-bottom:-72px;
+    }
+
+    .login{
+        padding:92px 18px 26px;
+        border-radius:28px;
+    }
+
+    .login h2{
+        font-size:28px;
+    }
+
+    .login h1{
+        font-size:40px;
+    }
+
+    .btn,
+    .boton-registro{
+        font-size:17px;
     }
 }
 
