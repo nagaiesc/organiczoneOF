@@ -50,6 +50,7 @@ while ($fila = $resultadoCarrito->fetch_assoc()) {
 $stmtCarrito->close();
 $conexion->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -60,75 +61,366 @@ $conexion->close();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root{--verde:#12A33C;--verde-oscuro:#0A4A1B;--cafe:#2B140D;--crema:#FCD09F;--fondo:#F5EEE3;}
-        *{box-sizing:border-box}
-        body{margin:0;background:var(--fondo);font-family:'Nunito',sans-serif;color:var(--cafe);padding:35px 20px}
-        .comprobante{width:min(850px,100%);margin:auto;background:white;border-radius:42px;overflow:hidden;box-shadow:0 18px 45px rgba(43,20,13,.14)}
-        .cabecera{background:var(--verde);color:white;padding:42px 48px;display:flex;justify-content:space-between;gap:20px;align-items:end}
-        .marca{font-family: 'Fredoka', sans-serif;font-size: 78px;line-height: .75;font-weight: 700;min-width: 110px;}.marca span{display:block;font-size:18px;color:var(--crema)}
-        .numero{text-align:right}.numero small{display:block;opacity:.8}.numero strong{font-family:'Fredoka',sans-serif;font-size:32px}
-        .contenido{padding:42px 48px}
-        .estado{display:inline-block;padding:10px 15px;border-radius:30px;background:#fff1d9;color:#8b5b13;font-weight:900;margin-bottom:25px}
-        .datos{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:35px}
-        .dato span{display:block;color:#858078;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:1px}.dato strong{font-size:17px}
-        table{width:100%;border-collapse:collapse}th{text-align:left;padding:12px 0;border-bottom:2px solid var(--cafe)}td{padding:15px 0;border-bottom:1px solid #eee8df}td:last-child,th:last-child{text-align:right}
-        .total{display:flex;justify-content:flex-end;gap:30px;font-size:26px;font-weight:900;padding-top:22px}.total strong{color:var(--verde)}
-        .acciones{display:flex;justify-content:center;gap:12px;margin-top:30px;flex-wrap:wrap}.acciones a{padding:13px 20px;border-radius:17px;text-decoration:none;font-weight:900}.verde{background:var(--verde);color:white}.cafe{background:var(--cafe);color:white}
-        @media(max-width:600px){.cabecera,.contenido{padding:30px 25px}.cabecera{flex-direction:column;align-items:start}.numero{text-align:left}.datos{grid-template-columns:1fr}}
-        .codigo-qr{
-        display:block;
-        width:150px;
-        height:150px;
-        object-fit:contain;
-        margin:15px auto 0;
-        border-radius:12px;
-}
+
+        :root {
+            --verde: #12A33C;
+            --verde-oscuro: #0A4A1B;
+            --cafe: #2B140D;
+            --crema: #FCD09F;
+            --fondo: #F5EEE3;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: var(--fondo);
+            font-family: 'Nunito', sans-serif;
+            color: var(--cafe);
+            padding: 35px 20px
+        }
+
+        .comprobante {
+            width: min(850px, 100%);
+            margin: auto;
+            background: white;
+            border-radius: 42px;
+            overflow: hidden;
+            box-shadow: 0 18px 45px rgba(43, 20, 13, .14)
+        }
+
+        .cabecera {
+            background: var(--verde);
+            color: white;
+            padding: 42px 48px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: end
+        }
+
+        .marca {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 78px;
+            line-height: .75;
+            font-weight: 700;
+            min-width: 110px;
+        }
+
+        .marca span {
+            display: block;
+            font-size: 18px;
+            color: var(--crema)
+        }
+
+        .numero {
+            text-align: right
+        }
+
+        .numero small {
+            display: block;
+            opacity: .8
+        }
+
+        .numero strong {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 32px
+        }
+
+        .contenido {
+            padding: 42px 48px
+        }
+
+        .estado {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 30px;
+            background: #fff1d9;
+            color: #8b5b13;
+            font-weight: 900;
+            margin-bottom: 25px
+        }
+
+        .datos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 35px
+        }
+
+        .dato span {
+            display: block;
+            color: #858078;
+            font-size: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px
+        }
+
+        .dato strong {
+            font-size: 17px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 0;
+            border-bottom: 2px solid var(--cafe)
+        }
+
+        td {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee8df
+        }
+
+        td:last-child,
+        th:last-child {
+            text-align: right
+        }
+
+        .codigo-qr {
+            display: block;
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            margin: 15px auto 0;
+            border-radius: 12px;
+        }
+
+        .qr-pago {
+            text-align: center;
+            margin: 30px 0 10px;
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid #161615;
+        }
+
+        .qr-pago p {
+            margin: 0 0 15px;
+            font-weight: 800;
+            color: var(--cafe);
+            font-size: 15px;
+        }
+
+        .qr-pago img {
+            width: 170px;
+            height: 170px;
+            object-fit: contain;
+        }
+
+        .total {
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+            font-size: 26px;
+            font-weight: 900;
+            padding-top: 22px
+        }
+
+        .total strong {
+            color: var(--verde)
+        }
+
+        .acciones {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+            flex-wrap: wrap
+        }
+
+        .acciones a {
+            padding: 13px 20px;
+            border-radius: 17px;
+            text-decoration: none;
+            font-weight: 900
+        }
+
+        .verde {
+            background: var(--verde);
+            color: white
+        }
+
+        .cafe {
+            background: var(--cafe);
+            color: white
+        }
+
+        @media(max-width:600px) {
+
+            .cabecera,
+            .contenido {
+                padding: 30px 25px
+            }
+
+            .cabecera {
+                flex-direction: column;
+                align-items: start
+            }
+
+            .numero {
+                text-align: left
+            }
+
+            .datos {
+                grid-template-columns: 1fr
+            }
+
+        }
 
     </style>
 
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/organiczoneOF/includes/oz-navegacion.php'; ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/organiczoneOF/includes/oz-navegacion.php'; ?>
 </head>
+
 <body>
+
 <div class="comprobante">
     <header class="cabecera">
-        <div class="marca"><span>My</span>Oz</div>
-        <div class="numero"><small>COMPROBANTE</small><strong>#<?= $pedidoId ?></strong></div>
+        <div class="marca">
+            <span>My</span>Oz
+        </div>
+
+        <div class="numero">
+            <small>COMPROBANTE</small>
+            <strong>#<?= $pedidoId ?></strong>
+        </div>
     </header>
 
     <main class="contenido">
-        <div class="estado">Estado: <?= htmlspecialchars($pedido['estado']) ?></div>
+        <div class="estado">
+            Estado: <?= htmlspecialchars($pedido['estado']) ?>
+        </div>
 
         <section class="datos">
-            <div class="dato"><span>Cliente</span><strong><?= htmlspecialchars($pedido['nombre']) ?></strong></div>
-            <div class="dato"><span>Fecha</span><strong><?= htmlspecialchars($pedido['fecha']) ?></strong></div>
-            <div class="dato"><span>Teléfono</span><strong><?= htmlspecialchars($pedido['telefono']) ?></strong></div>
+
             <div class="dato">
-            <span>Método de pago</span>
-            <strong><?= htmlspecialchars($pedido['metodo']) ?></strong>
-            <img class="codigo-qr" src="Imagenes/QR.jpeg" alt="Código QR">
+                <span>Cliente</span>
+
+                <strong>
+                    <?= htmlspecialchars($pedido['nombre']) ?>
+                </strong>
             </div>
-            <div class="dato" style="grid-column:1/-1"><span>Dirección</span><strong><?= htmlspecialchars($pedido['direccion']) ?></strong></div>
+
+            <div class="dato">
+                <span>Fecha</span>
+
+                <strong>
+                    <?= htmlspecialchars($pedido['fecha']) ?>
+                </strong>
+            </div>
+
+
+            <div class="dato">
+
+                <span>Teléfono</span>
+
+                <strong>
+                    <?= htmlspecialchars($pedido['telefono']) ?>
+                </strong>
+
+            </div>
+
+
+            <div class="dato">
+
+                <span>Método de pago</span>
+
+                <strong>
+                    <?= htmlspecialchars($pedido['metodo']) ?>
+                </strong>
+
+                <!-- QR DEL COMPROBANTE: SE GENERA AUTOMÁTICAMENTE -->
+                <img
+                    class="codigo-qr"
+                    src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=<?= urlencode('http://localhost/organiczoneOF/comprobante.php?id=' . $pedidoId) ?>"
+                    alt="Código QR del comprobante"
+                >
+
+            </div>
+
+            <div class="dato" style="grid-column:1/-1">
+
+                <span>Dirección</span>
+
+                <strong>
+                    <?= htmlspecialchars($pedido['direccion']) ?>
+                </strong>
+
+            </div>
+
         </section>
 
         <table>
-            <thead><tr><th>Producto</th><th>Cantidad</th><th>Precio</th><th>Total</th></tr></thead>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+
             <tbody>
             <?php foreach ($items as $item): ?>
                 <tr>
-                    <td><?= htmlspecialchars($item['nombre']) ?></td>
-                    <td><?= $item['cantidad'] ?></td>
-                    <td>Bs. <?= number_format($item['precio'],0,',','.') ?></td>
-                    <td>Bs. <?= number_format($item['costototal'],0,',','.') ?></td>
+                    <td>
+                        <?= htmlspecialchars($item['nombre']) ?>
+                    </td>
+                    <td>
+                        <?= $item['cantidad'] ?>
+                    </td>
+                    <td>
+                        Bs. <?= number_format($item['precio'], 0, ',', '.') ?>
+                    </td>
+                    <td>
+                        Bs. <?= number_format($item['costototal'], 0, ',', '.') ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
+
         </table>
 
-        <div class="total"><span>Total</span><strong>Bs. <?= number_format($total,0,',','.') ?></strong></div>
+        <!-- QR DE PAGO: IMAGEN QUE TÚ TIENES GUARDADA -->
+        <div class="qr-pago">
+            <p>
+                Escanea el código QR para realizar el pago
+            </p>
+
+            <img
+                src="../Imagenes/QR.jpeg"
+                alt="Código QR de pago"
+            >
+        </div>
+
+        <div class="total">
+            <span>Total</span>
+            <strong>
+                Bs. <?= number_format($total, 0, ',', '.') ?>
+            </strong>
+        </div>
 
         <div class="acciones">
-            <a class="verde" href="consultar_pedido.php?id=<?= (int)$pedido['id'] ?>">Consultar estado</a>
-            <a class="cafe" href="nuevo_pedido.php">Nueva compra</a>
+            <a
+                class="verde"
+                href="consultar_pedido.php?id=<?= (int)$pedido['id'] ?>"
+            >
+                Consultar estado
+            </a>
+
+            <a
+                class="cafe"
+                href="nuevo_pedido.php"
+            >
+                Nueva compra
+            </a>
         </div>
     </main>
 </div>
