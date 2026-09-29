@@ -1291,23 +1291,6 @@ body {
             #2B140D;
 
     }
-    .qr-factura {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    padding: 10px;
-}
-    #qr-factura {
-    width: 100px;
-    height: 100px;
-    margin: 12px 0 0 auto;
-}
-
-    #qr-factura img {
-    width: 100px;
-    height: 100px;
-}
-
     .qr-personal {
     text-align: center;
     margin: 10px 0 10px;
@@ -1430,7 +1413,6 @@ body {
     <div class="numero">
         Nº<?= limpiar($pedido['id']) ?>
     </div>
-    <div id="qr-factura"></div>
 
 </div>
 
