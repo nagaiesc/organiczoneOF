@@ -664,8 +664,7 @@ if (session_status() === PHP_SESSION_NONE) {
             .oz-hero-imagen{
                 width:100%;
                 max-width:none;
-                aspect-ratio:1 / .9;
-                border-radius:30px;
+                border-radius:50px;
             }
 
             .oz-filosofia{
