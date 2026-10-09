@@ -78,68 +78,48 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
 
 
 /* =========================================================
-   LOGO
+   LOGO (imagen + My Oz)
    ========================================================= */
 
 #barra > div:first-child {
-    width: 65px;
-    min-width: 65px;
-    height: 65px;
+    width: auto;
+    min-width: 0;
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    gap: 8px;
+    margin-left: 6px;
+    margin-right: 14px;
+}
+
+/* Imagen del logo (fondo transparente, sin círculo) */
+#logoImg {
+    height: 46px;
+    width: auto;
+    flex-shrink: 0;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    margin-right: 5px;
+    transition: transform 0.2s ease;
 }
 
-#orga {
-    width: 65px;
-    height: 65px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    text-decoration: none;
+#logoImg:hover {
+    transform: scale(1.06);
 }
 
-#orga h1 {
-    margin: 0;
-    padding: 0;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    font-family: 'Fredoka', sans-serif;
-    font-size: 0;
-    line-height: 0.75;
-    white-space: nowrap;
+#logoImg img {
+    height: 100%;
+    width: auto;
+    max-width: 70px;
+    display: block;
+    object-fit: contain;
 }
-
-#orga h1::before {
-    content: "My";
-    color: var(--blanco);
-    font-family: 'Fredoka', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    margin-bottom: 1px;
-}
-
-#orga h1::after {
-    content: "Oz";
-    color: var(--crema);
-    font-family: 'Fredoka', sans-serif;
-    font-size: 32px;
-    font-weight: 700;
-    letter-spacing: -1px;
-    line-height: 0.8;
-    margin-top: 0.5px;
-}
-
 
 /* =========================================================
    LINKS PRINCIPALES
@@ -412,12 +392,19 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
     }
 
     #barra > div:first-child {
-        width: 58px;
-        min-width: 58px;
+        width: auto;
+        min-width: 0;
+        gap: 6px;
+        margin-left: 4px;
+        margin-right: 10px;
     }
 
-    #orga {
-        width: 58px;
+    #logoImg {
+        height: 42px;
+    }
+
+    #logoImg img {
+        max-width: 64px;
     }
 
     #links {
@@ -496,23 +483,20 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
 
     /* Logo */
     #barra > div:first-child {
-        width: 50px;
-        min-width: 50px;
+        width: auto;
+        min-width: 0;
         height: 50px;
+        gap: 4px;
+        margin-left: 12px;
         margin-right: 2px;
     }
 
-    #orga {
-        width: 50px;
-        height: 50px;
+    #logoImg {
+        height: 44px;
     }
 
-    #orga h1::before {
-        font-size: 12px;
-    }
-
-    #orga h1::after {
-        font-size: 26px;
+    #logoImg img {
+        max-width: 64px;
     }
 
     /* Links siempre dentro del nav, repartidos en la fila */
@@ -693,20 +677,16 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
     }
 
     #barra > div:first-child {
-        width: 44px;
-        min-width: 44px;
+        gap: 3px;
+        margin-left: 9px;
     }
 
-    #orga {
-        width: 44px;
+    #logoImg {
+        height: 38px;
     }
 
-    #orga h1::after {
-        font-size: 23px;
-    }
-
-    #orga h1::before {
-        font-size: 11px;
+    #logoImg img {
+        max-width: 54px;
     }
 
     .item > a {
@@ -723,10 +703,12 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
 
 @media (max-width: 360px) {
 
-    #barra > div:first-child,
-    #orga {
-        width: 40px;
-        min-width: 40px;
+    #logoImg {
+        height: 34px;
+    }
+
+    #logoImg img {
+        max-width: 48px;
     }
 
     .item > a {
@@ -752,10 +734,14 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
 
         <a
             href="/organiczoneOF/paginaprincipal.php"
-            id="orga"
+            id="logoImg"
+            aria-label="Inicio"
         >
 
-            <h1>OrganicZone</h1>
+            <img
+                src="logoOz.png"
+                alt="Logo OrganicZone"
+            >
 
         </a>
 
