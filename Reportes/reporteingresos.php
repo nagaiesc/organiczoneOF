@@ -1,3 +1,4 @@
+
 <?php
 
 session_start();
@@ -13,7 +14,13 @@ if ($conn->connect_error) {
     die("Error de conexión");
 }
 
-$anio = $_GET['anio'] ?? date('Y');
+$conn->set_charset("utf8mb4");
+
+$anio = filter_input(INPUT_GET, 'anio', FILTER_VALIDATE_INT);
+
+if ($anio === false || $anio === null || $anio < 2020 || $anio > 2100) {
+    $anio = (int) date('Y');
+}
 
 $mesesNombres = [
     1 => 'Enero',
@@ -30,52 +37,74 @@ $mesesNombres = [
     12 => 'Diciembre'
 ];
 
-$meses = [];
-$ingresos = [];
+$meses = array_values($mesesNombres);
+$ingresos = array_fill(0, 12, 0);
+
+$fechaInicio = sprintf('%04d-01-01', $anio);
+$fechaFin = sprintf('%04d-01-01', $anio + 1);
 
 $sql = "
-    SELECT 
+    SELECT
         MONTH(p.fecha) AS mes,
-        SUM(v.costototal) AS ingresos
+        COALESCE(SUM(v.costototal), 0) AS ingresos
     FROM ventas v
     INNER JOIN pedidos p ON v.pedidos_id = p.id
-    WHERE YEAR(p.fecha) = '$anio'
+    WHERE p.fecha >= ?
+      AND p.fecha < ?
     GROUP BY MONTH(p.fecha)
     ORDER BY mes
 ";
 
-$resultado = $conn->query($sql);
+$stmt = $conn->prepare($sql);
+
+if (!$stmt) {
+    die("Error en el reporte mensual: " . htmlspecialchars($conn->error));
+}
+
+$stmt->bind_param("ss", $fechaInicio, $fechaFin);
+
+if (!$stmt->execute()) {
+    die("Error al consultar los ingresos mensuales");
+}
+
+$resultado = $stmt->get_result();
 
 while ($fila = $resultado->fetch_assoc()) {
-    $meses[] = $mesesNombres[$fila['mes']];
-    $ingresos[] = (float) $fila['ingresos'];
+    $indice = (int) $fila['mes'] - 1;
+
+    if ($indice >= 0 && $indice < 12) {
+        $ingresos[$indice] = (float) $fila['ingresos'];
+    }
 }
+
+$stmt->close();
 
 $anios = [];
 $totales = [];
 
 $sqlAnual = "
-    SELECT 
+    SELECT
         YEAR(p.fecha) AS anio,
         SUM(v.costototal) AS total
     FROM ventas v
     INNER JOIN pedidos p ON v.pedidos_id = p.id
+    WHERE p.fecha IS NOT NULL
     GROUP BY YEAR(p.fecha)
     ORDER BY anio
 ";
 
 $resultadoAnual = $conn->query($sqlAnual);
 
+if (!$resultadoAnual) {
+    die("Error en el reporte anual: " . htmlspecialchars($conn->error));
+}
+
 while ($fila = $resultadoAnual->fetch_assoc()) {
-    $anios[] = $fila['anio'];
+    $anios[] = (string) $fila['anio'];
     $totales[] = (float) $fila['total'];
 }
 
-$totalAnio = 0;
-
-foreach ($ingresos as $ingreso) {
-    $totalAnio += $ingreso;
-}
+$totalAnio = array_sum($ingresos);
 
 ?>
 
@@ -87,17 +116,14 @@ foreach ($ingresos as $ingreso) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Reporte de Ingresos</title>
+    <title>Reporte de Ingresos | Organic Zone</title>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
 
@@ -105,167 +131,249 @@ foreach ($ingresos as $ingreso) {
             box-sizing: border-box;
         }
 
+        :root {
+            --verde: #0BA84A;
+            --verde-oscuro: #087F3B;
+            --cafe: #2B140D;
+            --crema: #FCD09F;
+            --fondo: #F4F1EE;
+            --borde: #E8EEE9;
+        }
+
         body {
             margin: 0;
-            padding: 30px;
+            padding: 24px;
             min-height: 100vh;
-            background: #EAF7EC;
+            background: var(--fondo);
             font-family: 'Fredoka', sans-serif;
-            color: #2B140D;
+            color: var(--cafe);
         }
 
         .principal {
-            width: 95%;
+            width: 100%;
             max-width: 1100px;
-            margin: 40px auto;
-            padding: 40px;
+            margin: 35px auto;
+            padding: 36px;
             background: #FFFFFF;
-            border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(43, 20, 13, 0.12);
+            border-radius: 28px;
         }
 
         h1 {
             margin: 0;
-            color: #2B140D;
-            font-size: 42px;
+            font-size: 38px;
+            line-height: 1.2;
         }
 
         h1::after {
             content: "";
             display: block;
-            width: 60px;
+            width: 58px;
             height: 5px;
-            margin-top: 10px;
-            background: #0BA84A;
+            margin-top: 12px;
+            background: var(--verde);
             border-radius: 10px;
         }
 
         .filtro {
             display: flex;
             align-items: end;
-            gap: 15px;
-            margin: 30px 0;
             flex-wrap: wrap;
+            gap: 14px;
+            margin: 28px 0;
         }
 
         .filtro label {
             display: block;
-            margin-bottom: 7px;
+            margin-bottom: 8px;
             font-weight: 600;
         }
 
         .filtro input {
-            padding: 11px 15px;
+            width: 180px;
+            min-height: 45px;
+            padding: 10px 14px;
             border: 1px solid #DDE5DE;
-            border-radius: 20px;
+            border-radius: 15px;
             font-family: 'Fredoka', sans-serif;
             font-size: 16px;
             outline: none;
         }
 
         .filtro input:focus {
-            border-color: #0BA84A;
-            box-shadow: 0 0 0 3px rgba(11, 168, 74, 0.12);
+            border-color: var(--verde);
         }
 
         .boton {
-            padding: 12px 25px;
+            min-height: 45px;
+            padding: 11px 24px;
             border: 0;
-            border-radius: 25px;
-            background: #0BA84A;
+            border-radius: 15px;
+            background: var(--verde);
             color: #FFFFFF;
             font-family: 'Fredoka', sans-serif;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.2s ease;
         }
 
         .boton:hover {
-            background: #087F3B;
-            transform: translateY(-1px);
+            background: var(--verde-oscuro);
         }
 
         .tarjeta {
-            margin-bottom: 30px;
+            margin-bottom: 28px;
             padding: 25px;
-            background: #2B140D;
-            color: #FCD09F;
-            border-radius: 25px;
+            background: var(--cafe);
+            color: var(--crema);
+            border-radius: 22px;
         }
 
         .tarjeta p {
             margin: 0;
             color: #FFFFFF;
-            font-size: 18px;
+            font-size: 17px;
+            line-height: 1.5;
         }
 
         .tarjeta h2 {
-            margin: 5px 0 0;
-            font-size: 42px;
+            margin: 8px 0 0;
+            color: var(--crema);
+            font-size: 38px;
+            overflow-wrap: anywhere;
         }
 
         .grafico {
-            height: 400px;
-            margin-bottom: 30px;
-            padding: 25px;
+            width: 100%;
+            min-width: 0;
+            height: 390px;
+            margin-bottom: 26px;
+            padding: 24px;
             background: #FFFFFF;
-            border: 1px solid #E8EEE9;
-            border-radius: 20px;
+            border: 1px solid var(--borde);
+            border-radius: 21px;
         }
 
         .titulo-grafico {
-            margin: 0 0 20px;
-            color: #2B140D;
-            font-size: 24px;
-            font-weight: 700;
+            margin: 0 0 18px;
+            font-size: 23px;
+            line-height: 1.3;
+        }
+
+        .grafico-contenido {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            min-width: 0;
+        }
+
+        .grafico-contenido canvas {
+            display: block;
         }
 
         .volver {
             display: inline-block;
-            margin-top: 5px;
-            color: #0BA84A;
+            margin-top: 4px;
+            padding: 8px 0;
+            color: var(--verde-oscuro);
             font-weight: 600;
             text-decoration: none;
-            transition: 0.2s ease;
         }
 
         .volver:hover {
-            color: #087F3B;
-            transform: translateX(-2px);
+            color: var(--cafe);
         }
 
         @media (max-width: 700px) {
 
             body {
-                padding: 15px;
+                padding: 12px;
             }
 
             .principal {
-                width: 100%;
-                margin: 20px auto;
-                padding: 25px;
+                margin: 16px auto;
+                padding: 22px 15px;
+                border-radius: 22px;
             }
 
             h1 {
-                font-size: 34px;
+                font-size: 30px;
             }
 
-            .grafico {
-                height: 350px;
-                padding: 15px;
+            .filtro {
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+                margin: 24px 0;
+            }
+
+            .filtro > div,
+            .filtro input,
+            .boton {
+                width: 100%;
+            }
+
+            .tarjeta {
+                padding: 22px 18px;
+                border-radius: 19px;
+            }
+
+            .tarjeta p {
+                font-size: 15px;
             }
 
             .tarjeta h2 {
-                font-size: 34px;
+                font-size: 31px;
+            }
+
+            .grafico {
+                height: 335px;
+                margin-bottom: 20px;
+                padding: 18px 10px 12px;
+                border-radius: 18px;
+            }
+
+            .titulo-grafico {
+                padding: 0 4px;
+                font-size: 20px;
+            }
+
+            .grafico-contenido {
+                height: 265px;
+            }
+
+            .volver {
+                font-size: 14px;
+                line-height: 1.6;
+            }
+
+        }
+
+        @media (max-width: 380px) {
+
+            .principal {
+                padding: 19px 11px;
+            }
+
+            h1 {
+                font-size: 27px;
+            }
+
+            .grafico {
+                padding-right: 7px;
+                padding-left: 7px;
+            }
+
+            .grafico-contenido {
+                height: 245px;
             }
 
         }
 
     </style>
 
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/organiczoneOF/includes/oz-navegacion.php'; ?>
 
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/organiczoneOF/includes/oz-navegacion.php'; ?>
 </head>
 
 <body>
@@ -277,18 +385,17 @@ foreach ($ingresos as $ingreso) {
         <form class="filtro" method="GET">
 
             <div>
-
                 <label for="anio">Año</label>
 
                 <input
                     type="number"
                     id="anio"
                     name="anio"
-                    value="<?php echo htmlspecialchars($anio); ?>"
+                    value="<?php echo htmlspecialchars((string) $anio, ENT_QUOTES, 'UTF-8'); ?>"
                     min="2020"
                     max="2100"
+                    required
                 >
-
             </div>
 
             <button class="boton" type="submit">
@@ -300,15 +407,15 @@ foreach ($ingresos as $ingreso) {
         <section class="tarjeta">
 
             <p>
-                Ingresos totales del año <?php echo htmlspecialchars($anio); ?>
+                Ingresos totales del año <?php echo htmlspecialchars((string) $anio, ENT_QUOTES, 'UTF-8'); ?>
             </p>
 
             <h2>
-                Bs. <?php echo number_format($totalAnio, 2); ?>
+                Bs. <?php echo number_format($totalAnio, 2, ',', '.'); ?>
             </h2>
 
         </section>
-         
+
         <?php include 'reportesdia.php'; ?>
 
         <?php include 'reportessemana.php'; ?>
@@ -319,7 +426,9 @@ foreach ($ingresos as $ingreso) {
                 Ingresos por mes
             </h2>
 
-            <canvas id="graficoMeses"></canvas>
+            <div class="grafico-contenido">
+                <canvas id="graficoMeses"></canvas>
+            </div>
 
         </section>
 
@@ -329,7 +438,9 @@ foreach ($ingresos as $ingreso) {
                 Ingresos por año
             </h2>
 
-            <canvas id="graficoAnios"></canvas>
+            <div class="grafico-contenido">
+                <canvas id="graficoAnios"></canvas>
+            </div>
 
         </section>
 
@@ -341,14 +452,100 @@ foreach ($ingresos as $ingreso) {
 
     <script>
 
-        const meses = <?php echo json_encode($meses); ?>;
-        const ingresos = <?php echo json_encode($ingresos); ?>;
+        const meses = <?php echo json_encode($meses, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
+        const ingresos = <?php echo json_encode($ingresos, JSON_NUMERIC_CHECK); ?>;
 
-        const anios = <?php echo json_encode($anios); ?>;
-        const totales = <?php echo json_encode($totales); ?>;
+        const anios = <?php echo json_encode($anios, JSON_NUMERIC_CHECK); ?>;
+        const totales = <?php echo json_encode($totales, JSON_NUMERIC_CHECK); ?>;
 
         const verdeOrganicZone = '#0BA84A';
         const verdeOscuro = '#087F3B';
+        const cafeOrganicZone = '#2B140D';
+
+        Chart.defaults.font.family = 'Fredoka';
+        Chart.defaults.color = '#78685F';
+
+        const formatoBolivianos = (valor) => {
+            return 'Bs. ' + Number(valor).toLocaleString('es-BO', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        };
+
+        const opcionesBase = {
+            responsive: true,
+            maintainAspectRatio: false,
+            resizeDelay: 100,
+
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        usePointStyle: true,
+                        padding: 14,
+                        font: {
+                            family: 'Fredoka',
+                            size: 12
+                        }
+                    }
+                },
+
+                tooltip: {
+                    backgroundColor: cafeOrganicZone,
+                    titleFont: {
+                        family: 'Fredoka'
+                    },
+                    bodyFont: {
+                        family: 'Fredoka'
+                    },
+                    padding: 12,
+                    cornerRadius: 10,
+                    callbacks: {
+                        label: function(context) {
+                            return 'Ingresos: ' + formatoBolivianos(context.parsed.y);
+                        }
+                    }
+                }
+            },
+
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        font: {
+                            family: 'Fredoka',
+                            size: 11
+                        },
+                        maxRotation: 45,
+                        minRotation: 0
+                    },
+                    border: {
+                        display: false
+                    }
+                },
+
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        font: {
+                            family: 'Fredoka',
+                            size: 11
+                        },
+                        callback: function(valor) {
+                            return 'Bs. ' + Number(valor).toLocaleString('es-BO');
+                        }
+                    },
+                    border: {
+                        display: false
+                    },
+                    grid: {
+                        color: 'rgba(43, 20, 13, 0.07)'
+                    }
+                }
+            }
+        };
 
         const ctxMeses = document.getElementById('graficoMeses');
 
@@ -356,63 +553,33 @@ foreach ($ingresos as $ingreso) {
             type: 'line',
 
             data: {
-              labels: meses,
+                labels: meses,
 
-        datasets: [{
-            label: 'Ingresos en Bs.',
-            data: ingresos,
-            borderColor: verdeOrganicZone, // Color de la línea verde (#0BA84A)
-            backgroundColor: 'rgba(11, 168, 74, 0.1)', // Fondo transparente bajo la línea
-            borderWidth: 2,
-            radius: 3,                    // Tamaño del punto en cada mes
-            tension: 0.3                   // Curvatura suave para la línea
-        }]
-    },
-
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-
-        interaction: {
-            intersect: false,
-            mode: 'index'
-        },
-
-        plugins: {
-            legend: {
-                labels: {
-                    font: {
-                        family: 'Fredoka',
-                        size: 14
-                    }
-                }
-            }
-        },
-
-        scales: {
-            x: {
-                ticks: {
-                    font: {
-                        family: 'Fredoka'
-                    }
-                },
-
-                grid: {
-                    display: false
-                }
+                datasets: [{
+                    label: 'Ingresos en Bs.',
+                    data: ingresos,
+                    borderColor: verdeOrganicZone,
+                    backgroundColor: 'rgba(11, 168, 74, 0.10)',
+                    fill: true,
+                    borderWidth: 3,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    pointBackgroundColor: verdeOrganicZone,
+                    pointBorderColor: '#FFFFFF',
+                    pointBorderWidth: 2,
+                    tension: 0.3,
+                    spanGaps: true
+                }]
             },
 
-           y:      {
-                    beginAtZero: true,
+            options: {
+                ...opcionesBase,
 
-                        ticks: {
-                          font: {
-                            family: 'Fredoka'
-                          }
-                       }
-                   }
-               }
-           }
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                }
+            }
         });
 
         const ctxAnios = document.getElementById('graficoAnios');
@@ -423,56 +590,24 @@ foreach ($ingresos as $ingreso) {
             data: {
                 labels: anios,
 
-                datasets: [
-                    {
-                        label: 'Ingresos en Bs.',
-                        data: totales,
-                        backgroundColor: verdeOrganicZone,
-                        borderColor: verdeOscuro,
-                        borderWidth: 1,
-                        borderRadius: 8,
-                        hoverBackgroundColor: verdeOscuro
-                    }
-                ]
+                datasets: [{
+                    label: 'Ingresos en Bs.',
+                    data: totales,
+                    backgroundColor: verdeOrganicZone,
+                    borderColor: verdeOscuro,
+                    borderWidth: 1,
+                    borderRadius: 7,
+                    hoverBackgroundColor: verdeOscuro,
+                    maxBarThickness: 48
+                }]
             },
 
             options: {
-                responsive: true,
-                maintainAspectRatio: false,
+                ...opcionesBase,
 
-                plugins: {
-                    legend: {
-                        labels: {
-                            font: {
-                                family: 'Fredoka',
-                                size: 14
-                            }
-                        }
-                    }
-                },
-
-                scales: {
-                    x: {
-                        ticks: {
-                            font: {
-                                family: 'Fredoka'
-                            }
-                        },
-
-                        grid: {
-                            display: false
-                        }
-                    },
-
-                    y: {
-                        beginAtZero: true,
-
-                        ticks: {
-                            font: {
-                                family: 'Fredoka'
-                            }
-                        }
-                    }
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
                 }
             }
         });
@@ -482,4 +617,3 @@ foreach ($ingresos as $ingreso) {
 </body>
 
 </html>
-
