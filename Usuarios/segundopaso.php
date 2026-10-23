@@ -74,11 +74,13 @@ body{
 }
 
 .lateral{
+    min-width:0;
     min-height:490px;
     padding:38px 30px;
     display:flex;
     flex-direction:column;
     justify-content:space-between;
+    gap:24px;
     position:relative;
     overflow:hidden;
     background:var(--crema);
@@ -100,7 +102,7 @@ body{
     position:absolute;
     width:145px;
     height:145px;
-    bottom:-75px;
+    bottom:-80px;
     left:-65px;
     border-radius:50%;
     background:var(--cafe);
@@ -189,6 +191,7 @@ body{
 }
 
 .campo input{
+    display:block;
     width:100%;
     height:49px;
     padding:0 15px;
@@ -204,6 +207,7 @@ body{
 
 .campo input::placeholder{
     color:#A8A09A;
+    opacity:1;
 }
 
 .campo input:focus{
@@ -213,6 +217,7 @@ body{
 }
 
 .boton{
+    display:block;
     width:100%;
     min-height:51px;
     margin-top:3px;
@@ -238,14 +243,6 @@ body{
     outline-offset:3px;
 }
 
-.error{
-    display:block;
-    margin-top:7px;
-    color:var(--rojo);
-    font-size:12px;
-    font-weight:800;
-}
-
 .alerta-error{
     margin-top:17px;
     padding:12px 14px;
@@ -262,75 +259,146 @@ body{
     margin-top:23px;
     color:#918983;
     font-size:11px;
+    line-height:1.6;
     text-align:center;
 }
 
 @media(max-width:800px){
+
     body{
-        padding:95px 20px 25px;
+        padding:90px 22px 30px;
     }
 
     .contenedor{
+        width:100%;
         max-width:520px;
         grid-template-columns:1fr;
         border-radius:28px;
     }
 
     .lateral{
-        min-height:225px;
-        padding:28px 30px;
+        min-height:0;
+        padding:30px 30px 25px;
+        gap:24px;
     }
 
-    .lateral-contenido{
-        margin-top:22px;
+    .lateral::before{
+        width:150px;
+        height:150px;
+        top:-90px;
+        right:-65px;
+    }
+
+    .lateral::after{
+        width:105px;
+        height:105px;
+        bottom:-65px;
+        left:-45px;
     }
 
     .lateral-contenido h2{
+        margin-bottom:12px;
         font-size:32px;
+        line-height:1.12;
     }
 
     .lateral-contenido p{
-        max-width:300px;
+        max-width:340px;
+        font-size:14px;
+        line-height:1.65;
     }
 
     .decoracion{
-        margin-top:24px;
+        font-size:10px;
+        letter-spacing:1.2px;
     }
 
     .formulario{
-        padding:35px 32px 30px;
+        padding:36px 34px 30px;
+    }
+
+    .encabezado{
+        margin-bottom:27px;
+    }
+
+    .etiqueta{
+        margin-bottom:10px;
     }
 
     .titulo{
         font-size:35px;
+        line-height:1.15;
+    }
+
+    .subtitulo{
+        margin-top:11px;
+        font-size:14px;
+        line-height:1.65;
+    }
+
+    .campo{
+        margin-bottom:20px;
+    }
+
+    .campo label{
+        margin-bottom:8px;
+    }
+
+    .campo input{
+        height:50px;
+    }
+
+    .boton{
+        min-height:52px;
+        margin-top:4px;
+    }
+
+    .pie{
+        margin-top:22px;
     }
 }
 
-@media(max-width:480px){
+@media(max-width:520px){
+
     body{
-        padding:85px 12px 20px;
+        padding:82px 16px 24px;
     }
 
     .contenedor{
-        border-radius:24px;
+        max-width:400px;
+        border-radius:25px;
     }
 
     .lateral{
-        min-height:205px;
-        padding:25px 23px;
+        padding:26px 24px 23px;
+        gap:20px;
     }
 
-    .lateral-contenido{
-        margin-top:19px;
+    .lateral::before{
+        width:120px;
+        height:120px;
+        top:-72px;
+        right:-55px;
+    }
+
+    .lateral::after{
+        width:85px;
+        height:85px;
+        bottom:-52px;
+        left:-38px;
     }
 
     .lateral-contenido h2{
+        max-width:270px;
+        margin-bottom:10px;
         font-size:29px;
+        line-height:1.15;
     }
 
     .lateral-contenido p{
+        max-width:290px;
         font-size:13px;
-        max-width:260px;
+        line-height:1.65;
     }
 
     .decoracion{
@@ -339,31 +407,116 @@ body{
     }
 
     .formulario{
-        padding:30px 23px 25px;
+        padding:30px 24px 26px;
     }
 
     .encabezado{
         margin-bottom:25px;
     }
 
+    .etiqueta{
+        font-size:11px;
+        letter-spacing:1.7px;
+    }
+
     .titulo{
-        font-size:31px;
+        max-width:300px;
+        font-size:30px;
+        line-height:1.2;
+        overflow-wrap:normal;
     }
 
     .subtitulo{
+        max-width:300px;
         font-size:13px;
+        line-height:1.65;
     }
 
     .campo{
         margin-bottom:18px;
     }
 
+    .campo label{
+        font-size:13px;
+    }
+
+    .campo input{
+        height:49px;
+        padding:0 14px;
+        font-size:14px;
+    }
+
+    .boton{
+        min-height:51px;
+        border-radius:12px;
+        font-size:15px;
+    }
+
+    .alerta-error{
+        margin-top:16px;
+        padding:12px;
+        font-size:13px;
+        line-height:1.55;
+    }
+
+    .pie{
+        margin-top:20px;
+        font-size:10px;
+    }
+}
+
+@media(max-width:360px){
+
+    body{
+        padding:76px 11px 18px;
+    }
+
+    .contenedor{
+        border-radius:21px;
+    }
+
+    .lateral{
+        padding:23px 20px 21px;
+        gap:17px;
+    }
+
+    .lateral-contenido h2{
+        font-size:27px;
+    }
+
+    .lateral-contenido p{
+        font-size:12px;
+    }
+
+    .decoracion{
+        font-size:8px;
+        letter-spacing:.7px;
+    }
+
+    .formulario{
+        padding:27px 20px 23px;
+    }
+
+    .titulo{
+        font-size:27px;
+    }
+
+    .subtitulo{
+        font-size:12px;
+    }
+
+    .campo label{
+        font-size:12px;
+    }
+
     .campo input{
         height:47px;
+        font-size:13px;
     }
 }
 
 @media(prefers-reduced-motion:reduce){
+
     .campo input,
     .boton{
         transition:none;
@@ -395,6 +548,7 @@ body{
 
         </div>
 
+       
     </section>
 
     <section class="formulario">
