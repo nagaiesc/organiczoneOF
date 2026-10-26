@@ -398,49 +398,127 @@ if (session_status() === PHP_SESSION_NONE) {
 
         .oz-grid{
             display:grid;
-            grid-template-columns:repeat(3,1fr);
-            gap:18px;
+            grid-template-columns:1.08fr .92fr;
+            grid-template-rows:1fr 1fr;
+            gap:16px;
+            align-items:stretch;
         }
 
         .oz-card{
-            min-height:290px;
-            padding:35px;
-            background:white;
-            border:1px solid var(--gris-claro);
-            border-radius:32px;
-            transition:.25s ease;
+            min-height:230px;
+            padding:30px 32px;
+            background:var(--verde);
+            color:white;
+            border:0;
+            border-radius:28px;
+            transition:background .25s ease, transform .25s ease;
+            text-align:left;
+            display:flex;
+            flex-direction:column;
+            align-items:flex-start;
+            justify-content:center;
+            position:relative;
+            overflow:hidden;
+            isolation:isolate;
+        }
+
+        .oz-card:first-child{
+            grid-row:span 2;
+            min-height:480px;
+            padding:42px;
+            justify-content:flex-end;
+            background:var(--verde);
+        }
+
+        .oz-card:nth-child(2){
+            background:var(--crema);
+            color:var(--cafe);
+        }
+
+        .oz-card:nth-child(3){
+            background:var(--cafe);
+            color:white;
+        }
+
+        .oz-card::before{
+            content:"";
+            position:absolute;
+            z-index:-1;
+            width:230px;
+            height:230px;
+            border:1px solid currentColor;
+            border-radius:48% 52% 63% 37% / 43% 39% 61% 57%;
+            right:-95px;
+            top:-105px;
+            opacity:.17;
+            transform:rotate(-24deg);
+            transition:transform .35s ease;
+        }
+
+        .oz-card::after{
+            content:"";
+            position:absolute;
+            z-index:-1;
+            width:150px;
+            height:150px;
+            border:1px solid currentColor;
+            border-radius:50%;
+            right:-35px;
+            top:-65px;
+            opacity:.15;
         }
 
         .oz-card:hover{
-            transform:translateY(-8px);
-            border-color:var(--verde);
+            transform:translateY(-5px);
+        }
+
+        .oz-card:hover::before{
+            transform:rotate(0deg) scale(1.08);
         }
 
         .oz-card-numero{
-            width:55px;
-            height:55px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            border-radius:16px;
-            background:var(--verde-suave);
-            color:var(--verde-oscuro);
-            font-family:'Fredoka',sans-serif;
-            font-weight:700;
-            font-size:19px;
-            margin-bottom:30px;
+            display:none;
         }
 
         .oz-card h3{
             font-family:'Fredoka',sans-serif;
-            font-size:25px;
-            margin-bottom:12px;
+            font-size:clamp(31px,3vw,43px);
+            font-weight:700;
+            line-height:.98;
+            letter-spacing:-1.2px;
+            text-align:left;
+            margin:0 0 14px;
+            max-width:420px;
+        }
+
+        .oz-card:first-child h3{
+            font-size:clamp(43px,4.4vw,66px);
+            max-width:480px;
+            letter-spacing:-2px;
         }
 
         .oz-card p{
-            color:var(--gris);
-            font-size:15px;
-            line-height:1.7;
+            color:rgba(255,255,255,.94);
+            font-size:16px;
+            font-weight:600;
+            line-height:1.65;
+            text-align:left;
+            max-width:430px;
+            margin:0;
+        }
+
+        .oz-card:nth-child(2) p{
+            color:#543328;
+        }
+
+        .oz-card:nth-child(2)::before,
+        .oz-card:nth-child(2)::after{
+            color:var(--cafe);
+        }
+
+        .oz-card:nth-child(3)::before,
+        .oz-card:nth-child(3)::after{
+            color:var(--crema);
         }
 
         .oz-cta{
@@ -692,6 +770,28 @@ if (session_status() === PHP_SESSION_NONE) {
 
             .oz-grid{
                 grid-template-columns:1fr;
+                grid-template-rows:auto;
+                gap:14px;
+            }
+
+            .oz-card,
+            .oz-card:first-child{
+                min-height:260px;
+                padding:30px;
+                grid-row:auto;
+                justify-content:center;
+            }
+
+            .oz-card:first-child h3{
+                font-size:clamp(40px,10vw,54px);
+            }
+
+            .oz-card h3{
+                font-size:34px;
+            }
+
+            .oz-card p{
+                font-size:16px;
             }
 
             .oz-cta{
