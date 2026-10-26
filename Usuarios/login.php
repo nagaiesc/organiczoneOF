@@ -857,9 +857,9 @@ Swal.fire({
             <div class="oz-alert-dog-area">
 
                 <img
-                    src="perritoOZ.png"
+                    src="../perritoOZ.png"
                     class="oz-alert-dog"
-                    alt="Perrito Organic Zone"
+                    
                 >
 
             </div>

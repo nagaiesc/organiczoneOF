@@ -134,6 +134,25 @@ body{
     line-height:1.7;
 }
 
+.mascota-lateral{
+    position:relative;
+    z-index:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex:1;
+    min-height:190px;
+    width:100%;
+}
+
+.mascota-lateral img{
+    display:block;
+    width:min(100%, 250px);
+    max-height:245px;
+    object-fit:contain;
+    object-position:center;
+}
+
 .decoracion{
     position:relative;
     z-index:1;
@@ -308,6 +327,15 @@ body{
         line-height:1.65;
     }
 
+    .mascota-lateral{
+        min-height:170px;
+    }
+
+    .mascota-lateral img{
+        width:min(100%, 210px);
+        max-height:190px;
+    }
+
     .decoracion{
         font-size:10px;
         letter-spacing:1.2px;
@@ -399,6 +427,15 @@ body{
         max-width:290px;
         font-size:13px;
         line-height:1.65;
+    }
+
+    .mascota-lateral{
+        min-height:145px;
+    }
+
+    .mascota-lateral img{
+        width:min(100%, 175px);
+        max-height:160px;
     }
 
     .decoracion{
@@ -549,6 +586,10 @@ body{
         </div>
 
        
+    <div class="mascota-lateral">
+              <img src="../beyondjr.png">
+        </div>
+
     </section>
 
     <section class="formulario">
