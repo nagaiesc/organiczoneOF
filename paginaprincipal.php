@@ -425,7 +425,7 @@ if (session_status() === PHP_SESSION_NONE) {
         .oz-card:first-child{
             grid-row:span 2;
             min-height:480px;
-            padding:42px;
+            padding:30px;
             justify-content:flex-end;
             background:var(--verde);
         }
@@ -440,32 +440,37 @@ if (session_status() === PHP_SESSION_NONE) {
             color:white;
         }
 
+        /* Círculos decorativos semitransparentes */
         .oz-card::before{
             content:"";
             position:absolute;
             z-index:-1;
-            width:230px;
-            height:230px;
-            border:1px solid currentColor;
-            border-radius:48% 52% 63% 37% / 43% 39% 61% 57%;
-            right:-95px;
-            top:-105px;
-            opacity:.17;
-            transform:rotate(-24deg);
+            width:190px;
+            height:190px;
+            border-radius:50%;
+            right:-65px;
+            top:-75px;
+            background:rgba(255,255,255,.13);
+            border:0;
+            opacity:1;
+            transform:none;
             transition:transform .35s ease;
+            pointer-events:none;
         }
 
         .oz-card::after{
             content:"";
             position:absolute;
             z-index:-1;
-            width:150px;
-            height:150px;
-            border:1px solid currentColor;
+            width:115px;
+            height:115px;
             border-radius:50%;
-            right:-35px;
-            top:-65px;
-            opacity:.15;
+            right:55px;
+            top:-42px;
+            background:rgba(255,255,255,.09);
+            border:0;
+            opacity:1;
+            pointer-events:none;
         }
 
         .oz-card:hover{
@@ -473,7 +478,7 @@ if (session_status() === PHP_SESSION_NONE) {
         }
 
         .oz-card:hover::before{
-            transform:rotate(0deg) scale(1.08);
+            transform:scale(1.08);
         }
 
         .oz-card-numero{
@@ -511,14 +516,144 @@ if (session_status() === PHP_SESSION_NONE) {
             color:#543328;
         }
 
-        .oz-card:nth-child(2)::before,
-        .oz-card:nth-child(2)::after{
-            color:var(--cafe);
+        /* Círculos verdes con detalles crema */
+        .oz-card:first-child::before{
+            background:rgba(252,208,159,.20);
         }
 
-        .oz-card:nth-child(3)::before,
+        .oz-card:first-child::after{
+            background:rgba(252,208,159,.12);
+        }
+
+        /* Círculos café sobre el fondo crema */
+        .oz-card:nth-child(2)::before{
+            background:rgba(41,20,13,.10);
+        }
+
+        .oz-card:nth-child(2)::after{
+            background:rgba(41,20,13,.07);
+        }
+
+        /* Círculos crema sobre el fondo café */
+        .oz-card:nth-child(3)::before{
+            background:rgba(252,208,159,.14);
+        }
+
         .oz-card:nth-child(3)::after{
-            color:var(--crema);
+            background:rgba(252,208,159,.09);
+        }
+
+        /* =====================================================
+           Imagen de Ingredientes (hamburguesa grande + formas 2D)
+           El alto de la zona de imagen es fijo, así la caja
+           mantiene su tamaño. Si la quieres más alta o baja,
+           cambia el valor de --oz-burger-alto.
+        ===================================================== */
+        .oz-card-imagen{
+            --oz-burger-alto:330px;
+
+            width:100%;
+            height:var(--oz-burger-alto);
+            margin:0 auto 22px;
+            position:relative;
+            z-index:1;
+            flex-shrink:0;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            overflow:visible;
+        }
+
+        .oz-card-imagen img{
+            position:relative;
+            z-index:2;
+            display:block;
+            height:112%;
+            width:auto;
+            max-width:100%;
+            object-fit:contain;
+            border-radius:0;
+            filter:drop-shadow(0 18px 16px rgba(0,0,0,.28));
+            transition:transform .5s cubic-bezier(.34,1.56,.64,1);
+        }
+
+        /* Fondo: círculo grande + círculos de la mitad de tamaño bordeándolo */
+        .oz-orbita{
+            position:absolute;
+            z-index:1;
+            height:100%;
+            aspect-ratio:1 / 1;
+            left:50%;
+            top:50%;
+            transform:translate(-50%,-50%) rotate(0deg);
+            transition:transform .8s cubic-bezier(.34,1.2,.64,1);
+            pointer-events:none;
+        }
+
+        /* Círculo grande (crema) */
+        .oz-circulo{
+            position:absolute;
+            inset:18%;
+            border-radius:50%;
+            background:var(--crema);
+            transition:transform .6s cubic-bezier(.34,1.3,.64,1);
+        }
+
+        /* Círculos satélite: la mitad del tamaño del grande */
+        .oz-satelite{
+            position:absolute;
+            width:32%;
+            aspect-ratio:1 / 1;
+            border-radius:50%;
+            transform:translate(-50%,-50%);
+            transition:transform .6s cubic-bezier(.34,1.3,.64,1);
+        }
+
+        .oz-satelite-1{            /* arriba derecha */
+            left:86.9%;
+            top:24.2%;
+            background:var(--cafe);
+        }
+
+        .oz-satelite-2{            /* arriba izquierda */
+            left:11%;
+            top:27.5%;
+            background:var(--verde-oscuro);
+        }
+
+        .oz-satelite-3{            /* abajo izquierda */
+            left:7.7%;
+            top:65.4%;
+            background:var(--cafe);
+        }
+
+        .oz-satelite-4{            /* abajo derecha */
+            left:81.8%;
+            top:81.8%;
+            background:var(--crema-clara);
+        }
+
+        /* Movimiento al pasar el mouse */
+        .oz-card:first-child:hover .oz-card-imagen img{
+            transform:translateY(-8px) rotate(-3deg) scale(1.05);
+        }
+
+        .oz-card:first-child:hover .oz-orbita{
+            transform:translate(-50%,-50%) rotate(18deg);
+        }
+
+        .oz-card:first-child:hover .oz-circulo{
+            transform:scale(1.06);
+        }
+
+        .oz-card:first-child:hover .oz-satelite{
+            transform:translate(-50%,-50%) scale(1.08);
+        }
+
+        .oz-card:first-child h3,
+        .oz-card:first-child p{
+            position:relative;
+            z-index:1;
         }
 
         .oz-cta{
@@ -718,6 +853,14 @@ if (session_status() === PHP_SESSION_NONE) {
             .oz-cta-caja h2{
                 font-size:44px;
             }
+
+            .oz-card-imagen{
+                --oz-burger-alto:270px;
+            }
+
+            .oz-card:first-child{
+                padding:25px;
+            }
         }
 
         @media(max-width:700px){
@@ -780,6 +923,15 @@ if (session_status() === PHP_SESSION_NONE) {
                 padding:30px;
                 grid-row:auto;
                 justify-content:center;
+            }
+
+            .oz-card:first-child{
+                padding:28px;
+            }
+
+            .oz-card-imagen{
+                --oz-burger-alto:290px;
+                margin:0 auto 22px;
             }
 
             .oz-card:first-child h3{
@@ -845,6 +997,19 @@ if (session_status() === PHP_SESSION_NONE) {
 
             .oz-cta-caja h2{
                 font-size:38px;
+            }
+
+            .oz-card-imagen{
+                --oz-burger-alto:250px;
+                margin-bottom:20px;
+            }
+
+            .oz-card:first-child{
+                padding:24px;
+            }
+
+            .oz-card:first-child h3{
+                font-size:42px;
             }
         }
 
@@ -1072,6 +1237,25 @@ if (session_status() === PHP_SESSION_NONE) {
 
                 <div class="oz-card-numero">
                     01
+                </div>
+
+                <div class="oz-card-imagen">
+
+                    <!-- Fondo decorativo: círculo grande + 4 círculos satélite -->
+                    <div class="oz-orbita">
+                        <span class="oz-circulo"></span>
+                        <span class="oz-satelite oz-satelite-1"></span>
+                        <span class="oz-satelite oz-satelite-2"></span>
+                        <span class="oz-satelite oz-satelite-3"></span>
+                        <span class="oz-satelite oz-satelite-4"></span>
+                    </div>
+
+                    <img
+                        src="ozburger.png"
+                        alt="Ingredientes frescos de Organic Zone"
+                        loading="lazy"
+                    >
+
                 </div>
 
                 <h3>

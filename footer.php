@@ -556,11 +556,12 @@
         </div>
 
         <div class="oz-footer-bottom">
-
             <div class="oz-footer-logo">
 
                 <div class="oz-footer-logo-imagen">
-                    <img src="logoOz.png" alt="Logo de Organic Zone">
+                    <img 
+                    src="logoOz.png" 
+                    alt="Logo de Organic Zone">
                 </div>
 
                 <div class="oz-footer-logo-marca">

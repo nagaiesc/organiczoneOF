@@ -33,7 +33,7 @@ html{
 
 body{
     margin:0;
-    background:#eef0ed;
+    background:#fff4e2;
     font-family:'Fredoka', Arial, sans-serif;
     color:#2B140D;
     overflow-x:hidden;
@@ -88,7 +88,7 @@ body{
     gap:9px;
     padding:9px 18px;
     background:#2B140D;
-    color:#FCD09F;
+    color:#FFD57A;
     border-radius:50px;
     font-size:13px;
     font-weight:700;
@@ -340,10 +340,6 @@ body{
         font-size:17px;
     }
 
-    .numero{
-        font-size:120px;
-    }
-
     .frase{
         margin-top:60px;
     }
@@ -451,13 +447,6 @@ body{
         font-size:15.5px;
         line-height:1.65;
     }
-
-    .numero{
-        font-size:95px;
-        right:14px;
-        bottom:-16px;
-    }
-
     .frase{
         width:88%;
         margin-top:40px;
@@ -533,7 +522,7 @@ body{
         </span>
 
         <h1>
-            About <span>Us</span>
+            Sobre <span>Nosotros</span>
         </h1>
 
         <p class="about-intro">
@@ -549,10 +538,6 @@ body{
 
 
         <article class="bloque bloque-mision">
-
-            <span class="numero">
-                01
-            </span>
 
             <div class="bloque-superior">
 
@@ -580,10 +565,6 @@ body{
 
 
         <article class="bloque bloque-vision">
-
-            <span class="numero">
-                02
-            </span>
 
             <div class="bloque-superior">
 

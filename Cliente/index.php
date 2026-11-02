@@ -82,6 +82,161 @@ function obtenerImagenProducto(int $id): string
 
     return '../Imagenes/predeterminado.png';
 }
+
+
+/* =========================================================
+   INFORMACIÓN NUTRICIONAL POR PRODUCTO
+   ---------------------------------------------------------
+   "claves" son palabras que se buscan dentro del NOMBRE del
+   producto (da igual mayúsculas o tildes). El primer grupo
+   que coincida es el que se usa.
+
+   OJO: los valores de papas y de Beyond son ESTIMACIONES de
+   referencia. Cámbialos por los datos reales de tu cocina.
+   ========================================================= */
+
+$nutricion = [
+
+    [
+        'claves'        => ['doble', 'double'],
+        'porcion'       => '1 unidad (aprox. 380 g)',
+        'kcal'          => 730,
+        'proteinas'     => 45,
+        'carbohidratos' => 42,
+        'azucares'      => 8,
+        'grasas'        => 42,
+        'saturadas'     => 17,
+        'fibra'         => 3,
+        'sodio'         => 1150
+    ],
+
+    [
+        'claves'        => ['vegana', 'vegano', 'vegetariana', 'veggie', 'lenteja', 'garbanzo', 'beyond'],
+        'porcion'       => '1 unidad (aprox. 270 g)',
+        'kcal'          => 420,
+        'proteinas'     => 18,
+        'carbohidratos' => 52,
+        'azucares'      => 8,
+        'grasas'        => 16,
+        'saturadas'     => 3,
+        'fibra'         => 9,
+        'sodio'         => 640
+    ],
+
+    [
+        'claves'        => ['clasica', 'clasico', 'simple', 'hamburguesa', 'burger', 'burguer'],
+        'porcion'       => '1 unidad (aprox. 260 g)',
+        'kcal'          => 520,
+        'proteinas'     => 30,
+        'carbohidratos' => 40,
+        'azucares'      => 7,
+        'grasas'        => 26,
+        'saturadas'     => 10,
+        'fibra'         => 3,
+        'sodio'         => 880
+    ],
+
+    [
+        'claves'        => ['fries', 'papas', 'papa'],
+        'porcion'       => '1 porción (aprox. 150 g)',
+        'kcal'          => 410,
+        'proteinas'     => 5,
+        'carbohidratos' => 48,
+        'azucares'      => 1,
+        'grasas'        => 22,
+        'saturadas'     => 3,
+        'fibra'         => 5,
+        'sodio'         => 520
+    ]
+
+];
+
+/* Valor diario de referencia (dieta de 2.000 kcal) */
+$valorDiario = [
+    'proteinas'     => 50,
+    'carbohidratos' => 275,
+    'grasas'        => 78,
+    'saturadas'     => 20,
+    'fibra'         => 28,
+    'sodio'         => 2300
+];
+
+/* Filas de cada tabla: etiqueta, clave, unidad, ¿es subfila? */
+$filasNutricion = [
+    ['Proteínas',              'proteinas',     'g',  false],
+    ['Carbohidratos',          'carbohidratos', 'g',  false],
+    ['De los cuales azúcares', 'azucares',      'g',  true],
+    ['Grasas totales',         'grasas',        'g',  false],
+    ['Saturadas',              'saturadas',     'g',  true],
+    ['Fibra',                  'fibra',         'g',  false],
+    ['Sodio',                  'sodio',         'mg', false]
+];
+
+/**
+ * Escapa texto para mostrarlo seguro en HTML.
+ *
+ * @param string $texto
+ * @return string
+ */
+function h($texto)
+{
+    return htmlspecialchars((string) $texto, ENT_QUOTES, 'UTF-8');
+}
+
+/**
+ * Pasa a minúsculas y quita tildes para comparar nombres.
+ *
+ * @param string $texto
+ * @return string
+ */
+function normalizarNombre($texto)
+{
+    $texto = strtr((string) $texto, [
+        'Á' => 'a', 'É' => 'e', 'Í' => 'i', 'Ó' => 'o', 'Ú' => 'u', 'Ñ' => 'n',
+        'á' => 'a', 'é' => 'e', 'í' => 'i', 'ó' => 'o', 'ú' => 'u', 'ü' => 'u', 'ñ' => 'n'
+    ]);
+
+    return strtolower(trim($texto));
+}
+
+/**
+ * Busca el grupo nutricional que corresponde al nombre del producto.
+ *
+ * @param string $nombre
+ * @param array  $nutricion
+ * @return array|null
+ */
+function buscarNutricion($nombre, $nutricion)
+{
+    $nombre = normalizarNombre($nombre);
+
+    foreach ($nutricion as $item) {
+
+        foreach ($item['claves'] as $clave) {
+
+            if (strpos($nombre, normalizarNombre($clave)) !== false) {
+                return $item;
+            }
+
+        }
+
+    }
+
+    return null;
+}
+
+/**
+ * Formatea un número (sin decimales si es entero).
+ *
+ * @param int|float $valor
+ * @return string
+ */
+function formatoNumero($valor)
+{
+    $decimales = ($valor == (int) $valor) ? 0 : 1;
+
+    return number_format((float) $valor, $decimales, ',', '.');
+}
 ?>
 
 <!DOCTYPE html>
@@ -109,11 +264,11 @@ function obtenerImagenProducto(int $id): string
     >
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap"
         rel="stylesheet"
     >
 
-    <link rel="stylesheet" href="css/cliente.css">
+    <link rel="stylesheet" href="css/cliente.css?v=<?= (int) @filemtime(__DIR__ . '/css/cliente.css') ?>">
 
 </head>
 
@@ -315,13 +470,17 @@ function obtenerImagenProducto(int $id): string
 
         </div>
 
-        <div class="productos-grid">
+        <div class="productos">
 
             <?php if ($resultadoProductos && $resultadoProductos->num_rows > 0): ?>
+
+                <?php $numero = 0; ?>
 
                 <?php while ($producto = $resultadoProductos->fetch_assoc()): ?>
 
                     <?php
+
+                    $numero++;
 
                     $idProducto = (int) $producto['id'];
 
@@ -331,67 +490,226 @@ function obtenerImagenProducto(int $id): string
 
                     $imagen = obtenerImagenProducto($idProducto);
 
+                    /* Información nutricional de este producto */
+                    $info = buscarNutricion($producto['nombre'], $nutricion);
+
+                    /* Valores iniciales (evita el aviso "undefined variable") */
+                    $pctProteinas     = 0;
+                    $pctCarbohidratos = 0;
+                    $pctGrasas        = 0;
+
+                    if ($info) {
+
+                        $kcalProteinas     = $info['proteinas'] * 4;
+                        $kcalCarbohidratos = $info['carbohidratos'] * 4;
+                        $kcalGrasas        = $info['grasas'] * 9;
+
+                        $kcalTotal = $kcalProteinas + $kcalCarbohidratos + $kcalGrasas;
+
+                        if ($kcalTotal < 1) {
+                            $kcalTotal = 1;
+                        }
+
+                        $pctProteinas     = (int) round($kcalProteinas * 100 / $kcalTotal);
+                        $pctCarbohidratos = (int) round($kcalCarbohidratos * 100 / $kcalTotal);
+                        $pctGrasas        = 100 - $pctProteinas - $pctCarbohidratos;
+
+                    }
+
                     ?>
 
-                    <article class="producto-card">
+                    <article class="carta producto-card">
 
-                        <div class="producto-imagen-wrap">
+                        <div class="imagen">
+
+                            <span class="etiqueta-producto">
+                                ORGANIC ZONE
+                            </span>
+
+                            <span class="numero-producto">
+                                <?= str_pad((string) $numero, 2, '0', STR_PAD_LEFT) ?>
+                            </span>
 
                             <img
-                                src="<?= htmlspecialchars($imagen) ?>"
-                                alt="<?= htmlspecialchars($producto['nombre']) ?>"
+                                src="<?= h($imagen) ?>"
+                                alt="<?= h($producto['nombre']) ?>"
                             >
-
-                            <?php if ($sinStock): ?>
-
-                                <span class="etiqueta-stock sin-stock">
-                                    Sin stock
-                                </span>
-
-                            <?php else: ?>
-
-                                <span class="etiqueta-stock">
-                                    Stock: <?= $stockProducto ?>
-                                </span>
-
-                            <?php endif; ?>
 
                         </div>
 
-                        <div class="producto-info">
+
+                        <div class="informacion">
 
                             <h3>
-                                <?= htmlspecialchars($producto['nombre']) ?>
+                                <?= h($producto['nombre']) ?>
                             </h3>
 
-                            <p>
-                                <?= htmlspecialchars($producto['descripcion']) ?>
+                            <p class="descripcion">
+                                <?= h($producto['descripcion']) ?>
                             </p>
 
-                            <div class="producto-pie">
 
-                                <strong>
-                                    Bs.
-                                    <?= number_format(
-                                        (float) $producto['precio'],
-                                        0,
-                                        ',',
-                                        '.'
-                                    ) ?>
-                                </strong>
+                            <div class="parte-inferior">
 
-                                <button
-                                    type="button"
-                                    class="boton-agregar"
-                                    data-producto-id="<?= $idProducto ?>"
-                                    <?= (
-                                        $pedidoId <= 0 ||
-                                        $pedidoConfirmado ||
-                                        $sinStock
-                                    ) ? 'disabled' : '' ?>
-                                >
-                                    Agregar
-                                </button>
+                                <div class="precio-contenedor">
+
+                                    <span class="precio-label">
+                                        Precio
+                                    </span>
+
+                                    <span class="precio">
+
+                                        <small>Bs.</small><?= number_format((float) $producto['precio'], 0, ',', '.') ?>
+
+                                    </span>
+
+                                </div>
+
+
+                                <?php if (!$sinStock): ?>
+
+                                    <span class="disponible">
+                                        Disponible
+                                    </span>
+
+                                <?php else: ?>
+
+                                    <span class="disponible agotado sin-stock">
+                                        Agotado
+                                    </span>
+
+                                <?php endif; ?>
+
+                            </div>
+
+
+                            <!-- ===== Botón agregar al carrito ===== -->
+
+                            <button
+                                type="button"
+                                class="boton-agregar"
+                                data-producto-id="<?= $idProducto ?>"
+                                <?= (
+                                    $pedidoId <= 0 ||
+                                    $pedidoConfirmado ||
+                                    $sinStock
+                                ) ? 'disabled' : '' ?>
+                            >
+                                Agregar
+                            </button>
+
+
+                            <!-- ===== Botón + información nutricional ===== -->
+
+                            <button
+                                type="button"
+                                class="btn-nutri"
+                                aria-expanded="false"
+                                aria-controls="nutri-<?= $idProducto ?>"
+                            >
+
+                                <span class="btn-nutri-texto">Ver información nutricional</span>
+
+                                <span class="btn-nutri-icono">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                         stroke="currentColor" stroke-width="3.2"
+                                         stroke-linecap="round" stroke-linejoin="round"
+                                         aria-hidden="true">
+                                        <path d="M6 9l6 6 6-6"/>
+                                    </svg>
+                                </span>
+
+                            </button>
+
+
+                            <div class="nutri-desplegable" id="nutri-<?= $idProducto ?>" aria-hidden="true">
+
+                                <div class="nutri-contenido">
+
+                                    <?php if ($info): ?>
+
+                                        <span class="nutri-etiqueta">INFORMACIÓN NUTRICIONAL</span>
+
+                                        <span class="nutri-porcion">
+                                            Porción: <?= h($info['porcion']) ?>
+                                        </span>
+
+                                        <div class="nutri-kcal">
+                                            <strong><?= formatoNumero($info['kcal']) ?></strong>
+                                            <span>kcal</span>
+                                        </div>
+
+                                        <span class="nutri-barra-titulo">
+                                            De dónde vienen las calorías
+                                        </span>
+
+                                        <div class="nutri-barra">
+                                            <span class="seg-proteinas"     style="width: <?= $pctProteinas ?>%"></span>
+                                            <span class="seg-carbohidratos" style="width: <?= $pctCarbohidratos ?>%"></span>
+                                            <span class="seg-grasas"        style="width: <?= $pctGrasas ?>%"></span>
+                                        </div>
+
+                                        <ul class="nutri-leyenda">
+                                            <li class="l-proteinas">Proteínas <?= $pctProteinas ?>%</li>
+                                            <li class="l-carbohidratos">Carbohidratos <?= $pctCarbohidratos ?>%</li>
+                                            <li class="l-grasas">Grasas <?= $pctGrasas ?>%</li>
+                                        </ul>
+
+                                        <ul class="nutri-filas">
+
+                                            <li class="nutri-fila cabecera-filas">
+                                                <span>Por porción</span>
+                                                <span></span>
+                                                <span>% VD</span>
+                                            </li>
+
+                                            <?php foreach ($filasNutricion as $filaN): ?>
+
+                                                <?php
+
+                                                list($etiqueta, $clave, $unidad, $esSubfila) = $filaN;
+
+                                                $valor = $info[$clave];
+
+                                                $porcentajeVD = '';
+
+                                                if (isset($valorDiario[$clave])) {
+                                                    $porcentajeVD = round($valor * 100 / $valorDiario[$clave]) . '%';
+                                                }
+
+                                                ?>
+
+                                                <li class="nutri-fila<?= $esSubfila ? ' sub' : '' ?>">
+
+                                                    <span class="nutri-nombre"><?= h($etiqueta) ?></span>
+
+                                                    <span class="nutri-valor"><?= formatoNumero($valor) ?><small><?= $unidad ?></small></span>
+
+                                                    <span class="nutri-vd"><?= $porcentajeVD ?></span>
+
+                                                </li>
+
+                                            <?php endforeach; ?>
+
+                                        </ul>
+
+                                        <p class="nutri-nota">
+                                            Valores de referencia por porción; pueden variar según la preparación.
+                                            % VD: porcentaje del valor diario en una dieta de 2.000 kcal.
+                                        </p>
+
+                                    <?php else: ?>
+
+                                        <span class="nutri-etiqueta">INFORMACIÓN NUTRICIONAL</span>
+
+                                        <p class="nutri-vacio" style="margin-top: 12px;">
+                                            La información nutricional de este producto
+                                            estará disponible muy pronto.
+                                        </p>
+
+                                    <?php endif; ?>
+
+                                </div>
 
                             </div>
 
@@ -818,6 +1136,76 @@ $(document).ready(function () {
 }
 
 </style>
+
+<!-- Desplegable de información nutricional -->
+<script>
+
+(function () {
+
+    var botones = document.querySelectorAll('.btn-nutri');
+
+    function alternar(boton) {
+
+        var panel = document.getElementById(boton.getAttribute('aria-controls'));
+        var texto = boton.querySelector('.btn-nutri-texto');
+        var abierto = boton.getAttribute('aria-expanded') === 'true';
+
+        if (abierto) {
+
+            boton.setAttribute('aria-expanded', 'false');
+            boton.classList.remove('abierto');
+            panel.setAttribute('aria-hidden', 'true');
+            panel.style.maxHeight = '0px';
+            texto.textContent = 'Ver información nutricional';
+
+        } else {
+
+            boton.setAttribute('aria-expanded', 'true');
+            boton.classList.add('abierto');
+            panel.setAttribute('aria-hidden', 'false');
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+            texto.textContent = 'Ocultar información nutricional';
+
+            // Si el panel queda cortado abajo, lo acerca a la vista
+            setTimeout(function () {
+
+                var caja = panel.getBoundingClientRect();
+
+                if (caja.bottom > window.innerHeight) {
+                    window.scrollBy(0, caja.bottom - window.innerHeight + 24);
+                }
+
+            }, 520);
+
+        }
+
+    }
+
+    for (var i = 0; i < botones.length; i++) {
+
+        botones[i].addEventListener('click', function () {
+            alternar(this);
+        });
+
+    }
+
+    // Si cambia el ancho de la pantalla, recalcula la altura de los paneles abiertos
+    window.addEventListener('resize', function () {
+
+        var abiertos = document.querySelectorAll('.btn-nutri.abierto');
+
+        for (var j = 0; j < abiertos.length; j++) {
+
+            var panel = document.getElementById(abiertos[j].getAttribute('aria-controls'));
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+
+        }
+
+    });
+
+})();
+
+</script>
 
 <script src="js/cliente.js"></script>
 

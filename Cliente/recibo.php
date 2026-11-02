@@ -59,19 +59,21 @@ $conexion->close();
     <title>Comprobante #<?= $pedidoId ?> | Organic Zone</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
 
         :root {
             --verde: #12A33C;
             --verde-oscuro: #0A4A1B;
+            --verde-claro: #EAF7EC;
             --cafe: #2B140D;
             --crema: #FCD09F;
             --fondo: #F5EEE3;
+            --papel: #F8F4EC;
         }
 
         * {
-            box-sizing: border-box
+            box-sizing: border-box;
         }
 
         body {
@@ -79,8 +81,12 @@ $conexion->close();
             background: var(--fondo);
             font-family: 'Nunito', sans-serif;
             color: var(--cafe);
-            padding: 35px 20px
+            padding: 35px 20px;
         }
+
+        /* =====================================================
+           TARJETA (plana, sin sombras ni bordes)
+           ===================================================== */
 
         .comprobante {
             width: min(850px, 100%);
@@ -88,19 +94,44 @@ $conexion->close();
             background: white;
             border-radius: 42px;
             overflow: hidden;
-            box-shadow: 0 18px 45px rgba(43, 20, 13, .14)
         }
 
+        /* =====================================================
+           CABECERA
+           ===================================================== */
+
         .cabecera {
+            position: relative;
+            overflow: hidden;
             background: var(--verde);
             color: white;
             padding: 42px 48px;
             display: flex;
             justify-content: space-between;
             gap: 20px;
-            align-items: end
+            align-items: end;
         }
 
+        /* Un solo círculo plano de adorno */
+        .cabecera::before {
+            content: "";
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            right: -80px;
+            top: -120px;
+            border-radius: 50%;
+            background: var(--crema);
+            opacity: .25;
+        }
+
+        .marca,
+        .numero {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* My Oz: igual que el original */
         .marca {
             font-family: 'Fredoka', sans-serif;
             font-size: 78px;
@@ -112,76 +143,127 @@ $conexion->close();
         .marca span {
             display: block;
             font-size: 18px;
-            color: var(--crema)
+            color: var(--crema);
         }
 
         .numero {
-            text-align: right
+            text-align: right;
+            padding: 12px 24px;
+            border-radius: 100px;
+            background: var(--verde-oscuro);
         }
 
         .numero small {
             display: block;
-            opacity: .8
+            opacity: .8;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 2px;
         }
 
         .numero strong {
             font-family: 'Fredoka', sans-serif;
-            font-size: 32px
+            font-size: 30px;
+            line-height: 1.1;
         }
 
+        /* =====================================================
+           CONTENIDO
+           ===================================================== */
+
         .contenido {
-            padding: 42px 48px
+            padding: 38px 48px 42px;
         }
 
         .estado {
-            display: inline-block;
-            padding: 10px 15px;
-            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 10px 18px;
+            border-radius: 100px;
             background: #fff1d9;
             color: #8b5b13;
             font-weight: 900;
-            margin-bottom: 25px
+            margin-bottom: 26px;
         }
+
+        .estado::before {
+            content: "";
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #e0a02b;
+        }
+
+        /* ---------- Datos ---------- */
 
         .datos {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 35px
+            gap: 14px;
+            margin-bottom: 34px;
         }
 
-        .dato span {
+        .dato {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+            gap: 4px 14px;
+            padding: 16px 20px 16px 16px;
+            background: var(--papel);
+            border-radius: 26px;
+        }
+
+        .ico {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--verde-claro);
+            color: var(--verde);
+        }
+
+        .ico svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .dato-texto {
+            min-width: 0;
+        }
+
+        .dato-texto span {
             display: block;
+            margin-bottom: 2px;
             color: #858078;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 1px
+            letter-spacing: 1px;
         }
 
-        .dato strong {
-            font-size: 17px
+        .dato-texto strong {
+            display: block;
+            font-size: 17px;
+            overflow-wrap: anywhere;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse
+        .dato.ancho {
+            grid-column: 1 / -1;
         }
 
-        th {
-            text-align: left;
-            padding: 12px 0;
-            border-bottom: 2px solid var(--cafe)
-        }
-
-        td {
-            padding: 15px 0;
-            border-bottom: 1px solid #eee8df
-        }
-
-        td:last-child,
-        th:last-child {
-            text-align: right
+        /* QR del comprobante (dentro de Método de pago) */
+        .qr-comprobante {
+            grid-column: 1 / -1;
+            margin-top: 12px;
+            text-align: center;
         }
 
         .codigo-qr {
@@ -189,20 +271,90 @@ $conexion->close();
             width: 150px;
             height: 150px;
             object-fit: contain;
-            margin: 15px auto 0;
-            border-radius: 12px;
+            margin: 0 auto;
+            padding: 10px;
+            background: white;
+            border-radius: 22px;
         }
+
+        /* ---------- Tabla ---------- */
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 6px;
+        }
+
+        thead th {
+            padding: 13px 16px;
+            background: var(--cafe);
+            color: var(--crema);
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            text-align: left;
+        }
+
+        thead th:first-child {
+            padding-left: 24px;
+            border-radius: 100px 0 0 100px;
+        }
+
+        thead th:last-child {
+            padding-right: 24px;
+            border-radius: 0 100px 100px 0;
+            text-align: right;
+        }
+
+        tbody td {
+            padding: 15px 16px;
+            background: var(--papel);
+        }
+
+        tbody td:first-child {
+            padding-left: 24px;
+            border-radius: 100px 0 0 100px;
+            font-weight: 800;
+        }
+
+        tbody td:last-child {
+            padding-right: 24px;
+            border-radius: 0 100px 100px 0;
+            text-align: right;
+            font-weight: 900;
+        }
+
+        th:nth-child(2),
+        td:nth-child(2) {
+            text-align: center;
+        }
+
+        .cant {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 34px;
+            height: 34px;
+            padding: 0 10px;
+            border-radius: 100px;
+            background: var(--crema);
+            color: var(--cafe);
+            font-weight: 900;
+        }
+
+        /* ---------- QR de pago ---------- */
 
         .qr-pago {
             text-align: center;
-            margin: 30px 0 10px;
-            padding: 25px;
-            border-radius: 20px;
-            border: 1px solid #161615;
+            margin: 28px 0 26px;
+            padding: 26px 25px;
+            border-radius: 30px;
+            background: var(--verde-claro);
         }
 
         .qr-pago p {
-            margin: 0 0 15px;
+            margin: 0 0 16px;
             font-weight: 800;
             color: var(--cafe);
             font-size: 15px;
@@ -212,64 +364,140 @@ $conexion->close();
             width: 170px;
             height: 170px;
             object-fit: contain;
+            padding: 12px;
+            background: white;
+            border-radius: 24px;
         }
+
+        /* ---------- Total ---------- */
 
         .total {
             display: flex;
-            justify-content: flex-end;
-            gap: 30px;
-            font-size: 26px;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 20px 36px;
+            border-radius: 100px;
+            background: var(--cafe);
+            color: var(--crema);
+        }
+
+        .total span {
+            font-size: 14px;
             font-weight: 900;
-            padding-top: 22px
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .total strong {
-            color: var(--verde)
+            font-family: 'Fredoka', sans-serif;
+            font-size: 36px;
+            line-height: 1;
+            color: white;
         }
+
+        /* ---------- Botones ---------- */
 
         .acciones {
             display: flex;
             justify-content: center;
             gap: 12px;
             margin-top: 30px;
-            flex-wrap: wrap
+            flex-wrap: wrap;
         }
 
         .acciones a {
-            padding: 13px 20px;
-            border-radius: 17px;
+            padding: 14px 26px;
+            border-radius: 100px;
             text-decoration: none;
-            font-weight: 900
+            font-weight: 900;
+            transition: transform .2s ease;
+        }
+
+        .acciones a:hover {
+            transform: translateY(-2px);
         }
 
         .verde {
             background: var(--verde);
-            color: white
+            color: white;
         }
 
         .cafe {
             background: var(--cafe);
-            color: white
+            color: white;
         }
 
-        @media(max-width:600px) {
+        .gracias {
+            margin: 28px 0 0;
+            text-align: center;
+            color: #858078;
+            font-size: 13px;
+            font-weight: 800;
+        }
 
-            .cabecera,
-            .contenido {
-                padding: 30px 25px
-            }
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 600px) {
 
             .cabecera {
+                padding: 30px 25px;
                 flex-direction: column;
-                align-items: start
+                align-items: start;
+            }
+
+            .contenido {
+                padding: 28px 25px 32px;
             }
 
             .numero {
-                text-align: left
+                text-align: left;
             }
 
             .datos {
-                grid-template-columns: 1fr
+                grid-template-columns: 1fr;
+            }
+
+            thead th,
+            tbody td {
+                padding: 12px 8px;
+            }
+
+            thead th:first-child,
+            tbody td:first-child {
+                padding-left: 16px;
+            }
+
+            thead th:last-child,
+            tbody td:last-child {
+                padding-right: 16px;
+            }
+
+            tbody td {
+                font-size: 14px;
+            }
+
+            .total {
+                padding: 18px 26px;
+            }
+
+            .total strong {
+                font-size: 28px;
+            }
+
+        }
+
+        @media print {
+
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .acciones {
+                display: none;
             }
 
         }
@@ -282,7 +510,9 @@ $conexion->close();
 <body>
 
 <div class="comprobante">
+
     <header class="cabecera">
+
         <div class="marca">
             <span>My</span>Oz
         </div>
@@ -291,9 +521,11 @@ $conexion->close();
             <small>COMPROBANTE</small>
             <strong>#<?= $pedidoId ?></strong>
         </div>
+
     </header>
 
     <main class="contenido">
+
         <div class="estado">
             Estado: <?= htmlspecialchars($pedido['estado']) ?>
         </div>
@@ -302,59 +534,106 @@ $conexion->close();
 
             <div class="dato">
 
-                <span>Cliente</span>
+                <span class="ico">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </span>
 
-                <strong>
-                    <?= htmlspecialchars($pedido['nombre']) ?>
-                </strong>
+                <div class="dato-texto">
+                    <span>Cliente</span>
 
+                    <strong>
+                        <?= htmlspecialchars($pedido['nombre']) ?>
+                    </strong>
+                </div>
 
             </div>
 
             <div class="dato">
-                <span>Fecha</span>
 
-                <strong>
-                    <?= htmlspecialchars($pedido['fecha']) ?>
-                </strong>
+                <span class="ico">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="4" width="18" height="18" rx="2"/>
+                        <path d="M16 2v4M8 2v4M3 10h18"/>
+                    </svg>
+                </span>
+
+                <div class="dato-texto">
+                    <span>Fecha</span>
+
+                    <strong>
+                        <?= htmlspecialchars($pedido['fecha']) ?>
+                    </strong>
+                </div>
+
             </div>
-
 
             <div class="dato">
 
-                <span>Teléfono</span>
+                <span class="ico">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                </span>
 
-                <strong>
-                    <?= htmlspecialchars($pedido['telefono']) ?>
-                </strong>
+                <div class="dato-texto">
+                    <span>Teléfono</span>
+
+                    <strong>
+                        <?= htmlspecialchars($pedido['telefono']) ?>
+                    </strong>
+                </div>
 
             </div>
 
-
             <div class="dato">
 
-                <span>Método de pago</span>
+                <span class="ico">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="1" y="4" width="22" height="16" rx="2"/>
+                        <path d="M1 10h22"/>
+                    </svg>
+                </span>
 
-                <strong>
-                    <?= htmlspecialchars($pedido['metodo']) ?>
-                </strong>
+                <div class="dato-texto">
+                    <span>Método de pago</span>
+
+                    <strong>
+                        <?= htmlspecialchars($pedido['metodo']) ?>
+                    </strong>
+                </div>
 
                 <!-- QR DEL COMPROBANTE: SE GENERA AUTOMÁTICAMENTE -->
-                <img
-                    class="codigo-qr"
-                    src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=<?= urlencode('http://localhost/organiczoneOF/comprobante.php?id=' . $pedidoId) ?>"
-                    alt="Código QR del comprobante"
-                >
+                <div class="qr-comprobante">
+
+                    <img
+                        class="codigo-qr"
+                        src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=<?= urlencode('http://localhost/organiczoneOF/comprobante.php?id=' . $pedidoId) ?>"
+                        alt="Código QR del comprobante"
+                    >
+
+                </div>
 
             </div>
 
-            <div class="dato" style="grid-column:1/-1">
+            <div class="dato ancho">
 
-                <span>Dirección</span>
+                <span class="ico">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </span>
 
-                <strong>
-                    <?= htmlspecialchars($pedido['direccion']) ?>
-                </strong>
+                <div class="dato-texto">
+                    <span>Dirección</span>
+
+                    <strong>
+                        <?= htmlspecialchars($pedido['direccion']) ?>
+                    </strong>
+                </div>
 
             </div>
 
@@ -377,7 +656,7 @@ $conexion->close();
                         <?= htmlspecialchars($item['nombre']) ?>
                     </td>
                     <td>
-                        <?= $item['cantidad'] ?>
+                        <span class="cant"><?= $item['cantidad'] ?></span>
                     </td>
                     <td>
                         Bs. <?= number_format($item['precio'], 0, ',', '.') ?>
@@ -425,7 +704,11 @@ $conexion->close();
                 Nueva compra
             </a>
         </div>
+
+        <p class="gracias">¡Gracias por tu compra!</p>
+
     </main>
+
 </div>
 </body>
 </html>

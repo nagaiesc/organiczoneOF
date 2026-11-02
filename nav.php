@@ -782,7 +782,7 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
 
             <a href="#">
 
-                About Us
+                Búscanos
 
             </a>
 

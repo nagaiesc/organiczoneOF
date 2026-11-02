@@ -26,6 +26,10 @@ button { cursor: pointer; }
 
 a { color: inherit; }
 
+/* =====================================================
+   BARRA SUPERIOR
+   ===================================================== */
+
 .barra-cliente {
     width: min(1280px, 92%);
     height: 76px;
@@ -93,26 +97,11 @@ a { color: inherit; }
 
 .usuario-mini span { font-size: 12px; opacity: .85; }
 .usuario-mini strong { font-size: 15px; }
+
 .boton-carrito {
     width: 47px;
     height: 47px;
     min-width: 47px;
-    border: none;
-    border-radius: 50%;
-    background: #2B140D;
-    color: #FCD09F;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    flex-shrink: 0;
-}
-.boton-carrito {
-    width: 47px;
-    height: 47px;
     border: none;
     border-radius: 50%;
     background: var(--cafe);
@@ -122,6 +111,7 @@ a { color: inherit; }
     align-items: center;
     justify-content: center;
     padding: 0;
+    margin: 0;
     cursor: pointer;
     flex-shrink: 0;
     font-family: Arial, sans-serif;
@@ -160,6 +150,7 @@ a { color: inherit; }
     padding: 0;
     margin: 0;
 }
+
 .boton-salir {
     background: var(--crema);
     color: var(--cafe);
@@ -168,6 +159,10 @@ a { color: inherit; }
     text-decoration: none;
     font-weight: 900;
 }
+
+/* =====================================================
+   CONTENEDOR + HERO
+   ===================================================== */
 
 .contenedor-principal {
     width: min(1280px, 92%);
@@ -261,6 +256,10 @@ a { color: inherit; }
 .pedido-activo strong { font-size: 20px; }
 .pedido-activo small { align-self: center; color: var(--crema); font-weight: 800; }
 
+/* =====================================================
+   SECCIÓN PRODUCTOS (título + estado)
+   ===================================================== */
+
 .seccion-productos { margin-top: 70px; }
 
 .titulo-seccion {
@@ -302,85 +301,553 @@ a { color: inherit; }
 
 .punto.bloqueado { background: #a7a39a; }
 
-.productos-grid {
+/* =====================================================
+   TARJETAS DE PRODUCTOS (mismo diseño que el menú)
+   Los colores van dentro de .productos para no afectar
+   al resto de la página.
+   ===================================================== */
+
+.productos {
+    --verde: #0BA84A;
+    --verde-oscuro: #087A36;
+    --verde-suave: #E5F7EA;
+    --cafe: #2B140D;
+    --cafe-2: #3A1E13;
+    --crema: #FCD09F;
+    --amarillo: #FFD57A;
+    --rojo: #D62828;
+
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 25px;
+    align-items: start;
+    gap: 28px;
 }
 
-.producto-card {
-    background: white;
-    border-radius: 32px;
-    overflow: hidden;
-    box-shadow: 0 8px 28px rgba(43,20,13,.08);
-    transition: .2s;
-}
-
-.producto-card:hover { transform: translateY(-5px); }
-
-.producto-imagen-wrap {
-    height: 245px;
-    background: var(--verde-claro);
+.carta {
     position: relative;
     overflow: hidden;
+    background: white;
+    border-radius: 38px;
+    border: 1px solid rgba(43,20,13,.055);
+    box-shadow: 0 14px 38px rgba(43,20,13,.08);
+    transition: transform .35s ease, box-shadow .35s ease;
 }
 
-.producto-imagen-wrap img {
+.carta:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 28px 55px rgba(43,20,13,.15);
+}
+
+.carta .imagen {
+    position: relative;
+    aspect-ratio: 1587 / 2245;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            #ffffff 0%,
+            #edf7ef 60%,
+            #dcefe1 100%
+        );
+}
+
+.carta .imagen::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    width: 250px;
+    height: 250px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 50%;
+    background: rgba(11,168,74,.10);
+}
+
+.carta .imagen::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 70%, rgba(43,20,13,.10));
+    pointer-events: none;
+}
+
+.carta .imagen img {
+    position: relative;
+    z-index: 3;
     width: 100%;
     height: 100%;
+    display: block;
     object-fit: cover;
+    transition: transform .6s cubic-bezier(.2,.8,.2,1);
 }
 
-.etiqueta-stock {
+.carta:hover .imagen img {
+    transform: scale(1.08);
+}
+
+.etiqueta-producto {
     position: absolute;
-    top: 14px;
-    left: 14px;
-    padding: 8px 12px;
-    border-radius: 30px;
-    background: white;
-    color: var(--verde-oscuro);
-    font-size: 12px;
-    font-weight: 900;
-}
-
-.etiqueta-stock.sin-stock { background: #2B140D; color: white; }
-
-.producto-info { padding: 24px; }
-
-.producto-info h3 {
-    margin: 0 0 6px;
-    font-family: 'Fredoka', sans-serif;
-    font-size: 28px;
-}
-
-.producto-info p {
-    min-height: 44px;
-    margin: 0 0 22px;
-    color: var(--gris);
-    line-height: 1.45;
-}
-
-.producto-pie {
-    display: flex;
-    justify-content: space-between;
+    z-index: 10;
+    top: 18px;
+    left: 18px;
+    display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 7px;
+    padding: 9px 13px;
+    border-radius: 100px;
+    background: rgba(255,255,255,.94);
+    color: var(--cafe);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .8px;
+    box-shadow: 0 8px 20px rgba(43,20,13,.10);
+    backdrop-filter: blur(8px);
 }
 
-.producto-pie strong { font-size: 24px; color: var(--verde); }
+.etiqueta-producto::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--verde);
+}
 
-.boton-agregar {
-    border: 0;
-    border-radius: 16px;
-    padding: 11px 17px;
+.numero-producto {
+    position: absolute;
+    z-index: 8;
+    right: 18px;
+    top: 18px;
+    width: 39px;
+    height: 39px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
     background: var(--cafe);
     color: white;
-    font-weight: 900;
-    transition: .2s;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 14px;
 }
 
-.boton-agregar:hover:not(:disabled) { background: var(--verde); }
-.boton-agregar:disabled { background: #c9c5bc; cursor: not-allowed; color: #777; }
+.carta .informacion {
+    position: relative;
+    padding: 27px 27px 28px;
+}
+
+.carta .informacion h3 {
+    margin: 0;
+    color: var(--cafe);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 31px;
+    line-height: 1;
+    font-weight: 700;
+}
+
+.carta .descripcion {
+    margin: 13px 0 0;
+    min-height: 52px;
+    color: #7d746f;
+    font-size: 14px;
+    line-height: 1.55;
+    font-weight: 700;
+}
+
+.carta .parte-inferior {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 14px 15px;
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px dashed #e8e0d7;
+}
+
+.carta .precio-contenedor {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.carta .precio-label {
+    color: #99908a;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.carta .precio {
+    color: var(--cafe);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 102px;
+    line-height: .85;
+    letter-spacing: -3px;
+    font-weight: 700;
+}
+
+.carta .precio small {
+    display: inline-block;
+    vertical-align: top;
+    margin: 8px 6px 0 0;
+    color: var(--verde);
+    font-family: 'Nunito', sans-serif;
+    font-size: 39px;
+    line-height: 1;
+    letter-spacing: 0;
+    font-weight: 900;
+}
+
+.carta .disponible {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 13px;
+    border-radius: 100px;
+    background: var(--verde-suave);
+    color: var(--verde-oscuro);
+    font-size: 11px;
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+.carta .disponible::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--verde);
+    box-shadow: 0 0 0 4px rgba(11,168,74,.10);
+}
+
+.carta .disponible.agotado {
+    background: #fbe5e2;
+    color: var(--rojo);
+}
+
+.carta .disponible.agotado::before {
+    background: var(--rojo);
+    box-shadow: 0 0 0 4px rgba(214,40,40,.10);
+}
+
+/* ---------- Botón AGREGAR (carrito) ---------- */
+
+.carta .boton-agregar {
+    width: 100%;
+    margin: 22px 0 0;
+    padding: 15px 24px;
+    border: 0;
+    border-radius: 100px;
+    background: var(--cafe);
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: .4px;
+    box-shadow: 0 10px 22px rgba(43,20,13,.20);
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.carta .boton-agregar:hover:not(:disabled) {
+    transform: translateY(-3px);
+    background: var(--verde);
+    box-shadow: 0 14px 28px rgba(11,168,74,.35);
+}
+
+.carta .boton-agregar:disabled {
+    background: #d9d4cb;
+    color: #8a847c;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/* ---------- Botón + panel NUTRICIONAL ---------- */
+
+.btn-nutri {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin: 22px 0 0;
+    padding: 8px 8px 8px 24px;
+    border: 0;
+    border-radius: 100px;
+    background: var(--amarillo);
+    color: var(--cafe);
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: 0 10px 22px rgba(255,213,122,.55);
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.carta .boton-agregar + .btn-nutri {
+    margin-top: 12px;
+}
+
+.btn-nutri:hover {
+    transform: translateY(-3px);
+    background: #FFCB5C;
+    box-shadow: 0 14px 28px rgba(255,203,92,.6);
+}
+
+.btn-nutri:focus {
+    outline: 3px solid var(--cafe);
+    outline-offset: 3px;
+}
+
+.btn-nutri-icono {
+    flex: 0 0 auto;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--cafe);
+    color: var(--amarillo);
+}
+
+.btn-nutri-icono svg {
+    transition: transform .4s ease;
+}
+
+.btn-nutri.abierto .btn-nutri-icono svg {
+    transform: rotate(180deg);
+}
+
+.nutri-desplegable {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .5s ease;
+}
+
+.nutri-contenido {
+    position: relative;
+    overflow: hidden;
+    margin-top: 16px;
+    padding: 26px 24px 22px;
+    border-radius: 28px;
+    background: var(--cafe);
+    color: var(--crema);
+}
+
+.nutri-contenido::before {
+    content: "";
+    position: absolute;
+    width: 190px;
+    height: 190px;
+    right: -70px;
+    top: -90px;
+    border-radius: 50%;
+    background: var(--amarillo);
+    opacity: .14;
+    pointer-events: none;
+}
+
+.nutri-contenido > * {
+    position: relative;
+}
+
+.nutri-etiqueta {
+    display: block;
+    color: var(--amarillo);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.nutri-porcion {
+    display: block;
+    margin-top: 6px;
+    color: var(--crema);
+    opacity: .75;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.nutri-kcal {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.nutri-kcal strong {
+    color: var(--amarillo);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 78px;
+    line-height: .9;
+    letter-spacing: -2px;
+    font-weight: 700;
+}
+
+.nutri-kcal span {
+    color: var(--crema);
+    font-size: 19px;
+    font-weight: 900;
+}
+
+.nutri-barra-titulo {
+    display: block;
+    margin-top: 20px;
+    color: var(--crema);
+    opacity: .7;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+}
+
+.nutri-barra {
+    display: flex;
+    height: 14px;
+    margin-top: 9px;
+    overflow: hidden;
+    border-radius: 100px;
+    background: rgba(252,208,159,.18);
+}
+
+.nutri-barra span {
+    display: block;
+    height: 100%;
+}
+
+.seg-proteinas     { background: var(--verde); }
+.seg-carbohidratos { background: var(--amarillo); }
+.seg-grasas        { background: var(--crema); }
+
+.nutri-leyenda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+    color: var(--crema);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.nutri-leyenda li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.nutri-leyenda li::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.nutri-leyenda .l-proteinas::before     { background: var(--verde); }
+.nutri-leyenda .l-carbohidratos::before { background: var(--amarillo); }
+.nutri-leyenda .l-grasas::before        { background: var(--crema); }
+
+.nutri-filas {
+    margin: 22px 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nutri-fila {
+    display: grid;
+    grid-template-columns: 1fr auto 54px;
+    align-items: baseline;
+    gap: 10px;
+    padding: 11px 0;
+    border-top: 1px dashed rgba(252,208,159,.30);
+}
+
+.nutri-fila.cabecera-filas {
+    padding: 0 0 9px;
+    border-top: 0;
+    color: var(--crema);
+    opacity: .7;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.nutri-fila.cabecera-filas span:last-child {
+    text-align: right;
+}
+
+.nutri-nombre {
+    color: var(--crema);
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.nutri-valor {
+    color: var(--amarillo);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 23px;
+    line-height: 1;
+    font-weight: 600;
+}
+
+.nutri-valor small {
+    margin-left: 3px;
+    color: var(--crema);
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 900;
+}
+
+.nutri-vd {
+    justify-self: end;
+    padding: 4px 9px;
+    border-radius: 100px;
+    background: var(--amarillo);
+    color: var(--cafe);
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.nutri-vd:empty {
+    padding: 0;
+    background: none;
+}
+
+.nutri-fila.sub {
+    padding: 8px 0;
+}
+
+.nutri-fila.sub .nutri-nombre {
+    padding-left: 18px;
+    font-size: 13px;
+    opacity: .8;
+}
+
+.nutri-fila.sub .nutri-valor {
+    font-size: 18px;
+}
+
+.nutri-vacio {
+    margin: 0;
+    color: var(--crema);
+    font-size: 14px;
+    line-height: 1.55;
+    font-weight: 700;
+}
+
+.nutri-nota {
+    margin: 18px 0 0;
+    color: var(--crema);
+    opacity: .65;
+    font-size: 11.5px;
+    line-height: 1.5;
+    font-weight: 700;
+}
 
 .sin-productos {
     grid-column: 1 / -1;
@@ -389,6 +856,103 @@ a { color: inherit; }
     border-radius: 30px;
     text-align: center;
 }
+
+/* ---------- Responsive de las tarjetas (puntos de corte del menú) ---------- */
+
+@media (max-width: 1100px) {
+
+    .productos {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+
+    .carta .precio {
+        font-size: 96px;
+    }
+
+    .carta .precio small {
+        font-size: 36px;
+    }
+
+}
+
+@media (max-width: 800px) {
+
+    .productos {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .carta .informacion {
+        padding: 22px;
+    }
+
+    .carta .informacion h3 {
+        font-size: 27px;
+    }
+
+    .carta .precio {
+        font-size: 66px;
+        letter-spacing: -2px;
+    }
+
+    .carta .precio small {
+        margin-top: 5px;
+        font-size: 24px;
+    }
+
+    .btn-nutri {
+        font-size: 13px;
+        padding-left: 20px;
+    }
+
+    .nutri-contenido {
+        padding: 22px 18px 18px;
+    }
+
+    .nutri-kcal strong {
+        font-size: 64px;
+    }
+
+}
+
+@media (max-width: 560px) {
+
+    .productos {
+        grid-template-columns: 1fr;
+    }
+
+    .carta .informacion h3 {
+        font-size: 30px;
+    }
+
+    .carta .precio {
+        font-size: 88px;
+    }
+
+    .carta .precio small {
+        margin-top: 7px;
+        font-size: 32px;
+    }
+
+    .btn-nutri {
+        font-size: 14px;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .nutri-desplegable,
+    .btn-nutri,
+    .btn-nutri-icono svg {
+        transition: none;
+    }
+
+}
+
+/* =====================================================
+   INFO CARDS
+   ===================================================== */
 
 .seccion-informacion {
     margin-top: 70px;
@@ -409,6 +973,10 @@ a { color: inherit; }
 .info-card.verde { background: var(--verde); color: white; }
 .info-card.crema { background: var(--crema); color: var(--cafe); }
 .info-card.cafe { background: var(--cafe); color: white; }
+
+/* =====================================================
+   MODAL DE PEDIDO
+   ===================================================== */
 
 .modal-overlay {
     position: fixed;
@@ -471,6 +1039,10 @@ a { color: inherit; }
 .dos-columnas { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .mensaje-form { min-height: 20px; color: #b3261e; font-weight: 800; }
 
+/* =====================================================
+   CARRITO
+   ===================================================== */
+
 .carrito-overlay {
     position: fixed;
     inset: 0;
@@ -529,30 +1101,65 @@ a { color: inherit; }
 
 .controles-cantidad { display: flex; align-items: center; gap: 9px; }
 
-.controles-cantidad button {
-    width: 31px;
-    height: 31px;
+/* Botones − y + (se excluye "Eliminar" para que no hereden este estilo) */
+.controles-cantidad button:not(.eliminar-item) {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
     border: 0;
-    border-radius: 10px;
+    border-radius: 50%;
     background: var(--verde-claro);
     color: var(--verde-oscuro);
+    font-size: 18px;
     font-weight: 900;
+    line-height: 1;
+    transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+.controles-cantidad button:not(.eliminar-item):hover {
+    background: var(--verde);
+    color: white;
+    transform: translateY(-2px);
 }
 
 .controles-cantidad span { min-width: 25px; text-align: center; font-weight: 900; }
 
-.eliminar-item {
+/* Botón Eliminar: píldora roja suave */
+.controles-cantidad .eliminar-item {
+    width: auto;
+    height: auto;
     margin-left: auto;
+    padding: 8px 15px;
     border: 0;
-    background: transparent;
+    border-radius: 100px;
+    background: #fbe5e2;
     color: #b3261e;
+    font-family: 'Nunito', sans-serif;
     font-size: 12px;
     font-weight: 900;
+    letter-spacing: .3px;
+    line-height: 1;
+    white-space: nowrap;
+    transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+.controles-cantidad .eliminar-item:hover {
+    background: #b3261e;
+    color: white;
+    transform: translateY(-2px);
 }
 
 .carrito-footer { padding: 20px 25px 30px; border-top: 1px solid #eee8df; }
 .total-linea { display: flex; justify-content: space-between; font-size: 22px; font-weight: 900; margin-bottom: 15px; }
 .total-linea strong { color: var(--verde); }
+
+/* =====================================================
+   ALERTAS
+   ===================================================== */
+
 #ozAlerta {
     position: fixed;
     inset: 0;
@@ -693,13 +1300,8 @@ a { color: inherit; }
 }
 
 @keyframes ozAparecerFondo {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 @keyframes ozAparecerCaja {
@@ -715,13 +1317,8 @@ a { color: inherit; }
 }
 
 @keyframes ozDesaparecerFondo {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
+    from { opacity: 1; }
+    to   { opacity: 0; }
 }
 
 @keyframes ozDesaparecerCaja {
@@ -736,22 +1333,28 @@ a { color: inherit; }
     }
 }
 
+/* =====================================================
+   RESPONSIVE GENERAL
+   ===================================================== */
+
 @media (max-width: 1000px) {
     .hero-cliente { grid-template-columns: 1fr; }
     .hero-imagen { height: 300px; }
-    .productos-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
 }
 
 @media (max-width: 700px) {
     .hero-cliente { padding: 40px 28px; border-radius: 35px; }
     .hero-texto h1 { font-size: 58px; }
-    .productos-grid,
     .seccion-informacion { grid-template-columns: 1fr; }
     .titulo-seccion { align-items: start; flex-direction: column; }
     .titulo-seccion h2 { font-size: 40px; }
     .dos-columnas { grid-template-columns: 1fr; }
     .modal-caja { padding: 30px 22px; }
 }
+
+/* =====================================================
+   BARRA SUPERIOR (ajustes finales y responsive)
+   ===================================================== */
 
 .barra-cliente {
     width: min(1250px, 94%);
