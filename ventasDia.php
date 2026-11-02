@@ -108,13 +108,7 @@ html {
 body {
     margin: 0;
     min-height: 100vh;
-    background:
-        radial-gradient(
-            circle at 10% 10%,
-            rgba(11,168,74,.08),
-            transparent 30%
-        ),
-        #F8FBF8;
+    background: var(--crema-suave);
     color: var(--cafe);
     font-family: 'Nunito', sans-serif;
 }

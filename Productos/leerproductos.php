@@ -234,66 +234,89 @@ tbody tr:hover td img {
     transform: scale(1.04);
 }
 
-.acciones {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    min-width: 270px;
+th:last-child,
+td.col-acciones {
+    min-width: 300px;
 }
 
-.acciones a {
+
+/* =====================================================
+   BOTONES DE ACCIONES
+   Tres botones iguales, redondeados y alineados
+   (mismos colores que la lista de usuarios y pedidos)
+===================================================== */
+
+.acciones {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 78px;
-    height: 36px;
-    padding: 0 12px;
-    border-radius: 20px;
-    text-decoration: none;
+    min-height: 36px;
+    padding: 0 14px;
+    border: 1.5px solid transparent;
+    border-radius: 100px;
     font-family: 'Fredoka', Arial, sans-serif;
     font-size: 13px;
     font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
     cursor: pointer;
-    transition: 0.25s ease;
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.btn-editar {
-    background: #FCD09F;
-    color: #2B140D;
-    border: 1px solid #f2c38d;
-}
-
-.btn-editar:hover {
-    background: #2B140D;
-    color: white;
+.btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 12px rgba(43,20,13,0.20);
 }
 
-.btn-eliminar {
-    background: #fff0ed;
-    color: #963a2a;
-    border: 1px solid #edcfc8;
+.btn:active {
+    transform: scale(0.97);
 }
 
-.btn-eliminar:hover {
-    background: #963a2a;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 12px rgba(150,58,42,0.20);
-}
-
+/* Mostrar */
 .btn-mostrar {
     background: #0ba84a;
-    color: white;
-    border: 1px solid #0ba84a;
+    color: #ffffff;
 }
 
 .btn-mostrar:hover {
-    background: #098d3e;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 12px rgba(11,168,74,0.25);
+    background: #4a2115;
+    box-shadow: 0 6px 14px rgba(43, 20, 13, 0.25);
+}
+
+/* Editar */
+.btn-editar {
+    background: #FCD09F;
+    color: #2B140D;
+}
+
+.btn-editar:hover {
+    background: #f5bd7e;
+    box-shadow: 0 6px 14px rgba(252, 208, 159, 0.55);
+}
+
+/* Eliminar */
+.btn-eliminar {
+    background: #b3261e;
+    color: #ffffff;
+    border-color: #f1c7c1;
+}
+
+.btn-eliminar:hover {
+    background: #D62828;
+    border-color: #D62828;
+    color: #ffffff;
+    box-shadow: 0 6px 14px rgba(214, 40, 40, 0.30);
 }
 
 tbody td[colspan] {
@@ -330,15 +353,112 @@ tbody td[colspan] {
     font-weight: 700;
 }
 
-.popup-stock {
-    border-radius: 20px !important;
+
+/* =====================================================
+   ALERTAS PERSONALIZADAS (SweetAlert2)
+   Mismo estilo que la lista de pedidos y usuarios
+===================================================== */
+
+.oz-popup {
+    width: 430px !important;
+    border-radius: 32px !important;
+    padding: 35px 32px 30px !important;
+    background: #FFFDF9 !important;
+    border: 3px solid #FCD09F !important;
+    box-shadow: 0 20px 60px rgba(43,20,13,.25) !important;
     font-family: 'Fredoka', Arial, sans-serif !important;
 }
 
-.popup-organic {
-    border-radius: 20px !important;
+.oz-title {
+    color: #2B140D !important;
     font-family: 'Fredoka', Arial, sans-serif !important;
+    font-size: 29px !important;
+    font-weight: 700 !important;
 }
+
+.oz-text {
+    color: #665752 !important;
+    font-family: 'Fredoka', Arial, sans-serif !important;
+    font-size: 16px !important;
+}
+
+.oz-confirm {
+    background: #D62828 !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 50px !important;
+    padding: 12px 23px !important;
+    margin: 5px !important;
+    font-family: 'Fredoka', Arial, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    box-shadow: none !important;
+    transition: .25s ease !important;
+}
+
+.oz-confirm:hover {
+    background: #B71C1C !important;
+    transform: translateY(-2px) !important;
+}
+
+.oz-cancel {
+    background: #2B140D !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 50px !important;
+    padding: 12px 23px !important;
+    margin: 5px !important;
+    font-family: 'Fredoka', Arial, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    box-shadow: none !important;
+    transition: .25s ease !important;
+}
+
+.oz-cancel:hover {
+    background: #0BA84A !important;
+    transform: translateY(-2px) !important;
+}
+
+.oz-success {
+    background: #0BA84A !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 50px !important;
+    padding: 12px 28px !important;
+    font-family: 'Fredoka', Arial, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    box-shadow: none !important;
+    transition: .25s ease !important;
+}
+
+.oz-success:hover {
+    background: #087D38 !important;
+    transform: translateY(-2px) !important;
+}
+
+.swal2-icon {
+    margin-top: 0 !important;
+}
+
+.swal2-icon.swal2-warning {
+    border-color: #D62828 !important;
+    color: #D62828 !important;
+}
+
+.swal2-icon.swal2-success {
+    border-color: #0BA84A !important;
+    color: #0BA84A !important;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
 
 @media (max-width: 1000px) {
 
@@ -382,6 +502,43 @@ tbody td[colspan] {
 
     .section-blanco {
         padding: 20px;
+    }
+
+    .oz-popup {
+        width: calc(100% - 18px) !important;
+        max-width: 380px !important;
+        border-radius: 25px !important;
+        padding: 25px 18px 22px !important;
+    }
+
+    .oz-title {
+        font-size: 23px !important;
+    }
+
+    .oz-text {
+        font-size: 14px !important;
+    }
+
+    .oz-confirm,
+    .oz-cancel,
+    .oz-success {
+        padding: 10px 17px !important;
+        font-size: 13px !important;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .oz-popup {
+        padding: 22px 15px 20px !important;
+    }
+
+    .oz-title {
+        font-size: 21px !important;
+    }
+
+    .oz-text {
+        font-size: 13px !important;
     }
 }
 
@@ -494,6 +651,8 @@ if ($resultado && $resultado->num_rows > 0) {
         $precio = protegerTexto($fila['precio']);
         $costo = protegerTexto($fila['costo']);
 
+        $nombreAttr = htmlspecialchars($fila['nombre'], ENT_QUOTES, 'UTF-8');
+
         $imagen = "../Imagenes/predeterminado.png";
 
         $extensiones = [
@@ -576,29 +735,34 @@ if ($resultado && $resultado->num_rows > 0) {
         ";
 
         echo "
-            <td class='acciones'>
+            <td class='col-acciones'>
 
-                <a
-                    href='editarproducto.php?id=$id'
-                    class='btn-editar'
-                >
-                    Editar
-                </a>
+                <div class='acciones'>
 
-                <a
-                    href='#'
-                    class='btn-eliminar'
-                    onclick='confirmarEliminacion($id); return false;'
-                >
-                    Eliminar
-                </a>
+                    <a
+                        href='leerproducto.php?id=$id'
+                        class='btn btn-mostrar'
+                    >
+                        Mostrar
+                    </a>
 
-                <a
-                    href='leerproducto.php?id=$id'
-                    class='btn-mostrar'
-                >
-                    Mostrar
-                </a>
+                    <a
+                        href='editarproducto.php?id=$id'
+                        class='btn btn-editar'
+                    >
+                        Editar
+                    </a>
+
+                    <a
+                        href='#'
+                        class='btn btn-eliminar'
+                        data-id='$id'
+                        data-nombre='$nombreAttr'
+                    >
+                        Eliminar
+                    </a>
+
+                </div>
 
             </td>
         ";
@@ -631,35 +795,108 @@ if ($resultado && $resultado->num_rows > 0) {
 
 <script>
 
+/* Evita que el nombre rompa el HTML de la alerta */
+function escaparHtml(texto) {
+    const div = document.createElement("div");
+    div.textContent = texto;
+    return div.innerHTML;
+}
+
 <?php if (count($productosBajoStock) > 0): ?>
 
+const productosBajoStock = <?= json_encode(
+    implode('<br>', $productosBajoStock),
+    JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
+) ?>;
+
 Swal.fire({
+
     title: "Productos con bajo stock",
-    html: "Estos productos necesitan reposición:<br><br><strong><?= implode('<br>', $productosBajoStock) ?></strong>",
+
+    html: `
+        <div style="
+            font-family:'Fredoka', sans-serif;
+            color:#665752;
+            font-size:16px;
+            line-height:1.5;
+        ">
+            Estos productos necesitan reposición:
+            <br><br>
+            <strong style="color:#2B140D;">
+                ${productosBajoStock}
+            </strong>
+        </div>
+    `,
+
     icon: "warning",
-    confirmButtonColor: "#0ba84a",
+
+    iconColor: "#D62828",
+
+    background: "#FFFDF9",
+
     confirmButtonText: "Entendido",
+
+    buttonsStyling: false,
+
     customClass: {
-        popup: "popup-stock"
+        popup: "oz-popup",
+        title: "oz-title",
+        htmlContainer: "oz-text",
+        confirmButton: "oz-success"
     }
+
 });
 
 <?php endif; ?>
 
-function confirmarEliminacion(id) {
+function confirmarEliminacion(id, nombre) {
 
     Swal.fire({
 
-        title: "¿Estás seguro?",
-        text: "No podrás revertir esta acción",
+        title: "¿Eliminar producto?",
+
+        html: `
+            <div style="
+                font-family:'Fredoka', sans-serif;
+                color:#665752;
+                font-size:16px;
+                line-height:1.5;
+            ">
+                El producto
+                <strong style="color:#2B140D;">${escaparHtml(nombre)}</strong>
+                será eliminado
+                permanentemente.
+                <br><br>
+                <span style="
+                    color:#D62828;
+                    font-size:14px;
+                    font-weight:600;
+                ">
+                    Esta acción no se puede deshacer.
+                </span>
+            </div>
+        `,
+
         icon: "warning",
+
+        iconColor: "#D62828",
+
+        background: "#FFFDF9",
+
         showCancelButton: true,
-        confirmButtonColor: "#0ba84a",
-        cancelButtonColor: "#2B140D",
-        confirmButtonText: "Sí, eliminar",
+
+        confirmButtonText: "Eliminar",
+
         cancelButtonText: "Cancelar",
+
+        buttonsStyling: false,
+
         customClass: {
-            popup: "popup-organic"
+            popup: "oz-popup",
+            title: "oz-title",
+            htmlContainer: "oz-text",
+            confirmButton: "oz-confirm",
+            cancelButton: "oz-cancel"
         }
 
     }).then((result) => {
@@ -667,13 +904,26 @@ function confirmarEliminacion(id) {
         if (result.isConfirmed) {
 
             window.location.href =
-                "eliminarproducto.php?id=" + id;
+                "eliminarproducto.php?id=" + encodeURIComponent(id);
 
         }
 
     });
 
 }
+
+/* Botones "Eliminar" de la tabla */
+document.addEventListener("click", function (e) {
+
+    const boton = e.target.closest(".btn-eliminar");
+
+    if (!boton) return;
+
+    e.preventDefault();
+
+    confirmarEliminacion(boton.dataset.id, boton.dataset.nombre);
+
+});
 
 </script>
 

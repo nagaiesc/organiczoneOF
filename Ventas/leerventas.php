@@ -48,29 +48,19 @@ if ($rol === 'admin') {
 
 html,
 body {
-
     margin: 0;
     padding: 0;
-
     min-height: 100%;
-
     font-family: 'Fredoka', Arial, sans-serif;
-
     background: #ffffff;
-
     color: #2B140D;
 }
 
 body {
-
     min-height: 100vh;
-
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
     padding: 30px;
 }
 
@@ -80,26 +70,15 @@ body {
 ===================================================== */
 
 .principal-grid {
-
     display: grid;
-
     grid-template-columns: 390px 1fr;
-
     width: 96%;
-
     max-width: 1500px;
-
     min-height: 750px;
-
     background: white;
-
     border-radius: 25px;
-
     overflow: hidden;
-
-    box-shadow:
-        0 15px 45px rgba(43, 20, 13, 0.14);
-
+    box-shadow: 0 15px 45px rgba(43, 20, 13, 0.14);
 }
 
 
@@ -108,108 +87,55 @@ body {
 ===================================================== */
 
 .section-negro {
-
     background: #2B140D;
-
     color: white;
-
     padding: 50px 42px;
-
     display: flex;
-
     flex-direction: column;
-
     justify-content: flex-start;
 }
 
-
-/* =====================================================
-   TITULO
-===================================================== */
-
 .contrato-titulo {
-
     margin: 70px 0 0 0;
-
     font-size: 52px;
-
     line-height: 0.95;
-
     font-weight: 700;
-
     letter-spacing: -1px;
-
     color: white;
-
 }
 
-
-/* =====================================================
-   DESCRIPCIÓN
-===================================================== */
-
 .desc {
-
     color: #e5dcd8;
-
     margin-top: 25px;
-
     font-size: 16px;
-
     line-height: 1.7;
-
     max-width: 280px;
 }
 
-
-/* =====================================================
-   BOTÓN REGISTRAR VENTA
-===================================================== */
-
 #boton {
-
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
-
     width: fit-content;
-
     margin-top: 35px;
-
     padding: 13px 23px;
-
     border-radius: 40px;
-
     background: #0ba84a;
-
     color: white;
-
     text-decoration: none;
-
     font-size: 17px;
-
     font-weight: 600;
-
-    box-shadow:
-        0 8px 20px rgba(11, 168, 74, 0.25);
-
+    box-shadow: 0 8px 20px rgba(11, 168, 74, 0.25);
     transition:
         transform 0.25s ease,
         background 0.25s ease,
         box-shadow 0.25s ease;
 }
 
-
 #boton:hover {
-
     background: #098d3e;
-
     transform: translateY(-3px);
-
-    box-shadow:
-        0 12px 25px rgba(11, 168, 74, 0.35);
+    box-shadow: 0 12px 25px rgba(11, 168, 74, 0.35);
 }
 
 
@@ -218,57 +144,32 @@ body {
 ===================================================== */
 
 .section-blanco {
-
     background: #ffffff;
-
     padding: 50px;
-
     min-width: 0;
-
     overflow-x: auto;
 }
 
-
-/* =====================================================
-   ENCABEZADO
-===================================================== */
-
 .section-clientes {
-
     border-bottom: 1px solid #eee;
-
     padding-bottom: 22px;
-
     margin-bottom: 28px;
 }
 
-
 .section-clientes h2 {
-
     margin: 0;
-
     color: #2B140D;
-
     font-size: 30px;
-
     font-weight: 700;
 }
 
-
 .section-clientes h2::after {
-
     content: "";
-
     display: block;
-
     width: 55px;
-
     height: 5px;
-
     background: #0ba84a;
-
     border-radius: 10px;
-
     margin-top: 10px;
 }
 
@@ -278,234 +179,169 @@ body {
 ===================================================== */
 
 .tabla-contenedor {
-
     width: 100%;
-
     overflow-x: auto;
-
     border-radius: 15px;
-
     border: 1px solid #eee;
 }
 
-
 table {
-
     width: 100%;
-
-    min-width: 750px;
-
+    min-width: 850px;
     border-collapse: collapse;
 }
 
-
-/* CABECERA */
-
 thead {
-
     background: #2B140D;
 }
 
-
 thead th {
-
     padding: 17px 15px;
-
     color: white;
-
     text-align: left;
-
     font-size: 14px;
-
     font-weight: 600;
-
     white-space: nowrap;
 }
 
-
 thead th:first-child {
-
     border-radius: 14px 0 0 0;
 }
 
-
 thead th:last-child {
-
     border-radius: 0 14px 0 0;
 }
 
-
-/* CUERPO */
-
 tbody td {
-
     padding: 16px 15px;
-
     border-bottom: 1px solid #eeeeee;
-
     color: #4b4b4b;
-
     font-size: 14px;
-
     vertical-align: middle;
 }
 
-
 tbody tr {
-
     transition: background 0.2s ease;
 }
 
-
 tbody tr:hover {
-
     background: #f8fbf9;
 }
 
-
 tbody tr:last-child td {
-
     border-bottom: none;
 }
 
+th:last-child,
+td.col-acciones {
+    min-width: 300px;
+}
+
 
 /* =====================================================
-   ESTADO
+   ESTADO Y COSTO
 ===================================================== */
 
 .estado {
-
     display: inline-block;
-
     padding: 6px 12px;
-
     border-radius: 30px;
-
     background: #e7f7ed;
-
     color: #0ba84a;
-
     font-size: 12px;
-
     font-weight: 600;
-
     white-space: nowrap;
 }
-
-
-/* =====================================================
-   COSTO
-===================================================== */
 
 .costo {
-
     color: #0ba84a;
-
     font-weight: 700;
-
     white-space: nowrap;
 }
 
 
 /* =====================================================
-   ACCIONES
+   BOTONES DE ACCIONES
+   Tres botones iguales, redondeados y alineados
+   (mismos colores que usuarios, pedidos y productos)
 ===================================================== */
 
 .acciones {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
 
-    display: flex;
+/* Si solo hay un botón (vendedor), ocupa todo el ancho */
+.acciones .btn:only-child {
+    grid-column: 1 / -1;
+}
 
+.btn {
+    display: inline-flex;
     align-items: center;
-
-    gap: 7px;
-
-    white-space: nowrap;
-}
-
-
-.acciones a {
-
-    text-decoration: none;
-}
-
-
-.acciones button {
-
-    border: none;
-
-    padding: 8px 12px;
-
-    border-radius: 10px;
-
-    cursor: pointer;
-
+    justify-content: center;
+    min-height: 36px;
+    padding: 0 14px;
+    border: 1.5px solid transparent;
+    border-radius: 100px;
     font-family: 'Fredoka', Arial, sans-serif;
-
     font-size: 13px;
-
     font-weight: 600;
-
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
     transition:
         transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
+.btn:hover {
+    transform: translateY(-2px);
+}
 
-/* EDITAR */
+.btn:active {
+    transform: scale(0.97);
+}
 
+/* Mostrar */
+.btn-mostrar {
+    background: #0ba84a;
+    color: #ffffff;
+}
+
+.btn-mostrar:hover {
+    background: #4a2115;
+    box-shadow: 0 6px 14px rgba(43, 20, 13, 0.25);
+}
+
+/* Editar */
 .btn-editar {
-
     background: #FCD09F;
-
     color: #2B140D;
 }
 
-
 .btn-editar:hover {
-
-    background: #f7bd80;
-
-    transform: translateY(-2px);
+    background: #f5bd7e;
+    box-shadow: 0 6px 14px rgba(252, 208, 159, 0.55);
 }
 
-
-/* ELIMINAR */
-
+/* Eliminar */
 .btn-eliminar {
-
-    background: #2B140D;
-
-    color: white;
+    background: #b3261e;
+    color: #ffffff;
+    border-color: #f1c7c1;
 }
-
 
 .btn-eliminar:hover {
-
-    background: #4a2115;
-
-    transform: translateY(-2px);
-}
-
-
-/* MOSTRAR */
-
-.btn-mostrar {
-
-    background: #0ba84a;
-
-    color: white;
-}
-
-
-.btn-mostrar:hover {
-
-    background: #098d3e;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 5px 12px rgba(11, 168, 74, 0.25);
+    background: #D62828;
+    border-color: #D62828;
+    color: #ffffff;
+    box-shadow: 0 6px 14px rgba(214, 40, 40, 0.30);
 }
 
 
@@ -514,17 +350,11 @@ tbody tr:last-child td {
 ===================================================== */
 
 .mensaje {
-
     padding: 35px;
-
     text-align: center;
-
     color: #777;
-
     background: #fafafa;
-
     border-radius: 15px;
-
     margin-top: 20px;
 }
 
@@ -534,30 +364,123 @@ tbody tr:last-child td {
 ===================================================== */
 
 ::-webkit-scrollbar {
-
     width: 8px;
-
     height: 8px;
 }
 
-
 ::-webkit-scrollbar-track {
-
     background: #f1f1f1;
 }
 
-
 ::-webkit-scrollbar-thumb {
-
     background: #2B140D;
-
     border-radius: 10px;
 }
 
-
 ::-webkit-scrollbar-thumb:hover {
-
     background: #0ba84a;
+}
+
+
+/* =====================================================
+   ALERTAS PERSONALIZADAS (SweetAlert2)
+   Mismo estilo que pedidos, usuarios y productos
+===================================================== */
+
+.oz-popup {
+    width: 430px !important;
+    border-radius: 32px !important;
+    padding: 35px 32px 30px !important;
+    background: #FFFDF9 !important;
+    border: 3px solid #FCD09F !important;
+    box-shadow: 0 20px 60px rgba(43,20,13,.25) !important;
+    font-family: 'Fredoka', Arial, sans-serif !important;
+}
+
+.oz-title {
+    color: #2B140D !important;
+    font-family: 'Fredoka', Arial, sans-serif !important;
+    font-size: 29px !important;
+    font-weight: 700 !important;
+}
+
+.oz-text {
+    color: #665752 !important;
+    font-family: 'Fredoka', Arial, sans-serif !important;
+    font-size: 16px !important;
+}
+
+.oz-confirm {
+    background: #D62828 !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 50px !important;
+    padding: 12px 23px !important;
+    margin: 5px !important;
+    font-family: 'Fredoka', Arial, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    box-shadow: none !important;
+    transition: .25s ease !important;
+}
+
+.oz-confirm:hover {
+    background: #B71C1C !important;
+    transform: translateY(-2px) !important;
+}
+
+.oz-cancel {
+    background: #2B140D !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 50px !important;
+    padding: 12px 23px !important;
+    margin: 5px !important;
+    font-family: 'Fredoka', Arial, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    box-shadow: none !important;
+    transition: .25s ease !important;
+}
+
+.oz-cancel:hover {
+    background: #0BA84A !important;
+    transform: translateY(-2px) !important;
+}
+
+.oz-success {
+    background: #0BA84A !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 50px !important;
+    padding: 12px 28px !important;
+    font-family: 'Fredoka', Arial, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    box-shadow: none !important;
+    transition: .25s ease !important;
+}
+
+.oz-success:hover {
+    background: #087D38 !important;
+    transform: translateY(-2px) !important;
+}
+
+.swal2-icon {
+    margin-top: 0 !important;
+}
+
+.swal2-icon.swal2-warning {
+    border-color: #D62828 !important;
+    color: #D62828 !important;
+}
+
+.swal2-icon.swal2-success {
+    border-color: #0BA84A !important;
+    color: #0BA84A !important;
 }
 
 
@@ -568,98 +491,104 @@ tbody tr:last-child td {
 @media (max-width: 1000px) {
 
     body {
-
         padding: 15px;
-
         align-items: flex-start;
     }
 
-
     .principal-grid {
-
         grid-template-columns: 1fr;
-
         width: 100%;
-
         margin-top: 15px;
     }
 
-
     .section-negro {
-
         padding: 40px;
     }
 
-
     .contrato-titulo {
-
         margin-top: 20px;
-
         font-size: 42px;
     }
 
-
     .desc {
-
         max-width: 500px;
     }
 
-
     .section-blanco {
-
         padding: 30px;
     }
 
 }
 
-
 @media (max-width: 600px) {
 
     body {
-
         padding: 0;
     }
 
-
     .principal-grid {
-
         width: 100%;
-
         min-height: 100vh;
-
         border-radius: 0;
     }
 
-
     .section-negro {
-
         padding: 35px 25px;
     }
 
-
     .contrato-titulo {
-
         font-size: 38px;
     }
 
-
     .section-blanco {
-
         padding: 25px 18px;
     }
 
-
     .section-clientes h2 {
-
         font-size: 25px;
     }
 
-
     #boton {
-
         font-size: 15px;
-
         padding: 12px 19px;
+    }
+
+    .oz-popup {
+        width: calc(100% - 18px) !important;
+        max-width: 380px !important;
+        border-radius: 25px !important;
+        padding: 25px 18px 22px !important;
+    }
+
+    .oz-title {
+        font-size: 23px !important;
+    }
+
+    .oz-text {
+        font-size: 14px !important;
+    }
+
+    .oz-confirm,
+    .oz-cancel,
+    .oz-success {
+        padding: 10px 17px !important;
+        font-size: 13px !important;
+    }
+
+}
+
+@media (max-width: 400px) {
+
+    .oz-popup {
+        padding: 22px 15px 20px !important;
+    }
+
+    .oz-title {
+        font-size: 21px !important;
+    }
+
+    .oz-text {
+        font-size: 13px !important;
     }
 
 }
@@ -826,7 +755,7 @@ tbody tr:last-child td {
                             while ($fila = $resultado->fetch_assoc()) {
 
 
-                                $id = $fila['id'];
+                                $id = (int) $fila['id'];
 
                                 $pedidos_id = $fila['pedidos_id'];
 
@@ -913,45 +842,33 @@ tbody tr:last-child td {
 
 
                                 echo "
-                                <td class='acciones'>
+                                <td class='col-acciones'>
 
-                                    <a href='registroeditarventa.php?id=$id'>
+                                    <div class='acciones'>
 
-                                        <button
-                                            type='button'
-                                            class='btn-editar'
-                                        >
-                                            Editar
-                                        </button>
-
-                                    </a>
-
-
-                                    <a
-                                        href='#'
-                                        onclick='confirmarEliminacion($id); return false;'
-                                    >
-
-                                        <button
-                                            type='button'
-                                            class='btn-eliminar'
-                                        >
-                                            Eliminar
-                                        </button>
-
-                                    </a>
-
-
-                                    <a href='leerventa.php?id=$id'>
-
-                                        <button
-                                            type='button'
-                                            class='btn-mostrar'
+                                        <a
+                                            href='leerventa.php?id=$id'
+                                            class='btn btn-mostrar'
                                         >
                                             Mostrar
-                                        </button>
+                                        </a>
 
-                                    </a>
+                                        <a
+                                            href='registroeditarventa.php?id=$id'
+                                            class='btn btn-editar'
+                                        >
+                                            Editar
+                                        </a>
+
+                                        <a
+                                            href='#'
+                                            class='btn btn-eliminar'
+                                            data-id='$id'
+                                        >
+                                            Eliminar
+                                        </a>
+
+                                    </div>
 
                                 </td>
                                 ";
@@ -1052,7 +969,7 @@ tbody tr:last-child td {
 
 
                                         $id =
-                                            $fila['id'];
+                                            (int) $fila['id'];
 
 
                                         echo "<tr>";
@@ -1135,20 +1052,18 @@ tbody tr:last-child td {
 
 
                                         echo "
-                                        <td class='acciones'>
+                                        <td class='col-acciones'>
 
-                                            <a
-                                                href='leerventa.php?id=$id'
-                                            >
+                                            <div class='acciones'>
 
-                                                <button
-                                                    type='button'
-                                                    class='btn-mostrar'
+                                                <a
+                                                    href='leerventa.php?id=$id'
+                                                    class='btn btn-mostrar'
                                                 >
                                                     Mostrar
-                                                </button>
+                                                </a>
 
-                                            </a>
+                                            </div>
 
                                         </td>
                                         ";
@@ -1241,28 +1156,48 @@ function confirmarEliminacion(id) {
 
         title: "¿Eliminar venta?",
 
-        text: "No podrás revertir esta acción.",
+        html: `
+            <div style="
+                font-family:'Fredoka', sans-serif;
+                color:#665752;
+                font-size:16px;
+                line-height:1.5;
+            ">
+                La
+                <strong style="color:#2B140D;">venta #${id}</strong>
+                será eliminada
+                permanentemente.
+                <br><br>
+                <span style="
+                    color:#D62828;
+                    font-size:14px;
+                    font-weight:600;
+                ">
+                    Esta acción no se puede deshacer.
+                </span>
+            </div>
+        `,
 
         icon: "warning",
 
+        iconColor: "#D62828",
+
+        background: "#FFFDF9",
+
         showCancelButton: true,
 
-        confirmButtonColor: "#0ba84a",
-
-        cancelButtonColor: "#2B140D",
-
-        confirmButtonText: "Sí, eliminar",
+        confirmButtonText: "Eliminar",
 
         cancelButtonText: "Cancelar",
 
-        background: "#ffffff",
-
-        color: "#2B140D",
+        buttonsStyling: false,
 
         customClass: {
-
-            popup: "organic-alert"
-
+            popup: "oz-popup",
+            title: "oz-title",
+            htmlContainer: "oz-text",
+            confirmButton: "oz-confirm",
+            cancelButton: "oz-cancel"
         }
 
     }).then((result) => {
@@ -1272,7 +1207,7 @@ function confirmarEliminacion(id) {
 
 
             window.location =
-                "eliminarventa.php?id=" + id;
+                "eliminarventa.php?id=" + encodeURIComponent(id);
 
 
         }
@@ -1281,6 +1216,20 @@ function confirmarEliminacion(id) {
 
 
 }
+
+
+/* Botones "Eliminar" de la tabla */
+document.addEventListener("click", function (e) {
+
+    const boton = e.target.closest(".btn-eliminar");
+
+    if (!boton) return;
+
+    e.preventDefault();
+
+    confirmarEliminacion(boton.dataset.id);
+
+});
 
 
 </script>

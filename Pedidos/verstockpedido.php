@@ -29,152 +29,326 @@ $resultadoCarrito = $conn->query($sqlCarrito);
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
-        body {
-            background: #EAF7EC;
+        :root {
+            --verde: #0BA84A;
+            --verde-oscuro: #087A36;
+            --verde-profundo: #064D22;
+            --verde-suave: #E5F7EA;
+
+            --cafe: #2B140D;
+            --cafe-2: #3A1E13;
+
+            --crema: #FCD09F;
+
+            --fondo: #F5EEE3;
+            --blanco: #FFFFFF;
+
+            --gris: #766E69;
+            --rojo: #D62828;
+        }
+
+        * {
             margin: 0;
-            font-family: 'Fredoka', sans-serif;
-            color: #111;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--fondo);
+            margin: 0;
+            font-family: 'Nunito', sans-serif;
+            color: var(--cafe);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
+            padding: 30px;
         }
 
-        /* TARJETA PRINCIPAL */
+        /* TARJETA PRINCIPAL (base café) */
         .caja-formulario {
-            background: #46b666;
+            position: relative;
+            overflow: hidden;
             width: 100%;
-            max-width: 850px;
-            border-radius: 45px;
-            padding: 40px;
-            box-sizing: border-box;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+            max-width: 900px;
+            padding: 48px 44px;
+            background: var(--cafe);
+            border-radius: 42px;
+            box-shadow: 0 28px 65px rgba(43, 20, 13, .24);
+        }
+
+        .caja-formulario::before {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            width: 300px;
+            height: 300px;
+            right: -110px;
+            top: -110px;
+            border-radius: 50%;
+            background: var(--verde);
+            opacity: .85;
+        }
+
+        .caja-formulario::after {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            width: 190px;
+            height: 190px;
+            left: -70px;
+            bottom: -70px;
+            border-radius: 50%;
+            background: var(--crema);
+            opacity: .16;
+        }
+
+        .caja-formulario > * {
+            position: relative;
+            z-index: 2;
         }
 
         /* TITULOS */
         .caja-titulos {
-            text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 32px;
         }
 
         .texto-saludo {
-            font-size: 32px;
-            color: #EAF7EC;
-            margin: 0;
-            font-weight: 600;
+            display: block;
+            margin: 0 0 8px;
+            color: var(--crema);
+            font-family: 'Nunito', sans-serif;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .texto-rol {
-            font-size: 52px;
-            color: #2B140D;
-            margin: -5px 0 0 0;
+            margin: 0;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 42px;
+            color: var(--blanco);
             font-weight: 700;
             line-height: 1;
+            letter-spacing: -1px;
         }
 
         /* TABLA */
         .caja-tabla {
-            background: #0A4A1B;
+            margin-bottom: 26px;
+            padding: 12px 26px 10px;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(252, 208, 159, .16);
             border-radius: 30px;
-            padding: 20px;
-            margin-bottom: 25px;
-            overflow: hidden;
         }
 
         table {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 8px;
+            border-collapse: collapse;
         }
 
         th {
-            color: #FCD09F;
-            font-size: 18px;
-            font-weight: 700;
-            padding: 10px 15px;
+            padding: 12px 10px;
+            color: var(--crema);
+            font-family: 'Fredoka', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .6px;
             text-align: center;
+            text-transform: uppercase;
         }
 
         td {
-            background: #ffffff;
-            color: #2B140D;
-            font-size: 16px;
-            font-weight: 600;
-            padding: 12px 15px;
+            padding: 16px 10px;
+            border-top: 1px dashed rgba(252, 208, 159, .22);
+            color: var(--blanco);
+            font-family: 'Nunito', sans-serif;
+            font-size: 15px;
+            font-weight: 800;
             text-align: center;
         }
 
+        th:first-child,
         td:first-child {
-            border-top-left-radius: 15px;
-            border-bottom-left-radius: 15px;
+            text-align: left;
         }
 
+        th:last-child,
         td:last-child {
-            border-top-right-radius: 15px;
-            border-bottom-right-radius: 15px;
+            text-align: right;
+        }
+
+        .celda-vacia {
+            padding: 22px 10px;
+            color: rgba(255, 255, 255, .7);
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center !important;
+        }
+
+        /* Número en forma de pastilla */
+        .pastilla-numero {
+            display: inline-block;
+            min-width: 46px;
+            padding: 6px 14px;
+            border-radius: 100px;
+            background: rgba(252, 208, 159, .16);
+            color: var(--crema);
+            font-size: 13px;
+            font-weight: 900;
         }
 
         /* STOCK SUFICIENTE */
+        .stock-ok,
+        .stock-no {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
         .stock-ok {
-            color: #16823b;
-            font-weight: 700;
+            background: var(--verde);
+            color: var(--blanco);
         }
 
         /* STOCK INSUFICIENTE */
         .stock-no {
-            color: #d62828;
-            font-weight: 700;
+            background: #FBE5E2;
+            color: var(--rojo);
         }
 
         /* MENSAJE */
         .mensaje {
-            background: #FCD09F;
-            color: #2B140D;
-            border-radius: 25px;
-            padding: 18px;
+            margin-bottom: 22px;
+            padding: 18px 22px;
+            border-radius: 22px;
             text-align: center;
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 20px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 19px;
+            font-weight: 600;
+        }
+
+        .mensaje.ok {
+            background: var(--verde);
+            color: var(--blanco);
+        }
+
+        .mensaje.no {
+            background: var(--crema);
+            color: var(--cafe);
         }
 
         /* BOTON */
         .boton-volver {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             width: fit-content;
-            margin: auto;
-            background: #2B140D;
-            color: #ffffff;
+            margin: 0 auto;
+            padding: 14px 38px;
+            background: var(--crema);
+            color: var(--cafe);
             text-decoration: none;
             font-family: 'Fredoka', sans-serif;
             font-size: 18px;
-            font-weight: 700;
-            padding: 12px 35px;
-            border-radius: 25px;
-            transition: transform 0.2s ease, background-color 0.2s ease;
+            font-weight: 600;
+            border-radius: 16px;
+            transition: .25s ease;
         }
 
         .boton-volver:hover {
+            background: var(--blanco);
             transform: translateY(-2px);
-            background: #1a0b08;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, .28);
         }
 
-        @media (max-width: 600px) {
+        .boton-volver:active {
+            transform: scale(.98);
+        }
+
+        @media (max-width: 760px) {
+
+            body {
+                padding: 15px;
+            }
+
             .caja-formulario {
-                padding: 25px;
-                border-radius: 30px;
+                max-width: 520px;
+                padding: 34px 24px;
+                border-radius: 32px;
             }
+
             .texto-rol {
-                font-size: 40px;
+                font-size: 34px;
             }
-            th, td {
-                font-size: 14px;
-                padding: 9px 5px;
+
+            .caja-tabla {
+                padding: 8px 18px;
+                border-radius: 24px;
+            }
+
+            /* Cada producto pasa a ser una ficha vertical */
+            table,
+            tbody,
+            tr,
+            td {
+                display: block;
+                width: 100%;
+            }
+
+            tr:first-child:has(th) {
+                display: none;
+            }
+
+            tr {
+                padding: 12px 0;
+                border-top: 1px dashed rgba(252, 208, 159, .22);
+            }
+
+            tr:first-of-type,
+            tr:nth-child(2) {
+                border-top: 0;
+            }
+
+            td {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                padding: 6px 0;
+                border: 0;
+                text-align: right;
+            }
+
+            td[data-label]::before {
+                content: attr(data-label);
+                color: var(--crema);
+                font-family: 'Fredoka', sans-serif;
+                font-size: 11px;
+                font-weight: 600;
+                letter-spacing: .6px;
+                text-transform: uppercase;
+            }
+
+            td:first-child {
+                text-align: left;
+            }
+
+            .celda-vacia {
+                display: block;
+                text-align: center !important;
+            }
+
+            .mensaje {
+                font-size: 16px;
             }
         }
     </style>
@@ -186,7 +360,7 @@ $resultadoCarrito = $conn->query($sqlCarrito);
 <article class="caja-formulario">
 
     <header class="caja-titulos">
-        <h3 class="texto-saludo">Productos del pedido</h3>
+        <span class="texto-saludo">Productos del pedido</span>
         <h1 class="texto-rol">Ver Stock</h1>
     </header>
 
@@ -214,26 +388,26 @@ $resultadoCarrito = $conn->query($sqlCarrito);
 
                     /* Comprobar stock */
                     if ($stock >= $cantidad) {
-                        $estadoStock = "✓ Suficiente";
+                        $estadoStock = "SI Suficiente";
                         $claseStock = "stock-ok";
                     } else {
-                        $estadoStock = "✗ Insuficiente";
+                        $estadoStock = "NO Insuficiente";
                         $claseStock = "stock-no";
                         $hayStock = false;
                     }
             ?>
             <tr>
-                <td><?php echo $datosProducto['nombre']; ?></td>
-                <td><?php echo $stock; ?></td>
-                <td><?php echo $cantidad; ?></td>
-                <td class="<?php echo $claseStock; ?>"><?php echo $estadoStock; ?></td>
+                <td data-label="Producto"><?php echo $datosProducto['nombre']; ?></td>
+                <td data-label="Stock disponible"><span class="pastilla-numero"><?php echo $stock; ?></span></td>
+                <td data-label="Cantidad solicitada"><span class="pastilla-numero"><?php echo $cantidad; ?></span></td>
+                <td data-label="Estado"><span class="<?php echo $claseStock; ?>"><?php echo $estadoStock; ?></span></td>
             </tr>
             <?php
                 }
             } else {
             ?>
             <tr>
-                <td colspan="4">No hay productos registrados en este pedido.</td>
+                <td colspan="4" class="celda-vacia">No hay productos registrados en este pedido.</td>
             </tr>
             <?php
             }
@@ -244,9 +418,9 @@ $resultadoCarrito = $conn->query($sqlCarrito);
     <?php
     if ($resultadoCarrito->num_rows > 0) {
         if ($hayStock) {
-            echo "<div class='mensaje'>✓ Hay stock suficiente para aceptar este pedido.</div>";
+            echo "<div class='mensaje ok'>SI Hay stock suficiente para aceptar este pedido.</div>";
         } else {
-            echo "<div class='mensaje'>✗ No hay suficiente stock para aceptar este pedido.</div>";
+            echo "<div class='mensaje no'>NO Hay suficiente stock para aceptar este pedido.</div>";
         }
     }
     ?>
