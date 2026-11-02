@@ -1,4 +1,9 @@
-
+<?php
+// Ruta del logo (funciona en todas las vistas)
+$oz_dir  = str_replace('\\', '/', __DIR__);
+$oz_raiz = str_replace('\\', '/', rtrim($_SERVER['DOCUMENT_ROOT'], '/\\'));
+$oz_logo = str_replace($oz_raiz, '', $oz_dir) . '/logoOz.png';
+?>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
 
@@ -104,48 +109,37 @@
     min-width: 0;
     min-height: 280px;
     padding: 32px;
-    background: #30160F;
-    border: 1px solid #492719;
+    background: #4A2618;
+    border: none;
     border-radius: 25px;
     overflow: hidden;
-    transition: background .2s ease, border-color .2s ease;
+    transition: background .2s ease;
 }
 
-.oz-footer-card:hover {
-    background: #3A1C12;
-    border-color: #67402B;
+/* Cafés profundos: cada caja más oscura que la anterior */
+
+.oz-footer-card:nth-child(1) {
+    background: #5A2F1C;
 }
 
-.oz-footer-card:first-child {
-    background: #35190F;
-    border-color: #56301D;
+.oz-footer-card:nth-child(2) {
+    background: #4A2618;
 }
 
-.oz-footer-card:first-child:hover {
-    background: #402013;
+.oz-footer-card:nth-child(3) {
+    background: #3B1E13;
 }
 
-.oz-footer-card::after {
-    position: absolute;
-    right: 12px;
-    bottom: -28px;
-    font-size: 115px;
-    line-height: 1;
-    font-weight: 700;
-    color: #492719;
-    pointer-events: none;
+.oz-footer-card:nth-child(1):hover {
+    background: #653521;
 }
 
-.oz-footer-card:nth-child(1)::after {
-    content: "01";
+.oz-footer-card:nth-child(2):hover {
+    background: #542B1D;
 }
 
-.oz-footer-card:nth-child(2)::after {
-    content: "02";
-}
-
-.oz-footer-card:nth-child(3)::after {
-    content: "03";
+.oz-footer-card:nth-child(3):hover {
+    background: #442317;
 }
 
 /* ICONOS 2D */
@@ -269,8 +263,8 @@
     display: inline-block;
     max-width: 100%;
     padding: 9px 13px;
-    background: #422417;
-    border: 1px solid #593322;
+    background: #4F2A1B;
+    border: none;
     border-radius: 10px;
     color: #FCD09F !important;
     font-weight: 600;
@@ -560,7 +554,7 @@
 
                 <div class="oz-footer-logo-imagen">
                     <img 
-                    src="logoOz.png" 
+                    src="<?= $oz_logo ?>" 
                     alt="Logo de Organic Zone">
                 </div>
 

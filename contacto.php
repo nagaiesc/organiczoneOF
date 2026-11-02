@@ -29,7 +29,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
         :root {
             --oz-cafe: #2e140d;
-            --oz-verde: #0ba84a;
+            --oz-verde: #12A33C;
             --oz-ambar: #ffc982;
             --oz-crema: #fff4e2;
         }
@@ -259,11 +259,11 @@ if (session_status() === PHP_SESSION_NONE) {
         }
 
         .carta-cafe h2 {
-            color: var(--oz-ambar);
+            color: var(--oz-crema);
         }
 
         .carta-cafe .icono {
-            background: var(--oz-ambar);
+            background: var(--oz-crema);
             color: var(--oz-cafe);
         }
 
@@ -272,7 +272,7 @@ if (session_status() === PHP_SESSION_NONE) {
         }
 
         .carta-cafe .boton {
-            background: var(--oz-ambar);
+            background: var(--oz-crema);
             color: var(--oz-cafe);
         }
 
@@ -288,13 +288,13 @@ if (session_status() === PHP_SESSION_NONE) {
         }
 
         .carta-verde .icono {
-            background: var(--oz-cafe);
-            color: var(--oz-crema);
+            background: var(--oz-crema);
+            color: var(--oz-verde);
         }
 
         .carta-verde .boton {
-            background: var(--oz-cafe);
-            color: var(--oz-ambar);
+            background: var(--oz-crema);
+            color: var(--oz-verde);
         }
 
 
@@ -558,4 +558,5 @@ if (session_status() === PHP_SESSION_NONE) {
 
 </body>
 
+<?php include("footer.php"); ?>
 </html>

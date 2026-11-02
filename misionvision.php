@@ -8,8 +8,6 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <head>
     <meta charset="UTF-8">
-
-    <!-- IMPORTANTE: sin esta línea el celular NO aplica los @media -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>OrganicZone</title>
@@ -113,7 +111,7 @@ body{
 }
 
 .about h1 span{
-    color:#11b348;
+    color:#12A33C;
 }
 
 .about-intro{
@@ -144,7 +142,7 @@ body{
 
 .bloque-mision{
     width:78%;
-    background:#11b348;
+    background:#12A33C;
     color:white;
     border-radius:0 70px 70px 70px;
 }
