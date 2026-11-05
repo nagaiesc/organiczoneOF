@@ -739,9 +739,8 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
         >
 
             <img
-                src="logoOz.png"
-                alt="Logo OrganicZone"
-            >
+    src="/organiczoneOF/logoOz.png"
+>
 
         </a>
 

@@ -239,6 +239,7 @@ function formatoNumero($valor)
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -269,6 +270,8 @@ function formatoNumero($valor)
     >
 
     <link rel="stylesheet" href="css/cliente.css?v=<?= (int) @filemtime(__DIR__ . '/css/cliente.css') ?>">
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/organiczoneOF/includes/oz-navegacion.php'; ?>
+
 
 </head>
 
