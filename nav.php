@@ -5,7 +5,6 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 $rol = $_SESSION['rol'] ?? '';
-
 $paginaActual = basename($_SERVER['PHP_SELF']);
 
 $inicioRol = '';
@@ -43,7 +42,6 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
     box-sizing: border-box;
 }
 
-
 /* =========================================================
    NAV PRINCIPAL
    ========================================================= */
@@ -55,30 +53,24 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
     position: fixed;
     top: 20px;
     left: 50%;
-
     transform: translateX(-50%);
 
     padding: 0 18px;
 
     display: flex;
     align-items: center;
-
     gap: 12px;
 
     background: rgba(18, 163, 60, 0.96);
-
     border-radius: 40px;
-
     box-shadow: 0 10px 28px rgba(18, 163, 60, 0.20);
 
     z-index: 1000;
-
     font-family: 'Fredoka', sans-serif;
 }
 
-
 /* =========================================================
-   LOGO (imagen + My Oz)
+   LOGO
    ========================================================= */
 
 #barra > div:first-child {
@@ -96,7 +88,6 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
     margin-right: 14px;
 }
 
-/* Imagen del logo (fondo transparente, sin círculo) */
 #logoImg {
     height: 46px;
     width: auto;
@@ -134,15 +125,17 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
     min-width: 0;
 }
 
-.item {
+#links .item {
     position: relative;
     height: 100%;
+
     display: flex;
     align-items: center;
+
     padding-bottom: 4px;
 }
 
-.item > a {
+#links .item > a {
     height: 44px;
 
     display: flex;
@@ -153,7 +146,6 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
 
     color: var(--blanco);
     text-decoration: none;
-
     border-radius: 22px;
 
     font-family: 'Fredoka', sans-serif;
@@ -164,24 +156,33 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
     transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.item > a:hover {
+#links .item > a:hover {
     background: rgba(255, 255, 255, 0.15);
 }
 
-
 /* =========================================================
-   SUBMENÚ
+   SUBMENÚ CORREGIDO
+   ESCRITORIO: apertura mediante CSS
+   Sin temporizadores ni cierre por mouseleave
    ========================================================= */
 
-.submenu {
+#links .item > .submenu {
     position: absolute;
 
-    top: 54px;
+    /*
+       El submenú se superpone ligeramente al borde inferior
+       de la zona del enlace para evitar un espacio sin hover.
+    */
+    top: calc(100% - 2px);
     left: 50%;
+    right: auto;
 
     transform: translateX(-50%);
 
     min-width: 190px;
+    width: max-content;
+    max-width: calc(100vw - 24px);
+
     padding: 9px;
 
     display: flex;
@@ -196,33 +197,46 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
     visibility: hidden;
     pointer-events: none;
 
-    transition: opacity 0.18s ease, visibility 0.18s ease;
+    transition:
+        opacity 0.18s ease,
+        visibility 0s linear 0.18s;
 
     z-index: 2000;
 }
 
-/* Puente invisible entre botón y submenú */
-.submenu::before {
+/* Puente invisible para facilitar el movimiento del cursor */
+#links .item > .submenu::before {
     content: "";
     position: absolute;
-    top: -14px;
+
+    top: -10px;
     left: 0;
+
     width: 100%;
-    height: 16px;
+    height: 12px;
+
     background: transparent;
 }
 
-/* Mantener submenú abierto */
-.item:hover .submenu,
-.item:focus-within .submenu,
-.submenu:hover {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateX(-50%);
+/*
+   Escritorio: el menú permanece visible mientras el cursor
+   esté sobre el enlace padre o cualquiera de sus descendientes.
+*/
+@media (min-width: 981px) {
+
+    #links .item:hover > .submenu,
+    #links .item:focus-within > .submenu {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+
+        transition:
+            opacity 0.18s ease,
+            visibility 0s;
+    }
 }
 
-.submenu a {
+#links .submenu a {
     width: 100%;
     min-height: 42px;
 
@@ -245,11 +259,11 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
     transition: background 0.2s ease, color 0.2s ease;
 }
 
-.submenu a:hover {
+#links .submenu a:hover,
+#links .submenu a:focus-visible {
     color: var(--blanco);
     background: var(--verde);
 }
-
 
 /* =========================================================
    ZONA DE SESIÓN
@@ -273,12 +287,10 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
     justify-content: center;
 
     padding: 0 18px;
-
     border-radius: 22px;
 
     color: var(--crema);
     background: var(--cafe);
-
     text-decoration: none;
 
     font-family: 'Fredoka', sans-serif;
@@ -286,7 +298,10 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
     font-weight: 600;
     white-space: nowrap;
 
-    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
 }
 
 .boton-inicio-rol:hover {
@@ -303,7 +318,6 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
     justify-content: center;
 
     padding: 0 17px;
-
     border-radius: 22px;
     text-decoration: none;
 
@@ -326,7 +340,6 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
     background: var(--blanco);
     transform: translateY(-1px);
 }
-
 
 /* =========================================================
    PRODUCTO MÁS VENDIDO / MEJOR CLIENTE
@@ -378,7 +391,6 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
     margin-left: 1px;
 }
 
-
 /* =========================================================
    TABLET
    ========================================================= */
@@ -411,7 +423,7 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
         gap: 2px;
     }
 
-    .item > a {
+    #links .item > a {
         padding: 0 10px;
         font-size: 14px;
     }
@@ -430,10 +442,8 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
     }
 }
 
-
 /* =========================================================
-   CONTENEDOR DEL MENÚ DESPLEGABLE (3 PUNTITOS)
-   En escritorio no afecta el diseño (display: contents)
+   CONTENEDORES DEL MENÚ EXTRA
    ========================================================= */
 
 #menu-extra {
@@ -443,12 +453,6 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
 #btn-mas {
     display: none;
 }
-
-
-/* =========================================================
-   MENÚ "MÁS" (3 PUNTITOS)
-   En escritorio es invisible: el contenido se comporta igual que antes
-   ========================================================= */
 
 .menu-mas {
     display: contents;
@@ -462,11 +466,8 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
     display: none;
 }
 
-
 /* =========================================================
    CELULAR
-   Una sola fila: Logo · Nosotros · About Us · Menú · Comprar · ⋮
-   Los 3 puntitos despliegan: sesión, producto más vendido, mejor cliente
    ========================================================= */
 
 @media (max-width: 980px) {
@@ -481,7 +482,6 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
         flex-wrap: nowrap;
     }
 
-    /* Logo */
     #barra > div:first-child {
         width: auto;
         min-width: 0;
@@ -499,7 +499,6 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
         max-width: 64px;
     }
 
-    /* Links siempre dentro del nav, repartidos en la fila */
     #links {
         flex: 1;
         min-width: 0;
@@ -508,44 +507,67 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
         gap: 0;
     }
 
-    .item {
+    #links .item {
         height: auto;
         padding-bottom: 0;
     }
 
-    .item > a {
+    #links .item > a {
         height: 36px;
         padding: 0 8px;
         font-size: 13px;
     }
 
-    /* Submenús Nosotros / About Us */
-    .submenu {
-        top: 46px;
-        left: 0;
-        transform: none;
+    /*
+       En móvil los submenús se controlan por toque.
+       Se desactiva el hover para evitar aperturas involuntarias.
+    */
+    #links .item > .submenu {
+        top: calc(100% + 6px);
+        left: 50%;
+        right: auto;
+
+        transform: translateX(-50%);
+
         min-width: 170px;
+        width: max-content;
+        max-width: calc(100vw - 24px);
+
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+
+        transition:
+            opacity 0.18s ease,
+            visibility 0s linear 0.18s;
     }
 
-    .item:hover .submenu,
-    .item:focus-within .submenu,
-    .submenu:hover {
-        transform: none;
+    #links .item:hover > .submenu,
+    #links .item:focus-within > .submenu {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
     }
 
-    .item:nth-child(n+2) .submenu {
-        left: auto;
-        right: -40px;
+    #links .item.submenu-activo > .submenu {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+
+        transition:
+            opacity 0.18s ease,
+            visibility 0s;
     }
 
-    .submenu a {
+    #links .submenu a {
         min-height: 40px;
         font-size: 13px;
     }
 
-    /* Contenedor de los 3 puntitos */
+    /* Contenedor de los tres puntos */
     .menu-mas {
         display: block;
+        position: relative;
         flex-shrink: 0;
     }
 
@@ -558,16 +580,13 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
         justify-content: center;
 
         padding: 0;
-
         border: none;
         border-radius: 50%;
 
         background: rgba(255, 255, 255, 0.18);
-
         cursor: pointer;
 
         transition: background 0.2s ease, transform 0.2s ease;
-
         -webkit-tap-highlight-color: transparent;
     }
 
@@ -575,7 +594,6 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
         transform: scale(0.94);
     }
 
-    /* Los 3 puntos (verticales) */
     .boton-puntos span {
         display: block;
 
@@ -583,7 +601,6 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
         height: 5px;
 
         border-radius: 50%;
-
         background: var(--blanco);
 
         box-shadow:
@@ -612,7 +629,7 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
         top: calc(100% + 10px);
         right: 0;
 
-        width: min(260px, 100%);
+        width: min(260px, calc(100vw - 24px));
 
         padding: 12px;
 
@@ -621,12 +638,10 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
         gap: 8px;
 
         background: var(--blanco);
-
         border: 2px solid rgba(252, 208, 159, 0.75);
         border-radius: 24px;
 
         box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
-
         z-index: 3000;
     }
 
@@ -636,8 +651,15 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
     }
 
     @keyframes aparecerPanel {
-        from { opacity: 0; transform: translateY(-6px); }
-        to   { opacity: 1; transform: translateY(0); }
+        from {
+            opacity: 0;
+            transform: translateY(-6px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .panel-mas .zona-sesion,
@@ -645,6 +667,7 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
         width: 100%;
         margin: 0;
         padding: 0;
+
         flex-direction: column;
         align-items: stretch;
         gap: 8px;
@@ -661,7 +684,6 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
         font-size: 14px;
     }
 }
-
 
 /* =========================================================
    CELULARES MUY ANGOSTOS
@@ -689,7 +711,7 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
         max-width: 54px;
     }
 
-    .item > a {
+    #links .item > a {
         padding: 0 5px;
         font-size: 12px;
     }
@@ -699,7 +721,6 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
         height: 36px;
     }
 }
-
 
 @media (max-width: 360px) {
 
@@ -711,7 +732,7 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
         max-width: 48px;
     }
 
-    .item > a {
+    #links .item > a {
         padding: 0 3px;
         font-size: 11.5px;
     }
@@ -724,111 +745,68 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
 
 </style>
 
-
 <nav id="barra">
 
-
     <!-- LOGO -->
-
     <div>
-
         <a
             href="/organiczoneOF/paginaprincipal.php"
             id="logoImg"
             aria-label="Inicio"
         >
-
             <img
-    src="/organiczoneOF/logoOz.png"
->
-
+                src="/organiczoneOF/logoOz.png"
+                alt="Organic Zone"
+            >
         </a>
-
     </div>
 
-
     <!-- LINKS -->
-
     <section id="links">
 
-
         <!-- NOSOTROS -->
-
         <div class="item">
-
-            <a href="#">
-
+            <a href="#" aria-haspopup="true" aria-expanded="false">
                 Nosotros
-
             </a>
 
             <div class="submenu">
-
                 <a href="/organiczoneOF/misionvision.php">
-
                     Misión y Visión
-
                 </a>
-
             </div>
-
         </div>
 
-
-        <!-- ABOUT US -->
-
+        <!-- BÚSCANOS -->
         <div class="item">
-
-            <a href="#">
-
+            <a href="#" aria-haspopup="true" aria-expanded="false">
                 Búscanos
-
             </a>
 
             <div class="submenu">
-
                 <a href="/organiczoneOF/contacto.php">
-
                     Contacto
-
                 </a>
-
             </div>
-
         </div>
-
 
         <!-- MENÚ -->
-
         <div class="item">
-
             <a href="/organiczoneOF/Hamburguesas.php">
-
                 Menú
-
             </a>
-
         </div>
-
 
         <!-- COMPRAR -->
-
         <div class="item">
-
             <a href="/organiczoneOF/Cliente/index.php">
-
                 Comprar
-
             </a>
-
         </div>
-
 
     </section>
 
-
-    <!-- MENÚ DE 3 PUNTITOS (en escritorio se ve igual que antes) -->
-
+    <!-- MENÚ DE TRES PUNTITOS -->
     <div class="menu-mas" id="menuMas">
 
         <button
@@ -837,33 +815,26 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
             id="botonPuntos"
             aria-label="Más opciones"
             aria-expanded="false"
+            aria-controls="panelMas"
         >
-
             <span></span>
-
         </button>
 
-        <div class="panel-mas">
-
+        <div class="panel-mas" id="panelMas">
 
             <!-- SESIÓN -->
-
             <section class="zona-sesion">
-
 
                 <?php if ($inicioRol !== ''): ?>
 
                     <a
-                        href="<?php echo $inicioRol; ?>"
+                        href="<?php echo htmlspecialchars($inicioRol, ENT_QUOTES, 'UTF-8'); ?>"
                         class="boton-inicio-rol"
                     >
-
-                        <?php echo $textoInicioRol; ?>
-
+                        <?php echo htmlspecialchars($textoInicioRol, ENT_QUOTES, 'UTF-8'); ?>
                     </a>
 
                 <?php endif; ?>
-
 
                 <?php if (isset($_SESSION['nombre'])): ?>
 
@@ -871,9 +842,7 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
                         href="/organiczoneOF/Usuarios/cerrarse.php"
                         class="boton-sesion boton-cerrar"
                     >
-
                         Cerrar sesión
-
                     </a>
 
                 <?php else: ?>
@@ -882,71 +851,165 @@ if ($rol === 'vendedor' && $paginaActual !== 'vistavendedor.php') {
                         href="/organiczoneOF/Usuarios/formulariosesion.php"
                         class="boton-sesion boton-iniciar"
                     >
-
                         Iniciar sesión
-
                     </a>
 
                 <?php endif; ?>
 
-
             </section>
 
-
             <!-- PRODUCTO MÁS VENDIDO -->
-
             <section class="zonaProducto">
 
                 <button
+                    type="button"
                     class="botonProducto"
                     onclick="window.location.href='/organiczoneOF/productoBest.php'"
                 >
-
                     Producto más vendido
-
                 </button>
 
             </section>
 
-
             <!-- MEJOR CLIENTE -->
-
             <button
+                type="button"
                 class="botonUsuario"
                 onclick="window.location.href='/organiczoneOF/usuarioBest.php'"
             >
-
                 Mejor cliente
-
             </button>
 
-
         </div>
-
     </div>
-
 
 </nav>
 
 <script>
 (function () {
 
-    var menu  = document.getElementById('menuMas');
+    var links = document.getElementById('links');
+    var menu = document.getElementById('menuMas');
     var boton = document.getElementById('botonPuntos');
 
-    if (!menu || !boton) return;
+    if (!links) return;
 
-    boton.addEventListener('click', function (e) {
-        e.stopPropagation();
-        var abierto = menu.classList.toggle('abierto');
-        boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+    var elementos = links.querySelectorAll('.item');
+
+    function esCelular() {
+        return window.matchMedia('(max-width: 980px)').matches;
+    }
+
+    function cerrarSubmenus(excepto) {
+        elementos.forEach(function (item) {
+            if (item !== excepto) {
+                item.classList.remove('submenu-activo');
+
+                var enlace = item.querySelector(':scope > a');
+
+                if (enlace && enlace.hasAttribute('aria-haspopup')) {
+                    enlace.setAttribute('aria-expanded', 'false');
+                }
+            }
+        });
+    }
+
+    function abrirSubmenu(item) {
+        if (!item.querySelector(':scope > .submenu')) return;
+
+        cerrarSubmenus(item);
+        item.classList.add('submenu-activo');
+
+        var enlace = item.querySelector(':scope > a');
+
+        if (enlace) {
+            enlace.setAttribute('aria-expanded', 'true');
+        }
+    }
+
+    elementos.forEach(function (item) {
+
+        var enlace = item.querySelector(':scope > a');
+        var submenu = item.querySelector(':scope > .submenu');
+
+        if (!enlace || !submenu) return;
+
+        /*
+         * En escritorio la apertura y el cierre se gestionan
+         * exclusivamente con CSS :hover y :focus-within.
+         * No usar mouseleave aquí evita cierres prematuros.
+         */
+
+        enlace.addEventListener('click', function (e) {
+
+            if (!submenu) return;
+
+            if (!esCelular()) {
+                /*
+                 * Estos enlaces son disparadores de submenús.
+                 * Evita que href="#" haga saltar la página.
+                 */
+                e.preventDefault();
+                return;
+            }
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            var estabaAbierto = item.classList.contains('submenu-activo');
+
+            cerrarSubmenus();
+
+            if (!estabaAbierto) {
+                abrirSubmenu(item);
+            }
+        });
     });
 
+    /* Cerrar submenús móviles al tocar fuera */
     document.addEventListener('click', function (e) {
-        if (!menu.contains(e.target)) {
+
+        if (!links.contains(e.target)) {
+            cerrarSubmenus();
+        }
+
+        if (menu && boton && !menu.contains(e.target)) {
             menu.classList.remove('abierto');
             boton.setAttribute('aria-expanded', 'false');
         }
+    });
+
+    /* Menú de tres puntitos */
+    if (menu && boton) {
+
+        boton.addEventListener('click', function (e) {
+            e.stopPropagation();
+
+            var abierto = menu.classList.toggle('abierto');
+
+            boton.setAttribute(
+                'aria-expanded',
+                abierto ? 'true' : 'false'
+            );
+        });
+    }
+
+    /* Cerrar con Escape */
+    document.addEventListener('keydown', function (e) {
+
+        if (e.key === 'Escape') {
+            cerrarSubmenus();
+
+            if (menu && boton) {
+                menu.classList.remove('abierto');
+                boton.setAttribute('aria-expanded', 'false');
+            }
+        }
+    });
+
+    /* Limpiar el estado móvil al cambiar el tamaño */
+    window.addEventListener('resize', function () {
+        cerrarSubmenus();
     });
 
 })();
