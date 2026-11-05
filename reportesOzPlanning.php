@@ -480,6 +480,8 @@ thead th:first-child{background:#2B140D!important;color:#FFC982!important}
 @media(prefers-reduced-motion:reduce){.stats .stat,.detail summary{transition:none!important}.stats .stat:hover,.stats .stat:active,.detail summary:hover{transform:none!important}}
 
 </style>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/organiczoneOF/includes/oz-navegacion.php'; ?>
+
 </head>
 <body>
 <header class="topbar"><div class="topbar-inner"><div class="brand"><h1>Solicitudes <span>de clientes</span></h1><p>OZ PLANNING · PANEL DE GESTIÓN</p></div><div class="session"><span class="session-dot" aria-hidden="true"></span><div class="session-info"><span class="session-label">Sesión activa</span><strong class="session-name"><?= oz_e($_SESSION['nombre']) ?></strong><span class="session-role"><?= $rol === 'admin' ? 'Administrador' : 'Vendedor' ?></span></div></div></div></header>

@@ -2228,7 +2228,7 @@ foreach ($productos as $productoOz) {
 @media(prefers-reduced-motion:reduce){.ozp-panel-titulo{animation:none!important}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/organiczoneOF/includes/oz-navegacion.php'; ?>
 </head>
 
 <body>
