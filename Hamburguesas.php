@@ -2229,6 +2229,7 @@ foreach ($productos as $productoOz) {
 </style>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/organiczoneOF/includes/oz-navegacion.php'; ?>
+
 </head>
 
 <body>

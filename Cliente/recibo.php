@@ -598,7 +598,7 @@ $conexion->close();
                 </span>
 
                 <div class="dato-texto">
-                    <span>Método de pago</span>
+                    <span>ID DEL PEDIDO</span>
 
                     <strong>
                         <?= htmlspecialchars($pedido['metodo']) ?>
